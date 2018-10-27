@@ -76,6 +76,26 @@ void VisionGraph::initLayout()
     }
 }
 
+void VisionGraph::setSelectedColor(QColor color)
+{
+    selectedColor = color;
+}
+
+void VisionGraph::setBorderColor(QColor color)
+{
+    borderColor = color;
+}
+
+void VisionGraph::setBrushColor(QColor color)
+{
+    brushColor = color;
+}
+
+void VisionGraph::setRegionColor(QColor color)
+{
+    regionColor = color;
+}
+
 
 void VisionGraph::show()
 {

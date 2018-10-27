@@ -14,6 +14,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QVector>
 
+
 /**
  * @brief       枚举类型，item类型或者鼠标控制的类型（鼠标事件执行的对应的类型）-- 主要是绘图的view的状态的标记，包含了鼠标事件和绘制的item的记录等
  */

@@ -516,6 +516,8 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -789,7 +791,6 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -936,6 +937,8 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -1220,7 +1223,6 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -1408,6 +1410,8 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -1681,7 +1685,6 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -1911,6 +1914,8 @@ tmp\moc_visioncrosspointitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObj
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visioncrosspointitem.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2050,8 +2055,9 @@ tmp\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGra
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\minirect.h \
+		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src\control\minirect.h \
 		src\control\visionarrows_rotate.h \
 		src\item\visionellipseitem.h \
 		tmp\moc_predefs.h \
@@ -2292,6 +2298,8 @@ tmp\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraph
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -2663,6 +2671,8 @@ tmp\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -2683,7 +2693,6 @@ tmp\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -2860,6 +2869,8 @@ tmp\moc_visionpoint.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visionpoint.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2957,6 +2968,8 @@ tmp\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -2984,7 +2997,6 @@ tmp\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -3135,8 +3147,9 @@ tmp\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\minirect.h \
+		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src\control\minirect.h \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionrectitem.h \
@@ -3276,6 +3289,7 @@ tmp\moc_visionring.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
 		src\control\minirect.h \
 		src\item\visionring.h \
 		tmp\moc_predefs.h \
@@ -3637,6 +3651,8 @@ tmp\moc_visionitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionitem.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3812,6 +3828,8 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -4085,7 +4103,6 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4229,6 +4246,8 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -4513,7 +4532,6 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4707,6 +4725,8 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -4980,7 +5000,6 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -5126,6 +5145,8 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -5411,7 +5432,6 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -5635,6 +5655,8 @@ tmp\visioncrosspointitem.obj: src\item\visioncrosspointitem.cpp src/item/visionc
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
@@ -5782,8 +5804,9 @@ tmp\visionellipseitem.obj: src\item\visionellipseitem.cpp src/item/visionellipse
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/minirect.h \
+		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src/control/minirect.h \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
@@ -6024,6 +6047,8 @@ tmp\visiongraphview.obj: src\item\visiongraphview.cpp src/item/visiongraphview.h
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -6396,6 +6421,8 @@ tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -6416,7 +6443,6 @@ tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -6588,7 +6614,9 @@ tmp\visionpoint.obj: src\item\visionpoint.cpp src/item/visionpoint.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontiguouscache.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor
 
 tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -6683,6 +6711,8 @@ tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -6710,7 +6740,6 @@ tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -6859,8 +6888,9 @@ tmp\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/minirect.h \
+		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src/control/minirect.h \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -7003,6 +7033,7 @@ tmp\visionring.obj: src\item\visionring.cpp src/item/visionring.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
@@ -7139,7 +7170,8 @@ tmp\minirect.obj: src\control\minirect.cpp src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QBrush \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		src/control/color.h
 
 tmp\visionarrows_rotate.obj: src\control\visionarrows_rotate.cpp src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -7269,7 +7301,8 @@ tmp\visionarrows_rotate.obj: src\control\visionarrows_rotate.cpp src/control/vis
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		src/control/color.h
 
 tmp\visionitem.obj: src\control\visionitem.cpp src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -7362,6 +7395,8 @@ tmp\visionitem.obj: src\control\visionitem.cpp src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
 tmp\color.obj: src\control\color.cpp src/control/color.h \

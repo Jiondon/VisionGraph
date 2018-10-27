@@ -3,6 +3,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QCursor>
 #include <QDebug>
+#include "../control/color.h"
 
 VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
@@ -63,7 +64,7 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 //    qDebug()<<"VisionRingItem paint";
 //    qDebug()<<m_width<<m_height<<m_r1<<m_r2;
-    painter->setPen(QPen(QColor(255,0,0),0));
+    painter->setPen(QPen(borderColor,0));
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r1,m_r1);
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r2,m_r2);
     painter->drawRect(0,0,m_width,m_height);

@@ -2,6 +2,7 @@
 #include <QScrollBar>
 #include "qdebug.h"
 #include "visiongraphscene.h"
+#include "../control/color.h"
 
 VisionGraphView::VisionGraphView(QWidget *parent):
     QGraphicsView(parent)
@@ -292,8 +293,8 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 
     QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(QPen(QColor(255,0,0,50),0));
-    painter.setBrush(QColor(255,0,0,50));
+    painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
+    painter.setBrush(brushColor);
 
 
 

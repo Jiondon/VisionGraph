@@ -1,4 +1,5 @@
 ﻿#include "visionpoint.h"
+#include "../control/color.h"
 
 VisionPoint::VisionPoint(VisionItem *parent) : VisionItem(parent)
 {
@@ -15,7 +16,7 @@ void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    QPen pen = QPen(QColor(255,0,0),0);
+    QPen pen = QPen(borderColor,0);
     painter->setPen(pen);
     painter->setBrush(Qt::red);
     painter->drawEllipse(m_pointF,1,1);

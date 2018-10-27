@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QBrush>
 #include <QCursor>
+#include "color.h"
 
 MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
@@ -29,8 +30,8 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QColor(255,0,0),0));
-    painter->setBrush(QBrush(QColor(255,0,0)));
+    painter->setPen(QPen(borderColor,0));
+    painter->setBrush(QBrush(borderColor));  //此处填充和边框保持一致，原因自己想
     painter->drawRect(QRectF(0,0,m_width,m_height));
 }
 

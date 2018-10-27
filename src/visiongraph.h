@@ -80,6 +80,38 @@ public:
      */
     void initLayout();
 
+    /**
+     * @brief      设置颜色(选中)
+     * @param
+     */
+    void setSelectedColor(QColor color);
+
+
+    /**
+     * @brief      设置颜色(边框)
+     * @param
+     */
+    void setBorderColor(QColor color);
+
+
+    /**
+     * @brief      设置颜色(填充)
+     * @param
+     */
+    void setBrushColor(QColor color);
+
+
+    /**
+     * @brief      设置颜色(区域)
+     * @param
+     */
+    void setRegionColor(QColor color);
+
+
+    /**
+     * @brief      显示VisionGraph
+     * @param
+     */
     void show();
 
 protected:

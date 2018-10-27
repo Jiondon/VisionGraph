@@ -24,6 +24,8 @@
 #include "./item/visionring.h"
 #include "./item/visioncrosspointitem.h"
 
+#include "./control/color.h"
+
 enum ToolButtonDirection{
     leftDirection,
     topDirection,

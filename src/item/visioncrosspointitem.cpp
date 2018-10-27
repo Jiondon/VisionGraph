@@ -4,6 +4,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
+#include "../control/color.h"
+
 VisionCrossPointItem::VisionCrossPointItem(VisionItem *parent) : VisionItem(parent)
 {
     setAcceptHoverEvents(true);
@@ -55,10 +57,10 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     Q_UNUSED(option)
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
+        painter->setPen(QPen(QBrush(selectedColor),0));
         setEdit(true);
     }else{
-        painter->setPen(QPen(QBrush(QColor(0,0,255)),0));
+        painter->setPen(QPen(QBrush(borderColor),0));
         setEdit(false);
     }
 

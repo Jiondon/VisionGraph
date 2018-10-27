@@ -5,6 +5,7 @@
 #include <QMatrix>
 #include <QPixmap>
 
+#include "../control/color.h"
 
 #define pi 3.1415926
 
@@ -125,15 +126,8 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    painter->setPen(QPen(QBrush(borderColor),0));
 
-//    qDebug()<<"VisionRectItem paint";
-//    painter->setPen(QPen(QBrush(penColor),0));
-
-    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
-//    painter->setBrush(QColor(255,0,0));
-//    painter->drawRect(QRectF(0,0,m_width,m_height));
-
-//    return;
 
     QPointF originPointF = QPointF(m_x,m_y);
     painter->drawLine(m_pointF1-originPointF,m_pointF2-originPointF);
@@ -141,9 +135,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawLine(m_pointF3-originPointF,m_pointF4-originPointF);
     painter->drawLine(m_pointF4-originPointF,m_pointF1-originPointF);
 
-    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
-//    painter->setBrush(QColor(255,0,0));
-//    painter->drawRect(QRectF(0,0,m_width,m_height));
+
     QPainterPath path;
     QVector<QPointF> points;
     points.append(m_pointF1);

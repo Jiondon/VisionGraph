@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QPainterPath>
 
+#include "../control/color.h"
+
 VisionLineItem::VisionLineItem(QPointF p1, QPointF p2, bool bEdit, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
     m_pointF1 = p1;m_pointF2 = p2;
@@ -75,7 +77,7 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    QPen pen = QPen(QColor(255,0,0),0);
+    QPen pen = QPen(borderColor,0);
     painter->setPen(pen);
 //    if(pen)
     qDebug()<<painter->clipPath().currentPosition();

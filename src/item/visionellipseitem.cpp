@@ -5,6 +5,7 @@
 #include <QMatrix>
 #include <QPixmap>
 
+#include "../control/color.h"
 
 #define pi 3.1415926
 
@@ -106,9 +107,9 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
+    painter->setPen(QPen(QBrush(borderColor),0));
 
-    painter->setBrush(QColor(255,0,0,50));
+    painter->setBrush(brushColor);
 
     painter->translate(m_width/2,m_height/2);
     painter->rotate(m_angle);

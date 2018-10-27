@@ -1,5 +1,6 @@
 ﻿#include "visionpolygon.h"
 #include <QDebug>
+#include "../control/color.h"
 
 VisionPolygon::VisionPolygon(VisionItem *parent) : VisionItem(parent)
 {
@@ -38,7 +39,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
+    painter->setPen(QPen(QBrush(borderColor),0));
 //    painter->setBrush(QColor(255,0,0,50));
     painter->drawPolygon(m_vecPointFs);
 
