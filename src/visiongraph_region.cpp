@@ -48,10 +48,10 @@ void VisionGraph_Region::initScene()
 
     //显示坐标和操作信息
 
-    label_Operation = new QLabel;
-    label_Operation->setText(QStringLiteral(""));
-    label_Operation->show();
-    label_Operation->setFixedWidth(400);
+//    label_Operation = new QLabel;
+//    label_Operation->setText(QStringLiteral(""));
+//    label_Operation->show();
+//    label_Operation->setFixedWidth(400);
 
 }
 
@@ -341,6 +341,7 @@ void VisionGraph_Region::initLayout()
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
+            vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(sceneWidget);
@@ -419,6 +420,7 @@ void VisionGraph_Region::initLayout()
             vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
+            vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_painter);
@@ -436,6 +438,7 @@ void VisionGraph_Region::initLayout()
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
+            vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_operation);
@@ -523,14 +526,14 @@ void VisionGraph_Region::slot_drag_action()
 {
     view->setItemType(ItemType::No);
     m_itemType = ItemType::No;
-    label_Operation->setText(QStringLiteral("通过鼠标的拖动，拖动视图区域"));
+//    label_Operation->setText(QStringLiteral("通过鼠标的拖动，拖动视图区域"));
 }
 
 void VisionGraph_Region::slot_zoom_action()
 {
     view->setItemType(ItemType::Zoom);
     m_itemType = ItemType::Zoom;
-    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
+//    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
 //    this->
 }
 
@@ -538,7 +541,7 @@ void VisionGraph_Region::slot_mousePainter_action()
 {
     view->setItemType(ItemType::Point);
     m_itemType = ItemType::Point;
-    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
+//    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
 
 }
 
@@ -546,7 +549,7 @@ void VisionGraph_Region::slot_mouseClear_action()
 {
     view->setItemType(ItemType::NoPoint);
     m_itemType = ItemType::NoPoint;
-    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
+//    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
 
 
 }
@@ -555,14 +558,14 @@ void VisionGraph_Region::slot_rect_action()
 {
     view->setItemType(ItemType::Rect);
     m_itemType = ItemType::Rect;
-    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Rectangle"));
+//    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Rectangle"));
 }
 
 void VisionGraph_Region::slot_ellipse_action()
 {
     view->setItemType(ItemType::EllipseItem);
     m_itemType = ItemType::EllipseItem;
-    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Ellipse"));
+//    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Ellipse"));
 
 }
 
@@ -570,7 +573,7 @@ void VisionGraph_Region::slot_poly_action()
 {
     view->setItemType(ItemType::Poly);
     m_itemType = ItemType::Poly;
-    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 path"));
+//    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 path"));
 
 }
 
@@ -578,7 +581,7 @@ void VisionGraph_Region::slot_poly_elli_action()
 {
     view->setItemType(ItemType::Region);
     m_itemType = ItemType::Region;
-    label_Operation->setText(QStringLiteral("点击，创建任意的多边形"));
+//    label_Operation->setText(QStringLiteral("点击，创建任意的多边形"));
 }
 
 void VisionGraph_Region::slot_open_action()
