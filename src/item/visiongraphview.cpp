@@ -617,6 +617,6 @@ void VisionGraphView::push_region(XVRegion region, int index)
     }else{
         m_vecRegion = m_vecRegion.mid(0,m_vecRegion.count()-m_iIndex_Region);
         m_vecRegion.push_back(region);
-        m_iIndex_Region == 0;
+        m_iIndex_Region = 0;
     }
 }

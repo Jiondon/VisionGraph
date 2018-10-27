@@ -69,10 +69,10 @@ SOURCES += src/visiongraph.cpp \
     src/item/visionring.cpp \
     src/control/minirect.cpp \
     src/control/visionarrows_rotate.cpp \
-    src/control/visionitem.cpp
+    src/control/visionitem.cpp \
+    src/control/color.cpp
 
-HEADERS += visiongraph_global.h \
-    src/visiongraph.h \
+HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
     src/visiongraph_item.h \
     src/visiongraph_region.h \
@@ -90,7 +90,8 @@ HEADERS += visiongraph_global.h \
     src/item/visionring.h \
     src/control/minirect.h \
     src/control/visionarrows_rotate.h \
-    src/control/visionitem.h
+    src/control/visionitem.h \
+    src/control/color.h
 
 unix {
     target.path = /usr/lib
