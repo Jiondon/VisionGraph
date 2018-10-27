@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "VideoBoxBase"
+    </assembly>
+    <members>
+        <member name="P:VideoBoxBase.ZoomingVideoBoxBase.Zoom">
+            <summary>
+Gets or sets the current image zoom factor.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.ZoomingVideoBoxBase.Translation">
+            <summary>
+Gets or sets the current translation of the image scene in the control client space.
+</summary>
+        </member>
+        <member name="E:VideoBoxBase.ZoomingVideoBoxBase.SizeModeChanged">
+            <summary>
+Notifies about the value change of the SizeMode property.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.ZoomingVideoBoxBase.SizeMode">
+            <summary>
+Gets or sets the value indicating the current size handling mode of the control.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.ZoomingVideoBoxBase.#ctor">
+            <summary>
+Constructs a new instance of the ZoomingVideoBoxBase class.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.ZoomingVideoBoxBase.GetMaxZoom">
+            <summary>
+Returns the maximum allowed zoom value for the currently used display technology and image size.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.ZoomingVideoBoxBase.ChangeZoom(System.Int32,System.Drawing.Point)">
+            <summary>
+Changes the current zoom amount in the control.
+</summary>
+            <param name="dir">Number of zoom change steps (positive to zoom in, negative to zoom out).</param>
+            <param name="refPoint">Point in the control client space that should stay in the same place after this operation.</param>
+        </member>
+        <member name="T:VideoBoxBase.ZoomingVideoBoxBase">
+            <summary>
+Base class for implementing ZoomingVideoBox control, adding manual zoom manipulation capability to the VideoBox control.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.ZoomingVideoBoxMode">
+            <summary>
+Specifies the size handling mode of the ZoomingVideoBox control.
+</summary>
+        </member>
+        <member name="T:View3D.View3DGridDisplayMode">
+            <summary>
+Specifies the coordinate system measuring grid display mode used in the View3DBox scene visualization.
+</summary>
+        </member>
+        <member name="F:View3D.View3DGridDisplayMode.YZ">
+            <summary>Measurement grid is displayed on the plane containing Y and Z axes.</summary>
+        </member>
+        <member name="F:View3D.View3DGridDisplayMode.XY">
+            <summary>Measurement grid is displayed on the plane containing X and Y axes.</summary>
+        </member>
+        <member name="F:View3D.View3DGridDisplayMode.XZ">
+            <summary>Measurement grid is displayed on the plane containing X and Z axes.</summary>
+        </member>
+        <member name="F:View3D.View3DGridDisplayMode.None">
+            <summary>Measurement grid is not displayed.</summary>
+        </member>
+        <member name="T:View3D.View3DProjectionMode">
+            <summary>
+Specifies the view/projection mode used by the View3DBox control to present its scene.
+</summary>
+        </member>
+        <member name="F:View3D.View3DProjectionMode.OrthoLeft">
+            <summary>Displaying the scene from the left with orthogonal projection.</summary>
+        </member>
+        <member name="F:View3D.View3DProjectionMode.OrthoBack">
+            <summary>Displaying the scene from the back with orthogonal projection.</summary>
+        </member>
+        <member name="F:View3D.View3DProjectionMode.OrthoTop">
+            <summary>Displaying the scene from the top with orthogonal projection.</summary>
+        </member>
+        <member name="F:View3D.View3DProjectionMode.Perspective">
+            <summary>Displaying scene in free perspective mode.</summary>
+        </member>
+        <member name="T:View3D.View3DWorldOrientation">
+            <summary>
+Specifies the world space coordinate system type used by the View3DBox control to display its scene.
+</summary>
+        </member>
+        <member name="F:View3D.View3DWorldOrientation.LHYUp">
+            <summary>Left-hand coordinate system with Y axis point up.</summary>
+        </member>
+        <member name="F:View3D.View3DWorldOrientation.LHZUp">
+            <summary>Left-hand coordinate system with Z axis point up.</summary>
+        </member>
+        <member name="F:View3D.View3DWorldOrientation.RHYUp">
+            <summary>Right-hand coordinate system with Y axis point up.</summary>
+        </member>
+        <member name="F:View3D.View3DWorldOrientation.RHZUp">
+            <summary>Right-hand coordinate system with Z axis point up.</summary>
+        </member>
+        <member name="T:View3D.View3DColoringMode">
+            <summary>
+Specifies the point cloud points automatic coloring mode.
+</summary>
+        </member>
+        <member name="F:View3D.View3DColoringMode.ZAxis">
+            <summary>Automatic scale coloring of points based on the position along the Z axis.</summary>
+        </member>
+        <member name="F:View3D.View3DColoringMode.YAxis">
+            <summary>Automatic scale coloring of points based on the position along the Y axis.</summary>
+        </member>
+        <member name="F:View3D.View3DColoringMode.XAxis">
+            <summary>Automatic scale coloring of points based on the position along the X axis.</summary>
+        </member>
+        <member name="F:View3D.View3DColoringMode.Solid">
+            <summary>No automatic coloring, points are displayed with solid color.</summary>
+        </member>
+        <member name="T:View3D.Primitive3DType">
+            <summary>
+Specifies the type of the primitive handled by the View3DBox control.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxPrimitive.LineWidth">
+            <summary>
+Gets or sets the with (in pixels) of the line used to draw this primitive visualization (when applicable).
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxPrimitive.Color">
+            <summary>
+Gets or sets the color used to visualize this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetStringLabelArrayItem(System.Int32,System.Single,System.Single,System.String)">
+            <summary>
+Sets a single item in a string label primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetStringLabel(System.Single,System.Single,System.String)">
+            <summary>
+Sets a string label (text anchored at specified coordinates) as this primitive.
+</summary>
+            <param name="x">X coordinate of the label location.</param>
+            <param name="y">Y coordinate of the label location.</param>
+            <param name="text">Text of the label.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetPathArrayItem(System.Int32,System.Void*,System.Int32,System.Boolean)">
+            <summary>
+Sets a single item in a 2D path primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetPath(System.IntPtr,System.Int32,System.Boolean)">
+            <summary>
+Sets a 2D path as this primitive.
+</summary>
+            <param name="data">Pointer to the beginning of the data buffer with the array of path points (with x and y coordinates of type float per point).</param>
+            <param name="dataSize">Size of path data in bytes.</param>
+            <param name="closed">Flag indicating whether the path is close.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetPath(System.Void*,System.Int32,System.Boolean)">
+            <summary>
+Sets a 2D path as this primitive.
+</summary>
+            <param name="data">Pointer to the beginning of the data buffer with the array of path points (with x and y coordinates of type float per point).</param>
+            <param name="dataSize">Size of path data in bytes.</param>
+            <param name="closed">Flag indicating whether the path is close.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetLineArrayItem(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in a line primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetLine(System.Single,System.Single,System.Single)">
+            <summary>
+Sets a 2D line (described by a line equation) as this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetPointArrayItem(System.Int32,System.Single,System.Single)">
+            <summary>
+Sets a single item in a point primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetPoint(System.Single,System.Single)">
+            <summary>
+Sets a single 2D point as this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetSegmentArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in a segment primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetSegment(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a 2D segment (based on two points) as this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetCoordinateSystemArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in a coordinate system transform primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetCoordinateSystem(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets coordinate system transform description as this primitive.
+</summary>
+            <param name="x">X coordinate translation of the transform.</param>
+            <param name="y">Y coordinate translation of the transform.</param>
+            <param name="angle">Rotation angle.</param>
+            <param name="scale">Scaling factor.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetShapeRegionArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,VideoBoxBase.ShapeRegionType)">
+            <summary>
+Sets a single item in a shape region primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetShapeRegion(System.Single,System.Single,System.Single,System.Single,System.Single,VideoBoxBase.ShapeRegionType)">
+            <summary>
+Sets a shape region as this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetRectangleArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in an oriented rectangle primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetRectangle(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets an oriented 2D rectangle as this primitive.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetArcArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in an arc primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetArc(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+Sets an arc as this primitive
+</summary>
+            <param name="x">X coordinate of the center of the arc circle.</param>
+            <param name="y">Y coordinate of the center of the arc circle.</param>
+            <param name="r">Radius of the arc circle.</param>
+            <param name="startAngle">Arc start angle.</param>
+            <param name="sweepAngle">Arc sweep angle.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetCircleArrayItem(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+Sets a single item in a circle primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetCircle(System.Single,System.Single,System.Single)">
+            <summary>
+Sets a circle as this primitive
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetBoxArrayItem(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+Sets a single item in a 2D box primitives array.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetBox(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+Sets a 2D axis aligned box as this primitive.
+</summary>
+            <param name="x">X coordinate of the box corner.</param>
+            <param name="y">Y coordinate of the box corner.</param>
+            <param name="width">Width of the box.</param>
+            <param name="height">Height of the box.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetArrayItemColor(System.Int32,System.Drawing.Color)">
+            <summary>
+Sets the color of an item in array primitives.
+</summary>
+            <param name="index">Index of an array element.</param>
+            <param name="color">New color of the array element.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.GetArrayItemsCount">
+            <summary>
+For array primitives gets the number of element in the array.
+</summary>
+            <returns />
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.SetArrayItemsCount(VideoBoxBase.VideoBoxPrimitiveType,System.Int32)">
+            <summary>
+Initializes this item to display an array primitive of specified type and with specified amount of elements.
+</summary>
+            <param name="type">Type of array primitive this item should be initialized to.</param>
+            <param name="count">Number of element in the array.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxPrimitive.ResetPrimitive">
+            <summary>
+Resets this primitive to its default (empty) state.
+</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxPrimitive.MaxArrayItems">
+            <summary>
+Specifies the maximum amount of elements in the array primitives handled by the View2DBox control.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.VideoBoxPrimitive">
+            <summary>
+Represents a single 2D geometry primitive displayed by the View2DBox control.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.VideoBoxPrimitiveType">
+            <summary>
+Specifies the type of a primitive displayed by the View2DBox control.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.ShapeRegionType">
+            <summary>
+Specifies the type of the Shape Region primitive.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxBase.DisplayMode">
+            <summary>
+Gets or sets the value specifying which underlying display technology should be used by the control.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxBase.SizeMode">
+            <summary>
+Gets or sets the image size handling mode.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxBase.ImageHeight">
+            <summary>
+Gets the height in pixels of the currently displayed image.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxBase.ImageWidth">
+            <summary>
+Gets the with in pixels of the currently displayed image.
+</summary>
+        </member>
+        <member name="P:VideoBoxBase.VideoBoxBase.HasImage">
+            <summary>
+Gets the flag indicating whether the control is currently displaying any image (has non-empty image set).
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.SetImage(System.Int32,System.Int32,System.Int32,VideoBoxBase.ImagePixelType,System.Int32,System.Byte[])">
+            <summary>
+Sets a general image data to be displayed in this control.
+</summary>
+            <param name="width">Width of the image in pixels.</param>
+            <param name="height">Height of the image in pixels</param>
+            <param name="depth">Number of channels per pixel.</param>
+            <param name="type">Data type of the pixel channel.</param>
+            <param name="pitch">Offset in bytes between the beginnings of the scan lines in the image data buffer.</param>
+            <param name="data">Image data buffer.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.SetImage(System.Int32,System.Int32,System.Int32,VideoBoxBase.ImagePixelType,System.Int32,System.IntPtr)">
+            <summary>
+Sets a general image data to be displayed in this control.
+</summary>
+            <param name="width">Width of the image in pixels.</param>
+            <param name="height">Height of the image in pixels</param>
+            <param name="depth">Number of channels per pixel.</param>
+            <param name="type">Data type of the pixel channel.</param>
+            <param name="pitch">Offset in bytes between the beginnings of the scan lines in the image data buffer.</param>
+            <param name="data">Pointer to the beginning of the image data buffer.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.SetImage(System.Int32,System.Int32,System.Int32,VideoBoxBase.ImagePixelType,System.Int32,System.Void*)">
+            <summary>
+Sets a general image data to be displayed in this control.
+</summary>
+            <param name="width">Width of the image in pixels.</param>
+            <param name="height">Height of the image in pixels</param>
+            <param name="depth">Number of channels per pixel.</param>
+            <param name="type">Data type of the pixel channel.</param>
+            <param name="pitch">Offset in bytes between the beginnings of the scan lines in the image data buffer.</param>
+            <param name="data">Pointer to the beginning of the image data buffer.</param>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.PointToControlSpace(System.Drawing.Point)">
+            <summary>
+Computes the location of the specified image pixel into control coordinates.
+</summary>
+            <param name="point">Coordinates of the image pixel.</param>
+            <returns>Location in the control client space that represents the specified image pixel.</returns>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.PointToImageSpace(System.Drawing.Point)">
+            <summary>
+Computes the location of the specified control point into currently displayed image coordinates (in its current size state).
+</summary>
+            <param name="point">Point coordinates in the control space.</param>
+            <returns>Equivalent point coordinates in the image space. </returns>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.#ctor">
+            <summary>
+Construct a new instance of the VideoBoxBase class.
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.OnImageSizeChanged">
+            <summary>
+Called after the size of the displayed image has been changed (because of setting a new image with different dimensions).
+</summary>
+        </member>
+        <member name="M:VideoBoxBase.VideoBoxBase.OnGraphicSystemInitialized">
+            <summary>
+Called after the underlying display technology system was initialized.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.VideoBoxBase">
+            <summary>
+Base class for implementing the VideoBox control.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.ImagePixelType">
+            <summary>
+Specifies the image pixel data type for image data.
+</summary>
+        </member>
+        <member name="T:VideoBoxBase.VideoBoxDisplayMode">
+            <summary>
+Specifies the underlying display technology mode for the VideoBox control.
+</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxDisplayMode.DirectX">
+            <summary>Control will use DirectX to display its content with hardware acceleration.</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxDisplayMode.GDI">
+            <summary>Control will use GDI to display its content.</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxDisplayMode.Auto">
+            <summary>Control will attempt to start in DirectX mode when the technology is available on the local system.</summary>
+        </member>
+        <member name="T:VideoBoxBase.VideoBoxSizeMode">
+            <summary>
+Determines the image size handling mode of the VideoBox control.
+</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxSizeMode.Zoom">
+            <summary>Image is stretched and centered to fill the control client area without modifying the image size proportions.</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxSizeMode.CenterImage">
+            <summary>Image is displayed in its original size but centered in the control client area.</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxSizeMode.StretchImage">
+            <summary>Image stretched to fill the entire control client area.</summary>
+        </member>
+        <member name="F:VideoBoxBase.VideoBoxSizeMode.Normal">
+            <summary>Image displayed without changes.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1868 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HMI.Controls</name>
+    </assembly>
+    <members>
+        <member name="T:HMI.Controls.ActivityIndicator">
+            <summary>
+            Display control that provides an animation indicating waiting or working state of UI.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.ActivityIndicator.Mode">
+            <summary>
+            Determines the display mode of ActivityIndicator control.
+            </summary>
+        </member>
+        <member name="F:HMI.Controls.ActivityIndicator.Mode.Busy">
+            <summary>Animation suggesting waiting for operation to be finished.</summary>
+        </member>
+        <member name="F:HMI.Controls.ActivityIndicator.Mode.Recording">
+            <summary>Animation suggesting active video processing or recording state.</summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.#ctor">
+            <summary>
+            Constructs a new instance of ActivityIndicator class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ActivityIndicator.MinimumSize">
+            <summary>
+            Sets additional constraint and default value for MinimumSize property
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ActivityIndicator.Text">
+            <summary>
+            Hides Text property from edit.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ActivityIndicator.Font">
+            <summary>
+            Hides Font property from edit.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ActivityIndicator.Active">
+            <summary>
+            Gets or sets wait animation activation signal.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ActivityIndicator.IndicatorMode">
+            <summary>
+            Gets or sets the display mode of this control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.animationTimer_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Handles animation refreshing.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.DrawBusyAnimation(System.Drawing.Graphics)">
+            <summary>
+            Draws spinning circles animation.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.DrawRecordingAnimation(System.Drawing.Graphics)">
+            <summary>
+            Draws blinking recording indicator.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Handles control redrawing with animation drawing.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Disable refreshing animation while drawing heavy background.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ActivityIndicator.ProgramStateChanged(System.Object,HMI.ProgramStateChangedEventArgs)">
+            <summary>
+            Handles starting and stopping of the animation when the application program is run or stopped.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.AnalogIndicator">
+            <summary>
+            Display control of analog value indicator with needle and round board.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.AnalogIndicator.#ctor">
+            <summary>
+            Constructs a new instance of AnalogIndicator class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicator.Minimum">
+            <summary>
+            Gets or sets the minimum value on the analog indicator scale.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicator.Maximum">
+            <summary>
+            Gets or sets the maximum value on the analog indicator scale.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicator.LargeScale">
+            <summary>
+            Gets or sets the distance between small scale points on the indicator board (in scale units).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicator.SmallScale">
+            <summary>
+            Gets or sets the distance between large scale points (with numbers) on the indicator board (in scale units).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicator.Value">
+            <summary>
+            Gets or sets the value displayed on the indicator.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.AnalogIndicator.InvalidateWithBoard">
+            <summary>
+            Invalidates the control surfaces, cases the control to be redrawn and forces the scale background to be re-rendered.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.AnalogIndicator.DrawBoardBackground(System.Drawing.Graphics,System.Drawing.Rectangle)">
+            <summary>
+            Renders the graphics of the indicator scale (the control background).
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.AnalogIndicatorWithScales">
+            <summary>
+            Display control of analog value indicator with needle and green/yellow/red colors marked on a round board.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.GreenColorMinimum">
+            <summary>
+            Gets or sets the value of start of the green color scale marking.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.GreenColorMaximum">
+            <summary>
+            Gets or sets the value of the end of the green color scale marking.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.YellowColorMinimum">
+            <summary>
+            Gets or sets the value of the start of the yellow color scale marking.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.YellowColorMaximum">
+            <summary>
+            Gets or sets the value of the end of yellow color scale marking.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.RedColorMinimum">
+            <summary>
+            Gets or sets the value of the start of the red color scale marking.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.AnalogIndicatorWithScales.RedColorMaximum">
+            <summary>
+            Gets or sets the value of the end of the red color scale marking.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.CoordinateSystem">
+            <summary>
+            Equivalent of the CoordinateSystem2D AVS type. Describes general transform of the object on the 2D surface.
+            </summary>
+        </member>
+        <member name="F:HMI.Controls.CoordinateSystem.Translation">
+            <summary>Coordinate system translation (origin point).</summary>
+        </member>
+        <member name="F:HMI.Controls.CoordinateSystem.RotationAngle">
+            <summary>Rotation angle of the coordinate system around the origin point.</summary>
+        </member>
+        <member name="F:HMI.Controls.CoordinateSystem.Scale">
+            <summary>Scaling factor of the coordinate system.</summary>
+        </member>
+        <member name="F:HMI.Controls.CoordinateSystem.Default">
+            <summary>Identity coordinate system transformation description.</summary>
+        </member>
+        <member name="M:HMI.Controls.CoordinateSystem.#ctor(System.Drawing.PointF,System.Single,System.Single)">
+            <summary>
+            Creates coordinate system transformation description of specified properties.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.CoordinateSystem.op_Implicit(HMI.Controls.CoordinateSystem)~AvlNet.CoordinateSystem2D">
+            <summary>
+            Converts this coordinate system description to an AVL.Net data type.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.CoordinateSystem.op_Implicit(AvlNet.CoordinateSystem2D)~HMI.Controls.CoordinateSystem">
+            <summary>
+            Converts CoordinateSystem description from an AVL.Net data type.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.Knob">
+            <summary>
+            Value selection control class representing a round knob.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.#ctor">
+            <summary>
+            Constructs a new instance of the Knob class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.Value">
+            <summary>
+            Gets or sets the value selected in the control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.OnValueChanged">
+            <summary>
+            Called after the value selected in the control has changed. Raises ValueChanged event.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.Minimum">
+            <summary>
+            Gets or sets the minimum value available to be selected by the control (left-most position of the knob).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.Maximum">
+            <summary>
+            Gets or sets the maximum value available in the control (right-most position of the knob).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.ScaleChange">
+            <summary>
+            Gets or sets the distance between two lines in the knob scale markings (in the scale units).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.NumberChange">
+            <summary>
+            Gets or sets the distance between two numbers in the knob scale (in scale units).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.ShowNumbers">
+            <summary>
+            Gets or sets the flag indicating whether the number markings are shown on the knob scale.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.SnapToScale">
+            <summary>
+            Gets or sets the flag enabling the knob to snap to a closest scale point when the user moves it.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.KnobColor">
+            <summary>
+            Gets or sets the color of the knob top part surface.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.ScaleColor">
+            <summary>
+            Gets or sets the color of the scale line markings and text.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.PointerColor">
+            <summary>
+            Gets or sets the color of the knob pointer arrow part.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.calculateKnobArea">
+            <summary>
+            Updates knobArea parameter according to current control size
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.vectorToAngle(System.Drawing.PointF)">
+            <summary>
+            Calculates orientation angle in degrees of specified vector
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.pointToAngularVector(System.Drawing.Point)">
+            <summary>
+            Calculates vector from center of knob to specified point in control space
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Knob.currentKnobRadius">
+            <summary>
+            Gets knob radius in current control size
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handles mouse knob movement
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handles mouse knob movement
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handles mouse knob movement
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.angularPoint(System.Drawing.PointF,System.Double,System.Double)">
+            <summary>
+            Calculates point coordinates from specified angular coordinates
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.drawScaleLine(System.Drawing.Graphics,System.Drawing.PointF,System.Double,System.Double,System.Double,System.Drawing.Pen)">
+            <summary>
+            Draws single scale line (line directed from center to out)
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.BlendColors(System.Drawing.Color,System.Drawing.Color,System.Single)">
+            <summary>
+            Blends two specified color using alpha as strength of first color.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.Knob.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Handles full painting of knob
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:HMI.Controls.LocalizedDescriptionAttribute">
+            <summary>
+            Specialization of component model description attribute for setting control description from resource string dictionary.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.OnOffButton">
+            <summary>
+            ON/OFF switchable button control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.OnOffButton.#ctor">
+            <summary>
+            Constructs a new instance of OnOffButton class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.OnOffButton.Value">
+            <summary>
+            Gets or sets the on/off value selected in the control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.OnOffButton.OnValueChanged">
+            <summary>
+            Called after the on/off state value of the control has been changed. Raises the ValueChanged event.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.OnOffButton.CreateDisabledImage(System.Drawing.Image)">
+            <summary>
+            Draws disabled version of specified image.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.PassFailIndicator">
+            <summary>
+            Display control class representing one of the Pass/Neutral/Fail states.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.PassFailIndicator.Mode">
+            <summary>
+            Specifies the display mode of the PassFailIndicator control.
+            </summary>
+        </member>
+        <member name="F:HMI.Controls.PassFailIndicator.Mode.Text">
+            <summary>State indicated with a text description.</summary>
+        </member>
+        <member name="F:HMI.Controls.PassFailIndicator.Mode.Image">
+            <summary>State represented by displaying an image.</summary>
+        </member>
+        <member name="F:HMI.Controls.PassFailIndicator.Mode.Face">
+            <summary>State represented by displaying a smiley face of specific mood.</summary>
+        </member>
+        <member name="T:HMI.Controls.PassFailIndicator.IndicatorImageSizeMode">
+            <summary>
+            Specifies the size stretching mode of the PassFailIndicator control in the Image display mode.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.PassFailIndicator.#ctor">
+            <summary>
+            Constructs a new instance of the PassFailIndicator class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.Value">
+            <summary>
+            Gets or sets the value of the state indicated by the control. 
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.PassText">
+            <summary>
+            Gets or sets the text displayed when in Pass state (for Text display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.FailText">
+            <summary>
+            Gets or sets the text displayed when in Fail state (for Text display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.NeutralText">
+            <summary>
+            Gets or sets the text displayed when in Neutral/Unknown state (for Text display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.PassImage">
+            <summary>
+            Gets or sets the image shown when in Pass state  (for Image display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.FailImage">
+            <summary>
+            Gets or sets the image shown when in Fail state  (for Image display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.NeutralImage">
+            <summary>
+            Gets or sets the image shown when in Neutral/Unknown state  (for Image display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.ImageSizeMode">
+            <summary>
+            Gets or sets the image size to control size behavior mode (for Image display mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.IndicatorMode">
+            <summary>
+            Gets or sets the control display mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.PassFailIndicator.AutoTextSize">
+            <summary>
+            Gets or sets the flag enabling the size of the text to be automatically adjusted to the control size.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.ProfileBox.SizeMode">
+            <summary>
+            Specifies profile scaling mode in ProfileBox control.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.ProfileBox.ScaledPoint">
+            <summary>
+            Describes single point on scaled down profile.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.#ctor">
+            <summary>
+            Constructs a new instance of the ProfileBox class.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ReleaseBrushes">
+            <summary>
+            Disposes and invalidates all GDI brushes and pens used by control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.GenerateExampleProfile">
+            <summary>
+            Generates example profile out of sin(x)/x function for design time visualization.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.CalculateScaleStep(System.Decimal)">
+            <summary>
+            Helper routine to calculate axis scale grid step value.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.GetAxisLabelWidth(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Approximates axis scale label width.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.CreateScaledProfile">
+            <summary>
+            Generates scaled down profile data for current control zoom state.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.InitScrollBar">
+            <summary>
+            Initializes scroll bar control used for horizontal scroll bar.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ApplyDefaultMode">
+            <summary>
+            Puts chart zoom mode to initial state specified by Initial* properties.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.IsInDefaultMode">
+            <summary>
+            Checks if current zoom state corresponds to default zoom state.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.UpdateProfileState">
+            <summary>
+            Updates profile scaling state to current control size, scaling mode and profile data.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.MeasureFont">
+            <summary>
+            Updates font size factors for chart layout.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.CalculateLayout">
+            <summary>
+            Recalculates chart elements layout on control surface.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ResetProfileData">
+            <summary>
+            Removes current profile and sets control data to null;
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.SetOverflowMode">
+            <summary>
+            Puts control into profile overflow error mode and resets current profile data.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.UpdateProfileData(System.Double,System.Double)">
+            <summary>
+            Updates control to changed content of profile data.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.SetData(System.Single[],System.Double,System.Double)">
+            <summary>
+            Sets profile data to be shown in this control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.SetData(System.IntPtr,System.Int32,System.Double,System.Double)">
+            <summary>
+            Sets profile data to be shown in this control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.Pan(System.Int32)">
+            <summary>
+            Shifts chart zoom window horizontally.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.Zoom(System.Int32,System.Int32)">
+            <summary>
+            Changes profile zoom factor (and switches chart zooming mode accordingly).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.Zoom(System.Int32)">
+            <summary>
+            Changes profile zoom factor (and switches chart zooming mode accordingly).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintHorizontalAxis(System.Drawing.Graphics)">
+            <summary>
+            Draws horizontal axis scale.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintHorizontalAxisName(System.Drawing.Graphics)">
+            <summary>
+            Draws name of horizontal axis.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintVerticalAxis(System.Drawing.Graphics)">
+            <summary>
+            Draws vertical axis scale.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintVerticalAxisName(System.Drawing.Graphics)">
+            <summary>
+            Draws name of vertical axis.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintRawProfile(System.Drawing.Graphics)">
+            <summary>
+            Draws non-scaled profile line onto main chart area (using profile source data).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintScaledProfile(System.Drawing.Graphics)">
+            <summary>
+            Draws scaled down profile surface onto main chart area (using profile scaled down data).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.DrawProbeMarker(System.Drawing.Graphics,System.Int32,System.Single)">
+            <summary>
+            Draws probe chart intersection marker point.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintProbe(System.Drawing.Graphics)">
+            <summary>
+            Calculates and paint chart coordinates probe UI.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintChart(System.Drawing.Graphics)">
+            <summary>
+            Draws main area of the chart with profile.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.PaintAll(System.Drawing.Graphics,System.Drawing.Rectangle)">
+            <summary>
+            Draws whole chart.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Handles chart control painting.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.OnSizeChanged(System.EventArgs)">
+            <summary>
+            Handles chart scaling with control size changing.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.OnFontChanged(System.EventArgs)">
+            <summary>
+            Handles layout update after font change.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.UpdateCursor(System.Drawing.Point)">
+            <summary>
+            Updates mouse pointer cursor according to control state and mouse position over the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.VerticalAxisMin">
+            <summary>
+            Gets or sets the minimum value show at the vertical chart scale axis.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.VerticalAxisMax">
+            <summary>
+            Gets or sets the maximum value show at the vertical chart scale axis.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.DomainStart">
+            <summary>
+            Gets or sets the value on the horizontal axis scale assigned to the profile zero point (shift of the horizontal axis scale values).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.DomainScale">
+            <summary>
+            Gets or sets the scaling factor of the horizontal axis values in relation to the profile point indices (multiplier of the horizontal axis scale values).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.DomainDefaultSizeMode">
+            <summary>
+            Gets or sets the mode of chart size that the control will be put in by default.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.DomainDefaultLength">
+            <summary>
+            Gets or sets the default length of the horizontal scale that will determine the manual zoom factor selected in the control by default (requires DomainDefaultSizeMode to be set to manual mode).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.VerticalAxisName">
+            <summary>
+            Gets or sets the text displayed on the chart's vertical axis.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.HorizontalAxisName">
+            <summary>
+            Gets or sets the text displayed on the chart's horizontal axis.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.BackColor">
+            <summary>
+            Gets or sets the color of the chart background.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.AxisColor">
+            <summary>
+            Gets or sets the color of the chart axes and scale markings.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.GridColor">
+            <summary>
+            Gets or sets the color of the helper scale lines in the chart background.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.ChartColor">
+            <summary>
+            Gets or sets the color of the profile line.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.HighQualityMode">
+            <summary>
+            Gets or sets the flag indicating whether the chart is drawn in slower hight quality mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.EnableManualZoomChange">
+            <summary>
+            Gets or sets the flag enabling user to manually change the chart zoom and pan.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.EnableMouseProbe">
+            <summary>
+            Gets or sets the flag enabling the user to probe (using the mouse cursor) the value of the profile in specific point.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.Profile">
+            <summary>
+            Represents the profile data displayed in the control.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.ProfileBox.ProfileContainer">
+            <summary>
+            Provides interface for setting profile data to ProfileBox control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.ProfileContainer.Size">
+            <summary>
+            Gets the size (in points) of the profile currently visible in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ProfileBox.ProfileContainer.IsEmpty">
+            <summary>
+            Indicates that the control is not showing any profile data.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetData(System.Single[])">
+            <summary>
+            Sets the profile data to be shown in the control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetData(System.Single[],System.Double,System.Double)">
+            <summary>
+            Sets the profile data to be shown in the control.
+            </summary>
+            <param name="data">Profile data (values of the profile points).</param>
+            <param name="xOffset">Offset of profile x scale coordinates (position of the first profile point on the horizontal scale).</param>
+            <param name="xScale">Scaling factor of the profile x scale coordinates (horizontal scale gap width between consecutive profile points).</param>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetData(System.IntPtr,System.Int32)">
+            <summary>
+            Sets the profile data to be shown in the control.
+            </summary>
+            <param name="data">Pointer to the beginning of the profile sample points (of type float).</param>
+            <param name="size">Number of sample points in the profile data.</param>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetData(System.IntPtr,System.Int32,System.Double,System.Double)">
+            <summary>
+            Sets the profile data to be shown in the control.
+            </summary>
+            <param name="data">Pointer to the beginning of the profile sample points (of type float).</param>
+            <param name="size">Number of sample points in the profile data.</param>
+            <param name="xOffset">Offset of profile x scale coordinates (position of the first profile point on the horizontal scale).</param>
+            <param name="xScale">Scaling factor of the profile x scale coordinates (horizontal scale gap width between consecutive profile points).</param>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetProfile(AvlNet.Profile)">
+            <summary>
+            Sets the profile to be shown in the control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ProfileBox.ProfileContainer.SetOverflowState">
+            <summary>
+            Resets current profile data and puts the chart control into profile overflow error state.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.ButtonOff">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.ButtonOn">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.ClosedHand">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.OpenHand">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.Properties.Resources.Recording">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.SelectingVideoBox">
+            <summary>
+            Extension of VideoBox class adding ability to select a cropping rectangle on top of the image.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.#ctor">
+            <summary>
+            Constructs a new instance of the SelectingVideoBox class.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.OnGraphicSystemInitialized">
+            <summary>
+            Handles (re)initialization of marker properties after graphics system (re)initialization.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.RectToImageSpace(System.Drawing.Rectangle)">
+            <summary>
+            Converts a given rectangle from the control space to the image coordinates space;
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.RectToControlSpace(System.Drawing.Rectangle)">
+            <summary>
+            Converts given rectangle from image space to control coordinates space.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.RenderMarkerSquare(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Draws selection marker handle square into current adorners state.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.RenderMarkerRect(System.Drawing.Rectangle)">
+            <summary>
+            Renders selection marker into adorner of image.
+            </summary>
+            <param name="rect">Marker rectangle in control coordinate space</param>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.UpdateMarkerRect">
+            <summary>
+            Updates current marker rectangle to show specified selection.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.ConstrainRect(System.Drawing.Rectangle)">
+            <summary>
+            Corrects specified image space rect to be constrained to its allowed space.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.GetNewStateInPoint(System.Drawing.Point)">
+            <summary>
+            Returns state that control should move to when user clicks in given control point.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.GetStateCursor(HMI.Controls.SelectingVideoBox.SelectionState)">
+            <summary>
+            Returns mouse cursor for given selection state of a control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.GetNewRectangleFromPoint(System.Drawing.Point)">
+            <summary>
+            When user currently selects new rectangle returns rectangle that will be produced when mouse end gesture in given position.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.SetNewRect(System.Drawing.Rectangle,System.Boolean)">
+            <summary>
+            Sets given rectangle as new selection of a control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.UpdateCursorState">
+            <summary>
+            Updates control mouse cursor after user changed keyboard modifier keys state.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.UpdateMarkerLockState">
+            <summary>
+            Updates state of control after selection marker parts were changed.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.ClearSelection(System.Object,System.EventArgs)">
+            <summary>
+            Handles user request to clear current selection.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.SelectWholeImage(System.Object,System.EventArgs)">
+            <summary>
+            Handles user request to select full dimensions of currently displayed image.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.Selection">
+            <summary>
+            Gets or sets the dimensions of the rectangle selected in the control (in currently displayed image scale).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.SelectingVideoBox.OnSelectionChanged">
+            <summary>
+            Handles invoking of SelectionChanged event after Selection property has been changed.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.SelectorVisible">
+            <summary>
+            Gets or sets the flag indicating whether the selection marker is visible to the user.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.MarkerLineWidth">
+            <summary>
+            Gets or sets the with in pixels of the rectangle selection marker lines.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.MarkerLineColor">
+            <summary>
+            Gets or sets the color of the rectangle selection marker lines.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.MarkerShaderColor">
+            <summary>
+            Gets or sets the (semi-transparent) color of the shade covering the area outside of the selected rectangle.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.LockTop">
+            <summary>
+            Gets or sets the flag locking the top part of the selection rectangle. When True forces the top part of the image selector to be always on the image border.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.LockBottom">
+            <summary>
+            Gets or sets the flag locking the bottom part of the selection rectangle. When True forces the bottom part of the image selector to be always on the image border.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.LockLeft">
+            <summary>
+            Gets or sets the flag locking the left part of the selection rectangle. When True forces the left part of the image selector to be always on the image border.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.SelectingVideoBox.LockRight">
+            <summary>
+            Gets or sets the flag locking the right part of the selection rectangle. When True forces the right part of the image selector to be always on the image border.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.VideoBox">
+            <summary>
+            Optimized for efficiency (with hardware acceleration) control displaying images or video frames.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.VideoBox.#ctor">
+            <summary>
+            Constructs a new instance of the VideoBox class.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.VideoBox.SetImage(AvlNet.Image)">
+            <summary>
+            Sets the image data to be displayed in the VideoBox control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.VideoBox.Image">
+            <summary>
+            Represents the image displayed in the control.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.VideoBoxImage">
+            <summary>
+            Helper class for Image property (data port) in the VideoBox control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.VideoBoxImage.SetImage(System.Int32,System.Int32,System.Int32,VideoBoxBase.ImagePixelType,System.Int32,System.IntPtr)">
+            <summary>
+            Sets the image data to be displayed in the VideoBox control.
+            </summary>
+            <param name="width">Width of the image in pixels.</param>
+            <param name="height">Height of the image in pixels.</param>
+            <param name="depth">Number of image color channels.</param>
+            <param name="type">Pixel channel data type used by the image.</param>
+            <param name="pitch">Offset in bytes between scan lines in the image data.</param>
+            <param name="data">Pointer to the beginning of the image data.</param>
+        </member>
+        <member name="M:HMI.Controls.VideoBoxImage.SetImage(System.Int32,System.Int32,System.Int32,VideoBoxBase.ImagePixelType,System.Int32,System.Byte[])">
+            <summary>
+            Sets the image data to be displayed in the VideoBox control.
+            </summary>
+            <param name="width">Width of the image in pixels.</param>
+            <param name="height">Height of the image in pixels.</param>
+            <param name="depth">Number of image color channels.</param>
+            <param name="type">Pixel channel data type used by the image.</param>
+            <param name="pitch">Offset in bytes between scan lines in the image data.</param>
+            <param name="data">Image data buffer.</param>
+        </member>
+        <member name="M:HMI.Controls.VideoBoxImage.SetImage(AvlNet.Image)">
+            <summary>
+            Sets the image data to be displayed in the VideoBox control.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.View2DBoxPrimitive">
+            <summary>
+            Represents a single 2D geometry primitive displayed by the View2DBox control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetArc(AvlNet.Arc2D)">
+            <summary>
+            Sets an arc as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetArcArrayItem(System.Int32,AvlNet.Arc2D)">
+            <summary>
+            Sets a single item in an arc primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetArcArray(System.Collections.Generic.IList{AvlNet.Arc2D})">
+            <summary>
+            Sets an array of arc primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetBox(AvlNet.Box)">
+            <summary>
+            Sets a 2D axis aligned box as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetBoxArrayItem(System.Int32,AvlNet.Box)">
+            <summary>
+            Sets a single item in a 2D box primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetBoxArray(System.Collections.Generic.IList{AvlNet.Box})">
+            <summary>
+            Sets an array of box primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCircle(AvlNet.Circle2D)">
+            <summary>
+            Sets a circle as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCircleArrayItem(System.Int32,AvlNet.Circle2D)">
+            <summary>
+            Sets a single item in a circle primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCircleArray(System.Collections.Generic.IList{AvlNet.Circle2D})">
+            <summary>
+            Sets an array of circle primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCoordinateSystem(AvlNet.CoordinateSystem2D)">
+            <summary>
+            Sets coordinate system transform description as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCoordinateSystemArrayItem(System.Int32,AvlNet.CoordinateSystem2D)">
+            <summary>
+            Sets a single item in a coordinate system transform primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetCoordinateSystemArray(System.Collections.Generic.IList{AvlNet.CoordinateSystem2D})">
+            <summary>
+            Sets an array of coordinate system transformations for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetLine(AvlNet.Line2D)">
+            <summary>
+            Sets a 2D line (described by a line equation) as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetLineArrayItem(System.Int32,AvlNet.Line2D)">
+            <summary>
+            Sets a single item in a line primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetLineArray(System.Collections.Generic.IList{AvlNet.Line2D})">
+            <summary>
+            Sets an array of line primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPath(AvlNet.Path)">
+            <summary>
+            Sets a 2D path as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPathArrayItem(System.Int32,AvlNet.Path)">
+            <summary>
+            Sets a single item in a 2D path primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPathArray(System.Collections.Generic.IList{AvlNet.Path})">
+            <summary>
+            Sets an array of path primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPoint(AvlNet.Point2D)">
+            <summary>
+            Sets a single 2D point as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPoint(System.Drawing.PointF)">
+            <summary>
+            Sets a single 2D point as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPointArrayItem(System.Int32,AvlNet.Point2D)">
+            <summary>
+            Sets a single item in a point primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPointArrayItem(System.Int32,System.Drawing.PointF)">
+            <summary>
+            Sets a single item in a point primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPointArray(System.Collections.Generic.IList{AvlNet.Point2D})">
+            <summary>
+            Sets an array of point primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetPointArray(System.Collections.Generic.IList{System.Drawing.PointF})">
+            <summary>
+            Sets an array of point primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRectangle(AvlNet.Rectangle2D)">
+            <summary>
+            Sets an oriented 2D rectangle as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRectangleArrayItem(System.Int32,AvlNet.Rectangle2D)">
+            <summary>
+            Sets a single item in an oriented rectangle primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRectangleArray(System.Collections.Generic.IList{AvlNet.Rectangle2D})">
+            <summary>
+            Sets an array of rectangle primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRegion(AvlNet.Region)">
+            <summary>
+            Sets a region as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRegionArrayItem(System.Int32,AvlNet.Region)">
+            <summary>
+            Sets a single item in a region primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetRegionArray(System.Collections.Generic.IList{AvlNet.Region})">
+            <summary>
+            Sets an array of region primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetSegment(AvlNet.Segment2D)">
+            <summary>
+            Sets a 2D segment (based on two points) as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetSegmentArrayItem(System.Int32,AvlNet.Segment2D)">
+            <summary>
+            Sets a single item in a segment primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetSegmentArray(System.Collections.Generic.IList{AvlNet.Segment2D})">
+            <summary>
+            Sets an array of segment primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetShapeRegion(AvlNet.ShapeRegion)">
+            <summary>
+            Sets a shape region as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetShapeRegionArrayItem(System.Int32,AvlNet.ShapeRegion)">
+            <summary>
+            Sets a single item in a shape region primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBoxPrimitive.SetShapeRegionArray(System.Collections.Generic.IList{AvlNet.ShapeRegion})">
+            <summary>
+            Sets an array of shape region primitives for this data item.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.BaseView2DBox">
+            <summary>
+            Base class for View2DBox control variants, handling common primitives and primitive properties management.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.BaseView2DBox.CreatePrimitive(System.Int32)">
+            <summary>
+            Initializes a new instance of View2D primitive object for specified primitive id.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.BaseView2DBox.GetPrimitive(System.Int32)">
+            <summary>
+            Returns primitive data object for primitive of specified id.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.LineWidth">
+            <summary>
+            Gets or sets the width of the line used to draw primitives on top of the image (in pixels in the image space).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.HighQuality">
+            <summary>
+            Gets or sets the flag indicating whether the primitives are drawn in slower high quality mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.DataAlignment">
+            <summary>
+            Gets or sets the global transformation for all primitives drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data1">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data2">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data3">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data4">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data5">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data6">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data7">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data8">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data9">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data10">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data11">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data12">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data13">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data14">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data15">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.BaseView2DBox.Data16">
+            <summary>
+            Represent a single primitive drawn in the control.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.View2DBox">
+            <summary>
+            Extension of the VideoBox control allowing to show a set of 2D geometry primitives on top of the image.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View2DBox.#ctor">
+            <summary>
+            Constructs a new instance of the View2DBox class.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.View3DBox">
+            <summary>
+            Hardware accelerated display control for presenting 3D point cloud data and primitives.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.View3DBox.WorldOrientationMode">
+            <summary>
+            Determines the world coordinate system type for the View3DBox control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.#ctor">
+            <summary>
+            Constructs a new instance of the View3DBox class.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.ResetView">
+            <summary>
+            Resets the view position and orientation to its initial setting.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.SetAutoViewState">
+            <summary>
+            Sets the view position and zoom to automatically determined state best suitable for the current scene.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.InitialViewState">
+            <summary>
+            Specifies the initial view rotation and zoom state applied after the control is initialized.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.WorldOrientation">
+            <summary>
+            Gets or sets the world coordinate system type to be used in control's scene.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.GridMode">
+            <summary>
+            Gets or sets the coordinate system grid display mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ScaleColoringMode">
+            <summary>
+            Gets or sets the point cloud coloring mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ProjectionMode">
+            <summary>
+            Gets or sets the flag indicating the view/projection mode of 3D visualization.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.PointsSize">
+            <summary>
+            Gets or sets the relative size of points for displaying point cloud data.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.EnableAntiAliasing">
+            <summary>
+            Gets or sets the flag indicating whether the preview is displayed with a slower hight quality anti-aliasing mode.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.EnableMouseNavigation">
+            <summary>
+            Gets or sets the flag enabling user to manually change the rotation and zoom of the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ShowBoundingBoxes">
+            <summary>
+            Gets or sets the flag indicating whether the bounding boxes of point cloud data primitives are displayed.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data1">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data2">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data3">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data4">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data5">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data6">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data7">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.Data8">
+            <summary>
+            Represent the data primitive shown in the preview.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.RotationYaw">
+            <summary>
+            Yaw rotation angle of the observer around the observation center.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.RotationPitch">
+            <summary>
+            Pitch rotation angle of the observer around the observation center.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.Distance">
+            <summary>
+            Distance of the observer from the observation center.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.TranslationX">
+            <summary>
+            Translation along the X axis of the observation center.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.TranslationY">
+            <summary>
+            Translation along the Y axis of the observation center.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.ViewState.TranslationZ">
+            <summary>
+            Translation along the Z axis of the observation center.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.View3DBox.DataItem">
+            <summary>
+            Helper class representing a single 3D primitive displayed in the View3DBox control.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.#ctor(HMI.Controls.View3DBox,System.UInt32)">
+            <summary>
+            Constructs a new instance of the View3DBox.DataItem class.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.ResetPrimitive">
+            <summary>
+            Clears content of this primitive.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.DataItem.IsEmpty">
+            <summary>
+            Gets flag indicating if this primitive is empty (does not show any data).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.View3DBox.DataItem.Color">
+            <summary>
+            Gets or sets the color used to visualize this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetArrayItemsCount(View3D.Primitive3DType,System.Int32)">
+            <summary>
+            Initializes this data item to be an array of 3D primitives of specified type.
+            </summary>
+            <param name="primitiveType">Type of array primitive this data item should be initialized to.</param>
+            <param name="count">Number of element in the array of primitives.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointCloud(System.Void*,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets an arbitrary point cloud data arranged in the 2D grid for this primitive.
+            </summary>
+            <param name="data">Pointer to the beginning of the 3D point cloud data buffer (containing three float values with x, y and z coordinates per point).</param>
+            <param name="dataSize">Data buffer size in bytes.</param>
+            <param name="width">Width of the 2D grid arrangement.</param>
+            <param name="height">Height of the 2D grid arrangement.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointCloud(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets an arbitrary point cloud data arranged in the 2D grid for this primitive.
+            </summary>
+            <param name="data">Pointer to the beginning of the 3D point cloud data buffer (containing three float values with x, y and z coordinates per point).</param>
+            <param name="dataSize">Data buffer size in bytes.</param>
+            <param name="width">Width of the 2D grid arrangement.</param>
+            <param name="height">Height of the 2D grid arrangement.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointCloud(System.IntPtr,System.Int32)">
+            <summary>
+            Sets an arbitrary point cloud data for this primitive.
+            </summary>
+            <param name="data">Pointer to the beginning of the 3D point cloud data buffer (containing three float values with x, y and z coordinates per point).</param>
+            <param name="pointsCount">Number of points in the point cloud data.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSurface(System.Int32,System.Int32,System.Int32,System.Int32,System.Void*,System.Int32,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Sets a Surface data (a depth/height map) as a point cloud data for this primitive
+            </summary>
+            <param name="width">Width in points of the depth map.</param>
+            <param name="height">Height in points of the depth map.</param>
+            <param name="type">Data type of a point value used by the depth map.</param>
+            <param name="pitch">Offset in bytes between the beginnings of the scan lines in the map data.</param>
+            <param name="data">Pointer to the beginning of the depth map data buffer (with single value of specified type per point),</param>
+            <param name="dataSize">Size of the data buffer in bytes.</param>
+            <param name="xOffset">X coordinate of the absolute offset of the first map point.</param>
+            <param name="xScale">Scaling factor along X axis of depth map coordinates.</param>
+            <param name="yOffset">Y coordinate of the absolute offset of the first map point.</param>
+            <param name="yScale">Scaling factor along Y axis of depth map coordinates.</param>
+            <param name="zOffset">Z coordinate of the absolute offset of the first map point.</param>
+            <param name="zScale">Scaling factor along Z axis of depth map coordinates.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSurface(System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr,System.Int32,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Sets a Surface data (a depth/height map) as a point cloud data for this primitive.
+            </summary>
+            <param name="width">Width in points of the depth map.</param>
+            <param name="height">Height in points of the depth map.</param>
+            <param name="type">Data type of a point value used by the depth map.</param>
+            <param name="pitch">Offset in bytes between the beginnings of the scan lines in the map data.</param>
+            <param name="data">Pointer to the beginning of the depth map data buffer (with single value of specified type per point),</param>
+            <param name="dataSize">Size of the data buffer in bytes.</param>
+            <param name="xOffset">X coordinate of the absolute offset of the first map point.</param>
+            <param name="xScale">Scaling factor along X axis of depth map coordinates.</param>
+            <param name="yOffset">Y coordinate of the absolute offset of the first map point.</param>
+            <param name="yScale">Scaling factor along Y axis of depth map coordinates.</param>
+            <param name="zOffset">Z coordinate of the absolute offset of the first map point.</param>
+            <param name="zScale">Scaling factor along Z axis of depth map coordinates.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPoint3DGrid(AvlNet.Point3DGrid)">
+            <summary>
+            Sets a Point3DGrid object with point cloud data for this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSurface(AvlNet.Surface)">
+            <summary>
+            Sets a Surface object with height map data for this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPlane(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets 3D plane as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPlane(AvlNet.Plane3D)">
+            <summary>
+            Sets 3D plane as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetCircle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets 2D circle parallel to a 3D plane as this primitive.
+            </summary>
+            <param name="A">Plane A factor.</param>
+            <param name="B">Plane B factor.</param>
+            <param name="C">Plane C factor.</param>
+            <param name="cx">X coordinate of the center of the circle.</param>
+            <param name="cy">Y coordinate of the center of the circle.</param>
+            <param name="cz">Z coordinate of the center of the circle.</param>
+            <param name="r">Circle radius.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetCircle(AvlNet.Circle3D)">
+            <summary>
+            Sets 2D circle parallel in 3D space as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetCircleArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a 2D circle primitives array.
+            </summary>
+            <param name="index">Array item index.</param>
+            <param name="A">Plane A factor.</param>
+            <param name="B">Plane B factor.</param>
+            <param name="C">Plane C factor.</param>
+            <param name="cx">X coordinate of the center of the circle.</param>
+            <param name="cy">Y coordinate of the center of the circle.</param>
+            <param name="cz">Z coordinate of the center of the circle.</param>
+            <param name="r">Circle radius.</param>/// 
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetCircleArrayItem(System.Int32,AvlNet.Circle3D)">
+            <summary>
+            Sets a single item in a 2D circle primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetCircleArray(System.Collections.Generic.IList{AvlNet.Circle3D})">
+            <summary>
+            Sets an array of 2D circle primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSphere(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a sphere as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSphere(AvlNet.Sphere3D)">
+            <summary>
+            Sets a sphere as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSphereArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a sphere primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSphereArrayItem(System.Int32,AvlNet.Sphere3D)">
+            <summary>
+            Sets a single item in a sphere primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSphereArray(System.Collections.Generic.IList{AvlNet.Sphere3D})">
+            <summary>
+            Sets an array of sphere primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPoint(System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single point in a 3D space as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPoint(AvlNet.Point3D)">
+            <summary>
+            Sets a single point in a 3D space as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointArrayItem(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a point primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointArrayItem(System.Int32,AvlNet.Point3D)">
+            <summary>
+            Sets a single item in a point primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPointArray(System.Collections.Generic.IList{AvlNet.Point3D})">
+            <summary>
+            Sets an array of point primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a segment (described by two points in 3D space) as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment(AvlNet.Segment3D)">
+            <summary>
+            Sets a 3D segment as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegmentArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a 3D segment primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegmentArrayItem(System.Int32,AvlNet.Segment3D)">
+            <summary>
+            Sets a single item in a 3D segment primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegmentArray(System.Collections.Generic.IList{AvlNet.Segment3D})">
+            <summary>
+            Sets an array of segment primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment2D(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a segment as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment2D(AvlNet.Segment2D)">
+            <summary>
+            Sets a 2D segment as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment2DArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a 2D segment primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment2DArrayItem(System.Int32,AvlNet.Segment2D)">
+            <summary>
+            Sets a single item in a 2D segment primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetSegment2DArray(System.Collections.Generic.IList{AvlNet.Segment2D})">
+            <summary>
+            Sets an array of segment primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetBox(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a 3D axis aligned box as this primitive.
+            </summary>
+            <param name="x">X coordinate of the box corner.</param>
+            <param name="y">Y coordinate of the box corner.</param>
+            <param name="z">Z coordinate of the box corner.</param>
+            <param name="dx">Size of the box along the X axis.</param>
+            <param name="dy">Size of the box along the Y axis.</param>
+            <param name="dz">Size of the box along the Z axis.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetBox(AvlNet.Box3D)">
+            <summary>
+            Sets a 3D axis aligned box as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetBoxArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a 3D box primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetBoxArrayItem(System.Int32,AvlNet.Box3D)">
+            <summary>
+            Sets a single item in a 3D box primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetBoxArray(System.Collections.Generic.IList{AvlNet.Box3D})">
+            <summary>
+            Sets an array of box primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetLine(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a 3D line as this primitive.
+            </summary>
+            <param name="x">X coordinate of a point on the line.</param>
+            <param name="y">Y coordinate of a point on the line.</param>
+            <param name="z">Z coordinate of a point on the line.</param>
+            <param name="dx">X component of a line direction vector.</param>
+            <param name="dy">Y component of a line direction vector.</param>
+            <param name="dz">Z component of a line direction vector.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetLine(AvlNet.Line3D)">
+            <summary>
+            Sets a 3D line as this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetLineArrayItem(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets a single item in a 3D line primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetLineArrayItem(System.Int32,AvlNet.Line3D)">
+            <summary>
+            Sets a single item in a 3D line primitives array.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetLineArray(System.Collections.Generic.IList{AvlNet.Line3D})">
+            <summary>
+            Sets an array of line primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPath(System.Void*,System.Int32,System.Boolean)">
+            <summary>
+            Sets a 2D path data as a path delimiter for this primitive.
+            </summary>
+            <param name="data">Pointer to the beginning of a path 2D points data buffer (with x and y coordinates of type float per point).</param>
+            <param name="size">Number of point in the path data.</param>
+            <param name="closed">True when the path is closed.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPath(System.IntPtr,System.Int32,System.Boolean)">
+            <summary>
+            Sets a 2D path data as a path delimiter preview for this primitive.
+            </summary>
+            <param name="data">Pointer to the beginning of a path 2D points data buffer (with x and y coordinates of type float per point).</param>
+            <param name="size">Number of point in the path data.</param>
+            <param name="closed">True when the path is closed.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPath(AvlNet.Path)">
+            <summary>
+            Sets a 2D path as a delimiter preview for this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPathArrayItem(System.Int32,System.Void*,System.Int32,System.Boolean)">
+            <summary>
+            Sets a single item in a 2D paths array primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPathArrayItem(System.Int32,System.IntPtr,System.Int32,System.Boolean)">
+            <summary>
+            Sets a single item in a 2D paths array primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPathArrayItem(System.Int32,AvlNet.Path)">
+            <summary>
+            Sets a single item in a 2D paths array primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetPathArray(System.Collections.Generic.IList{AvlNet.Path})">
+            <summary>
+            Sets an array of 2D path primitives for this data item.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetRegion(System.Void*,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets 2D region for this primitive.
+            </summary>
+            <param name="data">Region point-runs data buffer.</param>
+            <param name="size">Size of the data buffer in bytes.</param>
+            <param name="width">Frame width of the region.</param>
+            <param name="height">Frame height of the region.</param>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetRegion(AvlNet.Region)">
+            <summary>
+            Sets 2D region for this primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetRegionArrayItem(System.Int32,System.Void*,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a single item in a 2D region array primitive.
+            </summary>
+            <param name="index">Array item index.</param>
+            <param name="data">Region point-runs data buffer.</param>
+            <param name="size">Size of the data buffer in bytes.</param>
+            <param name="width">Frame width of the region.</param>
+            <param name="height">Frame height of the region.</param>            
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetRegionArrayItem(System.Int32,AvlNet.Region)">
+            <summary>
+            Sets a single item in a 2D region array primitive.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.View3DBox.DataItem.SetRegionArray(System.Collections.Generic.IList{AvlNet.Region})">
+            <summary>
+            Sets an array of 2D region primitives for this data item.
+            </summary>
+        </member>
+        <member name="T:HMI.Controls.ZoomingVideoBoxSizeMode">
+            <summary>
+            Specifies the initial size handling mode for ZoomingVideoBox class.
+            </summary>
+        </member>
+        <member name="F:HMI.Controls.ZoomingVideoBoxSizeMode.OriginalSize">
+            <summary>Image shown in its original size (zoom factor equals to 1), centered in the view area.</summary>
+        </member>
+        <member name="F:HMI.Controls.ZoomingVideoBoxSizeMode.FitToWindow">
+            <summary>Zoom factor automatically selected for the image to fill the available view area (without affecting the aspect ration).</summary>
+        </member>
+        <member name="T:HMI.Controls.ZoomingVideoBox">
+            <summary>
+            VideoBox class extension that allows end user to manipulate preview zoom and translation.
+            </summary>
+        </member>
+        <member name="E:HMI.Controls.ZoomingVideoBox.ImageLeftClick">
+            <summary>
+            Raised when the user left clicks the image area (specifies the click point in the image space coordinates).
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ZoomingVideoBox.SetImageMouseMovePos(System.Drawing.Point)">
+            <summary>
+            Sets new location of mouse above control for purpose of tracking mouse move location above image.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ZoomingVideoBox.OnImageLeftClicked(System.Drawing.Point)">
+            <summary>
+            Invoked when the user clicks the image surface with the left mouse button.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ZoomingVideoBox.ZoomIn">
+            <summary>
+            Increases the zoom factor of the preview.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ZoomingVideoBox.ZoomOut">
+            <summary>
+            Decreases the zoom factor of the preview.
+            </summary>
+        </member>
+        <member name="M:HMI.Controls.ZoomingVideoBox.SetImage(AvlNet.Image)">
+            <summary>
+            Sets the image data to be displayed in the VideoBox control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ZoomingVideoBox.Image">
+            <summary>
+            Represents the image displayed in the control.
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ZoomingVideoBox.ManualZoomEnabled">
+            <summary>
+            Gets or sets the flag enabling the user to manually change the zoom and translation of the image preview. 
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ZoomingVideoBox.InitialSizeMode">
+            <summary>
+            Gets or sets the flag indicating the initial image size handling mode (applied to SizeMode during the control startup).
+            </summary>
+        </member>
+        <member name="P:HMI.Controls.ZoomingVideoBox.IsMoving">
+            <summary>
+            Returns True when user is currently using mouse to move the image inside the control.
+            </summary>
+        </member>
+    </members>
+</doc>

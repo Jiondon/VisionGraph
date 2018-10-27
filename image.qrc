@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/back.png</file>
+        <file>icon/back0.png</file>
+        <file>icon/clear.png</file>
+        <file>icon/cursor-size_Circle.png</file>
+        <file>icon/cursor-sizeall.png</file>
+        <file>icon/cursor-sizeb.png</file>
+        <file>icon/cursor-sizef.png</file>
+        <file>icon/cursor-sizeh.png</file>
+        <file>icon/cursor-sizev.png</file>
+        <file>icon/delect.png</file>
+        <file>icon/drag.png</file>
+        <file>icon/ellipse.png</file>
+        <file>icon/front.png</file>
+        <file>icon/front0.png</file>
+        <file>icon/painter.png</file>
+        <file>icon/poly.png</file>
+        <file>icon/poly_elli.png</file>
+        <file>icon/rect.png</file>
+        <file>icon/select.png</file>
+        <file>icon/zoom.png</file>
+        <file>icon/line.png</file>
+        <file>icon/open.png</file>
+        <file>icon/point.png</file>
+        <file>icon/polyline.png</file>
+        <file>icon/remove.png</file>
+        <file>icon/save.png</file>
+    </qresource>
+</RCC>
