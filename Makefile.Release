@@ -11,7 +11,7 @@ MAKEFILE      = Makefile.Release
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DVISIONGRAPH_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL
+DEFINES       = -DUNICODE -DWIN32 -DVISIONGRAPH_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL
 CFLAGS        = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -W3 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -GR -W3 -w34100 -w34189 -w44996 -EHsc $(DEFINES)
 INCPATH       = -I. -Iinclude -Iinclude\XVBase.h -Iinclude\AVL.h -Iinclude\XVCreateRegion.h -Iinclude\XVCombineRegions.h -ID:\Qt\Qt5.8.0\5.8\msvc2013\include -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtANGLE -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore -Itmp -ID:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013 
@@ -295,12 +295,12 @@ $(OBJECTS) $(LIBS)
 <<
 
 qmake: FORCE
-	@$(QMAKE) -o Makefile.Release VisionGraph.pro -spec win32-msvc2013 "CONFIG+=debug" "CONFIG+=qml_debug"
+	@$(QMAKE) -o Makefile.Release VisionGraph.pro -spec win32-msvc2013
 
 qmake_all: FORCE
 
 dist:
-	$(ZIP) VisionGraph.zip $(SOURCES) $(DIST) VisionGraph.pro D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\angle.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-base.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\qconfig.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_clucene_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_functions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013\qmake.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\toolchain.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resolve_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\build_pass.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qml_debug.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\rtti.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\precompile_header.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\warn_on.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resources.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\moc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\uic.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qmake_use.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\file_copies.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\windows.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exceptions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\yacc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\lex.prf VisionGraph.pro image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgets.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Gui.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Core.prl   image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp src\visiongraph.h src\visiongraph_global.h src\visiongraph_item.h src\visiongraph_region.h src\visiongraphtool.h src\item\lineitem.h src\item\visioncrosspointitem.h src\item\visionellipseitem.h src\item\visiongraphscene.h src\item\visiongraphview.h src\item\visionlineitem.h src\item\visionpathitem.h src\item\visionpoint.h src\item\visionpolygon.h src\item\visionrectitem.h src\item\visionring.h src\control\minirect.h src\control\visionarrows_rotate.h src\control\visionitem.h src\control\color.h src\visiongraph.cpp src\visiongraph_item.cpp src\visiongraph_region.cpp src\visiongraphtool.cpp src\item\lineitem.cpp src\item\visioncrosspointitem.cpp src\item\visionellipseitem.cpp src\item\visiongraphscene.cpp src\item\visiongraphview.cpp src\item\visionlineitem.cpp src\item\visionpathitem.cpp src\item\visionpoint.cpp src\item\visionpolygon.cpp src\item\visionrectitem.cpp src\item\visionring.cpp src\control\minirect.cpp src\control\visionarrows_rotate.cpp src\control\visionitem.cpp src\control\color.cpp     
+	$(ZIP) VisionGraph.zip $(SOURCES) $(DIST) VisionGraph.pro D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\angle.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-base.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\qconfig.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_clucene_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_functions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013\qmake.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\toolchain.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resolve_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\build_pass.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\rtti.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\precompile_header.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\warn_on.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resources.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\moc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\uic.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qmake_use.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\file_copies.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\windows.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exceptions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\yacc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\lex.prf VisionGraph.pro image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgets.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Gui.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Core.prl   image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp src\visiongraph.h src\visiongraph_global.h src\visiongraph_item.h src\visiongraph_region.h src\visiongraphtool.h src\item\lineitem.h src\item\visioncrosspointitem.h src\item\visionellipseitem.h src\item\visiongraphscene.h src\item\visiongraphview.h src\item\visionlineitem.h src\item\visionpathitem.h src\item\visionpoint.h src\item\visionpolygon.h src\item\visionrectitem.h src\item\visionring.h src\control\minirect.h src\control\visionarrows_rotate.h src\control\visionitem.h src\control\color.h src\visiongraph.cpp src\visiongraph_item.cpp src\visiongraph_region.cpp src\visiongraphtool.cpp src\item\lineitem.cpp src\item\visioncrosspointitem.cpp src\item\visionellipseitem.cpp src\item\visiongraphscene.cpp src\item\visiongraphview.cpp src\item\visionlineitem.cpp src\item\visionpathitem.cpp src\item\visionpoint.cpp src\item\visionpolygon.cpp src\item\visionrectitem.cpp src\item\visionring.cpp src\control\minirect.cpp src\control\visionarrows_rotate.cpp src\control\visionitem.cpp src\control\color.cpp     
 
 clean: compiler_clean 
 	-$(DEL_FILE) tmp\visiongraph.obj tmp\visiongraph_item.obj tmp\visiongraph_region.obj tmp\visiongraphtool.obj tmp\lineitem.obj tmp\visioncrosspointitem.obj tmp\visionellipseitem.obj tmp\visiongraphscene.obj tmp\visiongraphview.obj tmp\visionlineitem.obj tmp\visionpathitem.obj tmp\visionpoint.obj tmp\visionpolygon.obj tmp\visionrectitem.obj tmp\visionring.obj tmp\minirect.obj tmp\visionarrows_rotate.obj tmp\visionitem.obj tmp\color.obj tmp\qrc_image.obj tmp\moc_visiongraph.obj tmp\moc_visiongraph_item.obj tmp\moc_visiongraph_region.obj tmp\moc_lineitem.obj tmp\moc_visioncrosspointitem.obj tmp\moc_visionellipseitem.obj tmp\moc_visiongraphscene.obj tmp\moc_visiongraphview.obj tmp\moc_visionlineitem.obj tmp\moc_visionpathitem.obj tmp\moc_visionpoint.obj tmp\moc_visionpolygon.obj tmp\moc_visionrectitem.obj tmp\moc_visionring.obj tmp\moc_minirect.obj tmp\moc_visionarrows_rotate.obj tmp\moc_visionitem.obj
@@ -516,8 +516,6 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -791,6 +789,7 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -800,6 +799,7 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		src\item\visionpoint.h \
 		src\item\visionring.h \
 		src\item\visioncrosspointitem.h \
+		src\control\color.h \
 		src\visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QSpinBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qspinbox.h \
@@ -937,8 +937,6 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -1206,6 +1204,8 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		include\System\Interoperability.h \
 		include\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src\item\visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
@@ -1223,6 +1223,7 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -1232,8 +1233,7 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		src\item\visionpoint.h \
 		src\item\visionring.h \
 		src\item\visioncrosspointitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QComboBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qcombobox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractitemdelegate.h \
@@ -1410,8 +1410,6 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -1685,6 +1683,7 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -1694,6 +1693,7 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		src\item\visionpoint.h \
 		src\item\visionring.h \
 		src\item\visioncrosspointitem.h \
+		src\control\color.h \
 		src\visiongraph_region.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -1914,8 +1914,6 @@ tmp\moc_visioncrosspointitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObj
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visioncrosspointitem.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2055,9 +2053,8 @@ tmp\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGra
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		src\item\visionellipseitem.h \
 		tmp\moc_predefs.h \
@@ -2298,8 +2295,6 @@ tmp\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraph
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -2567,6 +2562,9 @@ tmp\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraph
 		include\System\Interoperability.h \
 		include\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src\visiongraph_global.h \
 		src\item\visiongraphview.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2671,8 +2669,6 @@ tmp\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -2693,6 +2689,7 @@ tmp\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -2869,8 +2866,6 @@ tmp\moc_visionpoint.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visionpoint.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2968,8 +2963,6 @@ tmp\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -2997,6 +2990,7 @@ tmp\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -3147,9 +3141,8 @@ tmp\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionrectitem.h \
@@ -3289,7 +3282,6 @@ tmp\moc_visionring.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
 		src\control\minirect.h \
 		src\item\visionring.h \
 		tmp\moc_predefs.h \
@@ -3651,8 +3643,6 @@ tmp\moc_visionitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\control\visionitem.h \
 		tmp\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3828,8 +3818,6 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -4103,6 +4091,7 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4112,6 +4101,7 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		src/item/visionpoint.h \
 		src/item/visionring.h \
 		src/item/visioncrosspointitem.h \
+		src/control/color.h \
 		src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QSpinBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qspinbox.h \
@@ -4246,8 +4236,6 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -4515,6 +4503,8 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		include\System\Interoperability.h \
 		include\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
@@ -4532,6 +4522,7 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4541,8 +4532,7 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		src/item/visionpoint.h \
 		src/item/visionring.h \
 		src/item/visioncrosspointitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QComboBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qcombobox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractitemdelegate.h \
@@ -4725,8 +4715,6 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -5000,6 +4988,7 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -5009,6 +4998,7 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		src/item/visionpoint.h \
 		src/item/visionring.h \
 		src/item/visioncrosspointitem.h \
+		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QSpinBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qspinbox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QSlider \
@@ -5145,8 +5135,6 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -5414,6 +5402,8 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		include\System\Interoperability.h \
 		include\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
@@ -5432,6 +5422,7 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -5440,7 +5431,8 @@ tmp\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPolygonF \
 		src/item/visionpoint.h \
 		src/item/visionring.h \
-		src/item/visioncrosspointitem.h
+		src/item/visioncrosspointitem.h \
+		src/control/color.h
 
 tmp\lineitem.obj: src\item\lineitem.cpp src/item/lineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -5655,8 +5647,6 @@ tmp\visioncrosspointitem.obj: src\item\visioncrosspointitem.cpp src/item/visionc
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
@@ -5667,7 +5657,9 @@ tmp\visioncrosspointitem.obj: src\item\visioncrosspointitem.cpp src/item/visionc
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor
 
 tmp\visionellipseitem.obj: src\item\visionellipseitem.cpp src/item/visionellipseitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
@@ -5804,16 +5796,16 @@ tmp\visionellipseitem.obj: src\item\visionellipseitem.cpp src/item/visionellipse
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QtMath \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmath.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMatrix \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPixmap
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPixmap \
+		src/control/color.h
 
 tmp\visiongraphscene.obj: src\item\visiongraphscene.cpp src/item/visiongraphscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -6047,8 +6039,6 @@ tmp\visiongraphview.obj: src\item\visiongraphview.cpp src/item/visiongraphview.h
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		include\XVBase.h \
 		include\XVCreateRegion.h \
 		include\AVL.h \
@@ -6316,10 +6306,15 @@ tmp\visiongraphview.obj: src\item\visiongraphview.cpp src/item/visiongraphview.h
 		include\System\Interoperability.h \
 		include\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/visiongraph_global.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QScrollBar \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollbar.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
-		src/item/visiongraphscene.h
+		src/item/visiongraphscene.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor
 
 tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -6421,8 +6416,6 @@ tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -6443,6 +6436,7 @@ tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -6457,7 +6451,8 @@ tmp\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
+		src/control/color.h
 
 tmp\visionpathitem.obj: src\item\visionpathitem.cpp src/item/visionpathitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -6711,8 +6706,6 @@ tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -6740,6 +6733,7 @@ tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
@@ -6753,7 +6747,8 @@ tmp\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		src/control/color.h
 
 tmp\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -6888,9 +6883,8 @@ tmp\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -6898,7 +6892,8 @@ tmp\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QtMath \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmath.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMatrix \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPixmap
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPixmap \
+		src/control/color.h
 
 tmp\visionring.obj: src\item\visionring.cpp src/item/visionring.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -7033,11 +7028,11 @@ tmp\visionring.obj: src\item\visionring.cpp src/item/visionring.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		src/control/color.h
 
 tmp\minirect.obj: src\control\minirect.cpp src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -7395,8 +7390,6 @@ tmp\visionitem.obj: src\control\visionitem.cpp src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
 tmp\color.obj: src\control\color.cpp src/control/color.h \

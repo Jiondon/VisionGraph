@@ -114,6 +114,13 @@ public:
      */
     void show();
 
+
+    /**
+     * @brief       获取view
+     * @param
+     */
+    VisionGraphView* getView();
+
 protected:
 
 private:

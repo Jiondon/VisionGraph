@@ -110,3 +110,16 @@ void VisionGraph::show()
     }
 }
 
+VisionGraphView *VisionGraph::getView()
+{
+    VisionGraphView* view = NULL;
+    if(m_type == GraphType::graphRegion){
+        view = m_graphWidget_Region->getView();
+    }else if(m_type == GraphType::graphItem_self){
+        view = m_graphWidget_Item->getView();
+    }else if(m_type == GraphType::graphItem_unSelf){
+        view = m_graphWidget_Item->getView();
+    }
+    return view;
+}
+

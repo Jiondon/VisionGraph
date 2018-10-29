@@ -21,7 +21,16 @@
 #include <QDebug>
 #include <QLabel>
 
-class VisionGraphView : public QGraphicsView
+#include "../visiongraph_global.h"
+
+enum Corner{
+    topLeft,
+    topRight,
+    bottomRight,
+    bottomLeft,
+};
+
+class VISIONGRAPHSHARED_EXPORT VisionGraphView : public QGraphicsView
 {
     Q_OBJECT
 public:
@@ -121,6 +130,33 @@ public:
         return m_region;
     }
 
+    /**
+     * @brief       设置View信息框的位置（四个拐角）
+     */
+    void setViewInfo_Pos(Corner corner);
+
+    /**
+     * @brief       设置View信息框的位置（任意位置）
+     */
+    void setViewInfo_Pos(qreal x,qreal y);
+
+    /**
+     * @brief       设置View信息框的大小
+     */
+    void setViewInfo_Size(QSize size);
+    void setViewInfo_Size(qreal w,qreal h);
+
+
+    /**
+     * @brief       设置View信息框的文本
+     */
+    void setViewInfo_text(QString text);
+
+    /**
+     * @brief       设置View信息框的颜色（背景颜色和文本颜色）
+     */
+    void setViewInfo_Color(QColor color);
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);
@@ -174,7 +210,9 @@ private:
 
     float m_scale = 1;
 
-    QLabel *m_pMouseInfo_Label;
+    QLabel *m_pMouseInfo_Label;  //跟随鼠标显示的信息
+
+    QLabel *m_pLabelInfo;  //view的信息框
 
 protected:
 

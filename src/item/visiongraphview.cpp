@@ -11,8 +11,15 @@ VisionGraphView::VisionGraphView(QWidget *parent):
     m_pMouseInfo_Label = new QLabel(this);
     m_pMouseInfo_Label->resize(120,50);
     m_pMouseInfo_Label->setStyleSheet("background-color:gray;color:black;");
-    m_pMouseInfo_Label->setWindowModality(Qt::NonModal);
     m_pMouseInfo_Label->hide();
+
+    m_pLabelInfo = new QLabel(this);
+    m_pLabelInfo->move(2,2);
+    m_pLabelInfo->resize(150,70);
+    m_pLabelInfo->setAlignment(Qt::AlignCenter);
+    m_pLabelInfo->setStyleSheet("background-color:#ADD8E699;color:green;");
+//    m_pLabelInfo->setText("View Infomation show");
+
     setItemType(ItemType::No);
 }
 
@@ -429,6 +436,48 @@ void VisionGraphView::clearPainter()
 
 
     this->scene()->update();
+}
+
+void VisionGraphView::setViewInfo_Pos(Corner corner)
+{
+    qDebug()<<this->width()<<this->height();
+    if(corner == Corner::topLeft){
+        m_pLabelInfo->move(2,2);
+
+    }else if(corner == Corner::topRight){
+        m_pLabelInfo->move(this->sceneRect().width()-2-m_pLabelInfo->width(),2);
+
+    }else if(corner == Corner::bottomLeft){
+        m_pLabelInfo->move(2,this->sceneRect().height()-2-m_pLabelInfo->height());
+
+    }else if(corner == Corner::bottomRight){
+        m_pLabelInfo->move(this->sceneRect().width()-2-m_pLabelInfo->width(),this->sceneRect().height()-2-m_pLabelInfo->height());
+    }
+}
+
+void VisionGraphView::setViewInfo_Pos(qreal x, qreal y)
+{
+    m_pLabelInfo->move(x,y);
+}
+
+void VisionGraphView::setViewInfo_Size(QSize size)
+{
+    m_pLabelInfo->resize(size);
+}
+
+void VisionGraphView::setViewInfo_Size(qreal w, qreal h)
+{
+    m_pLabelInfo->resize(w,h);
+}
+
+void VisionGraphView::setViewInfo_text(QString text)
+{
+    m_pLabelInfo->setText(text);
+}
+
+void VisionGraphView::setViewInfo_Color(QColor color)
+{
+
 }
 
 

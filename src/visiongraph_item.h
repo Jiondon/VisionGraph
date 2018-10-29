@@ -100,6 +100,14 @@ public:
         m_toolButtonDirection_operation = direct;
     }
 
+    /**
+     * @brief       获取view
+     * @param
+     */
+    VisionGraphView* getView(){
+        return view;
+    }
+
     void initLayout();
 
 private:
