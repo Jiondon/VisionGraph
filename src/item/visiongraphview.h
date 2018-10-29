@@ -19,6 +19,7 @@
 #include "XVCreateRegion.h"
 #include "XVCombineRegions.h"
 #include <QDebug>
+#include <QLabel>
 
 class VisionGraphView : public QGraphicsView
 {
@@ -49,9 +50,14 @@ public:
     void wheelEvent(QWheelEvent *event);
 
     /**
-     * @param       view中的鼠标的样式控制
+     * @param       鼠标进入view的事件触发
      */
     void enterEvent(QEvent *event);
+
+    /**
+     * @param       鼠标离开view的事件触发
+     */
+    void leaveEvent(QEvent *event);
 
     /**
      * @param       view的重绘函数的重载
@@ -167,6 +173,8 @@ private:
     bool m_clearAll = false; //清除view中的所有绘制数据
 
     float m_scale = 1;
+
+    QLabel *m_pMouseInfo_Label;
 
 protected:
 

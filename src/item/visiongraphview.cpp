@@ -8,8 +8,10 @@ VisionGraphView::VisionGraphView(QWidget *parent):
     QGraphicsView(parent)
 {
     this->setMouseTracking(true);//捕捉鼠标移动信息
-//    this->setStyleSheet("border:none; background:transparent;");
-//    border-image:url(c:/picture/cup/Pic_2018_09_18_100043_blockId#16022.bmp);
+    m_pMouseInfo_Label = new QLabel(this);
+    m_pMouseInfo_Label->resize(120,50);
+    m_pMouseInfo_Label->setStyleSheet("background-color:gray;color:black;");
+    m_pMouseInfo_Label->hide();
     setItemType(ItemType::No);
 }
 
@@ -20,6 +22,33 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
 
     emit signal_Move(viewPos);
+    if(!m_pMouseInfo_Label->isHidden()){
+        QString text_pos="";
+        QString text_rgb="";
+        QString text_gray="";
+        m_pMouseInfo_Label->move(viewPos+QPoint(1,1));
+        text_pos = (QStringLiteral("坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
+
+        //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
+
+        QPixmap pixmap = this->grab(QRect(QPoint(viewPos),QSize(-1,-1)));
+        if (!pixmap.isNull())
+        {
+            QImage image = pixmap.toImage();//将像素图转换为QImage
+            if (!image.isNull()) //如果image不为空
+            {
+                if (image.valid(0, 0)) //坐标位置有效
+                {
+                    QColor color = image.pixel(0, 0);
+                    text_rgb = QString("RGB: %1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue());
+                    int grayValue = (color.red()*30+color.green()*59+color.blue()*11)/100;
+                    text_gray = QString("Gray: %1,%2,%3").arg(grayValue).arg(grayValue).arg(grayValue);
+                    qDebug() << text_rgb<<"   "<<text_gray;
+                }
+            }
+        }
+        m_pMouseInfo_Label->setText(text_pos+"\n"+text_rgb+"\n"+text_gray);
+    }
 
     if(m_bPress && m_itemType == ItemType::Drag){
         QPointF disPointF = event->pos() - m_lastPointF;
@@ -285,6 +314,20 @@ void VisionGraphView::enterEvent(QEvent *event)
     }else{
         this->setCursor(Qt::ArrowCursor);
     }
+
+
+    //设置鼠标所在位置的信息显示
+    if(m_itemType == ItemType::No || m_itemType == ItemType::Zoom)
+    {
+        m_pMouseInfo_Label->show();
+    }else{
+        m_pMouseInfo_Label->hide();
+    }
+}
+
+void VisionGraphView::leaveEvent(QEvent *event)
+{
+    m_pMouseInfo_Label->hide();
 }
 
 void VisionGraphView::paintEvent(QPaintEvent *event)
