@@ -110,7 +110,7 @@ bool VisionRectItem::getPosInArea(qreal x, qreal y)
     qreal b4 = (m_lstRect[6]->pos().x()-m_lstRect[0]->pos().x());
     qreal c4 = (m_x+m_lstRect[0]->pos().x())*(m_y+m_lstRect[6]->pos().y()) - (m_x+m_lstRect[6]->pos().x())*(m_y+m_lstRect[0]->pos().y());
     qreal h4 = fabs((a4*x+b4*y+c4)/sqrt(a4*a4+b4*b4));
-        qDebug()<<m_x<<m_y<<m_width<<m_height<<"("<<x<<","<<y<<")";
+//        qDebug()<<m_x<<m_y<<m_width<<m_height<<"("<<x<<","<<y<<")";
     //得到四个直线方程，然后相对的两条直线之间的距离是固定的，点在矩形的内部，则满足 到相对的两条直线的距离是固定的分别是h和w
     // <和+1是为了防止出现四舍五入导致数据不能绝对的等于，-- 理论上四舍五入不会出现这样的情况，但是为了保险起见,+10考虑到编辑状态下的小边框
     if(!(h1+h2 <= m_height+10+2 && h3+h4 <= m_width+10+2)){
@@ -298,9 +298,10 @@ void VisionRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug()<<event->scenePos();
+//    qDebug()<<event->scenePos();
     if(directCursor != arrowsUp){
         if(!m_bEdit){
+            qDebug()<<"is not edit";
             return;
         }
         //计算两次move的鼠标的差值，

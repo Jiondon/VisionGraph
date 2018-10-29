@@ -801,7 +801,7 @@ void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qrea
     //需要对基类添加的函数，设置选中和未选中的接口，获取选中状态的接口,获取item的painterPath，获取坐标是否在item的有效区域内
 
     QList<VisionItem*> lstClickedItem;
-    qDebug()<<m_lstItem.count()<<x<<y;
+//    qDebug()<<m_lstItem.count()<<x<<y;
     for(int i=0;i<m_lstItem.count();i++){
         //点击了某一个item的无效区域，该item的z值是0，显示是in area，
         //clicked some item's uneffect area, and this item's z value is 0, this if think it is in area

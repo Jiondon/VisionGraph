@@ -11,6 +11,7 @@ VisionGraphView::VisionGraphView(QWidget *parent):
     m_pMouseInfo_Label = new QLabel(this);
     m_pMouseInfo_Label->resize(120,50);
     m_pMouseInfo_Label->setStyleSheet("background-color:gray;color:black;");
+    m_pMouseInfo_Label->setWindowModality(Qt::NonModal);
     m_pMouseInfo_Label->hide();
     setItemType(ItemType::No);
 }
@@ -22,11 +23,13 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
 
     emit signal_Move(viewPos);
+
+    //show mouse info
     if(!m_pMouseInfo_Label->isHidden()){
         QString text_pos="";
         QString text_rgb="";
         QString text_gray="";
-        m_pMouseInfo_Label->move(viewPos+QPoint(1,1));
+        m_pMouseInfo_Label->move(viewPos+QPoint(5,5));
         text_pos = (QStringLiteral("坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
 
         //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
@@ -43,7 +46,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
                     text_rgb = QString("RGB: %1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue());
                     int grayValue = (color.red()*30+color.green()*59+color.blue()*11)/100;
                     text_gray = QString("Gray: %1,%2,%3").arg(grayValue).arg(grayValue).arg(grayValue);
-                    qDebug() << text_rgb<<"   "<<text_gray;
+//                    qDebug() << text_rgb<<"   "<<text_gray;
                 }
             }
         }
@@ -58,7 +61,8 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         return;
     }
 
-    if(m_bPainter && m_bPress){
+    //2.修改在点击选择选项的时候，item在选中情况下无法move    m_itemType != ItemType::No的原因
+    if(m_bPainter && m_bPress && m_itemType != ItemType::No){
 
         if(m_itemType == ItemType::Rect){
             //绘制矩形
@@ -165,6 +169,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         QGraphicsView::mouseMoveEvent(event);
     }
     m_lastPointF = viewPos;
+
 }
 
 void VisionGraphView::mousePressEvent(QMouseEvent *event)
@@ -276,6 +281,8 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
 
         }else if(m_itemType == ItemType::polyLine){
 
+        }else if(m_itemType == ItemType::CrossPoint){
+            m_bPainter = false;
         }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
             //对于鼠标绘制，鼠标释放为一次记录
             push_region(m_region);
