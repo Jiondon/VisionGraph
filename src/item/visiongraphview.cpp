@@ -7,6 +7,8 @@
 VisionGraphView::VisionGraphView(QWidget *parent):
     QGraphicsView(parent)
 {
+//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff) ;
+//    setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff ) ;
     this->setMouseTracking(true);//捕捉鼠标移动信息
     m_pMouseInfo_Label = new QLabel(this);
     m_pMouseInfo_Label->resize(120,50);

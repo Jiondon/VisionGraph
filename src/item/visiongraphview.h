@@ -126,8 +126,8 @@ public:
      * @brief       获取当前绘制在view的区域
      * @param       XVRegion
      */
-    XVRegion getRegion(){
-        return m_region;
+    XVRegion* getRegion(){
+        return &m_region;
     }
 
     /**

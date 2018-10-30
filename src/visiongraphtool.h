@@ -16,6 +16,7 @@
 
 #include "./item/visiongraphscene.h"
 #include "./item/visiongraphview.h"
+#include "visiongraphwidget.h"
 #include "./item/visionrectitem.h"
 #include "./item/visionellipseitem.h"
 #include "./item/visionlineitem.h"

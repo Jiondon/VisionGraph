@@ -33,6 +33,13 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
+    void setSceneWidgetSize(QSize size);
+    void setSceneWidgetSize(qreal w,qreal h);
+
+    /**
+     * @brief       添加rectangle  可旋转的矩形
+     * @param       bEdit 表示编辑
+     */
     void addRect(QRectF rf,bool bEdit = true);
 
     /**
@@ -40,6 +47,12 @@ public:
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
     void addEllipse(QRectF rf);
+
+    /**
+     * @brief       添加线
+     * @param       具体方法未实现
+     */
+    void addLine(QLine line);
 
     /**
      * @brief       添加线
@@ -71,7 +84,7 @@ public:
      * @brief       获取当前绘制在view的区域
      * @return       XVRegion
      */
-    XVRegion getRegion(){
+    XVRegion* getRegion(){
         return view->getRegion();
     }
 
@@ -96,7 +109,97 @@ public:
      * @param
      */
     VisionGraphView* getView(){
+        if(view == nullptr)
+            return NULL;
         return view;
+    }
+
+    /**
+     * @brief       修改绘制的item时候触发
+     * @param       在使用鼠标移动进行绘制任意区域的时候，鼠标本身的大小作为绘制要素之一
+     * @param       绘制不同的item，有不同的鼠标样式
+     */
+    void setPainterCursorR(qreal qR){
+        view->setPainterCursorR(qR);
+    }
+
+    /**
+     * @brief       设置记录当前所要绘制的item
+     */
+    void setItemType(ItemType type){
+        view->setItemType(type);
+    }
+
+
+    /**
+     * @brief       view的缩放比例
+     */
+    void zoom(float scaleFactor){
+        view->zoom(scaleFactor);
+    }
+
+
+    /**
+     * @brief       撤销区域生成
+     */
+    void back_region(){
+        view->back_region();
+    }
+
+
+    /**
+     * @brief       恢复区域生成
+     */
+    void front_region(){
+        view->front_region();
+    }
+
+
+    /**
+     * @brief       清除view的绘制数据
+     */
+    void clearPainter(){
+        view->clearPainter();
+    }
+
+    /**
+     * @brief       设置View信息框的位置（四个拐角）
+     */
+    void setViewInfo_Pos(Corner corner){
+        view->setViewInfo_Pos(corner);
+    }
+
+    /**
+     * @brief       设置View信息框的位置（任意位置）
+     */
+    void setViewInfo_Pos(qreal x,qreal y){
+        view->setViewInfo_Pos(x,y);
+    }
+
+    /**
+     * @brief       设置View信息框的大小
+     */
+    void setViewInfo_Size(QSize size){
+        view->setViewInfo_Size(size);
+    }
+
+    void setViewInfo_Size(qreal w,qreal h){
+        view->setViewInfo_Size(w,h);
+    }
+
+
+    /**
+     * @brief       设置View信息框的文本
+     */
+    void setViewInfo_text(QString text){
+        view->setViewInfo_text(text);
+    }
+
+    /**
+     * @brief       设置View信息框的颜色（背景颜色和文本颜色）
+     */
+    void setViewInfo_Color(QColor color){
+        view->setViewInfo_Color(color);
     }
 
     void initLayout();
@@ -110,8 +213,8 @@ private:
 
 
 private:
-    VisionGraphScene *scene;
-    VisionGraphView *view;
+    VisionGraphScene *scene = nullptr;
+    VisionGraphView *view = nullptr;
 
     QGraphicsPixmapItem *m_bkPixmapItem = nullptr;  //背景图片
     QGraphicsPixmapItem *m_mousePixmap = nullptr;  //调整鼠标的大小的时候，显示在区域中心的图片
@@ -162,7 +265,7 @@ private:
 
     QVBoxLayout *mainLayout;
 
-    QWidget *sceneWidget;
+    VisionGraphWidget *sceneWidget;
 
 private slots:
     //对应Action的槽函数
@@ -199,6 +302,7 @@ private slots:
 
     //调节view的缩放比例
     void slot_SizeChanged(QString currentSize);
+    void slot_SizeChanged(qreal w,qreal h);
 
     void slot_SceneMouseMove(qreal x,qreal y);
     void slot_actionTriggered(QAction* action);

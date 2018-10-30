@@ -9,20 +9,31 @@
 
 VisionGraph_Region::VisionGraph_Region(QWidget *parent) : QFrame(parent)
 {
-    setFixedSize(1200,800);
-    mainLayout = new QVBoxLayout(this);
+//    setMinimumSize(1200,800);
+    mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 
     initScene();
 
 }
 
+void VisionGraph_Region::setSceneWidgetSize(QSize size)
+{
+    sceneWidget->resize(size);
+}
+
+void VisionGraph_Region::setSceneWidgetSize(qreal w, qreal h)
+{
+    sceneWidget->resize(w,h);
+}
+
 
 void VisionGraph_Region::initScene()
 {
 
-    sceneWidget = new QWidget(this);
-    sceneWidget->setFixedSize(800,600);
+    sceneWidget = new VisionGraphWidget(this);
+    sceneWidget->setMinimumSize(800,600);
+    connect(sceneWidget,SIGNAL(signal_sizeChanged(qreal,qreal)),this,SLOT(slot_SizeChanged(qreal,qreal)));
 
     view = new VisionGraphView(sceneWidget);
     QObject::connect(view,SIGNAL(signal_Item(ItemType,QRectF)),this,SLOT(slot_addItem(ItemType,QRectF)));
@@ -32,12 +43,12 @@ void VisionGraph_Region::initScene()
     scene = new VisionGraphScene(sceneWidget);
     connect(scene,SIGNAL(signal_MouseMove(qreal,qreal)),this,SLOT(slot_SceneMouseMove(qreal,qreal)));
 
-    scene->setSceneRect(0,0,800,600);
+    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->setScene(scene);
-    view->setSceneRect(0,0,800,600);
+    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 
     m_bkPixmapItem = new QGraphicsPixmapItem();
-    m_bkPixmapItem->setPixmap(QPixmap(":/bgk.bmp").scaled(800,600));
+    m_bkPixmapItem->setPixmap(QPixmap(":/bgk.bmp"));
     scene->addItem(m_bkPixmapItem);
 
     m_mousePixmap = new QGraphicsPixmapItem();
@@ -293,37 +304,37 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }
 
 
@@ -333,11 +344,11 @@ void VisionGraph_Region::initLayout()
             tool_operation->setOrientation(Qt::Vertical);
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
@@ -345,24 +356,24 @@ void VisionGraph_Region::initLayout()
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(sceneWidget);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
@@ -374,19 +385,19 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
@@ -396,15 +407,15 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::bottomDirection){
@@ -413,28 +424,28 @@ void VisionGraph_Region::initLayout()
             tool_operation->setOrientation(Qt::Vertical);
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addStretch();
+//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
@@ -442,12 +453,12 @@ void VisionGraph_Region::initLayout()
             vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addStretch();
+//            vBoxLayout->addStretch();
         }
     }
 
     mainLayout->addLayout(vBoxLayout);
-    mainLayout->addStretch();
+//    mainLayout->addStretch();
 }
 
 void VisionGraph_Region::addRect(QRectF rf, bool bEdit)
@@ -478,6 +489,16 @@ void VisionGraph_Region::addEllipse(QRectF rf)
     m_curVisionItem = item;
 }
 
+void VisionGraph_Region::addLine(QLine line)
+{
+
+}
+
+void VisionGraph_Region::addLines(QList<QLine> lstLine)
+{
+
+}
+
 void VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
 {
     VisionPolygon *item = new VisionPolygon();
@@ -493,6 +514,11 @@ void VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
     }
     scene->addItem(item);
     m_curVisionItem = item;
+}
+
+void VisionGraph_Region::addPoint(QPointF pointF)
+{
+
 }
 
 
@@ -714,6 +740,16 @@ void VisionGraph_Region::slot_SizeChanged(QString currentSize)
     if(ok){
         view->zoom(scale/100);
     }
+}
+
+void VisionGraph_Region::slot_SizeChanged(qreal w, qreal h)
+{
+    qDebug()<<"sceneWidget size is changed";
+
+    view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
+    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+    view->setScene(scene);
+    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 }
 
 void VisionGraph_Region::slot_SceneMouseMove(qreal x, qreal y)

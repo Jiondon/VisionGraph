@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionGraph_Item_t {
-    QByteArrayData data[43];
-    char stringdata0[580];
+    QByteArrayData data[45];
+    char stringdata0[584];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -74,7 +74,9 @@ QT_MOC_LITERAL(38, 532, 1), // "y"
 QT_MOC_LITERAL(39, 534, 10), // "slot_wheel"
 QT_MOC_LITERAL(40, 545, 5), // "delta"
 QT_MOC_LITERAL(41, 551, 16), // "slot_SizeChanged"
-QT_MOC_LITERAL(42, 568, 11) // "currentSize"
+QT_MOC_LITERAL(42, 568, 11), // "currentSize"
+QT_MOC_LITERAL(43, 580, 1), // "w"
+QT_MOC_LITERAL(44, 582, 1) // "h"
 
     },
     "VisionGraph_Item\0slot_selected_action\0"
@@ -93,7 +95,7 @@ QT_MOC_LITERAL(42, 568, 11) // "currentSize"
     "line\0slot_mouseMove\0slot_Press\0"
     "VisionItem*\0item\0bSelected\0bIn\0x\0y\0"
     "slot_wheel\0delta\0slot_SizeChanged\0"
-    "currentSize"
+    "currentSize\0w\0h"
 };
 #undef QT_MOC_LITERAL
 
@@ -103,7 +105,7 @@ static const uint qt_meta_data_VisionGraph_Item[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -111,32 +113,33 @@ static const uint qt_meta_data_VisionGraph_Item[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  144,    2, 0x08 /* Private */,
-       3,    0,  145,    2, 0x08 /* Private */,
-       4,    0,  146,    2, 0x08 /* Private */,
-       5,    0,  147,    2, 0x08 /* Private */,
-       6,    0,  148,    2, 0x08 /* Private */,
-       7,    0,  149,    2, 0x08 /* Private */,
-       8,    0,  150,    2, 0x08 /* Private */,
-       9,    0,  151,    2, 0x08 /* Private */,
-      10,    0,  152,    2, 0x08 /* Private */,
-      11,    0,  153,    2, 0x08 /* Private */,
-      12,    0,  154,    2, 0x08 /* Private */,
-      13,    0,  155,    2, 0x08 /* Private */,
-      14,    0,  156,    2, 0x08 /* Private */,
-      15,    0,  157,    2, 0x08 /* Private */,
-      16,    0,  158,    2, 0x08 /* Private */,
-      17,    0,  159,    2, 0x08 /* Private */,
-      18,    0,  160,    2, 0x08 /* Private */,
-      19,    0,  161,    2, 0x08 /* Private */,
-      20,    2,  162,    2, 0x08 /* Private */,
-      24,    1,  167,    2, 0x08 /* Private */,
-      27,    1,  170,    2, 0x08 /* Private */,
-      29,    1,  173,    2, 0x08 /* Private */,
-      31,    1,  176,    2, 0x08 /* Private */,
-      32,    5,  179,    2, 0x08 /* Private */,
-      39,    1,  190,    2, 0x08 /* Private */,
-      41,    1,  193,    2, 0x08 /* Private */,
+       1,    0,  149,    2, 0x08 /* Private */,
+       3,    0,  150,    2, 0x08 /* Private */,
+       4,    0,  151,    2, 0x08 /* Private */,
+       5,    0,  152,    2, 0x08 /* Private */,
+       6,    0,  153,    2, 0x08 /* Private */,
+       7,    0,  154,    2, 0x08 /* Private */,
+       8,    0,  155,    2, 0x08 /* Private */,
+       9,    0,  156,    2, 0x08 /* Private */,
+      10,    0,  157,    2, 0x08 /* Private */,
+      11,    0,  158,    2, 0x08 /* Private */,
+      12,    0,  159,    2, 0x08 /* Private */,
+      13,    0,  160,    2, 0x08 /* Private */,
+      14,    0,  161,    2, 0x08 /* Private */,
+      15,    0,  162,    2, 0x08 /* Private */,
+      16,    0,  163,    2, 0x08 /* Private */,
+      17,    0,  164,    2, 0x08 /* Private */,
+      18,    0,  165,    2, 0x08 /* Private */,
+      19,    0,  166,    2, 0x08 /* Private */,
+      20,    2,  167,    2, 0x08 /* Private */,
+      24,    1,  172,    2, 0x08 /* Private */,
+      27,    1,  175,    2, 0x08 /* Private */,
+      29,    1,  178,    2, 0x08 /* Private */,
+      31,    1,  181,    2, 0x08 /* Private */,
+      32,    5,  184,    2, 0x08 /* Private */,
+      39,    1,  195,    2, 0x08 /* Private */,
+      41,    1,  198,    2, 0x08 /* Private */,
+      41,    2,  201,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -165,6 +168,7 @@ static const uint qt_meta_data_VisionGraph_Item[] = {
     QMetaType::Void, 0x80000000 | 33, QMetaType::Bool, QMetaType::Bool, QMetaType::QReal, QMetaType::QReal,   34,   35,   36,   37,   38,
     QMetaType::Void, QMetaType::QReal,   40,
     QMetaType::Void, QMetaType::QString,   42,
+    QMetaType::Void, QMetaType::QReal, QMetaType::QReal,   43,   44,
 
        0        // eod
 };
@@ -201,6 +205,7 @@ void VisionGraph_Item::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 23: _t->slot_Press((*reinterpret_cast< VisionItem*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4])),(*reinterpret_cast< qreal(*)>(_a[5]))); break;
         case 24: _t->slot_wheel((*reinterpret_cast< qreal(*)>(_a[1]))); break;
         case 25: _t->slot_SizeChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 26: _t->slot_SizeChanged((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -249,13 +254,13 @@ int VisionGraph_Item::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 27;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 26)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 27;
     }
     return _id;
 }
