@@ -39,15 +39,10 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QBrush(borderColor),0));
-//    painter->setBrush(QColor(255,0,0,50));
-    painter->drawPolygon(m_vecPointFs);
-
-    QPainterPath path;
-    path.addPolygon(m_polygonF);
-    emit signal_painterInfo(ItemType::Poly,path);
-
     if(option->state & QStyle::State_Selected){
+
+        painter->setPen(QPen(QBrush(selectedColor),0));
+
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(true);
         }
@@ -59,6 +54,9 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         setEdit(m_bEdit);
 
     }else{
+
+        painter->setPen(QPen(QBrush(borderColor),0));
+
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(false);
         }
@@ -69,6 +67,15 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         m_bEdit = false;
         setEdit(m_bEdit);
     }
+
+    painter->setBrush(brushColor);
+    painter->drawPolygon(m_vecPointFs);
+
+    QPainterPath path;
+    path.addPolygon(m_polygonF);
+    emit signal_painterInfo(ItemType::Poly,path);
+
+
 
 }
 

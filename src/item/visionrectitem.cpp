@@ -126,8 +126,19 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QBrush(borderColor),0));
+    //item pos ()
+    if(option->state & QStyle::State_Selected){
 
+        painter->setPen(QPen(QBrush(selectedColor),0));
+
+    }else{
+
+        painter->setPen(QPen(QBrush(borderColor),0));
+
+
+    }
+
+    painter->setBrush(brushColor);
 
     QPointF originPointF = QPointF(m_x,m_y);
     painter->drawLine(m_pointF1-originPointF,m_pointF2-originPointF);
@@ -145,10 +156,11 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     QPolygonF poly(points);
     path.addPolygon(poly);
-    emit signal_painterInfo(Rect,path);
+    emit signal_painterInfo(ItemType::Rect,path);
 
     //item pos ()
     if(option->state & QStyle::State_Selected){
+
         //编辑模式下的小矩形框
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(true);
@@ -161,6 +173,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         m_bEdit = true;
         setEdit(m_bEdit);
     }else{
+
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(false);
         }
@@ -177,6 +190,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
             directCursor = normal_rect;
         }
     }
+
 }
 
 QRectF VisionRectItem::boundingRect() const

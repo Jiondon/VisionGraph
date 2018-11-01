@@ -491,7 +491,16 @@ void VisionGraph_Region::addEllipse(QRectF rf)
 
 void VisionGraph_Region::addLine(QLine line)
 {
-
+    //todo
+    VisionLineItem *item = new VisionLineItem();
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_curVisionItem = nullptr;
+    });
+    item->setLine(line.p1(),line.p2());
+    scene->addItem(item);
+    m_curVisionItem = item;
 }
 
 void VisionGraph_Region::addLines(QList<QLine> lstLine)
@@ -518,7 +527,16 @@ void VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
 
 void VisionGraph_Region::addPoint(QPointF pointF)
 {
-
+    // todo
+    VisionCrossPointItem *item = new VisionCrossPointItem();
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_curVisionItem = nullptr;
+    });
+    item->setPoint(pointF);
+    scene->addItem(item);
+    m_curVisionItem = item;
 }
 
 

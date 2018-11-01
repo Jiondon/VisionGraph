@@ -77,8 +77,13 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    QPen pen = QPen(borderColor,0);
-    painter->setPen(pen);
+    if(option->state & QStyle::State_Selected){
+        painter->setPen(QPen(QBrush(selectedColor),0));
+
+    }else{
+        painter->setPen(QPen(QBrush(borderColor),0));
+
+    }
 //    if(pen)
     qDebug()<<painter->clipPath().currentPosition();
     painter->drawLine(m_pointF1,m_pointF2);

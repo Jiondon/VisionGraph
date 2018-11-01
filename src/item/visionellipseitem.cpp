@@ -107,7 +107,48 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(QBrush(borderColor),0));
+
+    if(option->state & QStyle::State_Selected){
+
+        painter->setPen(QPen(QBrush(selectedColor),0));
+
+        //编辑模式下的小矩形框
+        for(int i=0;i<m_lstRect.count();i++){
+            if(i%2 == 0){
+                m_lstRect[i]->setVisible(false);
+            }else{
+                m_lstRect[i]->setVisible(true);
+            }
+        }
+
+        if(!m_bEdit){
+            emit selectedChanged(true,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+        }
+
+        m_bEdit = true;
+        setEdit(m_bEdit);
+    }else{
+
+        painter->setPen(QPen(QBrush(borderColor),0));
+
+        for(int i=0;i<m_lstRect.count();i++){
+            m_lstRect[i]->setVisible(false);
+        }
+
+        if(m_bEdit){
+            emit selectedChanged(false,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+        }
+
+        m_bEdit = false;
+        setEdit(m_bEdit);
+
+        if(directCursor != arrowsUp){
+            this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
+            directCursor = normal_rect;
+        }
+    }
+
+
 
     painter->setBrush(brushColor);
 
@@ -140,39 +181,6 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 //    emit signal_painterInfo(EllipseItem,path);
 
 
-    if(option->state & QStyle::State_Selected){
-        //编辑模式下的小矩形框
-        for(int i=0;i<m_lstRect.count();i++){
-            if(i%2 == 0){
-                m_lstRect[i]->setVisible(false);
-            }else{
-                m_lstRect[i]->setVisible(true);
-            }
-        }
-
-        if(!m_bEdit){
-            emit selectedChanged(true,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
-        }
-
-        m_bEdit = true;
-        setEdit(m_bEdit);
-    }else{
-        for(int i=0;i<m_lstRect.count();i++){
-            m_lstRect[i]->setVisible(false);
-        }
-
-        if(m_bEdit){
-            emit selectedChanged(false,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
-        }
-
-        m_bEdit = false;
-        setEdit(m_bEdit);
-
-        if(directCursor != arrowsUp){
-            this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
-            directCursor = normal_rect;
-        }
-    }
 }
 
 QRectF VisionEllipseItem::boundingRect() const
