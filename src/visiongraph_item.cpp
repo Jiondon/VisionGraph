@@ -136,9 +136,6 @@ void VisionGraph_Item::initTool_V()
 
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-    QAction *action = new QAction();
-    action->setEnabled(false);
-//    action->setDisabled(true);
 
     tool_painter = new QToolBar;
     //    tool_painter->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -148,9 +145,7 @@ void VisionGraph_Item::initTool_V()
     tool_painter->addAction(sys_selected_action);
     tool_painter->addAction(sys_drag_action);
     tool_painter->addAction(sys_zoom_action);
-    tool_painter->addAction(action);
-
-    tool_painter->addAction(action);
+    tool_painter->addSeparator();
 
     if(m_model == ItemModel::un_self){
         tool_painter->addAction(sys_rect_action);
@@ -158,7 +153,7 @@ void VisionGraph_Item::initTool_V()
         tool_painter->addAction(sys_poly_action);
         tool_painter->addAction(sys_point_action);
         tool_painter->addAction(sys_line_action);
-        tool_painter->addAction(action);
+        tool_painter->addSeparator();
     }
 }
 
@@ -290,37 +285,29 @@ void VisionGraph_Item::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
 
@@ -330,11 +317,9 @@ void VisionGraph_Item::initLayout()
             tool_operation->setOrientation(Qt::Vertical);
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
@@ -342,24 +327,21 @@ void VisionGraph_Item::initLayout()
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(sceneWidget);
-//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
+            vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
@@ -371,37 +353,29 @@ void VisionGraph_Item::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::bottomDirection){
@@ -431,13 +405,12 @@ void VisionGraph_Item::initLayout()
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
             vBoxLayout->addWidget(sceneWidget);
-            vBoxLayout->addWidget(tool_operation);
+            vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(tool_operation);
         }
     }
 
     mainLayout->addLayout(vBoxLayout);
-//    mainLayout->addStretch();
 }
 
 

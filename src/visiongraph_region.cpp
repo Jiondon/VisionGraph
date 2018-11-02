@@ -118,9 +118,6 @@ void VisionGraph_Region::initTool_V()
 
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-    QAction *action = new QAction();
-    action->setEnabled(false);
-
     tool_painter = new QToolBar;
     tool_painter->setMinimumHeight(20);
     tool_painter->setMovable(false);
@@ -130,34 +127,51 @@ void VisionGraph_Region::initTool_V()
     tool_painter->addAction(sys_selected_action);
     tool_painter->addAction(sys_drag_action);
     tool_painter->addAction(sys_zoom_action);
-    tool_painter->addAction(action);
+    tool_painter->addSeparator();
 
     tool_painter->addAction(sys_mouseClear_action);
     tool_painter->addAction(sys_mousePainter_action);
-    tool_painter->addAction(action);
+    tool_painter->addSeparator();
 
     tool_painter->addAction(sys_rect_action);
     tool_painter->addAction(sys_ellipse_action);
     tool_painter->addAction(sys_poly_action);
     tool_painter->addAction(sys_poly_elli_action);
-    tool_painter->addAction(action);
+    tool_painter->addSeparator();
+
+//    QWidget* widget_mouseSet = new QWidget;
 
     QLabel *label = new QLabel;
     label->setText(QStringLiteral("大小"));
+    label->setAlignment(Qt::AlignCenter);
+    label->setMinimumHeight(20);
     label->show();
 
-    // 滑动条
-    QSlider *pSlider = new QSlider;
+
+    QLabel *label_slider = new QLabel;
+
+    QSlider *pSlider = new QSlider(label_slider);
     if(m_toolButtonDirection_painter == ToolButtonDirection::leftDirection ||
             m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
-        pSlider->setOrientation(Qt::Vertical);  // 水平方向
+        label_slider->setFixedSize(40,120);
+        pSlider->setOrientation(Qt::Vertical);  // 竖直方向
         pSlider->setFixedHeight(100);
-
+        pSlider->setMinimumWidth(20);
+        QHBoxLayout *layout = new QHBoxLayout(label_slider);
+        layout->addWidget(pSlider);
+        layout->addStretch();
     }else{
+        label_slider->setFixedSize(120,40);
+
+        QVBoxLayout *layout = new QVBoxLayout(label_slider);
+
         pSlider->setOrientation(Qt::Horizontal);
         pSlider->setFixedWidth(100);
-
+        pSlider->setMinimumHeight(20);
+        layout->addWidget(pSlider);
+        layout->addStretch();
     }
+
     pSlider->setMinimum(1);  // 最小值
     pSlider->setMaximum(300);  // 最大值
     pSlider->setSingleStep(1);  // 步长
@@ -173,9 +187,9 @@ void VisionGraph_Region::initTool_V()
     connect(pSlider, SIGNAL(valueChanged(int)), pSpinBox, SLOT(setValue(int)));
     connect(pSlider,SIGNAL(valueChanged(int)),this,SLOT(slot_valueChanged(int)));
 
-//    pSlider->setValue(20);
     tool_painter->addWidget(label);
-    tool_painter->addWidget(pSlider);
+//    tool_painter->addWidget(pSlider);
+    tool_painter->addWidget(label_slider);
     tool_painter->addWidget(pSpinBox);
 
 }
@@ -304,37 +318,29 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(tool_painter);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
 
@@ -344,11 +350,9 @@ void VisionGraph_Region::initLayout()
             tool_operation->setOrientation(Qt::Vertical);
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
@@ -356,24 +360,21 @@ void VisionGraph_Region::initLayout()
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(sceneWidget);
-//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
             vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addLayout(hBoxLayout);
+            vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
@@ -385,19 +386,15 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
@@ -407,15 +404,12 @@ void VisionGraph_Region::initLayout()
             hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_painter);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
 
     }else if(m_toolButtonDirection_painter == ToolButtonDirection::bottomDirection){
@@ -424,41 +418,34 @@ void VisionGraph_Region::initLayout()
             tool_operation->setOrientation(Qt::Vertical);
             hBoxLayout->addWidget(tool_operation);
             hBoxLayout->addWidget(sceneWidget);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_painter);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_operation);
             vBoxLayout->addWidget(sceneWidget);
             vBoxLayout->addWidget(tool_painter);
-//            vBoxLayout->addStretch();
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
             tool_operation->setOrientation(Qt::Vertical);
 
             hBoxLayout->addWidget(sceneWidget);
             hBoxLayout->addWidget(tool_operation);
-//            hBoxLayout->addStretch();
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(tool_painter);
-//            vBoxLayout->addStretch();
 
         }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
 
             vBoxLayout->addLayout(hBoxLayout);
             vBoxLayout->addWidget(sceneWidget);
+            vBoxLayout->addWidget(tool_painter);
             vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addWidget(tool_operation);
-//            vBoxLayout->addStretch();
         }
     }
 
     mainLayout->addLayout(vBoxLayout);
-//    mainLayout->addStretch();
 }
 
 void VisionGraph_Region::addRect(QRectF rf, bool bEdit)

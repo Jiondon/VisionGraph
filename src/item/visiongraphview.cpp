@@ -268,24 +268,24 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
     if(m_bPainter){
         if(m_itemType == Rect){
             QPointF topLeftPoint;
-            QPointF bottomRight;
+            QPointF bottomRightPoint;
             if(m_pressPointF_scene.x() < scenePos.x()){
                 topLeftPoint.setX(m_pressPointF_scene.x());
-                bottomRight.setX(scenePos.x());
+                bottomRightPoint.setX(scenePos.x());
             }else{
                 topLeftPoint.setX(scenePos.x());
-                bottomRight.setX(m_pressPointF_scene.x());
+                bottomRightPoint.setX(m_pressPointF_scene.x());
             }
 
             if(m_pressPointF_scene.y() < scenePos.y()){
                 topLeftPoint.setY(m_pressPointF_scene.y());
-                bottomRight.setY(scenePos.y());
+                bottomRightPoint.setY(scenePos.y());
             }else{
                 topLeftPoint.setY(scenePos.y());
-                bottomRight.setY(m_pressPointF_scene.y());
+                bottomRightPoint.setY(m_pressPointF_scene.y());
             }
 
-            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRight));
+            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
 
             QPainterPath path;
             m_path = path;
@@ -294,24 +294,24 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
         }else if(m_itemType == EllipseItem){
 
             QPointF topLeftPoint;
-            QPointF bottomRight;
+            QPointF bottomRightPoint;
             if(m_pressPointF_scene.x() < scenePos.x()){
                 topLeftPoint.setX(m_pressPointF_scene.x());
-                bottomRight.setX(scenePos.x());
+                bottomRightPoint.setX(scenePos.x());
             }else{
                 topLeftPoint.setX(scenePos.x());
-                bottomRight.setX(m_pressPointF_scene.x());
+                bottomRightPoint.setX(m_pressPointF_scene.x());
             }
 
             if(m_pressPointF_scene.y() < scenePos.y()){
                 topLeftPoint.setY(m_pressPointF_scene.y());
-                bottomRight.setY(scenePos.y());
+                bottomRightPoint.setY(scenePos.y());
             }else{
                 topLeftPoint.setY(scenePos.y());
-                bottomRight.setY(m_pressPointF_scene.y());
+                bottomRightPoint.setY(m_pressPointF_scene.y());
             }
 
-            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRight));
+            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
 
             QPainterPath path;
             m_path = path;
