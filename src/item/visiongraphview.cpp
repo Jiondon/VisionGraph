@@ -267,14 +267,51 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
 
     if(m_bPainter){
         if(m_itemType == Rect){
-            emit signal_Item(m_itemType,QRectF(m_pressPointF_scene,scenePos));
+            QPointF topLeftPoint;
+            QPointF bottomRight;
+            if(m_pressPointF_scene.x() < scenePos.x()){
+                topLeftPoint.setX(m_pressPointF_scene.x());
+                bottomRight.setX(scenePos.x());
+            }else{
+                topLeftPoint.setX(scenePos.x());
+                bottomRight.setX(m_pressPointF_scene.x());
+            }
+
+            if(m_pressPointF_scene.y() < scenePos.y()){
+                topLeftPoint.setY(m_pressPointF_scene.y());
+                bottomRight.setY(scenePos.y());
+            }else{
+                topLeftPoint.setY(scenePos.y());
+                bottomRight.setY(m_pressPointF_scene.y());
+            }
+
+            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRight));
 
             QPainterPath path;
             m_path = path;
 
             m_bPainter = false;
         }else if(m_itemType == EllipseItem){
-            emit signal_Item(m_itemType,QRectF(m_pressPointF_scene,scenePos));
+
+            QPointF topLeftPoint;
+            QPointF bottomRight;
+            if(m_pressPointF_scene.x() < scenePos.x()){
+                topLeftPoint.setX(m_pressPointF_scene.x());
+                bottomRight.setX(scenePos.x());
+            }else{
+                topLeftPoint.setX(scenePos.x());
+                bottomRight.setX(m_pressPointF_scene.x());
+            }
+
+            if(m_pressPointF_scene.y() < scenePos.y()){
+                topLeftPoint.setY(m_pressPointF_scene.y());
+                bottomRight.setY(scenePos.y());
+            }else{
+                topLeftPoint.setY(scenePos.y());
+                bottomRight.setY(m_pressPointF_scene.y());
+            }
+
+            emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRight));
 
             QPainterPath path;
             m_path = path;
@@ -477,7 +514,7 @@ void VisionGraphView::setViewInfo_text(QString text)
     m_pLabelInfo->setText(text);
 }
 
-void VisionGraphView::setViewInfo_Color(QColor color)
+void VisionGraphView::setViewInfo_Color(QColor backgroundColor, QColor textColor)
 {
 
 }

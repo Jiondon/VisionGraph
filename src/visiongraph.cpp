@@ -395,13 +395,13 @@ void VisionGraph::setViewInfo_text(QString text){
     }
 }
 
-void VisionGraph::setViewInfo_Color(QColor color){
+void VisionGraph::setViewInfo_Color(QColor backgroundColor,QColor textColor){
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Color(color);
+        m_graphWidget_Region->setViewInfo_Color(backgroundColor,textColor);
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Color(color);
+        m_graphWidget_Item->setViewInfo_Color(backgroundColor,textColor);
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Color(color);
+        m_graphWidget_Item->setViewInfo_Color(backgroundColor,textColor);
     }else{
         qDebug()<<"VisionGraph is Error";
     }

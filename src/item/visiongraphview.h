@@ -155,7 +155,7 @@ public:
     /**
      * @brief       设置View信息框的颜色（背景颜色和文本颜色）
      */
-    void setViewInfo_Color(QColor color);
+    void setViewInfo_Color(QColor backgroundColor,QColor textColor);
 
 signals:
     void signal_Move(QPointF pointF);

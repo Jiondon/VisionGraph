@@ -198,8 +198,8 @@ public:
     /**
      * @brief       设置View信息框的颜色（背景颜色和文本颜色）
      */
-    void setViewInfo_Color(QColor color){
-        view->setViewInfo_Color(color);
+    void setViewInfo_Color(QColor backgroundColor,QColor textColor){
+        view->setViewInfo_Color(backgroundColor,textColor);
     }
 
     void initLayout();
