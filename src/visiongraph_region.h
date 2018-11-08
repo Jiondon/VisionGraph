@@ -26,7 +26,8 @@ class VisionGraph_Region : public QFrame
 {
     Q_OBJECT
 public:
-    explicit VISIONGRAPHSHARED_EXPORT VisionGraph_Region(QWidget *parent = 0);
+    explicit VISIONGRAPHSHARED_EXPORT VisionGraph_Region(ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection,
+                                                         QWidget *parent = 0);
 
 public:
     /**
@@ -88,20 +89,13 @@ public:
         return view->getRegion();
     }
 
-    /**
-     * @brief       设置toolButton(painter)的布局
-     * @param
-     */
-    void setToolButton_Painter(ToolButtonDirection direct){
-        m_toolButtonDirection_painter = direct;
-    }
 
     /**
-     * @brief       设置toolButton(operation)的布局
+     * @brief       设置toolButton的布局
      * @param
      */
-    void setToolButton_Operation(ToolButtonDirection direct){
-        m_toolButtonDirection_operation = direct;
+    void setToolButton_Direction(ToolButtonDirection direct){
+        m_toolButtonDirection = direct;
     }
 
     /**
@@ -202,14 +196,14 @@ public:
         view->setViewInfo_Color(backgroundColor,textColor);
     }
 
-    void initLayout();
 
 protected:
 
 private:
     void initScene();
-    void initTool_V();  //竖直的工具栏
-    void initTool_H();  //水平的工具栏
+    void initTool_painter();  //竖直的工具栏
+    void initTool_operation();  //水平的工具栏
+    void initLayout(ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection);
 
 
 private:
@@ -222,11 +216,10 @@ private:
     qreal m_zoom = 1;   //图形View的缩放比例
 
 
-    QToolBar *tool_painter;
-    ToolButtonDirection  m_toolButtonDirection_painter = ToolButtonDirection::leftDirection;  //工具按钮的位置
-
-    QToolBar *tool_operation;
-    ToolButtonDirection  m_toolButtonDirection_operation = ToolButtonDirection::topDirection;  //工具按钮的位置
+    QToolBar *tool_painter = NULL;
+    ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //工具按钮的位置
+    QToolBar *tool_operation = NULL;
+    QToolBar *tool_Widget = NULL;
 
 
 private:

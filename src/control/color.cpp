@@ -8,3 +8,6 @@ QColor regionColor = QColor(255,0,0);
 //暂时未用，
 QColor viewMouseInfo_TextColor = QColor(255,255,255);
 QColor viewMouseInfo_BackgroundColor = QColor(255,255,255);
+
+
+QString iconPath = "./icon/";

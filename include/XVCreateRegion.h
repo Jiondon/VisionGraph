@@ -8,28 +8,33 @@
 #include "AVL.h"
 
 
-enum XVBorderPosition //圆环创建模式
+namespace XVCreateR
 {
-	Internal,  //圆内部
-	External,  //圆外部
-	Centered   //圆居中
-};
+	enum XVBorderPosition //圆环创建模式
+	{
+		Internal,  //圆内部
+		External,  //圆外部
+		Centered   //圆居中
+	};
 
-enum XVCreateRegionType
-{
-	Box1,          //框
-	Rectangle,     //矩形
-	Circle,        //圆
-	Ellipse,       //椭圆
-	Polygon,       //多边形
-	Ring,          //环
-	Segment,       //线段 
-	Location1      //点集
-};
+	enum XVCreateRegionType
+	{
+		Box,           //框
+		Rectangle,     //矩形
+		Circle,        //圆
+		Ellipse,       //椭圆
+		Polygon,       //多边形
+		Ring,          //环
+		Segment,       //线段 
+		Location       //点集
+	};
+}
+
+
 
 typedef struct XVCreateRegionIn
 {
-	XVCreateRegionType inType;
+	XVCreateR::XVCreateRegionType inType;
 	int   inFrameWidth;
 	int   inFrameHeight;
 	XVCoordinateSystem2D inAlignment; //可选
@@ -48,7 +53,7 @@ typedef struct XVCreateRegionIn
 
 	//ring
 	float				inRingWidth;
-	XVBorderPosition	inBorderPosition;
+	XVCreateR::XVBorderPosition	inBorderPosition;
 
 	//Segment
 	XVSegment2D			inSegment;
@@ -64,7 +69,7 @@ typedef struct XVCreateRegionIn
 typedef struct XVCreateRegionOut
 {
 	XVRegion     outregion;
-	XVCreateRegionType outType;
+	XVCreateR::XVCreateRegionType outType;
 
 	//Rectangle or Ellipse
 	XVRectangle2D outAlignedRectangle;

@@ -32,7 +32,7 @@ class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 {
     Q_OBJECT
 public:
-    VisionGraph(GraphType type,QWidget *parent = 0);
+    VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
 
     /**
      * @brief       添加rectangle  可旋转的矩形
@@ -93,22 +93,11 @@ public:
 
 
     /**
-     * @brief       设置toolButton(painter)的布局
+     * @brief       设置toolButton的布局
      * @param
      */
-    void setToolButton_Painter(ToolButtonDirection direct);
+    void setToolButton_Direction(ToolButtonDirection direct);
 
-    /**
-     * @brief       设置toolButton(operation)的布局
-     * @param
-     */
-    void setToolButton_Operation(ToolButtonDirection direct);
-
-    /**
-     * @brief      布局设置完成后，进行初始化
-     * @param
-     */
-    void initLayout();
 
     /**
      * @brief      设置颜色(选中)
@@ -216,6 +205,10 @@ public:
      */
     void setViewInfo_Color(QColor backgroundColor, QColor textColor);
 
+    /**
+     * @brief       设置icon的路径
+     */
+    void setIconPath(QString iconpath);
 
 protected:
 

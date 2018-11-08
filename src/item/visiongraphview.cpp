@@ -23,6 +23,7 @@ VisionGraphView::VisionGraphView(QWidget *parent):
 //    m_pLabelInfo->setText("View Infomation show");
 
     setItemType(ItemType::No);
+
 }
 
 void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
@@ -62,7 +63,9 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         m_pMouseInfo_Label->setText(text_pos+"\n"+text_rgb+"\n"+text_gray);
     }
 
+//    qDebug()<<m_bPress<<m_itemType<<"111111111";
     if(m_bPress && m_itemType == ItemType::Drag){
+//        qDebug()<<"222222222";
         QPointF disPointF = event->pos() - m_lastPointF;
 
         this->horizontalScrollBar()->setSliderPosition(this->horizontalScrollBar()->value()-disPointF.x()/10);
@@ -362,7 +365,7 @@ void VisionGraphView::enterEvent(QEvent *event)
     QGraphicsView::enterEvent(event);
     if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
         //修改鼠标为绘图样式
-        QCursor cursor = QCursor(QPixmap(":/icon/cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
         this->setCursor(cursor);
     }else{
         this->setCursor(Qt::ArrowCursor);
@@ -411,6 +414,18 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.drawLines(vecLines);
 }
 
+void VisionGraphView::setItemType(ItemType type){
+    m_bPainter = true;
+    m_itemType = type;
+    if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        //修改鼠标为绘图样式
+        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+        this->setCursor(cursor);
+    }else{
+        this->setCursor(Qt::ArrowCursor);
+    }
+}
+
 void VisionGraphView::zoom(float scaleFactor)
 {
     scale(1/m_scale, 1/m_scale);
@@ -420,7 +435,7 @@ void VisionGraphView::zoom(float scaleFactor)
 
     if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
         //修改鼠标为绘图样式
-        QCursor cursor = QCursor(QPixmap(":/icon/cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
         this->setCursor(cursor);
     }
 
@@ -479,7 +494,8 @@ void VisionGraphView::clearPainter()
 
 void VisionGraphView::setViewInfo_Pos(Corner corner)
 {
-    qDebug()<<this->width()<<this->height();
+    qDebug()<<this->width()<<this->height() << "111111111" <<this->sceneRect();
+    m_Corner = corner;
     if(corner == Corner::topLeft){
         m_pLabelInfo->move(2,2);
 
@@ -636,8 +652,8 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     xvPath.arrayPoint2D = vec_point2D;
 
     regionIn.inType = XVCreateRegionType::Polygon;
-    regionIn.inFrameWidth = 800;
-    regionIn.inFrameHeight = 600;
+    regionIn.inFrameWidth = this->sceneRect().width();
+    regionIn.inFrameHeight = this->sceneRect().height();
     regionIn.inPolygon = xvPath;
 
     XVCreateRegion(regionIn,regionOut);
@@ -670,8 +686,8 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 
         //没有圆
         regionIn.inType = XVCreateRegionType::Circle;
-        regionIn.inFrameWidth = 800;
-        regionIn.inFrameHeight = 600;
+        regionIn.inFrameWidth = this->sceneRect().width();
+        regionIn.inFrameHeight = this->sceneRect().height();
         regionIn.inCircle2D = xvCircle;
 
         XVBox xvBox;
@@ -693,8 +709,8 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         xvRect.width = (float)rf.width();
 
         regionIn.inType = XVCreateRegionType::Ellipse;
-        regionIn.inFrameWidth = 800;
-        regionIn.inFrameHeight = 600;
+        regionIn.inFrameWidth = this->sceneRect().width();
+        regionIn.inFrameHeight = this->sceneRect().height();
         regionIn.inRectangle =xvRect;
 
         XVBox xvBox;
@@ -729,8 +745,8 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
     xvRect.width = (float)rf.width();
 
     regionIn.inType = XVCreateRegionType::Rectangle;
-    regionIn.inFrameWidth = 800;
-    regionIn.inFrameHeight = 600;
+    regionIn.inFrameWidth = this->sceneRect().width();
+    regionIn.inFrameHeight = this->sceneRect().height();
     regionIn.inRectangle =xvRect;
 
     XVBox xvBox;
@@ -757,5 +773,21 @@ void VisionGraphView::push_region(XVRegion region, int index)
         m_vecRegion = m_vecRegion.mid(0,m_vecRegion.count()-m_iIndex_Region);
         m_vecRegion.push_back(region);
         m_iIndex_Region = 0;
+    }
+}
+
+void VisionGraphView::slotUpdateViewInfo_Pos()
+{
+    if(m_Corner == Corner::topLeft){
+        return;
+
+    }else if(m_Corner == Corner::topRight){
+        m_pLabelInfo->move(this->sceneRect().width()-2-m_pLabelInfo->width()-15,2);
+
+    }else if(m_Corner == Corner::bottomLeft){
+        m_pLabelInfo->move(2,this->sceneRect().height()-2-m_pLabelInfo->height()-15);
+
+    }else if(m_Corner == Corner::bottomRight){
+        m_pLabelInfo->move(this->sceneRect().width()-2-m_pLabelInfo->width()-15,this->sceneRect().height()-2-m_pLabelInfo->height()-15);
     }
 }

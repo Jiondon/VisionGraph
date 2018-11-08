@@ -604,25 +604,25 @@ void VisionEllipseItem::slotIndex(int index)
     if(index == 7){
         //left
         directCursor = left_rect;
-        cursor = QCursor(QPixmap(":/icon/cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
         this->scene()->views().at(0)->setCursor(cursor);
 
     }else if(index == 1){
         //top
         directCursor = top_rect;
-        cursor = QCursor(QPixmap(":/icon/cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
         this->scene()->views().at(0)->setCursor(cursor);
 
     }else if(index == 3){
         //right
         directCursor = right_rect;
-        cursor = QCursor(QPixmap(":/icon/cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
         this->scene()->views().at(0)->setCursor(cursor);
 
     }else if(index == 5){
         //bottom
         directCursor = bottom_rect;
-        cursor = QCursor(QPixmap(":/icon/cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
         this->scene()->views().at(0)->setCursor(cursor);
 
     }else{

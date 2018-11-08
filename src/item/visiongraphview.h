@@ -23,6 +23,7 @@
 
 #include "../visiongraph_global.h"
 
+using namespace XVCreateR;
 enum Corner{
     topLeft,
     topRight,
@@ -86,17 +87,7 @@ public:
     /**
      * @brief       设置记录当前所要绘制的item
      */
-    void setItemType(ItemType type){
-        m_bPainter = true;
-        m_itemType = type;
-        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
-            //修改鼠标为绘图样式
-            QCursor cursor = QCursor(QPixmap(":/icon/cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
-            this->setCursor(cursor);
-        }else{
-            this->setCursor(Qt::ArrowCursor);
-        }
-    }
+    void setItemType(ItemType type);
 
 
     /**
@@ -214,6 +205,7 @@ private:
 
     QLabel *m_pLabelInfo;  //view的信息框
 
+    Corner m_Corner = Corner::topLeft;
 protected:
 
 public slots:
@@ -246,6 +238,8 @@ public slots:
      * @brief       多个VisionItem进行某一类逻辑运算
      */
 //    XVRegion slot_CombineRegion(XVRegion region1,XVRegion region2,XVCombineRegionsType combineType);
+
+    void slotUpdateViewInfo_Pos();
 
 private:
     /**
@@ -284,6 +278,7 @@ private:
      * @param       region新插入的记录，index，恢复的记录在vector中的位置(倒序)，目前该参数是使用全局变量 m_iIndex_Region替换
      */
     void push_region(XVRegion region,int index = 0);
+
 };
 
 #endif // VISIONGRAPHVIEW_H

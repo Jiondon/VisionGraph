@@ -178,7 +178,7 @@ void VisionPolygon::slotIndex(int index)
     if(m_iIndex == -1){
         view->setCursor(Qt::ArrowCursor);
     }else{
-        QCursor cursor = QCursor(QPixmap(":/icon/cursor-sizeall.png"));
+        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-sizeall.png"));
         view->setCursor(cursor);
     }
 }

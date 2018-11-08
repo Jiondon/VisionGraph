@@ -2,20 +2,20 @@
 #include <QDebug>
 
 
-VisionGraph::VisionGraph(GraphType type, QWidget *parent) : QWidget(parent)
+VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : QWidget(parent)
 {
-    setFixedSize(1200,800);
+    setMinimumSize(400,300);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     if(type == GraphType::graphRegion){
-        m_graphWidget_Region = new VisionGraph_Region(this);
+        m_graphWidget_Region = new VisionGraph_Region(toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Region);
 
     }else if(type == GraphType::graphItem_self){
-        m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,this);
+        m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
 
     }else if(type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,this);
+        m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
 
     }else{
@@ -177,40 +177,14 @@ void VisionGraph::setBkImg(QImage image)
     }
 }
 
-void VisionGraph::setToolButton_Painter(ToolButtonDirection direct)
+void VisionGraph::setToolButton_Direction(ToolButtonDirection direct)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setToolButton_Painter(direct);
+        m_graphWidget_Region->setToolButton_Direction(direct);
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setToolButton_Painter(direct);
+        m_graphWidget_Item->setToolButton_Direction(direct);
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setToolButton_Painter(direct);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
-}
-
-void VisionGraph::setToolButton_Operation(ToolButtonDirection direct)
-{
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setToolButton_Operation(direct);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setToolButton_Operation(direct);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setToolButton_Operation(direct);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
-}
-
-void VisionGraph::initLayout()
-{
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->initLayout();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->initLayout();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->initLayout();
+        m_graphWidget_Item->setToolButton_Direction(direct);
     }else{
         qDebug()<<"VisionGraph is Error";
     }
@@ -405,5 +379,10 @@ void VisionGraph::setViewInfo_Color(QColor backgroundColor,QColor textColor){
     }else{
         qDebug()<<"VisionGraph is Error";
     }
+}
+
+void VisionGraph::setIconPath(QString iconpath)
+{
+    iconPath = iconpath;
 }
 

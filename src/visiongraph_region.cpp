@@ -7,13 +7,15 @@
 #include <QMatrix>
 #include <QFileDialog>
 
-VisionGraph_Region::VisionGraph_Region(QWidget *parent) : QFrame(parent)
+VisionGraph_Region::VisionGraph_Region(ToolButtonDirection toolButtonDirect,QWidget *parent) : QFrame(parent)
 {
 //    setMinimumSize(1200,800);
     mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 
+    m_toolButtonDirection = toolButtonDirect;
     initScene();
+    initLayout(toolButtonDirect);
 
 }
 
@@ -32,7 +34,7 @@ void VisionGraph_Region::initScene()
 {
 
     sceneWidget = new VisionGraphWidget(this);
-    sceneWidget->setMinimumSize(800,600);
+    sceneWidget->setMinimumSize(400,300);
     connect(sceneWidget,SIGNAL(signal_sizeChanged(qreal,qreal)),this,SLOT(slot_SizeChanged(qreal,qreal)));
 
     view = new VisionGraphView(sceneWidget);
@@ -53,64 +55,100 @@ void VisionGraph_Region::initScene()
 
     m_mousePixmap = new QGraphicsPixmapItem();
     m_mousePixmap->setPos(scene->width()/2-10,scene->height()/2-10);
-    m_mousePixmap->setPixmap(QPixmap(":/icon/cursor-size_Circle.png").scaled(10*2,10*2));
+    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(10*2,10*2));
     scene->addItem(m_mousePixmap);
 
 
     //显示坐标和操作信息
 
-//    label_Operation = new QLabel;
-//    label_Operation->setText(QStringLiteral(""));
-//    label_Operation->show();
-//    label_Operation->setFixedWidth(400);
+}
+
+void VisionGraph_Region::initTool_painter()
+{
 
 }
 
-void VisionGraph_Region::initTool_V()
+void VisionGraph_Region::initTool_operation()
 {
+    sys_open_action = new QAction(QIcon(iconPath+"open.png"),QStringLiteral("打开"));
+    sys_open_action->setIconText(QStringLiteral("打开"));
+    connect(sys_open_action,SIGNAL(triggered(bool)),this,SLOT(slot_open_action()));
+
+    sys_save_action = new QAction(QIcon(iconPath+"save.png"),QStringLiteral("保存"));
+    sys_save_action->setIconText(QStringLiteral("保存"));
+    connect(sys_save_action,SIGNAL(triggered(bool)),this,SLOT(slot_save_action()));
+    //撤销按钮（回滚）历史
+    sys_front_action = new QAction(QIcon(iconPath+"back.png"),QStringLiteral("撤销"));
+    sys_front_action->setIconText(QStringLiteral("撤销"));
+    connect(sys_front_action,SIGNAL(triggered(bool)),this,SLOT(slot_front_action()));
+    //撤销按钮（后滚）未来
+    sys_next_action = new QAction(QIcon(iconPath+"front.png"),QStringLiteral("恢复"));
+    sys_next_action->setIconText(QStringLiteral("恢复"));
+    connect(sys_next_action,SIGNAL(triggered(bool)),this,SLOT(slot_next_action()));
+    //清空绘图区域
+    sys_clear_action = new QAction(QIcon(iconPath+"delect.png"),QStringLiteral("清理"));
+    sys_clear_action->setIconText(QStringLiteral("清理"));
+    connect(sys_clear_action,SIGNAL(triggered(bool)),this,SLOT(slot_clear_action()));
+
+    //调整鼠标的大小--针对鼠标擦除和鼠标绘制
+    tool_Widget = new QToolBar;
+    tool_Widget->setMinimumHeight(20);
+    tool_Widget->setMovable(false);
+
+    tool_Widget->addAction(sys_open_action);
+    tool_Widget->addAction(sys_save_action);
+    tool_Widget->addAction(sys_front_action);
+    tool_Widget->addAction(sys_next_action);
+    tool_Widget->addAction(sys_clear_action);
+    tool_Widget->addSeparator();
+
+
+
+
+
     //选中按钮---绘制规则形状的时候，绘制完成后默认选中，此时高亮，其他时间都是灰色
-    sys_selected_action = new QAction(QIcon(":/icon/select.png"),QStringLiteral(""));
+    sys_selected_action = new QAction(QIcon(iconPath+"select.png"),QStringLiteral(""));
     sys_selected_action->setIconText(QStringLiteral("选择"));
     connect(sys_selected_action,SIGNAL(triggered(bool)),this,SLOT(slot_selected_action()));
     //拖动按钮---拖动整个绘制的区域的位置---目前暂时不提供（后期加）
-    sys_drag_action = new QAction(QIcon(":/icon/drag.png"),QStringLiteral("拖动当前视图"));
+    sys_drag_action = new QAction(QIcon(iconPath+"drag.png"),QStringLiteral("拖动当前视图"));
     sys_drag_action->setIconText(QStringLiteral("拖动"));
     connect(sys_drag_action,SIGNAL(triggered(bool)),this,SLOT(slot_drag_action()));
     //放大镜功能
-    sys_zoom_action = new QAction(QIcon(":/icon/zoom.png"),QStringLiteral("缩放"));
+    sys_zoom_action = new QAction(QIcon(iconPath+"zoom.png"),QStringLiteral("缩放"));
     sys_zoom_action->setIconText(QStringLiteral("缩放"));
     connect(sys_zoom_action,SIGNAL(triggered(bool)),this,SLOT(slot_zoom_action()));
 
 
     //鼠标擦除
-    sys_mouseClear_action = new QAction(QIcon(":/icon/clear.png"),QStringLiteral("擦除"));
+    sys_mouseClear_action = new QAction(QIcon(iconPath+"clear.png"),QStringLiteral("擦除"));
     sys_mouseClear_action->setIconText(QStringLiteral("擦除"));
     sys_mouseClear_action->setText("mouseClear");
     connect(sys_mouseClear_action,SIGNAL(triggered(bool)),this,SLOT(slot_mouseClear_action()));
     //鼠标绘制
-    sys_mousePainter_action = new QAction(QIcon(":/icon/painter.png"),QStringLiteral("绘制"));
+    sys_mousePainter_action = new QAction(QIcon(iconPath+"painter.png"),QStringLiteral("绘制"));
     sys_mousePainter_action->setIconText(QStringLiteral("绘制"));
     sys_mousePainter_action->setText("mousePainter");
     connect(sys_mousePainter_action,SIGNAL(triggered(bool)),this,SLOT(slot_mousePainter_action()));
 
 
     //矩形
-    sys_rect_action = new QAction(QIcon(":/icon/rect.png"),QStringLiteral("新建一个矩形区域"));
+    sys_rect_action = new QAction(QIcon(iconPath+"rect.png"),QStringLiteral("新建一个矩形区域"));
     sys_rect_action->setIconText(QStringLiteral("矩形"));
     sys_rect_action->setText("rectangle");
     connect(sys_rect_action,SIGNAL(triggered(bool)),this,SLOT(slot_rect_action()));
     //椭圆
-    sys_ellipse_action = new QAction(QIcon(":/icon/ellipse.png"),QStringLiteral("新建一个椭圆区域"));
+    sys_ellipse_action = new QAction(QIcon(iconPath+"ellipse.png"),QStringLiteral("新建一个椭圆区域"));
     sys_ellipse_action->setIconText(QStringLiteral("椭圆或者圆"));
     sys_ellipse_action->setText("ellipse");
     connect(sys_ellipse_action,SIGNAL(triggered(bool)),this,SLOT(slot_ellipse_action()));
     //不规则多边形---直线连接各点
-    sys_poly_action = new QAction(QIcon(":/icon/poly.png"),QStringLiteral("新建一个不规则多边形区域"));
+    sys_poly_action = new QAction(QIcon(iconPath+"poly.png"),QStringLiteral("新建一个不规则多边形区域"));
     sys_poly_action->setIconText(QStringLiteral("多边形"));
     sys_poly_action->setText("poly");
     connect(sys_poly_action,SIGNAL(triggered(bool)),this,SLOT(slot_poly_action()));
     //不规则圆形---曲线连接各点
-    sys_poly_elli_action = new QAction(QIcon(":/icon/poly_elli.png"),QStringLiteral("任意区域：绘制不规则区域"));
+    sys_poly_elli_action = new QAction(QIcon(iconPath+"poly_elli.png"),QStringLiteral("任意区域：绘制不规则区域"));
     sys_poly_elli_action->setIconText(QStringLiteral("任意区域"));
     sys_poly_elli_action->setText("region");
     connect(sys_poly_elli_action,SIGNAL(triggered(bool)),this,SLOT(slot_poly_elli_action()));
@@ -118,28 +156,30 @@ void VisionGraph_Region::initTool_V()
 
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-    tool_painter = new QToolBar;
-    tool_painter->setMinimumHeight(20);
-    tool_painter->setMovable(false);
-//    tool_painter->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    connect(tool_painter,SIGNAL(actionTriggered(QAction*)),this,SLOT(slot_actionTriggered(QAction*)));
+//    tool_painter->setStyleSheet(QString::fromUtf8("border:1px solid red"));
+    tool_Widget->addAction(sys_selected_action);
+    tool_Widget->addAction(sys_drag_action);
+    tool_Widget->addAction(sys_zoom_action);
+    tool_Widget->addSeparator();
 
-    tool_painter->addAction(sys_selected_action);
-    tool_painter->addAction(sys_drag_action);
-    tool_painter->addAction(sys_zoom_action);
-    tool_painter->addSeparator();
+    tool_Widget->addAction(sys_mouseClear_action);
+    tool_Widget->addAction(sys_mousePainter_action);
+    tool_Widget->addSeparator();
 
-    tool_painter->addAction(sys_mouseClear_action);
-    tool_painter->addAction(sys_mousePainter_action);
-    tool_painter->addSeparator();
+    tool_Widget->addAction(sys_rect_action);
+    tool_Widget->addAction(sys_ellipse_action);
+    tool_Widget->addAction(sys_poly_action);
+    tool_Widget->addAction(sys_poly_elli_action);
+    tool_Widget->addSeparator();
 
-    tool_painter->addAction(sys_rect_action);
-    tool_painter->addAction(sys_ellipse_action);
-    tool_painter->addAction(sys_poly_action);
-    tool_painter->addAction(sys_poly_elli_action);
-    tool_painter->addSeparator();
+    connect(tool_Widget,SIGNAL(actionTriggered(QAction*)),this,SLOT(slot_actionTriggered(QAction*)));
 
-//    QWidget* widget_mouseSet = new QWidget;
+
+
+
+
+
+
 
     QLabel *label = new QLabel;
     label->setText(QStringLiteral("大小"));
@@ -147,12 +187,11 @@ void VisionGraph_Region::initTool_V()
     label->setMinimumHeight(20);
     label->show();
 
-
     QLabel *label_slider = new QLabel;
 
     QSlider *pSlider = new QSlider(label_slider);
-    if(m_toolButtonDirection_painter == ToolButtonDirection::leftDirection ||
-            m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
+            m_toolButtonDirection == ToolButtonDirection::rightDirection){
         label_slider->setFixedSize(40,120);
         pSlider->setOrientation(Qt::Vertical);  // 竖直方向
         pSlider->setFixedHeight(100);
@@ -187,36 +226,14 @@ void VisionGraph_Region::initTool_V()
     connect(pSlider, SIGNAL(valueChanged(int)), pSpinBox, SLOT(setValue(int)));
     connect(pSlider,SIGNAL(valueChanged(int)),this,SLOT(slot_valueChanged(int)));
 
-    tool_painter->addWidget(label);
-//    tool_painter->addWidget(pSlider);
-    tool_painter->addWidget(label_slider);
-    tool_painter->addWidget(pSpinBox);
+    tool_Widget->addWidget(label);
+    tool_Widget->addWidget(label_slider);
+    tool_Widget->addWidget(pSpinBox);
+    tool_Widget->addSeparator();
 
-}
 
-void VisionGraph_Region::initTool_H()
-{
-    sys_open_action = new QAction(QIcon(":/icon/open.png"),QStringLiteral("打开"));
-    sys_open_action->setIconText(QStringLiteral("打开"));
-    connect(sys_open_action,SIGNAL(triggered(bool)),this,SLOT(slot_open_action()));
 
-    sys_save_action = new QAction(QIcon(":/icon/save.png"),QStringLiteral("保存"));
-    sys_save_action->setIconText(QStringLiteral("保存"));
-    connect(sys_save_action,SIGNAL(triggered(bool)),this,SLOT(slot_save_action()));
-    //撤销按钮（回滚）历史
-    sys_front_action = new QAction(QIcon(":/icon/back.png"),QStringLiteral("撤销"));
-    sys_front_action->setIconText(QStringLiteral("撤销"));
-    connect(sys_front_action,SIGNAL(triggered(bool)),this,SLOT(slot_front_action()));
-    //撤销按钮（后滚）未来
-    sys_next_action = new QAction(QIcon(":/icon/front.png"),QStringLiteral("恢复"));
-    sys_next_action->setIconText(QStringLiteral("恢复"));
-    connect(sys_next_action,SIGNAL(triggered(bool)),this,SLOT(slot_next_action()));
-    //清空绘图区域
-    sys_clear_action = new QAction(QIcon(":/icon/delect.png"),QStringLiteral("清理"));
-    sys_clear_action->setIconText(QStringLiteral("清理"));
-    connect(sys_clear_action,SIGNAL(triggered(bool)),this,SLOT(slot_clear_action()));
 
-    //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
     //显示区域的信息，view的大小，缩放比例，鼠标的信息
     QWidget *infoWidget = new QWidget();
@@ -227,7 +244,7 @@ void VisionGraph_Region::initTool_H()
 
     QLineEdit *lineEdit_w = new QLineEdit;
     lineEdit_w->setText(QString::number(view->width()));
-    lineEdit_w->setFixedWidth(50);
+    lineEdit_w->setFixedWidth(35);
     lineEdit_w->show();
 
     QLabel *label_h = new QLabel;
@@ -236,7 +253,7 @@ void VisionGraph_Region::initTool_H()
 
     QLineEdit *lineEdit_h = new QLineEdit;
     lineEdit_h->setText(QString::number(view->height()));
-    lineEdit_h->setFixedWidth(50);
+    lineEdit_h->setFixedWidth(35);
     lineEdit_w->show();
 
     QLabel *label_size = new QLabel;
@@ -255,8 +272,8 @@ void VisionGraph_Region::initTool_H()
     comboBox->setCurrentText("100%");
     connect(comboBox,SIGNAL(currentTextChanged(QString)),this,SLOT(slot_SizeChanged(QString)));
 
-    if(m_toolButtonDirection_operation == ToolButtonDirection::leftDirection ||
-            m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
+            m_toolButtonDirection == ToolButtonDirection::rightDirection){
         QVBoxLayout* vBoxLayout = new QVBoxLayout;
         infoWidget->setLayout(vBoxLayout);
 
@@ -286,163 +303,46 @@ void VisionGraph_Region::initTool_H()
 
     infoWidget->show();
 
-    tool_operation = new QToolBar;
-    tool_operation->setMovable(false);
-//    tool_operation->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    connect(tool_operation,SIGNAL(actionTriggered(QAction*)),this,SLOT(slot_actionTriggered(QAction*)));
 
-    tool_operation->addAction(sys_open_action);
-    tool_operation->addAction(sys_save_action);
-    tool_operation->addAction(sys_front_action);
-    tool_operation->addAction(sys_next_action);
-    tool_operation->addAction(sys_clear_action);
-    tool_operation->addSeparator();
-
-    tool_operation->addWidget(infoWidget);
-
+    tool_Widget->addWidget(infoWidget);
+    tool_Widget->addSeparator();
 }
 
-void VisionGraph_Region::initLayout()
+void VisionGraph_Region::initLayout(ToolButtonDirection toolButtonDirect)
 {
     QHBoxLayout *hBoxLayout = new QHBoxLayout;
     QVBoxLayout *vBoxLayout = new QVBoxLayout;
 
-    initTool_H();
-    initTool_V();
-
-    if(m_toolButtonDirection_painter == ToolButtonDirection::leftDirection){
-        tool_painter->setOrientation(Qt::Vertical);
-
-        if(m_toolButtonDirection_operation == ToolButtonDirection::leftDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-            hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addWidget(sceneWidget);
-
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
-
-            hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addWidget(sceneWidget);
-
-            vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-
-            hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_operation);
-
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
-            hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addWidget(sceneWidget);
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_operation);
-        }
+    m_toolButtonDirection = toolButtonDirect;
+    initTool_operation();
+    initTool_painter();
 
 
-    }else if(m_toolButtonDirection_painter == ToolButtonDirection::topDirection){
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection){
+        tool_Widget->setOrientation(Qt::Vertical);
 
-        if(m_toolButtonDirection_operation == ToolButtonDirection::leftDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-            hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addWidget(sceneWidget);
+        hBoxLayout->addWidget(tool_Widget);
+        hBoxLayout->addWidget(sceneWidget);
 
-            vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addLayout(hBoxLayout);
+        vBoxLayout->addLayout(hBoxLayout);
+    }else if(m_toolButtonDirection == ToolButtonDirection::topDirection){
+        tool_Widget->setOrientation(Qt::Horizontal);
 
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
+        vBoxLayout->addWidget(tool_Widget);
+        vBoxLayout->addWidget(sceneWidget);
 
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addWidget(sceneWidget);
+    }else if(m_toolButtonDirection == ToolButtonDirection::rightDirection){
+        tool_Widget->setOrientation(Qt::Vertical);
 
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
-            tool_operation->setOrientation(Qt::Vertical);
+        hBoxLayout->addWidget(sceneWidget);
+        hBoxLayout->addWidget(tool_Widget);
 
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_operation);
+        vBoxLayout->addLayout(hBoxLayout);
+    }else if(m_toolButtonDirection == ToolButtonDirection::bottomDirection){
+        tool_Widget->setOrientation(Qt::Horizontal);
 
-            vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
-
-            vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(sceneWidget);
-            vBoxLayout->addWidget(tool_operation);
-        }
-
-    }else if(m_toolButtonDirection_painter == ToolButtonDirection::rightDirection){
-        tool_painter->setOrientation(Qt::Vertical);
-
-        if(m_toolButtonDirection_operation == ToolButtonDirection::leftDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-
-            hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_painter);
-
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
-
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_painter);
-
-            vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_painter);
-            hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addStretch();
-
-            vBoxLayout->addLayout(hBoxLayout);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_painter);
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_operation);
-        }
-
-    }else if(m_toolButtonDirection_painter == ToolButtonDirection::bottomDirection){
-
-        if(m_toolButtonDirection_operation == ToolButtonDirection::leftDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-            hBoxLayout->addWidget(tool_operation);
-            hBoxLayout->addWidget(sceneWidget);
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_painter);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::topDirection){
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_operation);
-            vBoxLayout->addWidget(sceneWidget);
-            vBoxLayout->addWidget(tool_painter);
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::rightDirection){
-            tool_operation->setOrientation(Qt::Vertical);
-
-            hBoxLayout->addWidget(sceneWidget);
-            hBoxLayout->addWidget(tool_operation);
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(tool_painter);
-
-        }else if(m_toolButtonDirection_operation == ToolButtonDirection::bottomDirection){
-
-            vBoxLayout->addLayout(hBoxLayout);
-            vBoxLayout->addWidget(sceneWidget);
-            vBoxLayout->addWidget(tool_painter);
-            vBoxLayout->addWidget(tool_operation);
-        }
+        vBoxLayout->addWidget(sceneWidget);
+        vBoxLayout->addWidget(tool_Widget);
     }
 
     mainLayout->addLayout(vBoxLayout);
@@ -555,8 +455,8 @@ void VisionGraph_Region::slot_selected_action()
 
 void VisionGraph_Region::slot_drag_action()
 {
-    view->setItemType(ItemType::No);
-    m_itemType = ItemType::No;
+    view->setItemType(ItemType::Drag);
+    m_itemType = ItemType::Drag;
 //    label_Operation->setText(QStringLiteral("通过鼠标的拖动，拖动视图区域"));
 }
 
@@ -727,7 +627,7 @@ void VisionGraph_Region::slot_wheel(qreal delta)
 void VisionGraph_Region::slot_valueChanged(int qR)
 {
     m_mousePixmap->show();
-    m_mousePixmap->setPixmap(QPixmap(":/icon/cursor-size_Circle.png").scaled(qR,qR));
+    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(qR,qR));
     m_mousePixmap->setPos(view->width()/2-m_mousePixmap->boundingRect().width()/2,view->height()/2-m_mousePixmap->boundingRect().height()/2);
     view->setPainterCursorR((qreal)qR/2);
 }
@@ -755,6 +655,7 @@ void VisionGraph_Region::slot_SizeChanged(qreal w, qreal h)
     scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->setScene(scene);
     view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+    view->slotUpdateViewInfo_Pos();
 }
 
 void VisionGraph_Region::slot_SceneMouseMove(qreal x, qreal y)

@@ -658,56 +658,56 @@ void VisionRectItem::slotIndex(int index)
         //left
         directCursor = left_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 0){
         //left top
         directCursor = left_Top_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizef.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizef.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 1){
         //top
         directCursor = top_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 2){
         //top right
         directCursor = right_top_rect;
 
-        cursor = QCursor(QPixmap(":/cursor-sizeb.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeb.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 3){
         //right
         directCursor = right_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeh.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 4){
         //right bottom
         directCursor = right_bottom_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizef.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizef.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 5){
         //bottom
         directCursor = bottom_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizev.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else if(index == 6){
         //bottom left
         directCursor = left_bottom_rect;
 
-        cursor = QCursor(QPixmap(":/icon/cursor-sizeb.png").transformed(leftmatrix,Qt::SmoothTransformation));
+        cursor = QCursor(QPixmap(iconPath+"cursor-sizeb.png").transformed(leftmatrix,Qt::SmoothTransformation));
         view->setCursor(cursor);
 
     }else{

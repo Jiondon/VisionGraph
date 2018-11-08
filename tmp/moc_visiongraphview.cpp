@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionGraphView_t {
-    QByteArrayData data[33];
-    char stringdata0[364];
+    QByteArrayData data[34];
+    char stringdata0[387];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -64,7 +64,8 @@ QT_MOC_LITERAL(28, 306, 8), // "XVRegion"
 QT_MOC_LITERAL(29, 315, 7), // "region1"
 QT_MOC_LITERAL(30, 323, 7), // "region2"
 QT_MOC_LITERAL(31, 331, 20), // "XVCombineRegionsType"
-QT_MOC_LITERAL(32, 352, 11) // "combineType"
+QT_MOC_LITERAL(32, 352, 11), // "combineType"
+QT_MOC_LITERAL(33, 364, 22) // "slotUpdateViewInfo_Pos"
 
     },
     "VisionGraphView\0signal_Move\0\0pointF\0"
@@ -76,7 +77,7 @@ QT_MOC_LITERAL(32, 352, 11) // "combineType"
     "item\0leftTop\0angle\0slot_CreatePolygonF\0"
     "vecPointF\0slot_CombineRegion\0XVRegion\0"
     "region1\0region2\0XVCombineRegionsType\0"
-    "combineType"
+    "combineType\0slotUpdateViewInfo_Pos"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +87,7 @@ static const uint qt_meta_data_VisionGraphView[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -94,18 +95,19 @@ static const uint qt_meta_data_VisionGraphView[] = {
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   64,    2, 0x06 /* Public */,
-       4,    1,   67,    2, 0x06 /* Public */,
-       6,    2,   70,    2, 0x06 /* Public */,
-      10,    1,   75,    2, 0x06 /* Public */,
-      13,    1,   78,    2, 0x06 /* Public */,
-      14,    1,   81,    2, 0x06 /* Public */,
+       1,    1,   69,    2, 0x06 /* Public */,
+       4,    1,   72,    2, 0x06 /* Public */,
+       6,    2,   75,    2, 0x06 /* Public */,
+      10,    1,   80,    2, 0x06 /* Public */,
+      13,    1,   83,    2, 0x06 /* Public */,
+      14,    1,   86,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      16,    2,   84,    2, 0x0a /* Public */,
-      19,    6,   89,    2, 0x0a /* Public */,
-      25,    4,  102,    2, 0x0a /* Public */,
-      27,    3,  111,    2, 0x0a /* Public */,
+      16,    2,   89,    2, 0x0a /* Public */,
+      19,    6,   94,    2, 0x0a /* Public */,
+      25,    4,  107,    2, 0x0a /* Public */,
+      27,    3,  116,    2, 0x0a /* Public */,
+      33,    0,  123,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QPointF,    3,
@@ -120,6 +122,7 @@ static const uint qt_meta_data_VisionGraphView[] = {
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 21, 0x80000000 | 7, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,   20,   22,    8,    9,   23,   24,
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 21, 0x80000000 | 7, 0x80000000 | 11,   20,   22,    8,   26,
     0x80000000 | 28, 0x80000000 | 28, 0x80000000 | 28, 0x80000000 | 31,   29,   30,   32,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -141,6 +144,7 @@ void VisionGraphView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 8: _t->slot_CreatePolygonF((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4]))); break;
         case 9: { XVRegion _r = _t->slot_CombineRegion((*reinterpret_cast< XVRegion(*)>(_a[1])),(*reinterpret_cast< XVRegion(*)>(_a[2])),(*reinterpret_cast< XVCombineRegionsType(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
+        case 10: _t->slotUpdateViewInfo_Pos(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -243,13 +247,13 @@ int VisionGraphView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }
