@@ -502,6 +502,9 @@ tmp\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QIntValidator \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
 		src\visiongraphtool.h \
 		src\item\visiongraphscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -933,6 +936,10 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
 		src\visiongraphtool.h \
 		src\visiongraph_global.h \
 		src\item\visiongraphscene.h \
@@ -1222,7 +1229,6 @@ tmp\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFram
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
@@ -1399,6 +1405,9 @@ tmp\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QIntValidator \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
 		src\visiongraphtool.h \
 		src\visiongraph_global.h \
 		src\item\visiongraphscene.h \
@@ -3918,6 +3927,9 @@ tmp\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QIntValidator \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
 		src/visiongraphtool.h \
 		src/item/visiongraphscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -4346,6 +4358,10 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
 		src/visiongraphtool.h \
 		src/visiongraph_global.h \
 		src/item/visiongraphscene.h \
@@ -4635,7 +4651,6 @@ tmp\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
@@ -4818,6 +4833,9 @@ tmp\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_region.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QIntValidator \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
 		src/visiongraphtool.h \
 		src/visiongraph_global.h \
 		src/item/visiongraphscene.h \

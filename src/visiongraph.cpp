@@ -386,3 +386,44 @@ void VisionGraph::setIconPath(QString iconpath)
     iconPath = iconpath;
 }
 
+QToolButton *VisionGraph::getToolButton(ToolButtonType type)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->getToolButton(type);
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->getToolButton(type);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->getToolButton(type);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+bool VisionGraph::removeToolButton(ToolButtonType type)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->removeToolButton(type);
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->removeToolButton(type);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->removeToolButton(type);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+void VisionGraph::addToolButton(QToolButton *btn)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->addToolButton(btn);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->addToolButton(btn);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->addToolButton(btn);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+

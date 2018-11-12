@@ -15,7 +15,7 @@
 #include <QMouseEvent>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-
+#include <QToolButton>
 #include "visiongraphtool.h"
 
 #include <QLabel>
@@ -207,9 +207,24 @@ public:
         view->setViewInfo_Color(backgroundColor,textColor);
     }
 
+
+    /**
+     * @brief       获取ToolButton
+     */
+    QToolButton* getToolButton(ToolButtonType type);
+
+    /**
+     * @brief       删除ToolButton
+     */
+    bool removeToolButton(ToolButtonType type);
+
+    /**
+     * @brief       添加ToolButton
+     */
+    void addToolButton(QToolButton* btn);
+
 private:
     void initScene();
-    void initTool_painter();  //竖直的工具栏
     void initTool_operation();  //水平的工具栏
 
     void initLayout(ToolButtonDirection toolButtonDirect);
@@ -241,8 +256,6 @@ private:
 
     qreal m_zoom = 1;   //图形View的缩放比例
 
-    QToolBar *tool_painter = NULL;
-    QToolBar *tool_operation = NULL;
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
 
@@ -251,32 +264,39 @@ private:
 private:
 
     //左侧工具栏 -- 绘制类（操作类）
-    QAction *sys_selected_action;
-    QAction *sys_drag_action;
-    QAction *sys_zoom_action;
+    QToolButton *sys_selected_button;
+    QToolButton *sys_drag_button;
+    QToolButton *sys_zoom_button;
 
-    QAction *sys_mousePainter_action;
-    QAction *sys_mouseClear_action;
+    QToolButton *sys_mousePainter_button;
+    QToolButton *sys_mouseClear_button;
 
-    QAction *sys_save_action;
+    QToolButton *sys_save_button;
 
-    QAction *sys_rect_action;
-    QAction *sys_ellipse_action;
-    QAction *sys_poly_action;
-    QAction *sys_poly_elli_action;
-    QAction *sys_point_action;
-    QAction *sys_line_action;
-    QAction *sys_polyLine_action;
+    QToolButton *sys_rect_button;
+    QToolButton *sys_ellipse_button;
+    QToolButton *sys_poly_button;
+    QToolButton *sys_poly_elli_button;
+    QToolButton *sys_point_button;
+    QToolButton *sys_line_button;
+    QToolButton *sys_polyLine_button;
 
 
 
     //右侧工具栏 -- 功能类
-    QAction *sys_open_project;  //打开工程
-    QAction *sys_front_action;  //撤销
-    QAction *sys_next_action;   //取消撤销
-    QAction *sys_clear_action;  //清空绘图区域
-    QAction *sys_remove_item;  //删除当前选中的item
+    QToolButton *sys_open_project_button;  //打开工程
+    QToolButton *sys_front_button;  //撤销
+    QToolButton *sys_next_button;   //取消撤销
+    QToolButton *sys_clear_button;  //清空绘图区域
+    QToolButton *sys_remove_item_button;  //删除当前选中的item
 
+    QList<QToolButton*> m_lstToolBtn;
+    QList<QAction*> m_lstAction;  //删除ToolButton使用的 ，必须要保证和m_lstToolBtn一致；其他的如，高度等widget，使用单独的删除接口
+    QAction* m_insertAction;   //addToolButton,所需要添加的action的位置，是一个空的action（end），
+
+    QSize m_ToolBtnSize = QSize(36,36);
+    QSize m_ToolIconSize = QSize(36,36);
+    Qt::ToolButtonStyle m_ToolStyle = Qt::ToolButtonIconOnly;//记录工具栏整体的ToolButtonStyle
 
     //显示的信息 -- 鼠标的移动坐标信息和操作信息
     QLabel *label_Operation;

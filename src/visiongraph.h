@@ -210,6 +210,22 @@ public:
      */
     void setIconPath(QString iconpath);
 
+
+    /**
+     * @brief       获取ToolButton
+     */
+    QToolButton* getToolButton(ToolButtonType type);
+
+    /**
+     * @brief       删除ToolButton
+     */
+    bool removeToolButton(ToolButtonType type);
+
+    /**
+     * @brief       添加ToolButton
+     */
+    void addToolButton(QToolButton* btn);
+
 protected:
 
 private:
