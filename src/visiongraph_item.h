@@ -223,6 +223,11 @@ public:
      */
     void addToolButton(QToolButton* btn);
 
+    /**
+     * @brief       不显示toolbar的view的信息
+     */
+    void removeToolBarInfoWidget();
+
 private:
     void initScene();
     void initTool_operation();  //水平的工具栏
@@ -258,8 +263,6 @@ private:
 
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
-
-
 
 private:
 
@@ -312,6 +315,8 @@ private:
     QVBoxLayout *mainLayout;   //主布局
 
     VisionGraphWidget *sceneWidget;
+
+    QAction *infoWidget_Action;
 
     ItemModel m_model = ItemModel::un_self;   //item的模式，用户交互绘制item？
 

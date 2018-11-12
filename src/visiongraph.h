@@ -32,7 +32,7 @@ class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 {
     Q_OBJECT
 public:
-    VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
+    VisionGraph(GraphType type = GraphType::graphRegion, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
 
     /**
      * @brief       添加rectangle  可旋转的矩形
@@ -225,6 +225,17 @@ public:
      * @brief       添加ToolButton
      */
     void addToolButton(QToolButton* btn);
+
+    /**
+     * @brief       不显示toolbar的view的信息
+     */
+    void removeToolBarInfoWidget();
+
+    /**
+     * @brief       在工具栏添加frame布局
+     * @param        todo,未实现
+     */
+    void addToolFrame();
 
 protected:
 

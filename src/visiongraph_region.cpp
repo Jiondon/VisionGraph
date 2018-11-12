@@ -270,25 +270,29 @@ void VisionGraph_Region::initTool_operation()
 
 
     //显示区域的信息，view的大小，缩放比例，鼠标的信息
-    QWidget *infoWidget = new QWidget();
+    QWidget* infoWidget = new QWidget();
 
     QLabel *label_w = new QLabel;
     label_w->setText(QStringLiteral("宽度:"));
-    label_w->show();
+//    label_w->show();
+    label_w->hide();
 
     QLineEdit *lineEdit_w = new QLineEdit;
     lineEdit_w->setText(QString::number(view->width()));
     lineEdit_w->setFixedWidth(35);
-    lineEdit_w->show();
+//    lineEdit_w->show();
+    lineEdit_w->hide();
 
     QLabel *label_h = new QLabel;
     label_h->setText(QStringLiteral("高度:"));
-    label_h->show();
+//    label_h->show();
+    label_h->hide();
 
     QLineEdit *lineEdit_h = new QLineEdit;
     lineEdit_h->setText(QString::number(view->height()));
     lineEdit_h->setFixedWidth(35);
-    lineEdit_w->show();
+//    lineEdit_h->show();
+    lineEdit_h->hide();
 
     QLabel *label_size = new QLabel;
     label_size->setText(QStringLiteral("尺寸:"));
@@ -333,13 +337,14 @@ void VisionGraph_Region::initTool_operation()
         hBoxLayout->addWidget(comboBox);
         hBoxLayout->addStretch();
     }
-
-
     infoWidget->show();
 
+    QToolBar* tool_infoWidget = new QToolBar;
+    tool_infoWidget->addWidget(infoWidget);
+    tool_infoWidget->addSeparator();
 
-    tool_Widget->addWidget(infoWidget);
-    tool_Widget->addSeparator();
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+
 
     for(int i=0;i<m_lstToolBtn.count();i++){
         m_lstToolBtn[i]->setToolButtonStyle(m_ToolStyle);
@@ -601,6 +606,11 @@ void VisionGraph_Region::addToolButton(QToolButton *btn)
     //
     m_lstAction.append(tool_Widget->insertWidget(m_insertAction,btn));
     m_lstToolBtn.append(btn);
+}
+
+void VisionGraph_Region::removeToolBarInfoWidget()
+{
+    tool_Widget->removeAction(infoWidget_Action);
 }
 
 void VisionGraph_Region::slot_selected_action()

@@ -427,3 +427,21 @@ void VisionGraph::addToolButton(QToolButton *btn)
     }
 }
 
+void VisionGraph::removeToolBarInfoWidget()
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->removeToolBarInfoWidget();
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->removeToolBarInfoWidget();
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->removeToolBarInfoWidget();
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::addToolFrame()
+{
+
+}
+

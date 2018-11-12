@@ -213,6 +213,11 @@ public:
      */
     void addToolButton(QToolButton* btn);
 
+    /**
+     * @brief       不显示toolbar的view的信息
+     */
+    void removeToolBarInfoWidget();
+
 protected:
 
 private:
@@ -280,6 +285,7 @@ private:
     QVBoxLayout *mainLayout;
 
     VisionGraphWidget *sceneWidget;
+    QAction *infoWidget_Action;
 
 private slots:
     //对应Action的槽函数
