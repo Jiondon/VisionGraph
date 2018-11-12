@@ -492,6 +492,15 @@ void VisionGraphView::clearPainter()
     this->scene()->update();
 }
 
+void VisionGraphView::setViewInfo_Visible(bool bVisible)
+{
+    if(bVisible){
+        m_pLabelInfo->show();
+    }else{
+        m_pLabelInfo->hide();
+    }
+}
+
 void VisionGraphView::setViewInfo_Pos(Corner corner)
 {
     qDebug()<<this->width()<<this->height() << "111111111" <<this->sceneRect();

@@ -309,6 +309,19 @@ void VisionGraph::clearPainter(){
     }
 }
 
+void VisionGraph::setViewInfo_Visible(bool bVisible)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setViewInfo_Visible(bVisible);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setViewInfo_Visible(bVisible);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setViewInfo_Visible(bVisible);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
 void VisionGraph::setViewInfo_Pos(Corner corner){
     if(m_type == GraphType::graphRegion){
         m_graphWidget_Region->setViewInfo_Pos(corner);

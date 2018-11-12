@@ -178,6 +178,11 @@ public:
     void clearPainter();
 
     /**
+     * @brief       设置View信息框的显示或者隐藏
+     */
+    void setViewInfo_Visible(bool bVisible);
+
+    /**
      * @brief       设置View信息框的位置（四个拐角）
      */
     void setViewInfo_Pos(Corner corner);

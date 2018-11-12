@@ -461,6 +461,11 @@ int VisionGraph_Item::setBkImg(QImage image)
     return 0;
 }
 
+void VisionGraph_Item::setViewInfo_Visible(bool bVisible)
+{
+    view->setViewInfo_Visible(bVisible);
+}
+
 QToolButton *VisionGraph_Item::getToolButton(ToolButtonType type)
 {
     switch(type)
