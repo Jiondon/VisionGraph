@@ -214,6 +214,6 @@ void VisionLineItem::slotMiniRectIndex(int index)
     }else{
         //恢复正常
         m_iIndex = -1;
-        this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
+        this->scene()->views().at(0)->setCursor(viewCursor);
     }
 }

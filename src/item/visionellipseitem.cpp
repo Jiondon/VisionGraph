@@ -45,7 +45,6 @@ void VisionEllipseItem::setRect(qreal x, qreal y, qreal width, qreal height)
         QObject::connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         QObject::connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
     }
-
 }
 
 void VisionEllipseItem::setRect(QRectF rf)
@@ -143,7 +142,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         setEdit(m_bEdit);
 
         if(directCursor != arrowsUp){
-            this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
+            this->scene()->views().at(0)->setCursor(viewCursor);
             directCursor = normal_rect;
         }
     }
@@ -180,13 +179,13 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 //    path.addEllipse(QPointF((m_pointF1.x()+m_pointF3.x())/2,(m_pointF1.y()+m_pointF3.y())/2),m_width/2,m_height/2);
 //    emit signal_painterInfo(EllipseItem,path);
 
-
 }
 
 QRectF VisionEllipseItem::boundingRect() const
 {
     //为方便旋转后的区域变化问题，临时的将有效区域设置为圆（直径为矩形的对角线）
     qreal r = sqrt((m_width)*(m_width)+(m_height)*(m_height));
+//    QRectF rf = QRectF(-5-10+(m_width/2-r/2)-m_width/2,-5-10+(m_height/2-r/2)-m_height/2,r+20,r+20);
     QRectF rf = QRectF(-5-10,-5-10,r+20,r+20);
     return rf;
 }
@@ -627,7 +626,7 @@ void VisionEllipseItem::slotIndex(int index)
 
     }else{
         directCursor = normal_rect;
-        this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
+        this->scene()->views().at(0)->setCursor(viewCursor);
     }
 }
 

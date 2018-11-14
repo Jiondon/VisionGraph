@@ -128,14 +128,9 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     //item pos ()
     if(option->state & QStyle::State_Selected){
-
         painter->setPen(QPen(QBrush(selectedColor),0));
-
     }else{
-
         painter->setPen(QPen(QBrush(borderColor),0));
-
-
     }
 
     painter->setBrush(brushColor);
@@ -186,7 +181,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         setEdit(m_bEdit);
 
         if(directCursor != arrowsUp){
-            this->scene()->views().at(0)->setCursor(Qt::ArrowCursor);
+            this->scene()->views().at(0)->setCursor(viewCursor);
             directCursor = normal_rect;
         }
     }
@@ -197,7 +192,9 @@ QRectF VisionRectItem::boundingRect() const
 {
     //为方便旋转后的区域变化问题，临时的将有效区域设置为圆（直径为矩形的对角线）
     qreal r = sqrt((m_width)*(m_width)+(m_height)*(m_height));
-    QRectF rf = QRectF(-5-10,-5-10,r+20,r+20);
+    // width/2,height/2
+    QRectF rf = QRectF(-5-10+(m_width/2-r/2),-5-10+(m_height/2-r/2),r+20,r+20);
+//    QRectF rf = QRectF(-5-10,-5-10,r+20,r+20);
     return rf;
 //    QVector<QPointF> points;
 //    points.append(m_pointF1);
@@ -712,7 +709,7 @@ void VisionRectItem::slotIndex(int index)
 
     }else{
         directCursor = normal_rect;
-        view->setCursor(Qt::ArrowCursor);
+        view->setCursor(viewCursor);
     }
 }
 

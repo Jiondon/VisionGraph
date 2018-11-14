@@ -21,6 +21,7 @@ VisionGraphView::VisionGraphView(QWidget *parent):
     m_pLabelInfo->setAlignment(Qt::AlignCenter);
     m_pLabelInfo->setStyleSheet("background-color:#ADD8E699;color:green;");
 //    m_pLabelInfo->setText("View Infomation show");
+    m_pLabelInfo->hide();
 
     setItemType(ItemType::No);
 
@@ -34,12 +35,13 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 
     emit signal_Move(viewPos);
 
+
     //show mouse info
-    if(!m_pMouseInfo_Label->isHidden()){
+    if(!m_pLabelInfo->isHidden()){
         QString text_pos="";
         QString text_rgb="";
         QString text_gray="";
-        m_pMouseInfo_Label->move(viewPos+QPoint(5,5));
+//        m_pMouseInfo_Label->move(viewPos+QPoint(5,5));
         text_pos = (QStringLiteral("坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
 
         //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
@@ -60,12 +62,10 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
                 }
             }
         }
-        m_pMouseInfo_Label->setText(text_pos+"\n"+text_rgb+"\n"+text_gray);
+        m_pLabelInfo->setText(text_pos+"\n"+text_rgb+"\n"+text_gray);
     }
 
-//    qDebug()<<m_bPress<<m_itemType<<"111111111";
     if(m_bPress && m_itemType == ItemType::Drag){
-//        qDebug()<<"222222222";
         QPointF disPointF = event->pos() - m_lastPointF;
 
         this->horizontalScrollBar()->setSliderPosition(this->horizontalScrollBar()->value()-disPointF.x()/10);
@@ -195,6 +195,18 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
     m_bPress = true;
     m_pressPointF = viewPos;
     m_pressPointF_scene = scenePos;
+
+    if(m_itemType == ItemType::Zoom){
+        //缩放
+        if(m_bZoom){
+            //放大
+            emit signal_wheel(1);
+        }else{
+            //缩小
+            emit signal_wheel(-1);
+        }
+        return;
+    }
 
     if(event->button() == Qt::RightButton){
          if(m_bPainter){
@@ -363,21 +375,40 @@ void VisionGraphView::wheelEvent(QWheelEvent *event)
 void VisionGraphView::enterEvent(QEvent *event)
 {
     QGraphicsView::enterEvent(event);
-    if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
-        //修改鼠标为绘图样式
-        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
-        this->setCursor(cursor);
+
+    if(m_itemType != ItemType::No){
+        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+            //修改鼠标为绘图样式
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            this->setCursor(cursor);
+        }else if(m_itemType == ItemType::Drag){
+            //拖动
+            this->setCursor(Qt::OpenHandCursor);
+        }else if(m_itemType == ItemType::Zoom){
+            //缩放
+            QCursor cursorIn = QCursor(QPixmap(iconPath+"cursor-zoomIn.png"));
+            QCursor cursorOut = QCursor(QPixmap(iconPath+"cursor-zoomOut.png"));
+
+            if(m_bZoom){
+                this->setCursor(cursorIn);
+            }else{
+                this->setCursor(cursorOut);
+            }
+        }else{
+            //其他绘制形状
+            this->setCursor(Qt::CrossCursor);
+        }
     }else{
         this->setCursor(Qt::ArrowCursor);
     }
-
+    viewCursor = this->cursor();
 
     //设置鼠标所在位置的信息显示
     if(m_itemType == ItemType::No || m_itemType == ItemType::Zoom)
     {
-        m_pMouseInfo_Label->show();
+//        m_pMouseInfo_Label->show();
     }else{
-        m_pMouseInfo_Label->hide();
+//        m_pMouseInfo_Label->hide();
     }
 }
 
@@ -417,13 +448,39 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 void VisionGraphView::setItemType(ItemType type){
     m_bPainter = true;
     m_itemType = type;
-    if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
-        //修改鼠标为绘图样式
-        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
-        this->setCursor(cursor);
+
+    m_vecPoint_Poly.clear();  //记录多边形的操作的点
+    m_vecPoint_Region.clear();  //记录任意区域的操作的点
+
+    if(m_itemType != ItemType::No){
+        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+            //修改鼠标为绘图样式
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            this->setCursor(cursor);
+        }else if(m_itemType == ItemType::Drag){
+            //拖动
+            this->setCursor(Qt::OpenHandCursor);
+        }else if(m_itemType == ItemType::Zoom){
+            //缩放
+            QCursor cursorIn = QCursor(QPixmap(iconPath+"cursor-zoomIn.png"));
+            QCursor cursorOut = QCursor(QPixmap(iconPath+"cursor-zoomOut.png"));
+
+            if(m_bZoom){
+                this->setCursor(cursorOut);
+                m_bZoom = false;
+            }else{
+                this->setCursor(cursorIn);
+                m_bZoom = true;
+            }
+
+        }else{
+            //其他绘制形状
+            this->setCursor(Qt::CrossCursor);
+        }
     }else{
         this->setCursor(Qt::ArrowCursor);
     }
+    viewCursor = this->cursor();
 }
 
 void VisionGraphView::zoom(float scaleFactor)
@@ -437,6 +494,7 @@ void VisionGraphView::zoom(float scaleFactor)
         //修改鼠标为绘图样式
         QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
         this->setCursor(cursor);
+        viewCursor = this->cursor();
     }
 
     return;
@@ -544,6 +602,29 @@ void VisionGraphView::setViewInfo_Color(QColor backgroundColor, QColor textColor
 
 }
 
+void VisionGraphView::itemCursorToViewCursor()
+{
+    if(m_itemType != ItemType::No){
+        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+            //修改鼠标为绘图样式
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            this->setCursor(cursor);
+        }else if(m_itemType == ItemType::Drag){
+            //拖动
+            this->setCursor(Qt::OpenHandCursor);
+        }else if(m_itemType == ItemType::Zoom){
+            //缩放
+            this->setCursor(Qt::ArrowCursor);
+        }else{
+            //其他绘制形状
+            this->setCursor(Qt::CrossCursor);
+        }
+    }else{
+        this->setCursor(Qt::ArrowCursor);
+    }
+    viewCursor = this->cursor();
+}
+
 
 void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
 {
@@ -606,7 +687,7 @@ void VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemT
     QPainterPath path;
     m_path = path;
 
-    item->hide();item->deleteLater();
+    item->hide();item->deleteLater();item = NULL;
     this->scene()->update();
 }
 

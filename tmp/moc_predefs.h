@@ -5,6 +5,7 @@
 #define _WIN32 
 #define _M_IX86 600
 #define _M_IX86_FP 2
+#define _DEBUG 
 #define _MT 
 #define _DLL 
 #define _CPPRTTI 

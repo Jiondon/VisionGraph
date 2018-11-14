@@ -11,3 +11,5 @@ QColor viewMouseInfo_BackgroundColor = QColor(255,255,255);
 
 
 QString iconPath = "./icon/";
+
+QCursor viewCursor;

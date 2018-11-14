@@ -153,6 +153,12 @@ public:
      */
     void setViewInfo_Color(QColor backgroundColor,QColor textColor);
 
+    /**
+     * @brief       在item中鼠标样式变化后，回到view后的鼠标样式恢复
+     */
+    void itemCursorToViewCursor();
+
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);
@@ -205,6 +211,7 @@ private:
     bool m_clearAll = false; //清除view中的所有绘制数据
 
     float m_scale = 1;
+    bool m_bZoom = false;  //false -- out缩小  true -- in放大
 
     QLabel *m_pMouseInfo_Label;  //跟随鼠标显示的信息
 

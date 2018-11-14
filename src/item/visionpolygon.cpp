@@ -71,9 +71,11 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setBrush(brushColor);
     painter->drawPolygon(m_vecPointFs);
 
-    QPainterPath path;
-    path.addPolygon(m_polygonF);
-    emit signal_painterInfo(ItemType::Poly,path);
+    if(m_bEdit){
+        QPainterPath path;
+        path.addPolygon(m_polygonF);
+        emit signal_painterInfo(ItemType::Poly,path);
+    }
 
 
 
@@ -176,7 +178,7 @@ void VisionPolygon::slotIndex(int index)
     QGraphicsView *view = this->scene()->views().at(0);
 
     if(m_iIndex == -1){
-        view->setCursor(Qt::ArrowCursor);
+        view->setCursor(viewCursor);
     }else{
         QCursor cursor = QCursor(QPixmap(iconPath+"cursor-sizeall.png"));
         view->setCursor(cursor);

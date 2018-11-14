@@ -260,6 +260,7 @@ void VisionGraph_Region::initTool_operation()
     connect(pSlider, SIGNAL(valueChanged(int)), pSpinBox, SLOT(setValue(int)));
     connect(pSlider,SIGNAL(valueChanged(int)),this,SLOT(slot_valueChanged(int)));
 
+    pSlider->setValue(10);  //默认值
     tool_Widget->addWidget(label);
     tool_Widget->addWidget(label_slider);
     tool_Widget->addWidget(pSpinBox);
@@ -319,10 +320,10 @@ void VisionGraph_Region::initTool_operation()
         vBoxLayout->addWidget(lineEdit_w);
         vBoxLayout->addWidget(label_h);
         vBoxLayout->addWidget(lineEdit_h);
-        vBoxLayout->addSpacing(50);
+//        vBoxLayout->addSpacing(50);
         vBoxLayout->addWidget(label_size);
         vBoxLayout->addWidget(comboBox);
-        vBoxLayout->addStretch();
+//        vBoxLayout->addStretch();
     }else{
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
@@ -332,10 +333,10 @@ void VisionGraph_Region::initTool_operation()
         hBoxLayout->addWidget(lineEdit_w);
         hBoxLayout->addWidget(label_h);
         hBoxLayout->addWidget(lineEdit_h);
-        hBoxLayout->addSpacing(50);
+//        hBoxLayout->addSpacing(50);
         hBoxLayout->addWidget(label_size);
         hBoxLayout->addWidget(comboBox);
-        hBoxLayout->addStretch();
+//        hBoxLayout->addStretch();
     }
     infoWidget->show();
 
@@ -620,7 +621,9 @@ void VisionGraph_Region::removeToolBarInfoWidget()
 
 void VisionGraph_Region::slot_selected_action()
 {
-
+    view->setItemType(ItemType::No);
+    m_itemType = ItemType::No;
+//    label_Operation->setText(QStringLiteral("通过鼠标的拖动，拖动视图区域"));
 }
 
 void VisionGraph_Region::slot_drag_action()

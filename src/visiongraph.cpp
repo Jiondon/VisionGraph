@@ -4,7 +4,11 @@
 
 VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : QWidget(parent)
 {
-    setMinimumSize(400,300);
+    if(toolButtonDirect == ToolButtonDirection::leftDirection || toolButtonDirect == ToolButtonDirection::rightDirection){
+        setMinimumSize(450,650);
+    }else{
+        setMinimumSize(650,450);
+    }
     QVBoxLayout *mainLayout = new QVBoxLayout;
     if(type == GraphType::graphRegion){
         m_graphWidget_Region = new VisionGraph_Region(toolButtonDirect);

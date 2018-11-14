@@ -8,7 +8,6 @@
 
 VisionGraph_Item::VisionGraph_Item(ItemModel model, ToolButtonDirection toolButtonDirect, QWidget *parent) : QFrame(parent)
 {
-//    setMinimumSize(1200,800);
     mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 
@@ -36,7 +35,6 @@ void VisionGraph_Item::initScene()
 {
     sceneWidget = new VisionGraphWidget;
     sceneWidget->setMinimumSize(400,300);
-//    sceneWidget->setStyleSheet(QString::fromUtf8("border:1px solid blue"));
     connect(sceneWidget,SIGNAL(signal_sizeChanged(qreal,qreal)),this,SLOT(slot_SizeChanged(qreal,qreal)));
 
     view = new VisionGraphView(sceneWidget);
@@ -292,10 +290,10 @@ void VisionGraph_Item::initTool_operation()
         vBoxLayout->addWidget(lineEdit_w);
         vBoxLayout->addWidget(label_h);
         vBoxLayout->addWidget(lineEdit_h);
-        vBoxLayout->addSpacing(50);
         vBoxLayout->addWidget(label_size);
         vBoxLayout->addWidget(comboBox);
-        vBoxLayout->addStretch();
+
+        tool_Widget->setMinimumWidth(45);
     }else{
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
@@ -305,10 +303,10 @@ void VisionGraph_Item::initTool_operation()
         hBoxLayout->addWidget(lineEdit_w);
         hBoxLayout->addWidget(label_h);
         hBoxLayout->addWidget(lineEdit_h);
-        hBoxLayout->addSpacing(50);
         hBoxLayout->addWidget(label_size);
         hBoxLayout->addWidget(comboBox);
-        hBoxLayout->addStretch();
+
+        tool_Widget->setMinimumHeight(45);
     }
 
     infoWidget->show();
@@ -999,7 +997,7 @@ void VisionGraph_Item::slot_SizeChanged(QString currentSize)
 
 void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
 {
-    qDebug()<<"sceneWidget size is changed";
+    qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
     scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->setScene(scene);
