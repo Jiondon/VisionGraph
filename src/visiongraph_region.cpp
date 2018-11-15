@@ -356,8 +356,8 @@ void VisionGraph_Region::initTool_operation()
 
 void VisionGraph_Region::initLayout(ToolButtonDirection toolButtonDirect)
 {
-    QHBoxLayout *hBoxLayout = new QHBoxLayout;
-    QVBoxLayout *vBoxLayout = new QVBoxLayout;
+    m_hBoxLayout = new QHBoxLayout;
+    m_vBoxLayout = new QVBoxLayout;
 
     m_toolButtonDirection = toolButtonDirect;
     initTool_operation();
@@ -365,31 +365,31 @@ void VisionGraph_Region::initLayout(ToolButtonDirection toolButtonDirect)
     if(m_toolButtonDirection == ToolButtonDirection::leftDirection){
         tool_Widget->setOrientation(Qt::Vertical);
 
-        hBoxLayout->addWidget(tool_Widget);
-        hBoxLayout->addWidget(sceneWidget);
+        m_hBoxLayout->addWidget(tool_Widget);
+        m_hBoxLayout->addWidget(sceneWidget);
 
-        vBoxLayout->addLayout(hBoxLayout);
+        m_vBoxLayout->addLayout(m_hBoxLayout);
     }else if(m_toolButtonDirection == ToolButtonDirection::topDirection){
         tool_Widget->setOrientation(Qt::Horizontal);
 
-        vBoxLayout->addWidget(tool_Widget);
-        vBoxLayout->addWidget(sceneWidget);
+        m_vBoxLayout->addWidget(tool_Widget);
+        m_vBoxLayout->addWidget(sceneWidget);
 
     }else if(m_toolButtonDirection == ToolButtonDirection::rightDirection){
         tool_Widget->setOrientation(Qt::Vertical);
 
-        hBoxLayout->addWidget(sceneWidget);
-        hBoxLayout->addWidget(tool_Widget);
+        m_hBoxLayout->addWidget(sceneWidget);
+        m_hBoxLayout->addWidget(tool_Widget);
 
-        vBoxLayout->addLayout(hBoxLayout);
+        m_vBoxLayout->addLayout(m_hBoxLayout);
     }else if(m_toolButtonDirection == ToolButtonDirection::bottomDirection){
         tool_Widget->setOrientation(Qt::Horizontal);
 
-        vBoxLayout->addWidget(sceneWidget);
-        vBoxLayout->addWidget(tool_Widget);
+        m_vBoxLayout->addWidget(sceneWidget);
+        m_vBoxLayout->addWidget(tool_Widget);
     }
 
-    mainLayout->addLayout(vBoxLayout);
+    mainLayout->addLayout(m_vBoxLayout);
 }
 
 void VisionGraph_Region::addRect(QRectF rf, bool bEdit)
@@ -490,6 +490,56 @@ int VisionGraph_Region::setBkImg(QImage image)
 //    this->setSceneRect(viewX,viewY,viewWidth,viewHeight);
 
     return 0;
+}
+
+void VisionGraph_Region::setToolButton_Direction(ToolButtonDirection direct){
+    m_toolButtonDirection = direct;
+
+
+    if(m_hBoxLayout != NULL){
+        m_hBoxLayout->deleteLater();
+        m_hBoxLayout = NULL;
+    }
+    if(m_vBoxLayout != NULL){
+        m_vBoxLayout->deleteLater();
+        m_vBoxLayout = NULL;
+    }
+    m_hBoxLayout = new QHBoxLayout;
+    m_vBoxLayout = new QVBoxLayout;
+
+//    initScene();
+
+    initTool_operation();
+
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection){
+        tool_Widget->setOrientation(Qt::Vertical);
+
+        m_hBoxLayout->addWidget(tool_Widget);
+        m_hBoxLayout->addWidget(sceneWidget);
+
+        m_vBoxLayout->addLayout(m_hBoxLayout);
+    }else if(m_toolButtonDirection == ToolButtonDirection::topDirection){
+        tool_Widget->setOrientation(Qt::Horizontal);
+
+        m_vBoxLayout->addWidget(tool_Widget);
+        m_vBoxLayout->addWidget(sceneWidget);
+
+    }else if(m_toolButtonDirection == ToolButtonDirection::rightDirection){
+        tool_Widget->setOrientation(Qt::Vertical);
+
+        m_hBoxLayout->addWidget(sceneWidget);
+        m_hBoxLayout->addWidget(tool_Widget);
+
+        m_vBoxLayout->addLayout(m_hBoxLayout);
+    }else if(m_toolButtonDirection == ToolButtonDirection::bottomDirection){
+        tool_Widget->setOrientation(Qt::Horizontal);
+
+        m_vBoxLayout->addWidget(sceneWidget);
+        m_vBoxLayout->addWidget(tool_Widget);
+    }
+
+
+    mainLayout->addLayout(m_vBoxLayout);
 }
 
 void VisionGraph_Region::setViewInfo_Visible(bool bVisible)

@@ -95,9 +95,7 @@ public:
      * @brief       设置toolButton的布局
      * @param
      */
-    void setToolButton_Direction(ToolButtonDirection direct){
-        m_toolButtonDirection = direct;
-    }
+    void setToolButton_Direction(ToolButtonDirection direct);
 
     /**
      * @brief       获取view
@@ -287,7 +285,9 @@ private:
     QComboBox *comboBox = NULL;
 
 
-    QVBoxLayout *mainLayout;
+    QVBoxLayout *mainLayout = NULL;   //主布局
+    QHBoxLayout *m_hBoxLayout = NULL;
+    QVBoxLayout *m_vBoxLayout = NULL;
 
     VisionGraphWidget *sceneWidget;
     QAction *infoWidget_Action;
