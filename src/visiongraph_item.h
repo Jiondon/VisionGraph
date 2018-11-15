@@ -234,7 +234,7 @@ public:
 private:
     void initScene();
     void initTool_operation();  //水平的工具栏
-
+    void initToolBar();
     void initLayout(ToolButtonDirection toolButtonDirect);
 
     QPainterPath and_Item(QPainterPath path1,QPainterPath path2);  //交集  &&
@@ -266,7 +266,6 @@ private:
 
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
-    QToolBar* tool_infoWidget = NULL;
 
 private:
 
@@ -313,8 +312,8 @@ private:
     VisionItem* m_curVisionItem = nullptr;
 
     //缩放的比例显示
-    QComboBox *comboBox;
-
+    QComboBox *comboBox = NULL;
+    QLabel *label_size = NULL;
 
     QVBoxLayout *mainLayout = NULL;   //主布局
     QHBoxLayout *m_hBoxLayout = NULL;
@@ -323,6 +322,7 @@ private:
     VisionGraphWidget *sceneWidget;
 
     QAction *infoWidget_Action;
+    QWidget* infoWidget = NULL;
 
     ItemModel m_model = ItemModel::un_self;   //item的模式，用户交互绘制item？
 

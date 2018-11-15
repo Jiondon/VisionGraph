@@ -281,16 +281,19 @@ private:
     ItemType m_itemType = ItemType::No;
     VisionItem* m_curVisionItem = nullptr;
 
+    QLabel *label_slider = NULL;
+    QSlider *pSlider = NULL;
     //缩放的比例显示
     QComboBox *comboBox = NULL;
-
+    QLabel *label_size = NULL;
 
     QVBoxLayout *mainLayout = NULL;   //主布局
     QHBoxLayout *m_hBoxLayout = NULL;
     QVBoxLayout *m_vBoxLayout = NULL;
 
-    VisionGraphWidget *sceneWidget;
-    QAction *infoWidget_Action;
+    VisionGraphWidget *sceneWidget = NULL;
+    QAction *infoWidget_Action = NULL;
+    QWidget* infoWidget = NULL;
 
 private slots:
     //对应Action的槽函数

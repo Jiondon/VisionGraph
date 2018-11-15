@@ -245,29 +245,11 @@ void VisionGraph_Item::initTool_operation()
 
     //显示区域的信息，view的大小，缩放比例，鼠标的信息
     infoWidget_Action = new QAction;
-    QWidget* infoWidget = new QWidget();
+    infoWidget = new QWidget();
 
-    QLabel *label_w = new QLabel;
-    label_w->setText(QStringLiteral("宽度:"));
-    label_w->hide();
 
-    QLineEdit *lineEdit_w = new QLineEdit;
-    lineEdit_w->setText(QString::number(1200));
-    lineEdit_w->setFixedWidth(50);
-    lineEdit_w->hide();
-
-    QLabel *label_h = new QLabel;
-    label_h->setText(QStringLiteral("高度:"));
-    label_h->hide();
-
-    QLineEdit *lineEdit_h = new QLineEdit;
-    lineEdit_h->setText(QString::number(800));
-    lineEdit_h->setFixedWidth(50);
-    lineEdit_h->hide();
-
-    QLabel *label_size = new QLabel;
+    label_size = new QLabel;
     label_size->setText(QStringLiteral("尺寸:"));
-    label_size->show();
 
     comboBox = new QComboBox;
     comboBox->setEditable(true);
@@ -286,10 +268,6 @@ void VisionGraph_Item::initTool_operation()
         QVBoxLayout* vBoxLayout = new QVBoxLayout;
         infoWidget->setLayout(vBoxLayout);
 
-        vBoxLayout->addWidget(label_w);
-        vBoxLayout->addWidget(lineEdit_w);
-        vBoxLayout->addWidget(label_h);
-        vBoxLayout->addWidget(lineEdit_h);
         vBoxLayout->addWidget(label_size);
         vBoxLayout->addWidget(comboBox);
 
@@ -298,24 +276,23 @@ void VisionGraph_Item::initTool_operation()
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
 
-
-        hBoxLayout->addWidget(label_w);
-        hBoxLayout->addWidget(lineEdit_w);
-        hBoxLayout->addWidget(label_h);
-        hBoxLayout->addWidget(lineEdit_h);
         hBoxLayout->addWidget(label_size);
         hBoxLayout->addWidget(comboBox);
 
         tool_Widget->setMinimumHeight(45);
     }
-
-
     infoWidget->show();
 
     QToolBar *tool_infoWidget = new QToolBar;
     tool_infoWidget->addWidget(infoWidget);
     tool_infoWidget->addSeparator();
-//    tool_infoWidget->setOrientation(Qt::Vertical);
+
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
+            m_toolButtonDirection == ToolButtonDirection::rightDirection){
+        tool_infoWidget->setOrientation(Qt::Vertical);
+    }else{
+        tool_infoWidget->setOrientation(Qt::Horizontal);
+    }
 
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
 
@@ -324,6 +301,11 @@ void VisionGraph_Item::initTool_operation()
         m_lstToolBtn[i]->setIconSize(m_ToolIconSize);
         m_lstToolBtn[i]->setFixedSize(m_ToolBtnSize);
     }
+}
+
+void VisionGraph_Item::initToolBar()
+{
+
 }
 
 void VisionGraph_Item::initLayout(ToolButtonDirection toolButtonDirect)
@@ -464,14 +446,45 @@ int VisionGraph_Item::setBkImg(QImage image)
 void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
     m_toolButtonDirection = direct;
 
+    if(infoWidget != NULL){
+        infoWidget->deleteLater();
+        infoWidget = NULL;
+    }
+    infoWidget = new QWidget();
+
+    tool_Widget->removeAction(infoWidget_Action);
     if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
             m_toolButtonDirection == ToolButtonDirection::rightDirection){
+
+        QVBoxLayout* vBoxLayout = new QVBoxLayout;
+        infoWidget->setLayout(vBoxLayout);
+
+        vBoxLayout->addWidget(label_size);
+        vBoxLayout->addWidget(comboBox);
+
         tool_Widget->setMinimumWidth(45);
-        tool_infoWidget->setOrientation(Qt::Horizontal);
     }else{
+
+        QHBoxLayout* hBoxLayout = new QHBoxLayout;
+        infoWidget->setLayout(hBoxLayout);
+
+        hBoxLayout->addWidget(label_size);
+        hBoxLayout->addWidget(comboBox);
+
         tool_Widget->setMinimumHeight(45);
-        tool_infoWidget->setOrientation(Qt::Vertical);
     }
+
+    QToolBar *tool_infoWidget = new QToolBar;
+    tool_infoWidget->addWidget(infoWidget);
+    tool_infoWidget->addSeparator();
+
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
+            m_toolButtonDirection == ToolButtonDirection::rightDirection){
+        tool_infoWidget->setOrientation(Qt::Vertical);
+    }else{
+        tool_infoWidget->setOrientation(Qt::Horizontal);
+    }
+
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
 
     if(m_hBoxLayout != NULL){
@@ -482,12 +495,10 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         m_vBoxLayout->deleteLater();
         m_vBoxLayout = NULL;
     }
+
     m_hBoxLayout = new QHBoxLayout;
     m_vBoxLayout = new QVBoxLayout;
 
-//    initScene();
-
-    initTool_operation();
 
     if(m_toolButtonDirection == ToolButtonDirection::leftDirection){
         tool_Widget->setOrientation(Qt::Vertical);
