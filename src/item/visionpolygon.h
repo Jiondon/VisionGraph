@@ -17,7 +17,7 @@
 #include "../control/minirect.h"
 
 
-class VisionPolygon : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionPolygon : public VisionItem
 {
     Q_OBJECT
 public:

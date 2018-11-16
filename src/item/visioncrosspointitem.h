@@ -14,7 +14,7 @@
 #include <QStyleOptionGraphicsItem>
 #include "../control/visionitem.h"
 
-class VisionCrossPointItem : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionCrossPointItem : public VisionItem
 {
     Q_OBJECT
 public:

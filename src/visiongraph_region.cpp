@@ -370,7 +370,7 @@ void VisionGraph_Region::initLayout(ToolButtonDirection toolButtonDirect)
     mainLayout->addLayout(m_vBoxLayout);
 }
 
-void VisionGraph_Region::addRect(QRectF rf, bool bEdit)
+VisionRectItem *VisionGraph_Region::addRect(QRectF rf, bool bEdit)
 {
     if(bEdit){
         VisionRectItem* item = new VisionRectItem(true);
@@ -382,10 +382,12 @@ void VisionGraph_Region::addRect(QRectF rf, bool bEdit)
         item->setRect(rf);
         scene->addItem(item);
         m_curVisionItem = item;
+        return item;
     }
+    return NULL;
 }
 
-void VisionGraph_Region::addEllipse(QRectF rf)
+VisionEllipseItem *VisionGraph_Region::addEllipse(QRectF rf)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -396,9 +398,10 @@ void VisionGraph_Region::addEllipse(QRectF rf)
     item->setRect(rf);
     scene->addItem(item);
     m_curVisionItem = item;
+    return item;
 }
 
-void VisionGraph_Region::addLine(QLine line)
+VisionLineItem *VisionGraph_Region::addLine(QLine line)
 {
     //todo
     VisionLineItem *item = new VisionLineItem();
@@ -410,6 +413,7 @@ void VisionGraph_Region::addLine(QLine line)
     item->setLine(line.p1(),line.p2());
     scene->addItem(item);
     m_curVisionItem = item;
+    return item;
 }
 
 void VisionGraph_Region::addLines(QList<QLine> lstLine)
@@ -417,7 +421,7 @@ void VisionGraph_Region::addLines(QList<QLine> lstLine)
 
 }
 
-void VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
+VisionPolygon *VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
 {
     VisionPolygon *item = new VisionPolygon();
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -432,9 +436,10 @@ void VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
     }
     scene->addItem(item);
     m_curVisionItem = item;
+    return item;
 }
 
-void VisionGraph_Region::addPoint(QPointF pointF)
+VisionCrossPointItem *VisionGraph_Region::addPoint(QPointF pointF)
 {
     // todo
     VisionCrossPointItem *item = new VisionCrossPointItem();
@@ -446,6 +451,7 @@ void VisionGraph_Region::addPoint(QPointF pointF)
     item->setPoint(pointF);
     scene->addItem(item);
     m_curVisionItem = item;
+    return item;
 }
 
 

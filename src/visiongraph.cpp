@@ -65,50 +65,53 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 }
 
 
-void VisionGraph::addRect(QRectF rf, bool bEdit)
+VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addRect(rf, bEdit);
+        return m_graphWidget_Region->addRect(rf, bEdit);
 
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addRect(rf, bEdit);
+        return m_graphWidget_Item->addRect(rf, bEdit);
 
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addRect(rf, bEdit);
+        return m_graphWidget_Item->addRect(rf, bEdit);
 
     }else{
         qDebug()<<"VisionGraph is Error";
+        return NULL;
     }
 }
 
-void VisionGraph::addEllipse(QRectF rf)
+VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addEllipse(rf);
+        return m_graphWidget_Region->addEllipse(rf);
 
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addEllipse(rf);
+        return m_graphWidget_Item->addEllipse(rf);
 
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addEllipse(rf);
+        return m_graphWidget_Item->addEllipse(rf);
 
     }else{
         qDebug()<<"VisionGraph is Error";
+        return NULL;
     }
 }
 
-void VisionGraph::addLine(QLine line)
+VisionLineItem *VisionGraph::addLine(QLine line)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addLine(line);
+        return m_graphWidget_Region->addLine(line);
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addLine(line);
+        return m_graphWidget_Item->addLine(line);
 
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addLine(line);
+        return m_graphWidget_Item->addLine(line);
 
     }else{
         qDebug()<<"VisionGraph is Error";
+        return NULL;
     }
 }
 
@@ -128,35 +131,37 @@ void VisionGraph::addLines(QList<QLine> lstLine)
     }
 }
 
-void VisionGraph::addPolygon(QVector<QPointF> vecPointF)
+VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addPolygon(vecPointF);
+        return m_graphWidget_Region->addPolygon(vecPointF);
 
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addPolygon(vecPointF);
+        return m_graphWidget_Item->addPolygon(vecPointF);
 
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addPolygon(vecPointF);
+        return m_graphWidget_Item->addPolygon(vecPointF);
 
     }else{
         qDebug()<<"VisionGraph is Error";
+        return NULL;
     }
 }
 
-void VisionGraph::addPoint(QPointF pointF)
+VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF)
 {
     if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addPoint(pointF);
+        return m_graphWidget_Region->addPoint(pointF);
 
     }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addPoint( pointF);
+        return m_graphWidget_Item->addPoint(pointF);
 
     }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addPoint(pointF);
+        return m_graphWidget_Item->addPoint(pointF);
 
     }else{
         qDebug()<<"VisionGraph is Error";
+        return NULL;
     }
 }
 

@@ -14,7 +14,7 @@
 #include <QPainter>
 #include "../control/visionitem.h"
 
-class VisionPoint : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionPoint : public VisionItem
 {
     Q_OBJECT
 public:

@@ -15,7 +15,7 @@
 #include "../control/visionitem.h"
 #include "../control/minirect.h"
 
-class VisionLineItem : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionLineItem : public VisionItem
 {
     Q_OBJECT
 public:

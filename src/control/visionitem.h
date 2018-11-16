@@ -13,7 +13,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QVector>
-
+#include "../visiongraph_global.h"
 
 /**
  * @brief       枚举类型，item类型或者鼠标控制的类型（鼠标事件执行的对应的类型）-- 主要是绘图的view的状态的标记，包含了鼠标事件和绘制的item的记录等
@@ -182,6 +182,11 @@ signals:
 
     void selectedChanged(bool selected,VisionItem* item,ItemType type, QVector<QPointF> vecPointF);
 
+    /**
+     * @brief       当item的boundingRect()发生变化的事触发
+     * @param
+     */
+    void signalChanged(QRectF rf);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

@@ -20,7 +20,7 @@
 #include "../control/minirect.h"
 
 //圆环控件  内圆和外圆
-class VisionRing : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionRing : public VisionItem
 {
     Q_OBJECT
 public:

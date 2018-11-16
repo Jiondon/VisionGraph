@@ -29,7 +29,7 @@
  * @date        create:20180208
  * @note        暂时没有添加可编辑椭圆
  */
-class VisionEllipseItem : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionEllipseItem : public VisionItem
 {
     Q_OBJECT
 public:

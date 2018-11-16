@@ -45,19 +45,19 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    void addRect(QRectF rf,bool bEdit = true);
+    VisionRectItem *addRect(QRectF rf,bool bEdit = true);
 
     /**
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    void addEllipse(QRectF rf);
+    VisionEllipseItem* addEllipse(QRectF rf);
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    void addLine(QLine line);
+    VisionLineItem* addLine(QLine line);
 
 
     /**
@@ -71,13 +71,13 @@ public:
      * @brief       添加多边形
      * @param       点的集合，点的集合一次连接
      */
-    void addPolygon(QVector<QPointF> vecPointF);
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF);
 
     /**
      * @brief       添加一个点
      * @param       具体方法未实现
      */
-    void addPoint(QPointF pointF);
+    VisionCrossPointItem* addPoint(QPointF pointF);
 
 
     /**

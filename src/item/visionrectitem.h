@@ -19,7 +19,7 @@
 #include "../control/minirect.h"
 #include "../control/visionarrows_rotate.h"
 
-class VisionRectItem : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionRectItem : public VisionItem
 {
     Q_OBJECT
 public:
