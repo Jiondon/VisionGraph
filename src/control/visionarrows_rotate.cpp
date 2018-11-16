@@ -3,6 +3,10 @@
 
 VisionArrows_Rotate::VisionArrows_Rotate(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     m_x = x;m_y = y;m_width = w;m_height = h;
     if(w<10)
         m_width = 10;
@@ -25,7 +29,7 @@ void VisionArrows_Rotate::paint(QPainter *painter, const QStyleOptionGraphicsIte
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
-    painter->setPen(QPen(QBrush(borderColor),0));
+    painter->setPen(QPen(QBrush(m_borderColor),0));
     painter->drawLine(QPointF(0,m_height/2),QPointF(m_width,m_height/2));
     painter->drawLine(QPointF(m_width-10,0),QPointF(m_width,m_height/2));
     painter->drawLine(QPointF(m_width-10,m_height),QPointF(m_width,m_height/2));

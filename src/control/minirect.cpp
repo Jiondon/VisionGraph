@@ -7,6 +7,10 @@
 
 MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     m_x = x;m_y = y;m_width = w;m_height = h;
     m_penColor = penColor;
     this->setPos(x,y);
@@ -30,8 +34,8 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(selectedColor,0));
-    painter->setBrush(QBrush(selectedColor));  //此处填充和边框保持一致，原因自己想
+    painter->setPen(QPen(m_selectedColor,0));
+    painter->setBrush(QBrush(m_selectedColor));  //此处填充和边框保持一致，原因自己想
     painter->drawRect(QRectF(0,0,m_width,m_height));
 }
 

@@ -6,6 +6,10 @@
 
 VisionLineItem::VisionLineItem(QPointF p1, QPointF p2, bool bEdit, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     m_pointF1 = p1;m_pointF2 = p2;
     m_penColor = penColor;
     m_penWidth = penWidth;
@@ -78,10 +82,10 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(option)
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
 
     }else{
-        painter->setPen(QPen(QBrush(borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),0));
 
     }
 //    if(pen)

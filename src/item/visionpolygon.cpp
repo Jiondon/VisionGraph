@@ -4,6 +4,10 @@
 
 VisionPolygon::VisionPolygon(VisionItem *parent) : VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
@@ -41,7 +45,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     if(option->state & QStyle::State_Selected){
 
-        painter->setPen(QPen(QBrush(selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
 
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(true);
@@ -68,7 +72,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         setEdit(m_bEdit);
     }
 
-    painter->setBrush(brushColor);
+    painter->setBrush(m_brushColor);
     painter->drawPolygon(m_vecPointFs);
 
     if(m_bEdit){

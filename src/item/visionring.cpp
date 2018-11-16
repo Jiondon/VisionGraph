@@ -7,6 +7,10 @@
 
 VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
@@ -64,7 +68,7 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 //    qDebug()<<"VisionRingItem paint";
 //    qDebug()<<m_width<<m_height<<m_r1<<m_r2;
-    painter->setPen(QPen(borderColor,0));
+    painter->setPen(QPen(m_borderColor,0));
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r1,m_r1);
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r2,m_r2);
     painter->drawRect(0,0,m_width,m_height);

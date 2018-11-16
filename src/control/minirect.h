@@ -54,6 +54,10 @@ private:
 
     QColor m_penColor = QColor(255,0,0);
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 public slots:
 };
 

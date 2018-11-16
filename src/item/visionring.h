@@ -76,6 +76,10 @@ private:
 
     int m_iDirection = 0;  //方向 环2-->环1
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 private:
     void setItemPos();
     void initMiniRect();

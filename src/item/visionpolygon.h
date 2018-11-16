@@ -61,6 +61,10 @@ private:
 
     bool m_bEdit = false;  //flag 选中未选中
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 private:
     void initMiniRect();
     void updateMiniRect();

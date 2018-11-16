@@ -56,6 +56,10 @@ signals:
 private:
     QPointF m_pointF;
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 public slots:
 };
 

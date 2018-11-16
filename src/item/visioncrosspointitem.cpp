@@ -8,6 +8,10 @@
 
 VisionCrossPointItem::VisionCrossPointItem(VisionItem *parent) : VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     setAcceptHoverEvents(true);
     m_type = ItemType::CrossPoint;
 }
@@ -57,10 +61,10 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     Q_UNUSED(option)
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
         setEdit(true);
     }else{
-        painter->setPen(QPen(QBrush(borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),0));
         setEdit(false);
     }
 

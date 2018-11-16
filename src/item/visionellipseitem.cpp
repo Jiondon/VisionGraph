@@ -11,6 +11,10 @@
 
 VisionEllipseItem::VisionEllipseItem(bool rotation, VisionItem *parent):VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     penColor = QColor(0,0,0);//black
     penWidth = 1;
     m_bRotation = rotation;
@@ -109,7 +113,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     if(option->state & QStyle::State_Selected){
 
-        painter->setPen(QPen(QBrush(selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
 
         //编辑模式下的小矩形框
         for(int i=0;i<m_lstRect.count();i++){
@@ -128,7 +132,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         setEdit(m_bEdit);
     }else{
 
-        painter->setPen(QPen(QBrush(borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),0));
 
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(false);
@@ -149,7 +153,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 
 
-    painter->setBrush(brushColor);
+    painter->setBrush(m_brushColor);
 
     painter->translate(m_width/2,m_height/2);
     painter->rotate(m_angle);

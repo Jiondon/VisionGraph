@@ -3,7 +3,9 @@
 
 VisionPoint::VisionPoint(VisionItem *parent) : VisionItem(parent)
 {
-
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
 }
 
 void VisionPoint::setPointF(QPointF pointF)
@@ -16,7 +18,7 @@ void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    QPen pen = QPen(borderColor,0);
+    QPen pen = QPen(m_borderColor,0);
     painter->setPen(pen);
     painter->setBrush(Qt::red);
     painter->drawEllipse(m_pointF,1,1);

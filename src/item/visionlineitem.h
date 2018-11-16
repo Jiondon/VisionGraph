@@ -82,6 +82,9 @@ private:
     qreal m_angle = 0;  //角度
     QPointF m_lastPointF;
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
 private:
 
     /**

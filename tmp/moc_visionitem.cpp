@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionItem_t {
-    QByteArrayData data[22];
-    char stringdata0[200];
+    QByteArrayData data[23];
+    char stringdata0[214];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -53,7 +53,8 @@ QT_MOC_LITERAL(17, 146, 15), // "selectedChanged"
 QT_MOC_LITERAL(18, 162, 4), // "left"
 QT_MOC_LITERAL(19, 167, 5), // "angle"
 QT_MOC_LITERAL(20, 173, 16), // "QVector<QPointF>"
-QT_MOC_LITERAL(21, 190, 9) // "vecPointF"
+QT_MOC_LITERAL(21, 190, 9), // "vecPointF"
+QT_MOC_LITERAL(22, 200, 13) // "signalChanged"
 
     },
     "VisionItem\0signal_clicked\0\0VisionItem*\0"
@@ -61,7 +62,7 @@ QT_MOC_LITERAL(21, 190, 9) // "vecPointF"
     "eventStyle\0signal_press\0signal_painterInfo\0"
     "ItemType\0type\0QPainterPath\0rf\0"
     "selectedChanged\0left\0angle\0QVector<QPointF>\0"
-    "vecPointF"
+    "vecPointF\0signalChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,23 +72,24 @@ static const uint qt_meta_data_VisionItem[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       9,       // signalCount
+      10,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    5,   59,    2, 0x06 /* Public */,
-       1,    4,   70,    2, 0x26 /* Public | MethodCloned */,
-       1,    3,   79,    2, 0x26 /* Public | MethodCloned */,
-       1,    2,   86,    2, 0x26 /* Public | MethodCloned */,
-       9,    1,   91,    2, 0x06 /* Public */,
-      11,    0,   94,    2, 0x06 /* Public */,
-      12,    2,   95,    2, 0x06 /* Public */,
-      17,    6,  100,    2, 0x06 /* Public */,
-      17,    4,  113,    2, 0x06 /* Public */,
+       1,    5,   64,    2, 0x06 /* Public */,
+       1,    4,   75,    2, 0x26 /* Public | MethodCloned */,
+       1,    3,   84,    2, 0x26 /* Public | MethodCloned */,
+       1,    2,   91,    2, 0x26 /* Public | MethodCloned */,
+       9,    1,   96,    2, 0x06 /* Public */,
+      11,    0,   99,    2, 0x06 /* Public */,
+      12,    2,  100,    2, 0x06 /* Public */,
+      17,    6,  105,    2, 0x06 /* Public */,
+      17,    4,  118,    2, 0x06 /* Public */,
+      22,    1,  127,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, QMetaType::Bool, QMetaType::Bool, QMetaType::QReal, QMetaType::QReal,    4,    5,    6,    7,    8,
@@ -99,6 +101,7 @@ static const uint qt_meta_data_VisionItem[] = {
     QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15,   14,   16,
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 3, 0x80000000 | 13, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,    5,    4,   14,   16,   18,   19,
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 3, 0x80000000 | 13, 0x80000000 | 20,    5,    4,   14,   21,
+    QMetaType::Void, QMetaType::QRectF,   16,
 
        0        // eod
 };
@@ -118,6 +121,7 @@ void VisionItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->signal_painterInfo((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QPainterPath(*)>(_a[2]))); break;
         case 7: _t->selectedChanged((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6]))); break;
         case 8: _t->selectedChanged((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4]))); break;
+        case 9: _t->signalChanged((*reinterpret_cast< QRectF(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -213,6 +217,13 @@ void VisionItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            typedef void (VisionItem::*_t)(QRectF );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&VisionItem::signalChanged)) {
+                *result = 9;
+                return;
+            }
+        }
     }
 }
 
@@ -243,13 +254,13 @@ int VisionItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }
@@ -293,6 +304,13 @@ void VisionItem::selectedChanged(bool _t1, VisionItem * _t2, ItemType _t3, QVect
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
     QMetaObject::activate(this, &staticMetaObject, 8, _a);
+}
+
+// SIGNAL 9
+void VisionItem::signalChanged(QRectF _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 9, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

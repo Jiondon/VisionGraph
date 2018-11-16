@@ -119,6 +119,10 @@ private:
     VisionArrows_Rotate* arrowsItem = NULL;  //箭头item  表示坐标方向的
     bool m_bRotation = false;  //旋转和非旋转
 
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 private:
     void initItem(); //初始化编辑模式下的几个小矩形以及旋转的箭头控件
     void updateItem();  //出现拖动和缩放等操作的时候，更新item的位置

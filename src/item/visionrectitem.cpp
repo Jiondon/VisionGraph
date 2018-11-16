@@ -11,6 +11,10 @@
 
 VisionRectItem::VisionRectItem(bool rotation, VisionItem *parent):VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
+
     penColor = QColor(0,0,0);//black
     penWidth = 1;
     m_bRotation = rotation;
@@ -128,18 +132,28 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     //item pos ()
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
     }else{
-        painter->setPen(QPen(QBrush(borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),0));
     }
 
-    painter->setBrush(brushColor);
+    painter->setBrush(m_brushColor);
 
     QPointF originPointF = QPointF(m_x,m_y);
-    painter->drawLine(m_pointF1-originPointF,m_pointF2-originPointF);
-    painter->drawLine(m_pointF2-originPointF,m_pointF3-originPointF);
-    painter->drawLine(m_pointF3-originPointF,m_pointF4-originPointF);
-    painter->drawLine(m_pointF4-originPointF,m_pointF1-originPointF);
+    QVector<QPointF> points1;
+    points1.append(m_pointF1-originPointF);
+    points1.append(m_pointF2-originPointF);
+    points1.append(m_pointF3-originPointF);
+    points1.append(m_pointF4-originPointF);
+//    painter->drawLine(m_pointF1-originPointF,m_pointF2-originPointF);
+//    painter->drawLine(m_pointF2-originPointF,m_pointF3-originPointF);
+//    painter->drawLine(m_pointF3-originPointF,m_pointF4-originPointF);
+//    painter->drawLine(m_pointF4-originPointF,m_pointF1-originPointF);
+    painter->drawPolygon(points1);
+//    painter->drawLines({m_pointF1-originPointF,m_pointF2-originPointF,
+//                        m_pointF2-originPointF,m_pointF3-originPointF,
+//                        m_pointF3-originPointF,m_pointF4-originPointF,
+//                        m_pointF4-originPointF,m_pointF1-originPointF});
 
 
     QPainterPath path;
