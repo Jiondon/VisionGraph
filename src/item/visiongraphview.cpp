@@ -7,8 +7,8 @@
 VisionGraphView::VisionGraphView(QWidget *parent):
     QGraphicsView(parent)
 {
-//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff) ;
-//    setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff ) ;
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff);
     this->setMouseTracking(true);//捕捉鼠标移动信息
     m_pMouseInfo_Label = new QLabel(this);
     m_pMouseInfo_Label->resize(120,50);
@@ -66,10 +66,15 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     }
 
     if(m_bPress && m_itemType == ItemType::Drag){
-        QPointF disPointF = event->pos() - m_lastPointF;
+//        QPointF disPointF = scenePos - this->mapToScene(m_lastPointF.toPoint());
+        QPointF disPointF = viewPos - m_lastPointF;
 
-        this->horizontalScrollBar()->setSliderPosition(this->horizontalScrollBar()->value()-disPointF.x()/10);
-        this->verticalScrollBar()->setSliderPosition(this->verticalScrollBar()->value()-disPointF.y()/10);
+        this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
+                                    this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+//        this->horizontalScrollBar()->setSliderPosition(this->horizontalScrollBar()->value()-disPointF.x()/10);
+//        this->verticalScrollBar()->setSliderPosition(this->verticalScrollBar()->value()-disPointF.y()/10);
+        this->scene()->update();
+        m_lastPointF = viewPos;
         return;
     }
 
@@ -421,11 +426,16 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 {
     QGraphicsView::paintEvent(event);
 
+
     QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.setPen(QPen(Qt::black,0));
+    painter.drawLine(QPointF(0,0),QPointF(0,500));
+    painter.drawLine(QPointF(0,0),QPointF(500,0));
+
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     painter.setBrush(brushColor);
-
 
 
     if(m_bPainter){
@@ -623,6 +633,18 @@ void VisionGraphView::itemCursorToViewCursor()
         this->setCursor(Qt::ArrowCursor);
     }
     viewCursor = this->cursor();
+}
+
+void VisionGraphView::resize(const QSize &size)
+{
+    QGraphicsView::resize(size);
+    this->scene()->setSceneRect(this->scene()->sceneRect().x(),this->scene()->sceneRect().y(),size.width(),size.height());
+}
+
+void VisionGraphView::resize(int w, int h)
+{
+    QGraphicsView::resize(w,h);
+    this->scene()->setSceneRect(this->scene()->sceneRect().x(),this->scene()->sceneRect().y(),w,h);
 }
 
 

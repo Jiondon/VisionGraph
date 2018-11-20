@@ -46,9 +46,9 @@ void VisionGraph_Item::initScene()
     QObject::connect(view,SIGNAL(signal_wheel(qreal)),this,SLOT(slot_wheel(qreal)));
 
     scene = new VisionGraphScene(sceneWidget);
-    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->setScene(scene);
-    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 
     m_bkPixmapItem = new QGraphicsPixmapItem();
     m_bkPixmapItem->setPixmap(QPixmap(":/bgk.bmp"));
@@ -1075,8 +1075,8 @@ void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
-    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
-    view->setScene(scene);
-    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    view->setScene(scene);
+//    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
 }

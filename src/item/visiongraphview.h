@@ -159,6 +159,9 @@ public:
     void itemCursorToViewCursor();
 
 
+    void resize(const QSize &size);
+    void resize(int w, int h);
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);

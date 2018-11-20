@@ -45,9 +45,9 @@ void VisionGraph_Region::initScene()
     scene = new VisionGraphScene(sceneWidget);
     connect(scene,SIGNAL(signal_MouseMove(qreal,qreal)),this,SLOT(slot_SceneMouseMove(qreal,qreal)));
 
-    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    scene->setSceneRect(0,0,800,600);
     view->setScene(scene);
-    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    view->setSceneRect(0,0,800,600);
 
     m_bkPixmapItem = new QGraphicsPixmapItem();
     m_bkPixmapItem->setPixmap(QPixmap(":/bgk.bmp"));
@@ -779,7 +779,7 @@ void VisionGraph_Region::slot_open_action()
 
     qDebug()<<fileName;
     if(fileName != ""){
-        m_bkPixmapItem->setPixmap(QPixmap(fileName).scaled(800,600));
+        m_bkPixmapItem->setPixmap(QPixmap(fileName).scaled(800,600,Qt::KeepAspectRatioByExpanding));
     }
 }
 
@@ -908,9 +908,9 @@ void VisionGraph_Region::slot_SizeChanged(qreal w, qreal h)
     qDebug()<<"sceneWidget size is changed";
 
     view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
-    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
-    view->setScene(scene);
-    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+//    view->setScene(scene);
+//    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
 }
 
