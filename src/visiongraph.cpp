@@ -467,3 +467,42 @@ void VisionGraph::addToolFrame()
 
 }
 
+void VisionGraph::setViewRegion_Size(qreal w, qreal h)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setViewRegion_Size(w,h);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setViewRegion_Size(w,h);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setViewRegion_Size(w,h);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::setViewRegion_Visible(bool bVisible)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setViewRegion_Visible(bVisible);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setViewRegion_Visible(bVisible);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setViewRegion_Visible(bVisible);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::setViewRegion_Color(const QColor &color)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setViewRegion_Color(color);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setViewRegion_Color(color);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setViewRegion_Color(color);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+

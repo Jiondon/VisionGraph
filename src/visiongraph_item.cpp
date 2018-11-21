@@ -46,7 +46,7 @@ void VisionGraph_Item::initScene()
     QObject::connect(view,SIGNAL(signal_wheel(qreal)),this,SLOT(slot_wheel(qreal)));
 
     scene = new VisionGraphScene(sceneWidget);
-//    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
+    scene->setSceneRect(0,0,800,600);
     view->setScene(scene);
 //    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 
@@ -672,6 +672,21 @@ void VisionGraph_Item::removeToolBarInfoWidget()
     tool_Widget->removeAction(infoWidget_Action);
 }
 
+void VisionGraph_Item::setViewRegion_Size(qreal w, qreal h)
+{
+    view->setViewRegion_Size(w,h);
+}
+
+void VisionGraph_Item::setViewRegion_Visible(bool bVisible)
+{
+    view->setViewRegion_Visible(bVisible);
+}
+
+void VisionGraph_Item::setViewRegion_Color(const QColor &color)
+{
+    view->setViewRegion_Color(color);
+}
+
 void VisionGraph_Item::slot_selected_action()
 {
     view->setItemType(ItemType::No);
@@ -1074,7 +1089,7 @@ void VisionGraph_Item::slot_SizeChanged(QString currentSize)
 void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed"<<w<<h;
-    view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
+    view->resize(sceneWidget->width(),sceneWidget->height());
 //    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 //    view->setScene(scene);
 //    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());

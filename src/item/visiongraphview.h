@@ -154,6 +154,22 @@ public:
     void setViewInfo_Color(QColor backgroundColor,QColor textColor);
 
     /**
+     * @brief       设置View的算法区域的大小
+     */
+    void setViewRegion_Size(qreal w,qreal h);
+
+    /**
+     * @brief       设置View的算法区域的Visible
+     */
+    void setViewRegion_Visible(bool bVisible);
+
+    /**
+     * @brief       设置View的算法区域的color
+     */
+    void setViewRegion_Color(const QColor &color);
+
+
+    /**
      * @brief       在item中鼠标样式变化后，回到view后的鼠标样式恢复
      */
     void itemCursorToViewCursor();
@@ -221,6 +237,11 @@ private:
     QLabel *m_pLabelInfo;  //view的信息框
 
     Corner m_Corner = Corner::topLeft;
+
+    QRectF m_frameRect = QRectF(0,0,800,600); //虚拟画布的设置--控制区域的范围
+    bool m_bFrameVisible = true;  //算法区域是否显示出来
+    QColor m_FrameColor = Qt::lightGray;   //算法区域的颜色
+
 protected:
 
 public slots:

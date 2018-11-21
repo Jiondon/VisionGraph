@@ -45,7 +45,7 @@ void VisionGraph_Region::initScene()
     scene = new VisionGraphScene(sceneWidget);
     connect(scene,SIGNAL(signal_MouseMove(qreal,qreal)),this,SLOT(slot_SceneMouseMove(qreal,qreal)));
 
-//    scene->setSceneRect(0,0,800,600);
+    scene->setSceneRect(0,0,800,600);
     view->setScene(scene);
 //    view->setSceneRect(0,0,800,600);
 
@@ -57,7 +57,6 @@ void VisionGraph_Region::initScene()
     m_mousePixmap->setPos(scene->width()/2-10,scene->height()/2-10);
     m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(10*2,10*2));
     scene->addItem(m_mousePixmap);
-
 
     //显示坐标和操作信息
 
@@ -702,6 +701,21 @@ void VisionGraph_Region::removeToolBarInfoWidget()
     tool_Widget->removeAction(infoWidget_Action);
 }
 
+void VisionGraph_Region::setViewRegion_Size(qreal w, qreal h)
+{
+    view->setViewRegion_Size(w,h);
+}
+
+void VisionGraph_Region::setViewRegion_Visible(bool bVisible)
+{
+    view->setViewRegion_Visible(bVisible);
+}
+
+void VisionGraph_Region::setViewRegion_Color(const QColor &color)
+{
+    view->setViewRegion_Color(color);
+}
+
 void VisionGraph_Region::slot_selected_action()
 {
     view->setItemType(ItemType::No);
@@ -907,7 +921,7 @@ void VisionGraph_Region::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed";
 
-    view->resize(sceneWidget->width()+2,sceneWidget->height()+2);
+    view->resize(sceneWidget->width(),sceneWidget->height());
 //    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 //    view->setScene(scene);
 //    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());

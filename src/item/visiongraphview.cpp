@@ -71,8 +71,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-//        this->horizontalScrollBar()->setSliderPosition(this->horizontalScrollBar()->value()-disPointF.x()/10);
-//        this->verticalScrollBar()->setSliderPosition(this->verticalScrollBar()->value()-disPointF.y()/10);
+
         this->scene()->update();
         m_lastPointF = viewPos;
         return;
@@ -430,9 +429,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.setPen(QPen(Qt::black,0));
-    painter.drawLine(QPointF(0,0),QPointF(0,500));
-    painter.drawLine(QPointF(0,0),QPointF(500,0));
+    if(m_bFrameVisible){
+        painter.setPen(QPen(m_FrameColor,0));
+        painter.drawPolygon(this->mapFromScene(m_frameRect));
+    }
 
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     painter.setBrush(brushColor);
@@ -612,6 +612,26 @@ void VisionGraphView::setViewInfo_Color(QColor backgroundColor, QColor textColor
 
 }
 
+void VisionGraphView::setViewRegion_Size(qreal w, qreal h)
+{
+    qDebug()<<"setViewRegion_size  "<<w<<h;
+    m_frameRect.setWidth(w);
+    m_frameRect.setHeight(h);
+    this->scene()->update();
+}
+
+void VisionGraphView::setViewRegion_Visible(bool bVisible)
+{
+    m_bFrameVisible = bVisible;
+    this->scene()->update();
+}
+
+void VisionGraphView::setViewRegion_Color(const QColor &color)
+{
+    m_FrameColor = color;
+    this->scene()->update();
+}
+
 void VisionGraphView::itemCursorToViewCursor()
 {
     if(m_itemType != ItemType::No){
@@ -764,8 +784,8 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     xvPath.arrayPoint2D = vec_point2D;
 
     regionIn.inType = XVCreateRegionType::Polygon;
-    regionIn.inFrameWidth = this->sceneRect().width();
-    regionIn.inFrameHeight = this->sceneRect().height();
+    regionIn.inFrameWidth = m_frameRect.width();
+    regionIn.inFrameHeight = m_frameRect.height();
     regionIn.inPolygon = xvPath;
 
     XVCreateRegion(regionIn,regionOut);
@@ -798,8 +818,8 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 
         //没有圆
         regionIn.inType = XVCreateRegionType::Circle;
-        regionIn.inFrameWidth = this->sceneRect().width();
-        regionIn.inFrameHeight = this->sceneRect().height();
+        regionIn.inFrameWidth = m_frameRect.width();
+        regionIn.inFrameHeight = m_frameRect.height();
         regionIn.inCircle2D = xvCircle;
 
         XVBox xvBox;
@@ -821,8 +841,8 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         xvRect.width = (float)rf.width();
 
         regionIn.inType = XVCreateRegionType::Ellipse;
-        regionIn.inFrameWidth = this->sceneRect().width();
-        regionIn.inFrameHeight = this->sceneRect().height();
+        regionIn.inFrameWidth = m_frameRect.width();
+        regionIn.inFrameHeight = m_frameRect.height();
         regionIn.inRectangle =xvRect;
 
         XVBox xvBox;
@@ -857,8 +877,8 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
     xvRect.width = (float)rf.width();
 
     regionIn.inType = XVCreateRegionType::Rectangle;
-    regionIn.inFrameWidth = this->sceneRect().width();
-    regionIn.inFrameHeight = this->sceneRect().height();
+    regionIn.inFrameWidth = m_frameRect.width();
+    regionIn.inFrameHeight = m_frameRect.height();
     regionIn.inRectangle =xvRect;
 
     XVBox xvBox;
@@ -890,6 +910,8 @@ void VisionGraphView::push_region(XVRegion region, int index)
 
 void VisionGraphView::slotUpdateViewInfo_Pos()
 {
+    qDebug()<<this->x()<<this->y()<<this->width()<<this->height() << "22222222" <<this->sceneRect();
+//    m_frameRect.setRect(this->x(),this->y(),this->width(),this->height());
     if(m_Corner == Corner::topLeft){
         return;
 

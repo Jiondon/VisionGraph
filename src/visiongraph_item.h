@@ -231,6 +231,22 @@ public:
      */
     void removeToolBarInfoWidget();
 
+    /**
+     * @brief       设置View的算法区域的大小
+     */
+    void setViewRegion_Size(qreal w,qreal h);
+
+
+    /**
+     * @brief       设置View的算法区域的Visible
+     */
+    void setViewRegion_Visible(bool bVisible);
+
+    /**
+     * @brief       设置View的算法区域的color
+     */
+    void setViewRegion_Color(const QColor &color);
+
 private:
     void initScene();
     void initTool_operation();  //水平的工具栏
