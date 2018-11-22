@@ -327,6 +327,10 @@ private:
     ItemType m_itemType = ItemType::No;
     VisionItem* m_curVisionItem = nullptr;
 
+    QLabel *label_w;
+    QSpinBox *pSpinBox_w;
+    QLabel *label_h;
+    QSpinBox *pSpinBox_h;
     //缩放的比例显示
     QComboBox *comboBox = NULL;
     QLabel *label_size = NULL;
@@ -383,6 +387,8 @@ private slots:
     //调节view的缩放比例
     void slot_SizeChanged(QString currentSize);
     void slot_SizeChanged(qreal w,qreal h);
+
+    void slot_SpinBox_ViewRegionSize(int w);
 };
 
 

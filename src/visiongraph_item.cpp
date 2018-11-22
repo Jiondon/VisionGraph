@@ -247,6 +247,30 @@ void VisionGraph_Item::initTool_operation()
     infoWidget_Action = new QAction;
     infoWidget = new QWidget();
 
+    label_w = new QLabel;
+    label_w->setText(QStringLiteral("宽度:"));
+
+    // 微调框
+    pSpinBox_w = new QSpinBox;
+    pSpinBox_w->setMinimum(1);  // 最小值
+    pSpinBox_w->setMaximum(5000);  // 最大值
+    pSpinBox_w->setSingleStep(5);  // 步长
+    pSpinBox_w->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
+        "QSpinBox::down-button{width:0;height:0;}");
+    connect(pSpinBox_w,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
+
+    label_h = new QLabel;
+    label_h->setText(QStringLiteral("高度:"));
+
+    // 微调框
+    pSpinBox_h = new QSpinBox;
+    pSpinBox_h->setMinimum(1);  // 最小值
+    pSpinBox_h->setMaximum(5000);  // 最大值
+    pSpinBox_h->setSingleStep(5);  // 步长
+    pSpinBox_h->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
+        "QSpinBox::down-button{width:0;height:0;}");
+    connect(pSpinBox_h,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
+
 
     label_size = new QLabel;
     label_size->setText(QStringLiteral("尺寸:"));
@@ -268,6 +292,12 @@ void VisionGraph_Item::initTool_operation()
         QVBoxLayout* vBoxLayout = new QVBoxLayout;
         infoWidget->setLayout(vBoxLayout);
 
+        vBoxLayout->addWidget(label_w);
+        vBoxLayout->addWidget(pSpinBox_w);
+        vBoxLayout->addWidget(label_h);
+        vBoxLayout->addWidget(pSpinBox_h);
+
+        vBoxLayout->setSpacing(10);
         vBoxLayout->addWidget(label_size);
         vBoxLayout->addWidget(comboBox);
 
@@ -276,6 +306,12 @@ void VisionGraph_Item::initTool_operation()
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
 
+        hBoxLayout->addWidget(label_w);
+        hBoxLayout->addWidget(pSpinBox_w);
+        hBoxLayout->addWidget(label_h);
+        hBoxLayout->addWidget(pSpinBox_h);
+
+        hBoxLayout->setSpacing(10);
         hBoxLayout->addWidget(label_size);
         hBoxLayout->addWidget(comboBox);
 
@@ -463,6 +499,12 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         QVBoxLayout* vBoxLayout = new QVBoxLayout;
         infoWidget->setLayout(vBoxLayout);
 
+        vBoxLayout->addWidget(label_w);
+        vBoxLayout->addWidget(pSpinBox_w);
+        vBoxLayout->addWidget(label_h);
+        vBoxLayout->addWidget(pSpinBox_h);
+
+        vBoxLayout->setSpacing(10);
         vBoxLayout->addWidget(label_size);
         vBoxLayout->addWidget(comboBox);
 
@@ -472,6 +514,12 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
 
+        hBoxLayout->addWidget(label_w);
+        hBoxLayout->addWidget(pSpinBox_w);
+        hBoxLayout->addWidget(label_h);
+        hBoxLayout->addWidget(pSpinBox_h);
+
+        hBoxLayout->setSpacing(10);
         hBoxLayout->addWidget(label_size);
         hBoxLayout->addWidget(comboBox);
 
@@ -675,6 +723,8 @@ void VisionGraph_Item::removeToolBarInfoWidget()
 void VisionGraph_Item::setViewRegion_Size(qreal w, qreal h)
 {
     view->setViewRegion_Size(w,h);
+    pSpinBox_w->setValue(w);
+    pSpinBox_h->setValue(h);
 }
 
 void VisionGraph_Item::setViewRegion_Visible(bool bVisible)
@@ -1094,4 +1144,9 @@ void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
 //    view->setScene(scene);
 //    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
+}
+
+void VisionGraph_Item::slot_SpinBox_ViewRegionSize(int w)
+{
+    view->setViewRegion_Size(pSpinBox_w->value(),pSpinBox_h->value());
 }

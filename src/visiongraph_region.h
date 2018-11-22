@@ -20,6 +20,7 @@
 #include <QComboBox>
 #include <QIntValidator>
 #include <QToolButton>
+#include <QSpinBox>
 
 #include "visiongraphtool.h"
 
@@ -299,6 +300,12 @@ private:
 
     QLabel *label_slider = NULL;
     QSlider *pSlider = NULL;
+
+//    Q
+    QLabel *label_w;
+    QSpinBox *pSpinBox_w;
+    QLabel *label_h;
+    QSpinBox *pSpinBox_h;
     //缩放的比例显示
     QComboBox *comboBox = NULL;
     QLabel *label_size = NULL;
@@ -351,5 +358,6 @@ private slots:
     void slot_SceneMouseMove(qreal x,qreal y);
     void slot_actionTriggered(QAction* action);
 
+    void slot_SpinBox_ViewRegionSize(int w);
 };
 #endif // VISIONGRAPH_REGION_H
