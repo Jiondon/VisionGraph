@@ -424,6 +424,26 @@ VisionRectItem *VisionGraph_Region::addRect(QRectF rf, bool bEdit)
     return NULL;
 }
 
+QGraphicsRectItem *VisionGraph_Region::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
+{
+    return scene->addRect(rect,pen,brush);
+}
+
+QGraphicsPolygonItem *VisionGraph_Region::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
+{
+    return scene->addPolygon(polygon,pen,brush);
+}
+
+QGraphicsLineItem *VisionGraph_Region::_addLine(const QLineF &line, const QPen &pen)
+{
+    return scene->addLine(line,pen);
+}
+
+QGraphicsEllipseItem *VisionGraph_Region::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
+{
+    return scene->addEllipse(rect,pen,brush);
+}
+
 VisionEllipseItem *VisionGraph_Region::addEllipse(QRectF rf)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);

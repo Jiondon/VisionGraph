@@ -82,6 +82,74 @@ VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit)
     }
 }
 
+QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addRect(rect,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addRect(rect,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addRect(rect,pen,brush);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+QGraphicsPolygonItem *VisionGraph::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addPolygon(polygon,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addPolygon(polygon,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addPolygon(polygon,pen,brush);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+QGraphicsLineItem *VisionGraph::_addLine(const QLineF &line, const QPen &pen)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addLine(line,pen);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addLine(line,pen);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addLine(line,pen);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addEllipse(rect,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addEllipse(rect,pen,brush);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addEllipse(rect,pen,brush);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
 {
     if(m_type == GraphType::graphRegion){
