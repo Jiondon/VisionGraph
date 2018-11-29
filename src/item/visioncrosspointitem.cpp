@@ -6,12 +6,12 @@
 
 #include "../control/color.h"
 
-VisionCrossPointItem::VisionCrossPointItem(VisionItem *parent) : VisionItem(parent)
+VisionCrossPointItem::VisionCrossPointItem(bool edit, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
     m_selectedColor = m_selectedColor;
-
+    m_bEdit = edit;
     setAcceptHoverEvents(true);
     m_type = ItemType::CrossPoint;
 }
@@ -76,6 +76,9 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
 void VisionCrossPointItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     if(boundingRect().contains(event->scenePos())){
         qDebug()<<"in area";
         setSelected(true);
@@ -89,12 +92,18 @@ void VisionCrossPointItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionCrossPointItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     this->setPoint(event->scenePos());
     this->scene()->update();
 }
 
 void VisionCrossPointItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     if(!boundingRect().contains(QPointF(event->scenePos().x(),event->scenePos().y()))){
         emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
         return;

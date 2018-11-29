@@ -15,10 +15,15 @@ class VisionGraphScene : public QGraphicsScene
 public:
     VisionGraphScene(QObject *parent =0);
 
+    void setGrid_Visible(bool bVisible);  //网格背景是否显示
+    void setGrid_Size(const QSize &size);
+    void setGrid_Color(const QColor &color);
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
+//    void drawBackground(QPainter *painter, const QRectF &rect);
 signals:
     /**
      * @brief       当鼠标移动时候触发该信号
@@ -29,6 +34,14 @@ signals:
     void signal_MouseMove(qreal x,qreal y);
 
     void signal_MousePress(qreal x,qreal y);
+
+private:
+    bool m_bGrddingVisible = false;
+    QSizeF m_GraddingSize = QSizeF(20,20);
+    QColor m_GraddingColor = QColor(Qt::lightGray);
+
+private:
+    void updateGridding();
 };
 
 #endif // VISIONGRAPHSCENE_H

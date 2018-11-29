@@ -422,6 +422,14 @@ QGraphicsEllipseItem *VisionGraph_Item::_addEllipse(const QRectF &rect, const QP
     return scene->addEllipse(rect,pen,brush);
 }
 
+VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF)
+{
+    VisionCrossPointItem *item = new VisionCrossPointItem();
+    item->setPoint(pointF);
+    scene->addItem(item);
+    return item;
+}
+
 VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);
@@ -457,6 +465,9 @@ void VisionGraph_Item::addLines(QList<QLine> lstLine)
 
 VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF)
 {
+    if(vecPointF.count() <= 0)
+        return NULL;
+    qDebug()<<"add polygon";
     VisionPolygon *item = new VisionPolygon();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
@@ -475,7 +486,7 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF)
 
 VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF)
 {
-    VisionCrossPointItem *item = new VisionCrossPointItem();
+    VisionCrossPointItem *item = new VisionCrossPointItem(true);
 //    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
 //    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
@@ -773,8 +784,9 @@ void VisionGraph_Item::slot_drag_action()
 
 void VisionGraph_Item::slot_zoom_action()
 {
-    view->setItemType(ItemType::Zoom);
-    m_itemType = ItemType::Zoom;
+    view->viewRegion_OriginPos();
+//    view->setItemType(ItemType::Zoom);
+//    m_itemType = ItemType::Zoom;
 //    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
 }
 
@@ -910,19 +922,21 @@ void VisionGraph_Item::slot_next_action()
 void VisionGraph_Item::slot_clear_action()
 {
     //清除当前的item
-//    for(int i=0;i<m_lstItem.count();i++){
-//        VisionItem* item = m_lstItem[i];
-//        item->deleteLater();
-//        item = NULL;
-//    }
     view->clearPainter();
+
+    if(m_curVisionItem != nullptr){
+        m_curVisionItem->hide();
+        m_curVisionItem->deleteLater();
+        m_curVisionItem = nullptr;
+    }
+
     for(int i=0;i<m_lstItem.count();i++){
         scene->removeItem(m_lstItem[i]);
         m_lstItem[i]->deleteLater();
-        m_lstItem[i] = NULL;
+        m_lstItem[i] = nullptr;
     }
     m_lstItem.clear();
-    m_curVisionItem = NULL;
+    qDebug()<<scene->items().count();
 //    scene->clear();  //会将scene中的所有的item都delete
 }
 
@@ -1033,6 +1047,7 @@ void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qrea
     //需要对基类添加的函数，设置选中和未选中的接口，获取选中状态的接口,获取item的painterPath，获取坐标是否在item的有效区域内
 
     QList<VisionItem*> lstClickedItem;
+    lstClickedItem.clear();
 //    qDebug()<<m_lstItem.count()<<x<<y;
     for(int i=0;i<m_lstItem.count();i++){
         //点击了某一个item的无效区域，该item的z值是0，显示是in area，
@@ -1043,50 +1058,50 @@ void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qrea
         if(m_lstItem[i]->getType() == ItemType::Rect){
             VisionRectItem* itemTest = (VisionRectItem*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"VisionRectItem in of range";
+//                qDebug()<<"VisionRectItem in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"VisionRectItem out of range";
+//                qDebug()<<"VisionRectItem out of range";
             }
         }else if (m_lstItem[i]->getType() == ItemType::EllipseItem) {
             VisionEllipseItem* itemTest = (VisionEllipseItem*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"VisionEllipseItem in of range";
+//                qDebug()<<"VisionEllipseItem in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"VisionEllipseItem out of range";
+//                qDebug()<<"VisionEllipseItem out of range";
             }
         }else if (m_lstItem[i]->getType() == ItemType::Poly) {
             VisionPolygon* itemTest = (VisionPolygon*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"VisionPolygon in of range";
+//                qDebug()<<"VisionPolygon in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"VisionPolygon out of range";
+//                qDebug()<<"VisionPolygon out of range";
             }
         }else if(m_lstItem[i]->getType() == ItemType::CrossPoint){
             VisionCrossPointItem* itemTest = (VisionCrossPointItem*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"VisionCrossPointItem in of range";
+//                qDebug()<<"VisionCrossPointItem in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"VisionCrossPointItem out of range";
+//                qDebug()<<"VisionCrossPointItem out of range";
             }
         }else if(m_lstItem[i]->getType() == ItemType::Line){
             VisionLineItem* itemTest = (VisionLineItem*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"VisionLineItem in of range";
+//                qDebug()<<"VisionLineItem in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"VisionLineItem out of range";
+//                qDebug()<<"VisionLineItem out of range";
             }
         }else{
             VisionRectItem* itemTest = (VisionRectItem*)m_lstItem[i];
             if(itemTest->getPosInArea(x,y)){
-                qDebug()<<"in of range";
+//                qDebug()<<"in of range";
                 lstClickedItem.push_back(m_lstItem[i]);
             }else{
-                qDebug()<<"out of range";
+//                qDebug()<<"out of range";
             }
 
         }
@@ -1143,7 +1158,7 @@ void VisionGraph_Item::slot_wheel(qreal delta)
 
 void VisionGraph_Item::slot_SizeChanged(QString currentSize)
 {
-    qDebug()<<" view scale size is changed : "<<currentSize;
+//    qDebug()<<" view scale size is changed : "<<currentSize;
     QString str = currentSize.mid(0,currentSize.indexOf("%"));
     if(!currentSize.contains("%") && currentSize != ""){
         comboBox->setEditText(currentSize+"%");

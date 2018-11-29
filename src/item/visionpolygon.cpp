@@ -16,11 +16,29 @@ VisionPolygon::VisionPolygon(VisionItem *parent) : VisionItem(parent)
     setSelected(true);
 }
 
+VisionPolygon::~VisionPolygon()
+{
+
+}
+
 void VisionPolygon::setPointFs(QVector<QPointF> pointFs, bool bFinished)
 {
     m_vecPointFs = pointFs;
     m_polygonF.clear();
     m_polygonF.append(m_vecPointFs);
+
+    //获取item的pos位置，boundingRect的topLeft
+
+    QPointF orignPointF = m_polygonF.boundingRect().topLeft();
+    m_x = orignPointF.x();
+    m_y = orignPointF.y();
+
+    for(int i=0;i<pointFs.count();i++){
+        m_vecPointFs_temp.append(pointFs.at(i) - orignPointF);
+    }
+    m_polygonF_temp.append(m_vecPointFs_temp);
+
+    this->setPos(m_x,m_y);
 
     if(bFinished){
         initMiniRect();
@@ -30,7 +48,7 @@ void VisionPolygon::setPointFs(QVector<QPointF> pointFs, bool bFinished)
 
 bool VisionPolygon::getPosInArea(qreal x, qreal y)
 {
-    if(m_polygonF.containsPoint(QPointF(x,y),Qt::OddEvenFill)){
+    if(m_polygonF_temp.containsPoint(QPointF(x,y),Qt::OddEvenFill)){
         return true;
     }else{
         return false;
@@ -42,6 +60,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
+
 
     if(option->state & QStyle::State_Selected){
 
@@ -73,7 +92,8 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     }
 
     painter->setBrush(m_brushColor);
-    painter->drawPolygon(m_vecPointFs);
+    painter->drawPolygon(m_polygonF_temp);
+
 
     if(m_bEdit){
         QPainterPath path;
@@ -81,14 +101,12 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         emit signal_painterInfo(ItemType::Poly,path);
     }
 
-
-
 }
 
 QRectF VisionPolygon::boundingRect() const
 {
-    QRectF rf = QRectF(m_polygonF.boundingRect().x()-5,m_polygonF.boundingRect().y()-5,
-                       m_polygonF.boundingRect().width()+10,m_polygonF.boundingRect().height()+10);
+    QRectF rf = QRectF(m_polygonF_temp.boundingRect().x()-5,m_polygonF_temp.boundingRect().y()-5,
+                       m_polygonF_temp.boundingRect().width()+10,m_polygonF_temp.boundingRect().height()+10);
     return rf;
 }
 
@@ -96,26 +114,28 @@ QRectF VisionPolygon::boundingRect() const
 void VisionPolygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
+    m_lastPointF = event->scenePos();
 
-    if(!m_bEdit)
+    //鼠标属于非正常状态--拖动小矩形框，当鼠标在编辑框状态，不处理按下事件，此时只需要处理moveEvent事件即可
+    if(m_iIndex != -1)
         return;
 
-    if(m_polygonF.containsPoint(event->pos(),Qt::OddEvenFill)){
-        qDebug()<<"true";
+    if(m_polygonF_temp.containsPoint(event->pos(),Qt::OddEvenFill)){
+//        qDebug()<<" mouse press Event : true";
         setSelected(true);
     }else{
         setSelected(false);
-        qDebug()<<"false";
+//        qDebug()<<" mouse press Event false";
     }
-    m_lastPointF = event->scenePos();
     this->scene()->update();
 }
 
 void VisionPolygon::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!m_bEdit)
+    if(m_iIndex != -1)
         return;
-    if(!m_polygonF.containsPoint(QPointF(event->scenePos().x(),event->scenePos().y()),Qt::OddEvenFill)){
+
+    if(!m_polygonF_temp.containsPoint(event->pos(),Qt::OddEvenFill)){
         emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
         return;
     }
@@ -131,27 +151,29 @@ void VisionPolygon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //在执行QGraphicsItem的时候。会自动的进行pos的重新设置
-//    QGraphicsItem::mouseMoveEvent(event);
-
+    QGraphicsItem::mouseMoveEvent(event);
 
     QPointF disPointF = event->scenePos() - m_lastPointF;
     m_lastPointF = event->scenePos();
 
     if(m_vecPointFs.count() > m_iIndex && m_iIndex != -1){
-        m_vecPointFs[m_iIndex] = event->scenePos();
-        m_polygonF.clear();
-        m_polygonF.append(m_vecPointFs);
-        updateMiniRect();
+        m_vecPointFs.replace(m_iIndex,event->scenePos());
+
+        m_vecPointFs_temp.replace(m_iIndex,event->scenePos()-QPointF(m_x,m_y));
     }else{
         //拖动的时候。m_vecPointFs是不变化的，变化的事this->pos()
-
         for(int i=0;i<m_vecPointFs.count();i++){
-            m_vecPointFs[i] = m_vecPointFs[i]+disPointF;
+            m_vecPointFs.replace(i,m_vecPointFs.at(i)+disPointF);
         }
-        m_polygonF.clear();
-        m_polygonF.append(m_vecPointFs);
-        updateMiniRect();
+        m_x = m_x + disPointF.x();m_y = m_y + disPointF.y();
     }
+    m_polygonF.clear();
+    m_polygonF.append(m_vecPointFs);
+    m_polygonF_temp.clear();
+    m_polygonF_temp.append(m_vecPointFs_temp);
+
+    updateMiniRect();
+    this->setPos(m_x,m_y);
     this->scene()->update();
 }
 
@@ -160,8 +182,8 @@ void VisionPolygon::initMiniRect()
 {
     m_lstRect.clear();
 
-    for(int i=0;i<m_vecPointFs.count();i++){
-        MiniRect* miniRect = new MiniRect(m_vecPointFs[i].x()-this->pos().x()-5,m_vecPointFs[i].y()-this->pos().y()-5,10,10,QColor(255,0,0),this);
+    for(int i=0;i<m_vecPointFs_temp.count();i++){
+        MiniRect* miniRect = new MiniRect(m_vecPointFs_temp.at(i).x()-5,m_vecPointFs_temp.at(i).y()-5,10,10,QColor(255,0,0),this);
         miniRect->setIndex(i);
         connect(miniRect,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
         m_lstRect.append(miniRect);
@@ -171,8 +193,9 @@ void VisionPolygon::initMiniRect()
 
 void VisionPolygon::updateMiniRect()
 {
-    for(int i=0;i<m_vecPointFs.count();i++){
-        m_lstRect[i]->setPos(m_vecPointFs[i].x()-this->pos().x()-5,m_vecPointFs[i].y()-this->pos().y()-5);
+
+    for(int i=0;i<m_vecPointFs_temp.count();i++){
+        m_lstRect[i]->setPos(m_vecPointFs_temp.at(i).x()-5,m_vecPointFs_temp.at(i).y()-5);
     }
 }
 

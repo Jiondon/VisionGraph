@@ -35,7 +35,6 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 
     emit signal_Move(viewPos);
 
-
     //show mouse info
     if(!m_pLabelInfo->isHidden()){
         QString text_pos="";
@@ -212,8 +211,8 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    if(event->button() == Qt::RightButton){
-         if(m_bPainter){
+    if(m_bPainter){
+        if(event->button() == Qt::RightButton){
             if(m_itemType == ItemType::Rect){
 
             }else if(m_itemType == ItemType::EllipseItem){
@@ -231,9 +230,7 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
                 m_vecPoint_Poly.clear();
                 //绘制多边形结束
             }
-         }
-    }else if(event->button() == Qt::LeftButton){
-        if(m_bPainter){
+        }else if(event->button() == Qt::LeftButton){
             //绘制矩形
             if(m_itemType == ItemType::Rect){
 
@@ -285,6 +282,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
     m_releasePointF = viewPos;
 
     if(m_bPainter){
+
         if(m_itemType == Rect){
             QPointF topLeftPoint;
             QPointF bottomRightPoint;
@@ -495,10 +493,11 @@ void VisionGraphView::setItemType(ItemType type){
 
 void VisionGraphView::zoom(float scaleFactor)
 {
-    scale(1/m_scale, 1/m_scale);
+//    scale(1/m_scale, 1/m_scale);
+    qreal scaleTemp = scaleFactor/m_scale;  //获取本次缩放相对于上次缩放的比例
     m_scale = scaleFactor;
-    scale(m_scale, m_scale);
-    qDebug()<<m_scale;
+    scale(scaleTemp, scaleTemp);
+//    qDebug()<<m_scale<<scaleTemp;
 
     if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
         //修改鼠标为绘图样式
@@ -507,6 +506,8 @@ void VisionGraphView::zoom(float scaleFactor)
         viewCursor = this->cursor();
     }
 
+//    this->viewport()->update();
+    this->scene()->update();
     return;
 
 }
@@ -630,6 +631,12 @@ void VisionGraphView::setViewRegion_Color(const QColor &color)
 {
     m_FrameColor = color;
     this->scene()->update();
+}
+
+void VisionGraphView::viewRegion_OriginPos()
+{
+    this->scene()->setSceneRect((m_frameRect.width()-this->width())/2,(m_frameRect.height()-this->height())/2,
+                                this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
 }
 
 void VisionGraphView::itemCursorToViewCursor()
@@ -912,6 +919,14 @@ void VisionGraphView::slotUpdateViewInfo_Pos()
 {
     qDebug()<<this->x()<<this->y()<<this->width()<<this->height() << "22222222" <<this->sceneRect();
 //    m_frameRect.setRect(this->x(),this->y(),this->width(),this->height());
+//    this->scene()->sceneRect().setTopLeft(QPointF((this->width()-this->scene()->sceneRect().width())/2,(this->height()-this->scene()->sceneRect().height())/2));
+//    m_frameRect.setRect(this->scene()->sceneRect().x(),this->scene()->sceneRect().y(),
+//                        this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+
+    //设置了初始构造了sceneWidget后进行对m_frameRect居中
+    this->scene()->setSceneRect((m_frameRect.width()-this->width())/2,(m_frameRect.height()-this->height())/2,
+                                this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+
     if(m_Corner == Corner::topLeft){
         return;
 

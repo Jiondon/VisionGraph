@@ -58,6 +58,7 @@ public:
     QGraphicsPolygonItem* _addPolygon(const QPolygonF &polygon, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     QGraphicsLineItem* _addLine(const QLineF &line, const QPen &pen = QPen());
     QGraphicsEllipseItem* _addEllipse(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
+    VisionCrossPointItem* _addPoint(QPointF pointF);
 
 
     /**

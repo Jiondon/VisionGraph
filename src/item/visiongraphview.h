@@ -74,6 +74,7 @@ public:
      */
     void paintEvent(QPaintEvent* event);
 
+
     /**
      * @brief       修改绘制的item时候触发
      * @param       在使用鼠标移动进行绘制任意区域的时候，鼠标本身的大小作为绘制要素之一
@@ -168,6 +169,10 @@ public:
      */
     void setViewRegion_Color(const QColor &color);
 
+    /**
+     * @brief       恢复View的算法区域的初始位置--居中
+     */
+    void viewRegion_OriginPos();
 
     /**
      * @brief       在item中鼠标样式变化后，回到view后的鼠标样式恢复
@@ -232,9 +237,9 @@ private:
     float m_scale = 1;
     bool m_bZoom = false;  //false -- out缩小  true -- in放大
 
-    QLabel *m_pMouseInfo_Label;  //跟随鼠标显示的信息
+    QLabel *m_pMouseInfo_Label = NULL;  //跟随鼠标显示的信息
 
-    QLabel *m_pLabelInfo;  //view的信息框
+    QLabel *m_pLabelInfo = NULL;  //view的信息框
 
     Corner m_Corner = Corner::topLeft;
 

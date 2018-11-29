@@ -18,7 +18,7 @@ class VISIONGRAPHSHARED_EXPORT VisionCrossPointItem : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionCrossPointItem(VisionItem *parent = 0);
+    explicit VisionCrossPointItem(bool edit = false,VisionItem *parent = 0);
 
     /**
      * @brief       构造的时候的参数为point
@@ -55,6 +55,8 @@ signals:
 
 private:
     QPointF m_pointF;
+
+    bool m_bEdit = false;
 
     QColor m_borderColor;
     QColor m_brushColor;

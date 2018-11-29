@@ -150,6 +150,23 @@ QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &p
     }
 }
 
+VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addPoint(pointF);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addPoint(pointF);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addPoint(pointF);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
 {
     if(m_type == GraphType::graphRegion){

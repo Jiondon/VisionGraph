@@ -118,6 +118,9 @@ void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //            C = X2*Y1 - X1*Y2
     QGraphicsItem::mousePressEvent(event);
 
+    if(m_iIndex != -1)
+        return;
+
     if(!m_bEditStatus)
         return;
 
@@ -167,6 +170,9 @@ void VisionLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(m_iIndex != -1)
+        return;
+
     if(!m_bEditStatus)
         return;
 

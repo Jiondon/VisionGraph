@@ -119,6 +119,8 @@ private:
     VisionArrows_Rotate* arrowsItem = NULL;  //箭头item  表示坐标方向的
     bool m_bRotation = false;  //旋转和非旋转
 
+    int m_iIndex = -1;  //鼠标当前所处于的编辑框的下标 -1表示当前不处于编辑框中
+
     QColor m_borderColor;
     QColor m_brushColor;
     QColor m_selectedColor;

@@ -201,6 +201,9 @@ void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //鼠标左键
     QGraphicsItem::mousePressEvent(event);
 
+    if(m_iIndex != -1)
+        return;
+
     //过滤掉在boundingRect但是不在绘制的有效区域的点击
     //根据椭圆定义，椭圆上任意一点，到横轴上的两个焦点距离之和等于2a
     qreal qc = sqrt(fabs((m_width/2)*(m_width/2) - (m_height/2)*(m_height/2)));
@@ -243,6 +246,9 @@ void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionEllipseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(m_iIndex != -1)
+        return;
+
     qreal qc = sqrt(fabs((m_width/2)*(m_width/2) - (m_height/2)*(m_height/2)));
     //两个焦点需要平移到item的中心点
     qreal dx1 = event->pos().x()-(qc*cos(m_angle*pi/180)+m_width/2);
@@ -604,6 +610,8 @@ void VisionEllipseItem::slotIndex(int index)
     leftmatrix.rotate(m_angle);
     QCursor cursor;
 
+    m_iIndex = index;
+
     if(index == 7){
         //left
         directCursor = left_rect;
@@ -629,6 +637,7 @@ void VisionEllipseItem::slotIndex(int index)
         this->scene()->views().at(0)->setCursor(cursor);
 
     }else{
+        m_iIndex = -1;
         directCursor = normal_rect;
         this->scene()->views().at(0)->setCursor(viewCursor);
     }

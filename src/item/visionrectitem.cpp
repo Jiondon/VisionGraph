@@ -227,6 +227,12 @@ void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //鼠标左键
     QGraphicsItem::mousePressEvent(event);
 
+
+    //说明鼠标处于小编辑框，忽略该事件
+    if(m_iIndex != -1)
+        return;
+
+
     //过滤掉在boundingRect但是不在绘制的有效区域的点击
 
     //四个边角的点的坐标，依次为 m_lstRect[0] m_lstRect[2] m_lstRect[4] m_lstRect[6]
@@ -288,6 +294,9 @@ void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void VisionRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 
+    //说明鼠标处于小编辑框，忽略该事件
+    if(m_iIndex != -1)
+        return;
     //            A = Y2 - Y1
     //            B = X1 - X2
     //            C = X2*Y1 - X1*Y2
@@ -664,6 +673,8 @@ void VisionRectItem::slotIndex(int index)
     leftmatrix.rotate(m_angle);
     QCursor cursor;
 
+    m_iIndex = index;
+
     QGraphicsView *view = this->scene()->views().at(0);
     if(index == 7){
         //left
@@ -722,6 +733,7 @@ void VisionRectItem::slotIndex(int index)
         view->setCursor(cursor);
 
     }else{
+        m_iIndex = -1;
         directCursor = normal_rect;
         view->setCursor(viewCursor);
     }

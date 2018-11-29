@@ -55,11 +55,13 @@ void VisionGraph_Region::initScene()
 
     m_mousePixmap = new QGraphicsPixmapItem();
     m_mousePixmap->setPos(scene->width()/2-10,scene->height()/2-10);
-    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(10*2,10*2));
+    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(10*2,10*2,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    m_mousePixmap->hide();
     scene->addItem(m_mousePixmap);
 
     //显示坐标和操作信息
-
+//    scene->setGrid_Visible(true);
+//    scene->setGrid_Size(QSize(50,50));
 }
 
 void VisionGraph_Region::initTool_operation()
@@ -444,6 +446,15 @@ QGraphicsEllipseItem *VisionGraph_Region::_addEllipse(const QRectF &rect, const 
     return scene->addEllipse(rect,pen,brush);
 }
 
+VisionCrossPointItem *VisionGraph_Region::_addPoint(QPointF pointF)
+{
+    // todo
+    VisionCrossPointItem *item = new VisionCrossPointItem();
+    item->setPoint(pointF);
+    scene->addItem(item);
+    return item;
+}
+
 VisionEllipseItem *VisionGraph_Region::addEllipse(QRectF rf)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);
@@ -499,7 +510,7 @@ VisionPolygon *VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF)
 VisionCrossPointItem *VisionGraph_Region::addPoint(QPointF pointF)
 {
     // todo
-    VisionCrossPointItem *item = new VisionCrossPointItem();
+    VisionCrossPointItem *item = new VisionCrossPointItem(true);
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
@@ -804,8 +815,9 @@ void VisionGraph_Region::slot_drag_action()
 
 void VisionGraph_Region::slot_zoom_action()
 {
-    view->setItemType(ItemType::Zoom);
-    m_itemType = ItemType::Zoom;
+    view->viewRegion_OriginPos();
+//    view->setItemType(ItemType::Zoom);
+//    m_itemType = ItemType::Zoom;
 //    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
 //    this->
 }
@@ -969,14 +981,17 @@ void VisionGraph_Region::slot_wheel(qreal delta)
 void VisionGraph_Region::slot_valueChanged(int qR)
 {
     m_mousePixmap->show();
-    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(qR,qR));
-    m_mousePixmap->setPos(view->width()/2-m_mousePixmap->boundingRect().width()/2,view->height()/2-m_mousePixmap->boundingRect().height()/2);
+    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(qR,qR,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    qreal qx = view->sceneRect().x()+view->sceneRect().width()/2;
+    qreal qy = view->sceneRect().y()+view->sceneRect().height()/2;
+//    qDebug()<<qx<<qy;
+    m_mousePixmap->setPos(qx-m_mousePixmap->boundingRect().width()/2,qy-m_mousePixmap->boundingRect().height()/2);
     view->setPainterCursorR((qreal)qR/2);
 }
 
 void VisionGraph_Region::slot_SizeChanged(QString currentSize)
 {
-    qDebug()<<" view scale size is changed : "<<currentSize;
+//    qDebug()<<" view scale size is changed : "<<currentSize;
     QString str = currentSize.mid(0,currentSize.indexOf("%"));
     if(!currentSize.contains("%") && currentSize != ""){
         comboBox->setEditText(currentSize+"%");
@@ -993,6 +1008,8 @@ void VisionGraph_Region::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed";
 
+
+//    view->viewport()->move(100,100);
     view->resize(sceneWidget->width(),sceneWidget->height());
 //    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 //    view->setScene(scene);
