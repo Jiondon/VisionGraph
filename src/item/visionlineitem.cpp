@@ -91,11 +91,8 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 //    if(pen)
 //    qDebug()<<painter->clipPath().currentPosition();
 
-    QLineF lineF(m_pointF1,m_pointF2);
-    painter->drawLine(lineF);
+    painter->drawLine(m_pointF1,m_pointF2);
 
-
-    painter->setPen(QPen(QBrush(Qt::blue),0));
 
     qreal alph = atan2(m_pointF2.y()-m_pointF1.y(), m_pointF2.x()-m_pointF1.x());
     painter->translate(m_pointF2);

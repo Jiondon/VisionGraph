@@ -24,13 +24,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+CONFIG += build_all
 
 
+Debug:MOC_DIR = ./tmp/debug
+Debug:RCC_DIR = ./tmp/debug
+Debug:UI_DIR = ./tmp/debug
+Debug:OBJECTS_DIR = ./tmp/debug
 
-MOC_DIR = ./tmp
-RCC_DIR = ./tmp
-UI_DIR = ./tmp
-OBJECTS_DIR = ./tmp
+Release:MOC_DIR = ./tmp/release
+Release:RCC_DIR = ./tmp/release
+Release:UI_DIR = ./tmp/release
+Release:OBJECTS_DIR = ./tmp/release
 
 Debug:DESTDIR= ./bin/debug
 Release:DESTDIR = ./bin/release
