@@ -110,6 +110,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
 

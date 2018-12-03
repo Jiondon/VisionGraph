@@ -81,6 +81,8 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    painter->setRenderHint(QPainter::Antialiasing, true);
+
     if(option->state & QStyle::State_Selected){
         painter->setPen(QPen(QBrush(m_selectedColor),0));
 

@@ -424,8 +424,8 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     QGraphicsView::paintEvent(event);
 
 
-    QPainter painter(this->viewport());
-    painter.setRenderHint(QPainter::Antialiasing);
+    QPainter painter(this->viewport());    
+    painter.setRenderHint(QPainter::Antialiasing,true);
 
     if(m_bFrameVisible){
         painter.setPen(QPen(m_FrameColor,0));

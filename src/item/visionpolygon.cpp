@@ -61,6 +61,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
 

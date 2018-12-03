@@ -18,6 +18,8 @@ void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    painter->setRenderHint(QPainter::Antialiasing, true);
+
     QPen pen = QPen(m_borderColor,0);
     painter->setPen(pen);
     painter->setBrush(Qt::red);
