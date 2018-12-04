@@ -257,6 +257,7 @@ void VisionGraph_Item::initTool_operation()
     pSpinBox_w->setSingleStep(5);  // 步长
     pSpinBox_w->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
+    pSpinBox_w->setValue(800);
     connect(pSpinBox_w,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
 
     label_h = new QLabel;
@@ -269,6 +270,7 @@ void VisionGraph_Item::initTool_operation()
     pSpinBox_h->setSingleStep(5);  // 步长
     pSpinBox_h->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
+    pSpinBox_h->setValue(600);
     connect(pSpinBox_h,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
 
 

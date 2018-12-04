@@ -48,10 +48,29 @@ public:
     VisionRectItem *addRect(QRectF rf,bool bEdit = true);
 
 
+    /**
+     * @brief       在scene中添加rectangle  不可编辑
+     */
     QGraphicsRectItem* _addRect(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
+
+    /**
+     * @brief       在scene中添加polygon  不可编辑
+     */
     QGraphicsPolygonItem* _addPolygon(const QPolygonF &polygon, const QPen &pen = QPen(), const QBrush &brush = QBrush());
+
+    /**
+     * @brief       在scene中添加line  不可编辑
+     */
     QGraphicsLineItem* _addLine(const QLineF &line, const QPen &pen = QPen());
+
+    /**
+     * @brief       在scene中添加Ellipse  不可编辑
+     */
     QGraphicsEllipseItem* _addEllipse(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
+
+    /**
+     * @brief       在scene中添加CrossPoint  不可编辑
+     */
     VisionCrossPointItem* _addPoint(QPointF pointF);
 
 

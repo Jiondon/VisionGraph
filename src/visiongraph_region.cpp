@@ -284,6 +284,7 @@ void VisionGraph_Region::initTool_operation()
     pSpinBox_w->setMinimum(1);  // 最小值
     pSpinBox_w->setMaximum(5000);  // 最大值
     pSpinBox_w->setSingleStep(5);  // 步长
+    pSpinBox_w->setValue(800);
     pSpinBox_w->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
     connect(pSpinBox_w,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
@@ -296,6 +297,7 @@ void VisionGraph_Region::initTool_operation()
     pSpinBox_h->setMinimum(1);  // 最小值
     pSpinBox_h->setMaximum(5000);  // 最大值
     pSpinBox_h->setSingleStep(5);  // 步长
+    pSpinBox_h->setValue(600);
     pSpinBox_h->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
     connect(pSpinBox_h,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
