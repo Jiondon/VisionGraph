@@ -381,7 +381,8 @@ void VisionGraphView::enterEvent(QEvent *event)
     if(m_itemType != ItemType::No){
         if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
             //修改鼠标为绘图样式
-            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
+                                                                                       Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
             this->setCursor(cursor);
         }else if(m_itemType == ItemType::Drag){
             //拖动
@@ -463,7 +464,8 @@ void VisionGraphView::setItemType(ItemType type){
     if(m_itemType != ItemType::No){
         if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
             //修改鼠标为绘图样式
-            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
+                                                                                       Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
             this->setCursor(cursor);
         }else if(m_itemType == ItemType::Drag){
             //拖动
@@ -501,7 +503,8 @@ void VisionGraphView::zoom(float scaleFactor)
 
     if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
         //修改鼠标为绘图样式
-        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+        QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
+                                                                                   Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
         this->setCursor(cursor);
         viewCursor = this->cursor();
     }
@@ -644,7 +647,8 @@ void VisionGraphView::itemCursorToViewCursor()
     if(m_itemType != ItemType::No){
         if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
             //修改鼠标为绘图样式
-            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale));
+            QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
+                                                                                       Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
             this->setCursor(cursor);
         }else if(m_itemType == ItemType::Drag){
             //拖动
