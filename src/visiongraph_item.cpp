@@ -432,6 +432,14 @@ VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF)
     return item;
 }
 
+VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP)
+{
+    VisionChainItem* item = new VisionChainItem();
+    item->setChainPos(lstP);
+    scene->addItem(item);
+    return item;
+}
+
 VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);

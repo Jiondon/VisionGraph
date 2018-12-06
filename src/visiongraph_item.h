@@ -59,7 +59,7 @@ public:
     QGraphicsLineItem* _addLine(const QLineF &line, const QPen &pen = QPen());
     QGraphicsEllipseItem* _addEllipse(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     VisionCrossPointItem* _addPoint(QPointF pointF);
-
+    VisionChainItem* _addChain(QList<QPointF> lstP);
 
     /**
      * @brief       添加椭圆

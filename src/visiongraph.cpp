@@ -167,6 +167,23 @@ VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF)
     }
 }
 
+VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addChain(lstP);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addChain(lstP);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addChain(lstP);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
 {
     if(m_type == GraphType::graphRegion){

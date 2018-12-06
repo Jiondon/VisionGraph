@@ -73,6 +73,10 @@ public:
      */
     VisionCrossPointItem* _addPoint(QPointF pointF);
 
+    /**
+     * @brief       在scene中添加链
+     */
+    VisionChainItem* _addChain(QList<QPointF> lstP);
 
     /**
      * @brief       添加椭圆

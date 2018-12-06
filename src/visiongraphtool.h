@@ -24,6 +24,7 @@
 #include "./item/visionpoint.h"
 #include "./item/visionring.h"
 #include "./item/visioncrosspointitem.h"
+#include "./item/visionchainitem.h"
 
 #include "./control/color.h"
 

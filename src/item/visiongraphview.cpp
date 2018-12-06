@@ -67,12 +67,13 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     if(m_bPress && m_itemType == ItemType::Drag){
 //        QPointF disPointF = scenePos - this->mapToScene(m_lastPointF.toPoint());
         QPointF disPointF = viewPos - m_lastPointF;
+        qDebug()<<"drag view"<<disPointF;
+        m_lastPointF = viewPos;
 
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
 
-        this->scene()->update();
-        m_lastPointF = viewPos;
+//        this->scene()->update();
         return;
     }
 
