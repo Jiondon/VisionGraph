@@ -37,6 +37,13 @@ public:
      */
     bool getPosInArea(qreal x, qreal y);
 
+    /**
+     * @brief       获取多边形的每个顶点
+     * @param       point vec
+     */
+    QVector<QPointF> getPointS(){
+        return m_vecPointFs;
+    }
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

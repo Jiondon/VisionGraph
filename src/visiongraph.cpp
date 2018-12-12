@@ -17,10 +17,14 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }else if(type == GraphType::graphItem_self){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
+        m_graphWidget_Item->setViewRegion_Visible(false);
+        brushColor = Qt::transparent;
 
     }else if(type == GraphType::graphItem_unSelf){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
+        m_graphWidget_Item->setViewRegion_Visible(false);
+        brushColor = Qt::transparent;
 
     }else{
         qDebug()<<"VisionGraph is Error";
@@ -65,7 +69,7 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 }
 
 
-VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit)
+VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->addRect(rf, bEdit);
@@ -150,7 +154,7 @@ QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &p
     }
 }
 
-VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF)
+VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->_addPoint(pointF);
@@ -167,7 +171,24 @@ VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF)
     }
 }
 
-VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP)
+VisionArrow *VisionGraph::_addArrow(QPointF pointF, QColor color)
+{
+    if(m_type == GraphType::graphRegion){
+        return m_graphWidget_Region->_addArrow(pointF,color);
+
+    }else if(m_type == GraphType::graphItem_self){
+        return m_graphWidget_Item->_addArrow(pointF,color);
+
+    }else if(m_type == GraphType::graphItem_unSelf){
+        return m_graphWidget_Item->_addArrow(pointF,color);
+
+    }else{
+        qDebug()<<"VisionGraph is Error";
+        return NULL;
+    }
+}
+
+VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->_addChain(lstP);
@@ -184,7 +205,7 @@ VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP)
     }
 }
 
-VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
+VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->addEllipse(rf);
@@ -201,7 +222,7 @@ VisionEllipseItem* VisionGraph::addEllipse(QRectF rf)
     }
 }
 
-VisionLineItem *VisionGraph::addLine(QLine line)
+VisionLineItem *VisionGraph::addLine(QLine line, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->addLine(line);
@@ -217,7 +238,7 @@ VisionLineItem *VisionGraph::addLine(QLine line)
     }
 }
 
-void VisionGraph::addLines(QList<QLine> lstLine)
+void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         m_graphWidget_Region->addLines(lstLine);
@@ -233,7 +254,7 @@ void VisionGraph::addLines(QList<QLine> lstLine)
     }
 }
 
-VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF)
+VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->addPolygon(vecPointF);
@@ -250,7 +271,7 @@ VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF)
     }
 }
 
-VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF)
+VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF, QColor color)
 {
     if(m_type == GraphType::graphRegion){
         return m_graphWidget_Region->addPoint(pointF);

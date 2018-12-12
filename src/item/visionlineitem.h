@@ -57,6 +57,22 @@ public:
      */
     bool getPosInArea(qreal x, qreal y);
 
+    /**
+     * @brief       获取Line的P1
+     * @param       QpointF
+     */
+    QPointF getP1(){
+        return m_pointF1;
+    }
+
+    /**
+     * @brief       获取Line的P2
+     * @param       QpointF
+     */
+    QPointF getP2(){
+        return m_pointF2;
+    }
+
 protected:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

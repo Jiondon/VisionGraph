@@ -77,6 +77,15 @@ public:
         return QRectF(m_x,m_y,m_width,m_height);
     }
 
+    /**
+     * @brief       获得椭圆的旋转角度
+     * @return      角度 、、 角度可能需要进行转换才可直接使用
+     */
+    qreal getAngle()
+    {
+        return m_angle;
+    }
+
     QPainterPath getPainterPath();   //暂时无用
 
 

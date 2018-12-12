@@ -41,6 +41,8 @@ public:
      */
     void setPoint(QPointF pointF);
 
+    QPointF getPoint();
+
     bool getPosInArea(qreal x, qreal y);
 
 protected:

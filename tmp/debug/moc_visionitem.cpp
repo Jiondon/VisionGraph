@@ -101,7 +101,7 @@ static const uint qt_meta_data_VisionItem[] = {
     QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15,   14,   16,
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 3, 0x80000000 | 13, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,    5,    4,   14,   16,   18,   19,
     QMetaType::Void, QMetaType::Bool, 0x80000000 | 3, 0x80000000 | 13, 0x80000000 | 20,    5,    4,   14,   21,
-    QMetaType::Void, QMetaType::QRectF,   16,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -121,7 +121,7 @@ void VisionItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->signal_painterInfo((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QPainterPath(*)>(_a[2]))); break;
         case 7: _t->selectedChanged((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6]))); break;
         case 8: _t->selectedChanged((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4]))); break;
-        case 9: _t->signalChanged((*reinterpret_cast< QRectF(*)>(_a[1]))); break;
+        case 9: _t->signalChanged((*reinterpret_cast< VisionItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -168,6 +168,13 @@ void VisionItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             case 3:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<QPointF> >(); break;
             case 1:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
+            }
+            break;
+        case 9:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
             }
             break;
@@ -218,7 +225,7 @@ void VisionItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
         }
         {
-            typedef void (VisionItem::*_t)(QRectF );
+            typedef void (VisionItem::*_t)(VisionItem * );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&VisionItem::signalChanged)) {
                 *result = 9;
                 return;
@@ -307,7 +314,7 @@ void VisionItem::selectedChanged(bool _t1, VisionItem * _t2, ItemType _t3, QVect
 }
 
 // SIGNAL 9
-void VisionItem::signalChanged(QRectF _t1)
+void VisionItem::signalChanged(VisionItem * _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 9, _a);

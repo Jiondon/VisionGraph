@@ -32,7 +32,7 @@ class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 {
     Q_OBJECT
 public:
-    VisionGraph(GraphType type = GraphType::graphRegion, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
+    VisionGraph(GraphType type = GraphType::graphItem_unSelf, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
 
     /**
      * @brief       添加rectangle  可旋转的矩形
@@ -45,7 +45,7 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    VisionRectItem *addRect(QRectF rf,bool bEdit = true);
+    VisionRectItem *addRect(QRectF rf, bool bEdit = true, QColor color = QColor(255,255,255));
 
 
     /**
@@ -71,44 +71,50 @@ public:
     /**
      * @brief       在scene中添加CrossPoint  不可编辑
      */
-    VisionCrossPointItem* _addPoint(QPointF pointF);
+    VisionCrossPointItem* _addPoint(QPointF pointF,QColor color = QColor(255,255,255));
+
+    /**
+     * @brief       添加一个arrow
+     * @param       不可编辑的坐标系
+     */
+    VisionArrow *_addArrow(QPointF pointF,QColor color = QColor(255,0,0 ));
 
     /**
      * @brief       在scene中添加链
      */
-    VisionChainItem* _addChain(QList<QPointF> lstP);
+    VisionChainItem* _addChain(QList<QPointF> lstP,QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    VisionEllipseItem* addEllipse(QRectF rf);
+    VisionEllipseItem* addEllipse(QRectF rf,bool bEdit = true, QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    VisionLineItem* addLine(QLine line);
+    VisionLineItem* addLine(QLine line,QColor color = QColor(255,255,255));
 
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    void addLines(QList<QLine> lstLine);
+    void addLines(QList<QLine> lstLine,QColor color = QColor(255,255,255));
 
 
     /**
      * @brief       添加多边形
      * @param       点的集合，点的集合一次连接
      */
-    VisionPolygon* addPolygon(QVector<QPointF> vecPointF);
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF,QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加一个点
      * @param       具体方法未实现
      */
-    VisionCrossPointItem* addPoint(QPointF pointF);
+    VisionCrossPointItem* addPoint(QPointF pointF,QColor color = QColor(255,255,255));
 
 
     /**
@@ -288,6 +294,9 @@ public:
      * @brief       设置View的算法区域的color
      */
     void setViewRegion_Color(const QColor &color);
+
+signals:
+    void signal_RectSizeChanged(VisionItem*);
 
 protected:
 

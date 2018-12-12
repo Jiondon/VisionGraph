@@ -68,7 +68,7 @@ struct OperationStruct{
     Operation_enum operation;   //运算 交集，差集，并集，异或
 };
 
-class VisionItem : public QObject,public QGraphicsItem
+class VISIONGRAPHSHARED_EXPORT VisionItem : public QObject,public QGraphicsItem
 {
     Q_OBJECT
 public:
@@ -186,7 +186,7 @@ signals:
      * @brief       当item的boundingRect()发生变化的事触发
      * @param
      */
-    void signalChanged(QRectF rf);
+    void signalChanged(VisionItem* item);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

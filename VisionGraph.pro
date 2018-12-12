@@ -37,8 +37,8 @@ Release:RCC_DIR = ./tmp/release
 Release:UI_DIR = ./tmp/release
 Release:OBJECTS_DIR = ./tmp/release
 
-Debug:DESTDIR= ./bin/debug
-Release:DESTDIR = ./bin/release
+Debug:DESTDIR= ../bin/debug
+Release:DESTDIR = ../bin/release
 
 #LIBS += ./lib
 Debug:LIBS += ./lib/debug/AVL.lib
@@ -77,7 +77,8 @@ SOURCES += src/visiongraph.cpp \
     src/control/visionitem.cpp \
     src/control/color.cpp \
     src/visiongraphwidget.cpp \
-    src/item/visionchainitem.cpp
+    src/item/visionchainitem.cpp \
+    src/item/visionarrow.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
@@ -100,7 +101,8 @@ HEADERS += src/visiongraph.h \
     src/control/visionitem.h \
     src/control/color.h \
     src/visiongraphwidget.h \
-    src/item/visionchainitem.h
+    src/item/visionchainitem.h \
+    src/item/visionarrow.h
 
 unix {
     target.path = /usr/lib

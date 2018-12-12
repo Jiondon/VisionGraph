@@ -28,9 +28,37 @@ public:
     explicit VisionRing(qreal centerX=0,qreal centerY=0,qreal r1=0,qreal r2=0,qreal penWidth=0,QColor penColor=QColor(255,0,0),VisionItem *parent = 0);
     //矩形框的内切圆
     VisionRing(QRectF rf1,QRectF rf2,qreal penWidth,QColor penColor=QColor(255,0,0),QGraphicsItem *parent = 0);
+
     void setDirection(int iDirection = 0);  //0--正向 -1反向
+
     QPainterPath getPainterPath();
 
+    /**
+     * @brief       圆环1的rect数据
+     * @return
+     */
+    QRectF getRing1()
+    {
+        return m_rf1;
+    }
+
+    /**
+     * @brief       圆环1的rect数据
+     * @return
+     */
+    QRectF getRing2()
+    {
+        return m_rf2;
+    }
+
+    /**
+     * @brief       圆环的方向
+     * @return
+     */
+    int getDirect()
+    {
+        return m_iDirection;
+    }
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;

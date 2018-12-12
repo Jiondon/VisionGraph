@@ -175,6 +175,7 @@ void VisionPolygon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     updateMiniRect();
     this->setPos(m_x,m_y);
+    emit signalChanged(this);
     this->scene()->update();
 }
 

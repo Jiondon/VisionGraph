@@ -13,6 +13,7 @@ VisionChainItem::VisionChainItem(QObject *parent) : QObject(parent)
     m_selectedColor = m_selectedColor;
 
     m_pointFColor = borderColor;
+    m_lstChainPoint.clear();
 }
 
 
@@ -22,6 +23,10 @@ void VisionChainItem::setChainPos(QList<qreal> lst_x, QList<qreal> lst_y)
         //data error; if count is 1,then it is a point
         qDebug()<<"setChainPos is error and Pos is null";
         return;
+    }
+
+    for(int i=0;i<lst_x.count();i++){
+        m_lstChainPoint.append(QPointF(lst_x[i],lst_y[i]));
     }
 
     m_lst_x = lst_x;m_lst_y = lst_y;
@@ -40,6 +45,7 @@ void VisionChainItem::setChainPos(QList<QPointF> lst_p)
         return;
     }
 
+    m_lstChainPoint = lst_p;
     for(int i=0;i<lst_p.count();i++){
         m_lst_x.append(lst_p[i].x());
         m_lst_y.append(lst_p[i].y());
@@ -80,6 +86,11 @@ QList<QPointF> VisionChainItem::getPointFs()
 void VisionChainItem::setPointFColor(const QColor &color)
 {
     m_pointFColor = color;
+}
+
+QList<QPointF> VisionChainItem::getChainPoints()
+{
+    return m_lstPointF;
 }
 
 

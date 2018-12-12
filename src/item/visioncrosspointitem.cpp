@@ -40,6 +40,11 @@ void VisionCrossPointItem::setPoint(QPointF pointF)
     m_pointF = pointF;
 }
 
+QPointF VisionCrossPointItem::getPoint()
+{
+    return m_pointF;
+}
+
 bool VisionCrossPointItem::getPosInArea(qreal x, qreal y)
 {
     if(boundingRect().contains(x,y)){

@@ -78,8 +78,17 @@ public:
      */
     bool getPosInArea(qreal x, qreal y);
 
-signals:
+    /**
+     * @brief       获得椭圆的旋转角度
+     * @return      角度 、、 角度可能需要进行转换才可直接使用
+     */
+    qreal getAngle()
+    {
+        return m_angle;
+    }
 
+signals:
+    void signal_RectSizeChanged();
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

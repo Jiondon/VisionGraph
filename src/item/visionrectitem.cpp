@@ -521,6 +521,7 @@ void VisionRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         updateItem();
         updatePointF();
     }
+    emit signalChanged(this);
     this->scene()->update();
 }
 

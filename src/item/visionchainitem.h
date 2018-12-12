@@ -21,6 +21,8 @@ public:
 
     void setPointFColor(const QColor &color);
 
+    QList<QPointF> getChainPoints();  //获取链的节点
+
 signals:
     void signalMouse(qreal x,qreal y);
     void signalSelected(bool selected,int index);
@@ -57,7 +59,8 @@ private:
     bool m_selected = false;  //选中状态 false-未选中 true--选中
     int m_iIndex = 0; //线的索引,用来区分每根线
 
-    QList<QPointF> m_lstPointF; //
+    QList<QPointF> m_lstPointF; //添加的点的集合
+    QList<QPointF> m_lstChainPoint;  //链的节点
 
     QColor m_borderColor;
     QColor m_brushColor;

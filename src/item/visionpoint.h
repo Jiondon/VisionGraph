@@ -22,6 +22,10 @@ public:
 
     void setPointF(QPointF pointF);
 
+    QPointF getP(){
+        return m_pointF;
+    }
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;

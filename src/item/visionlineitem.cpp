@@ -176,6 +176,7 @@ void VisionLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         m_pointF2 = m_pointF2 + disPointF;
     }
     updateRect(m_pointF1,m_pointF2);
+    emit signalChanged(this);
     this->scene()->update();
 }
 

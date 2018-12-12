@@ -387,7 +387,7 @@ void VisionGraph_Item::initLayout(ToolButtonDirection toolButtonDirect)
 
 
 
-VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit)
+VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
 {
     if(bEdit){
         VisionRectItem* item = new VisionRectItem(true);
@@ -424,7 +424,7 @@ QGraphicsEllipseItem *VisionGraph_Item::_addEllipse(const QRectF &rect, const QP
     return scene->addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF)
+VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF, QColor color)
 {
     VisionCrossPointItem *item = new VisionCrossPointItem();
     item->setPoint(pointF);
@@ -432,7 +432,7 @@ VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF)
     return item;
 }
 
-VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP)
+VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP, QColor color)
 {
     VisionChainItem* item = new VisionChainItem();
     item->setChainPos(lstP);
@@ -440,7 +440,16 @@ VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP)
     return item;
 }
 
-VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf)
+VisionArrow *VisionGraph_Item::_addArrow(QPointF pointF, QColor color)
+{
+    VisionArrow* item = new VisionArrow();
+    item->setPointF(pointF);
+    item->setColor(color);
+    scene->addItem(item);
+    return item;
+}
+
+VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
 {
     VisionEllipseItem *item = new VisionEllipseItem(true);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
@@ -454,7 +463,7 @@ VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf)
     return item;
 }
 
-VisionLineItem *VisionGraph_Item::addLine(QLine line)
+VisionLineItem *VisionGraph_Item::addLine(QLine line, QColor color)
 {
     VisionLineItem *item = new VisionLineItem();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
@@ -468,12 +477,12 @@ VisionLineItem *VisionGraph_Item::addLine(QLine line)
     return item;
 }
 
-void VisionGraph_Item::addLines(QList<QLine> lstLine)
+void VisionGraph_Item::addLines(QList<QLine> lstLine, QColor color)
 {
 
 }
 
-VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF)
+VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor color)
 {
     if(vecPointF.count() <= 0)
         return NULL;
@@ -494,7 +503,7 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF)
     return item;
 }
 
-VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF)
+VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
 {
     VisionCrossPointItem *item = new VisionCrossPointItem(true);
 //    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));

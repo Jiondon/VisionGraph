@@ -447,10 +447,19 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         m_clearAll = false;
     }
 
+    painter.setPen(QPen(brushColor,m_scale));  //区域采用填充的颜色，原因自己想
+    qDebug()<<painter.pen().width()<<painter.pen().widthF();
     QVector<QLineF> vecLines;
     for(int i=0;i<m_vecLines.size();i++){
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
+//        if(i % 2 == 0){
+//            painter.drawLine(lineF);
+
+////            painter.setPen(QPen(Qt::red,m_scale));
+//        }else{
+////            painter.setPen(QPen(Qt::blue,m_scale));
+//        }
     }
     painter.drawLines(vecLines);
 }
