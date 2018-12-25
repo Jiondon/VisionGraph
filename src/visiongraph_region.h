@@ -252,6 +252,35 @@ public:
      */
     void setViewRegion_Color(const QColor &color);
 
+    /**
+     * @brief       获取背景图片
+     */
+    QImage getBkgImg();
+
+    /**
+     * @brief       保存当前绘图区域的绘制信息，生成图片
+     * @param       path==""调用fileDialog进行设置保存
+     */
+    void saveBkgImg(QString path="");
+
+    /**
+     * @brief       删除具体的item
+     * @param       item == nullptr 默认删除选中的
+     */
+    void removeItem(VisionItem* item = nullptr);
+
+    /**
+     * @brief       设置鼠标绘制的时候，鼠标的大小
+     */
+    void setMousePaintSize(qreal qi);
+
+    /**
+     * @brief       设置view的缩放比例
+     * @param       value = 1 表示是标准大小
+     */
+    void setView_Zoom(qreal qZoom);
+
+
 protected:
 
 private:

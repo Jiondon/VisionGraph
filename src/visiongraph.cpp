@@ -629,3 +629,70 @@ void VisionGraph::setViewRegion_Color(const QColor &color)
     }
 }
 
+QImage VisionGraph::getBkgImg()
+{
+    QImage image;
+    if(m_type == GraphType::graphRegion){
+        image = m_graphWidget_Region->getBkgImg();
+    }else if(m_type == GraphType::graphItem_self){
+        image = m_graphWidget_Item->getBkgImg();
+    }else if(m_type == GraphType::graphItem_unSelf){
+        image = m_graphWidget_Item->getBkgImg();
+    }else{
+        qDebug()<<"VisionGraph is Error";
+//        return NULL;
+    }
+    return image;
+}
+
+void VisionGraph::saveBkgImg(QString path)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->saveBkgImg(path);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->saveBkgImg(path);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->saveBkgImg(path);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::removeItem(VisionItem *item)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->removeItem(item);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->removeItem(item);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->removeItem(item);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::setMousePaintSize(qreal qi)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setMousePaintSize(qi);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setMousePaintSize(qi);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setMousePaintSize(qi);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}
+
+void VisionGraph::setView_Zoom(qreal qZoom)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setView_Zoom(qZoom);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setView_Zoom(qZoom);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setView_Zoom(qZoom);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}

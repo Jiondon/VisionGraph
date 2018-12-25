@@ -418,7 +418,10 @@ VisionRectItem *VisionGraph_Region::addRect(QRectF rf, bool bEdit, QColor color)
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
-            m_curVisionItem = nullptr;
+            if(m_curVisionItem != nullptr){
+                m_curVisionItem->deleteLater();
+                m_curVisionItem = nullptr;
+            }
         });
         item->setRect(rf);
         scene->addItem(item);
@@ -480,7 +483,10 @@ VisionEllipseItem *VisionGraph_Region::addEllipse(QRectF rf, QColor color)
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setRect(rf);
     scene->addItem(item);
@@ -495,7 +501,10 @@ VisionLineItem *VisionGraph_Region::addLine(QLine line, QColor color)
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setLine(line.p1(),line.p2());
     scene->addItem(item);
@@ -514,7 +523,10 @@ VisionPolygon *VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF, QColor
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     if(vecPointF.count() > 0){
         item->setPointFs(vecPointF,true);
@@ -533,7 +545,10 @@ VisionCrossPointItem *VisionGraph_Region::addPoint(QPointF pointF, QColor color)
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setPoint(pointF);
     scene->addItem(item);
@@ -816,6 +831,85 @@ void VisionGraph_Region::setViewRegion_Visible(bool bVisible)
 void VisionGraph_Region::setViewRegion_Color(const QColor &color)
 {
     view->setViewRegion_Color(color);
+}
+
+QImage VisionGraph_Region::getBkgImg()
+{
+    QImage image;
+    if(m_bkPixmapItem != nullptr){
+        image = m_bkPixmapItem->pixmap().toImage();
+    }else{
+        qDebug()<<"bkImg is null";
+    }
+    return image;
+}
+
+void VisionGraph_Region::saveBkgImg(QString path)
+{
+    //path==""调用fileDialog进行设置保存
+    if(path == ""){
+        slot_save_action();
+    }else{
+
+        if (m_bkPixmapItem == NULL) return;
+
+        QString fileName = path;
+
+        if(fileName == ""){
+            qDebug()<<"save is failure";
+            return;
+        }
+
+        qDebug()<<fileName;
+        QPixmap map = m_bkPixmapItem->pixmap();
+        if (!map.isNull())
+        {
+            //默认采用时间命名法，
+            /*
+            QDateTime dataTime = QDateTime::currentDateTime();
+            QString imageName = QString::number(dataTime.date().year())+QString::number(dataTime.date().month())+
+                    QString::number(dataTime.date().day())+"_"
+                    +QString::number(dataTime.time().hour())+QString::number(dataTime.time().minute())+
+                    QString::number(dataTime.time().second())+".bmp";
+                    */
+    //        map.save(fileName,"BMP");
+
+            QImage image(scene->width(), scene->height(),QImage::Format_ARGB32);
+            QPainter painter(&image);
+            painter.setRenderHint(QPainter::Antialiasing);
+            scene->render(&painter);
+
+            bool saveSuccess =  image.save(fileName,"BMP");
+            Q_ASSERT(saveSuccess == true);
+        }
+    }
+}
+
+void VisionGraph_Region::removeItem(VisionItem *item)
+{
+    //item == nullptr 默认删除选中的
+    if(item == m_curVisionItem || item == nullptr){
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
+    }else{
+        qDebug()<<"remove item is error";
+    }
+}
+
+void VisionGraph_Region::setMousePaintSize(qreal qi)
+{
+    view->setPainterCursorR(qi/2);
+    if(pSlider != nullptr){
+        pSlider->setValue(qi);
+    }
+}
+
+void VisionGraph_Region::setView_Zoom(qreal qZoom)
+{
+    view->zoom(qZoom);
+    comboBox->setEditText(QString::number(qZoom*100)+"%");
 }
 
 void VisionGraph_Region::slot_selected_action()

@@ -29,7 +29,6 @@ VisionGraphView::VisionGraphView(QWidget *parent):
 
 void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 {
-
     QPoint viewPos = event->pos();//获取视口坐标
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
 
@@ -57,133 +56,28 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
                     text_rgb = QString("RGB: %1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue());
                     int grayValue = (color.red()*30+color.green()*59+color.blue()*11)/100;
                     text_gray = QString("Gray: %1,%2,%3").arg(grayValue).arg(grayValue).arg(grayValue);
-//                    qDebug() << text_rgb<<"   "<<text_gray;
                 }
             }
         }
         m_pLabelInfo->setText(text_pos+"\n"+text_rgb+"\n"+text_gray);
     }
 
+    //拖动
     if(m_bPress && m_itemType == ItemType::Drag){
-//        QPointF disPointF = scenePos - this->mapToScene(m_lastPointF.toPoint());
         QPointF disPointF = viewPos - m_lastPointF;
-        qDebug()<<"drag view"<<disPointF;
         m_lastPointF = viewPos;
-
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-
-//        this->scene()->update();
         return;
     }
 
     //2.修改在点击选择选项的时候，item在选中情况下无法move    m_itemType != ItemType::No的原因
     if(m_bPainter && m_bPress && m_itemType != ItemType::No){
-
-        if(m_itemType == ItemType::Rect){
-            //绘制矩形
-            QPainterPath path;
-            path.addRect(QRectF(m_pressPointF,viewPos));
-            m_path = path;
-        }else if(m_itemType == ItemType::EllipseItem){
-            //绘制椭圆
-            QPainterPath path;
-            path.addEllipse(QRectF(m_pressPointF,viewPos));
-            m_path = path;
-        }else if(m_itemType == ItemType::Poly){
-            QPainterPath path;
-            QPolygonF poly(m_vecPoint_Poly);
-            poly.insert(m_vecPoint_Poly.count(),scenePos);  //将最后一点替换成掉
-            path.addPolygon(this->mapFromScene(poly));
-            m_path = path;
-
-        }else if(m_itemType == ItemType::Region){
-            //鼠标绘制任意区域
-            m_vecPoint_Region.append(scenePos);
-            QPainterPath path;
-            QPolygonF poly(m_vecPoint_Region);
-            path.addPolygon(poly);
-            m_path = this->mapFromScene(path);
-        }else if(m_itemType == ItemType::Line){
-            m_Line.setPoints(m_pressPointF_scene.toPoint(),scenePos.toPoint());
-            m_path = QPainterPath(this->mapFromScene(m_pressPointF_scene));
-            m_path.lineTo(this->mapFromScene(scenePos));
-
-        }else if(m_itemType == ItemType::polyLine){
-
-        }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
-            //鼠标绘制(擦除)
-
-            //计算区域
-            qreal a = viewPos.y() - m_lastPointF.y();
-            qreal b = m_lastPointF.x() - viewPos.x();
-            //ax+by+c=0; 直线和圆相切得到四个点    圆心到线的距离等于半径
-            qreal c1 = m_qCircleR*m_scale*sqrt(a*a+b*b) - (a*m_lastPointF.x()+b*m_lastPointF.y());
-            qreal c2 = -m_qCircleR*m_scale*sqrt(a*a+b*b) - (a*m_lastPointF.x()+b*m_lastPointF.y());
-            //求过圆1和圆2的并且和l1和l2垂直的线的方程
-            //la(圆1):bx-ay+ca = 0;  ca = ay-bx
-            qreal ca = a*m_lastPointF.y() - b*m_lastPointF.x();
-
-            //lb(圆2):bx-ay+cb = 0;
-            qreal cb = a*viewPos.y() - b*viewPos.x();
-
-            //A1x+B1x+C1=0;A2x+B2y+C2=0
-            //if(A1*B2-A2*B1 != 0) 有唯一解  x=(B1*C2-B2*C1)/(A1*B2-A2*B1）  y=-(A1*C2-A2*C1)/(A1*B2-A2*B1）
-
-            //与圆得到切点p --- 不容易求，计算过圆心的和l1垂直的线即可轻松得到交点
-            //l1:ax+by+c1=0;   la:bx-ay+ca = 0; p1
-            QPointF p1 = QPointF((b*ca-(-a)*c1)/(a*(-a)-b*b),-(a*ca-b*c1)/(a*(-a)-b*b));
-
-            //l1:ax+by+c1=0;  lb:bx-ay+cb = 0; p2
-            QPointF p2 = QPointF((b*cb-(-a)*c1)/(a*(-a)-b*b),-(a*cb-b*c1)/(a*(-a)-b*b));
-
-            //l2:ax+by+c2=0;   lb:bx-ay+cb = 0; p3
-            QPointF p3 = QPointF((b*cb-(-a)*c2)/(a*(-a)-b*b),-(a*cb-b*c2)/(a*(-a)-b*b));
-
-            //l2:ax+by+c2=0;   la:bx-ay+ca = 0; p4
-            QPointF p4 = QPointF((b*ca-(-a)*c2)/(a*(-a)-b*b),-(a*ca-b*c2)/(a*(-a)-b*b));
-
-            QVector<QPointF> vec;
-            vec.clear();
-            vec.push_back(this->mapToScene(p1.toPoint()));
-            vec.push_back(this->mapToScene(p2.toPoint()));
-            vec.push_back(this->mapToScene(p3.toPoint()));
-            vec.push_back(this->mapToScene(p4.toPoint()));
-
-            QPolygonF polygonF(vec);
-
-
-            //合并区域
-            QPainterPath path;
-            path.addPolygon(polygonF);
-
-            XVRegion region = createPolygon(polygonF);
-
-            if(m_itemType == ItemType::Point){
-                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
-            }else{
-                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
-            }
-            //对两个path通过算法转换成region
-
-            QPainterPath path1;
-            path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
-
-            QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
-                                                  this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
-            XVRegion region1 = createEllipse(rf11,rf11.topLeft(),0);
-
-            if(m_itemType == ItemType::Point){
-                m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Union);
-            }else{
-                m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Difference);
-            }
-            analysis_region(m_region);
-        }
-        this->scene()->update();
+        detailMoveEvent(event);  //事件处理函数
     }else{
         QGraphicsView::mouseMoveEvent(event);
     }
+
     m_lastPointF = viewPos;
 
 }
@@ -227,7 +121,6 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
 
                 m_bPainter = false;
                 //多边形绘制完成，进行转换
-
                 m_vecPoint_Poly.clear();
                 //绘制多边形结束
             }
@@ -434,12 +327,9 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         painter.drawPolygon(this->mapFromScene(m_frameRect));
     }
 
-    painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
+    painter.setPen(QPen(borderColor,0));  //区域采用填充的颜色，原因自己想
     painter.setBrush(brushColor);
 
-
-    if(m_bPainter){
-    }
 
     painter.drawPath(m_path);
 
@@ -448,18 +338,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     }
 
     painter.setPen(QPen(brushColor,m_scale));  //区域采用填充的颜色，原因自己想
-    qDebug()<<painter.pen().width()<<painter.pen().widthF();
     QVector<QLineF> vecLines;
     for(int i=0;i<m_vecLines.size();i++){
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
-//        if(i % 2 == 0){
-//            painter.drawLine(lineF);
-
-////            painter.setPen(QPen(Qt::red,m_scale));
-//        }else{
-////            painter.setPen(QPen(Qt::blue,m_scale));
-//        }
     }
     painter.drawLines(vecLines);
 }
@@ -505,11 +387,9 @@ void VisionGraphView::setItemType(ItemType type){
 
 void VisionGraphView::zoom(float scaleFactor)
 {
-//    scale(1/m_scale, 1/m_scale);
     qreal scaleTemp = scaleFactor/m_scale;  //获取本次缩放相对于上次缩放的比例
     m_scale = scaleFactor;
     scale(scaleTemp, scaleTemp);
-//    qDebug()<<m_scale<<scaleTemp;
 
     if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
         //修改鼠标为绘图样式
@@ -518,8 +398,6 @@ void VisionGraphView::zoom(float scaleFactor)
         this->setCursor(cursor);
         viewCursor = this->cursor();
     }
-
-//    this->viewport()->update();
     this->scene()->update();
     return;
 
@@ -527,7 +405,6 @@ void VisionGraphView::zoom(float scaleFactor)
 
 void VisionGraphView::back_region()
 {
-//    m_iIndex_Region++;
     if(m_vecRegion.count() <= 0)
         return;
     if(m_vecRegion.count()-1 > m_iIndex_Region){
@@ -929,14 +806,118 @@ void VisionGraphView::push_region(XVRegion region, int index)
     }
 }
 
+void VisionGraphView::detailMoveEvent(QMouseEvent *event)
+{
+    QPoint viewPos = event->pos();//获取视口坐标
+    QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
+
+    //2.修改在点击选择选项的时候，item在选中情况下无法move    m_itemType != ItemType::No的原因
+
+    if(m_itemType == ItemType::Rect){
+        //绘制矩形
+        QPainterPath path;
+        path.addRect(QRectF(m_pressPointF,viewPos));
+        m_path = path;
+    }else if(m_itemType == ItemType::EllipseItem){
+        //绘制椭圆
+        QPainterPath path;
+        path.addEllipse(QRectF(m_pressPointF,viewPos));
+        m_path = path;
+    }else if(m_itemType == ItemType::Poly){
+        QPainterPath path;
+        QPolygonF poly(m_vecPoint_Poly);
+        poly.insert(m_vecPoint_Poly.count(),scenePos);  //将最后一点替换成掉
+        path.addPolygon(this->mapFromScene(poly));
+        m_path = path;
+
+    }else if(m_itemType == ItemType::Region){
+        //鼠标绘制任意区域
+        m_vecPoint_Region.append(scenePos);
+        QPainterPath path;
+        QPolygonF poly(m_vecPoint_Region);
+        path.addPolygon(poly);
+        m_path = this->mapFromScene(path);
+    }else if(m_itemType == ItemType::Line){
+        m_Line.setPoints(m_pressPointF_scene.toPoint(),scenePos.toPoint());
+        m_path = QPainterPath(this->mapFromScene(m_pressPointF_scene));
+        m_path.lineTo(this->mapFromScene(scenePos));
+
+    }else if(m_itemType == ItemType::polyLine){
+
+    }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        //鼠标绘制(擦除)
+
+        //计算区域
+        qreal a = viewPos.y() - m_lastPointF.y();
+        qreal b = m_lastPointF.x() - viewPos.x();
+        //ax+by+c=0; 直线和圆相切得到四个点    圆心到线的距离等于半径
+        qreal c1 = m_qCircleR*m_scale*sqrt(a*a+b*b) - (a*m_lastPointF.x()+b*m_lastPointF.y());
+        qreal c2 = -m_qCircleR*m_scale*sqrt(a*a+b*b) - (a*m_lastPointF.x()+b*m_lastPointF.y());
+        //求过圆1和圆2的并且和l1和l2垂直的线的方程
+        //la(圆1):bx-ay+ca = 0;  ca = ay-bx
+        qreal ca = a*m_lastPointF.y() - b*m_lastPointF.x();
+
+        //lb(圆2):bx-ay+cb = 0;
+        qreal cb = a*viewPos.y() - b*viewPos.x();
+
+        //A1x+B1x+C1=0;A2x+B2y+C2=0
+        //if(A1*B2-A2*B1 != 0) 有唯一解  x=(B1*C2-B2*C1)/(A1*B2-A2*B1）  y=-(A1*C2-A2*C1)/(A1*B2-A2*B1）
+
+        //与圆得到切点p --- 不容易求，计算过圆心的和l1垂直的线即可轻松得到交点
+        //l1:ax+by+c1=0;   la:bx-ay+ca = 0; p1
+        QPointF p1 = QPointF((b*ca-(-a)*c1)/(a*(-a)-b*b),-(a*ca-b*c1)/(a*(-a)-b*b));
+
+        //l1:ax+by+c1=0;  lb:bx-ay+cb = 0; p2
+        QPointF p2 = QPointF((b*cb-(-a)*c1)/(a*(-a)-b*b),-(a*cb-b*c1)/(a*(-a)-b*b));
+
+        //l2:ax+by+c2=0;   lb:bx-ay+cb = 0; p3
+        QPointF p3 = QPointF((b*cb-(-a)*c2)/(a*(-a)-b*b),-(a*cb-b*c2)/(a*(-a)-b*b));
+
+        //l2:ax+by+c2=0;   la:bx-ay+ca = 0; p4
+        QPointF p4 = QPointF((b*ca-(-a)*c2)/(a*(-a)-b*b),-(a*ca-b*c2)/(a*(-a)-b*b));
+
+        QVector<QPointF> vec;
+        vec.clear();
+        vec.push_back(this->mapToScene(p1.toPoint()));
+        vec.push_back(this->mapToScene(p2.toPoint()));
+        vec.push_back(this->mapToScene(p3.toPoint()));
+        vec.push_back(this->mapToScene(p4.toPoint()));
+
+        QPolygonF polygonF(vec);
+
+
+        //合并区域
+        QPainterPath path;
+        path.addPolygon(polygonF);
+
+        XVRegion region = createPolygon(polygonF);
+
+        if(m_itemType == ItemType::Point){
+            m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
+        }else{
+            m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
+        }
+        //对两个path通过算法转换成region
+
+        QPainterPath path1;
+        path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
+
+        QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
+                                              this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
+        XVRegion region1 = createEllipse(rf11,rf11.topLeft(),0);
+
+        if(m_itemType == ItemType::Point){
+            m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Union);
+        }else{
+            m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Difference);
+        }
+        analysis_region(m_region);
+    }
+    this->scene()->update();
+}
+
 void VisionGraphView::slotUpdateViewInfo_Pos()
 {
-    qDebug()<<this->x()<<this->y()<<this->width()<<this->height() << "22222222" <<this->sceneRect();
-//    m_frameRect.setRect(this->x(),this->y(),this->width(),this->height());
-//    this->scene()->sceneRect().setTopLeft(QPointF((this->width()-this->scene()->sceneRect().width())/2,(this->height()-this->scene()->sceneRect().height())/2));
-//    m_frameRect.setRect(this->scene()->sceneRect().x(),this->scene()->sceneRect().y(),
-//                        this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-
     //设置了初始构造了sceneWidget后进行对m_frameRect居中
     this->scene()->setSceneRect((m_frameRect.width()-this->width())/2,(m_frameRect.height()-this->height())/2,
                                 this->scene()->sceneRect().width(),this->scene()->sceneRect().height());

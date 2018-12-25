@@ -12,11 +12,9 @@ VisionGraph_Item::VisionGraph_Item(ItemModel model, ToolButtonDirection toolButt
     this->setLayout(mainLayout);
 
     m_toolButtonDirection = toolButtonDirect;
-
     m_model = model;
 
     initScene();
-
     initLayout(toolButtonDirect);
 }
 
@@ -102,6 +100,7 @@ void VisionGraph_Item::initTool_operation()
     sys_clear_button = new QToolButton;
     sys_clear_button->setDefaultAction(sys_clear_action);
     QAction* sys_remove_item = new QAction(QIcon(iconPath+"remove.png"),QStringLiteral("删除当前选中的item"));
+    sys_remove_item->setShortcut(QKeySequence::Delete);
     sys_remove_item->setIconText(QStringLiteral("删除"));
     connect(sys_remove_item,SIGNAL(triggered(bool)),this,SLOT(slot_removeItem_action()));
     sys_remove_item_button = new QToolButton;
@@ -112,6 +111,7 @@ void VisionGraph_Item::initTool_operation()
     tool_Widget = new QToolBar;
     tool_Widget->setMinimumHeight(20);
     tool_Widget->setMovable(false);
+//    tool_Widget->hide();
 
 
     m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
@@ -214,7 +214,6 @@ void VisionGraph_Item::initTool_operation()
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
 
-
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
     m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
@@ -226,13 +225,13 @@ void VisionGraph_Item::initTool_operation()
     m_lstToolBtn.append(sys_zoom_button);
 
     if(m_model == ItemModel::un_self){
+        qDebug()<<"VisionGraph is un_self";
         m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
         m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
         m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
         m_lstAction.append(tool_Widget->addWidget(sys_point_button));
         m_lstAction.append(tool_Widget->addWidget(sys_line_button));
         m_insertAction = tool_Widget->addSeparator();
-
 
         m_lstToolBtn.append(sys_rect_button);
         m_lstToolBtn.append(sys_ellipse_button);
@@ -393,7 +392,10 @@ VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
         VisionRectItem* item = new VisionRectItem(true);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
-            m_curVisionItem = nullptr;
+            if(m_curVisionItem != nullptr){
+                m_curVisionItem->deleteLater();
+                m_curVisionItem = nullptr;
+            }
         });
         item->setRect(rf);
         scene->addItem(item);
@@ -454,7 +456,10 @@ VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
     VisionEllipseItem *item = new VisionEllipseItem(true);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setRect(rf);
     scene->addItem(item);
@@ -468,7 +473,10 @@ VisionLineItem *VisionGraph_Item::addLine(QLine line, QColor color)
     VisionLineItem *item = new VisionLineItem();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setLine(line.p1(),line.p2());
     scene->addItem(item);
@@ -490,7 +498,10 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor c
     VisionPolygon *item = new VisionPolygon();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     if(vecPointF.count() > 0){
         item->setPointFs(vecPointF,true);
@@ -510,7 +521,10 @@ VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
 //    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        m_curVisionItem = nullptr;
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->deleteLater();
+            m_curVisionItem = nullptr;
+        }
     });
     item->setPoint(pointF);
     scene->addItem(item);
@@ -787,6 +801,96 @@ void VisionGraph_Item::setViewRegion_Color(const QColor &color)
     view->setViewRegion_Color(color);
 }
 
+QImage VisionGraph_Item::getBkgImg()
+{
+    QImage image;
+    if(m_bkPixmapItem != nullptr){
+        image = m_bkPixmapItem->pixmap().toImage();
+    }else{
+        qDebug()<<"bkImg is null";
+    }
+    return image;
+}
+
+void VisionGraph_Item::saveBkgImg(QString path)
+{
+    //path==""调用fileDialog进行设置保存
+    if(path == ""){
+        slot_save_action();
+    }else{
+
+        if (m_bkPixmapItem == NULL) return;
+
+        QString fileName = path;
+
+        if(fileName == ""){
+            qDebug()<<"save is failure";
+            return;
+        }
+
+        qDebug()<<fileName;
+        QPixmap map = m_bkPixmapItem->pixmap();
+        if (!map.isNull())
+        {
+            //默认采用时间命名法，
+            /*
+            QDateTime dataTime = QDateTime::currentDateTime();
+            QString imageName = QString::number(dataTime.date().year())+QString::number(dataTime.date().month())+
+                    QString::number(dataTime.date().day())+"_"
+                    +QString::number(dataTime.time().hour())+QString::number(dataTime.time().minute())+
+                    QString::number(dataTime.time().second())+".bmp";
+                    */
+    //        map.save(fileName,"BMP");
+
+            QImage image(scene->width(), scene->height(),QImage::Format_ARGB32);
+            QPainter painter(&image);
+            painter.setRenderHint(QPainter::Antialiasing);
+            scene->render(&painter);
+
+            bool saveSuccess =  image.save(fileName,"BMP");
+            Q_ASSERT(saveSuccess == true);
+        }
+    }
+}
+
+void VisionGraph_Item::removeItem(VisionItem *item)
+{
+    //item == nullptr 默认删除选中的
+    if(item == nullptr){
+        slot_removeItem_action();
+    }else{
+        //直接进行筛选，不考虑当前的
+        if(m_lstItem.count() == 0)
+            return;
+
+        for(int i=0;i<m_lstItem.count();i++){
+            if(m_lstItem[i] == item){
+                m_lstItem.removeAt(i);
+                break;
+            }
+        }
+        scene->removeItem(item);
+
+        if(item == m_curVisionItem){
+            if(m_curVisionItem != nullptr){
+                m_curVisionItem->deleteLater();
+                m_curVisionItem = nullptr;
+            }
+        }
+    }
+}
+
+void VisionGraph_Item::setMousePaintSize(qreal qi)
+{
+    view->setPainterCursorR(qi);
+}
+
+void VisionGraph_Item::setView_Zoom(qreal qZoom)
+{
+    view->zoom(qZoom);
+    comboBox->setEditText(QString::number(qZoom*100)+"%");
+}
+
 void VisionGraph_Item::slot_selected_action()
 {
     view->setItemType(ItemType::No);
@@ -814,7 +918,6 @@ void VisionGraph_Item::slot_mousePainter_action()
     view->setItemType(ItemType::Point);
     m_itemType = ItemType::Point;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
-
 }
 
 void VisionGraph_Item::slot_mouseClear_action()
@@ -822,8 +925,6 @@ void VisionGraph_Item::slot_mouseClear_action()
     view->setItemType(ItemType::NoPoint);
     m_itemType = ItemType::NoPoint;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
-
-
 }
 
 void VisionGraph_Item::slot_save_action()
@@ -972,7 +1073,10 @@ void VisionGraph_Item::slot_removeItem_action()
         }
     }
     scene->removeItem(m_curVisionItem);
-    m_curVisionItem = NULL;
+    if(m_curVisionItem != nullptr){
+        m_curVisionItem->deleteLater();
+        m_curVisionItem = nullptr;
+    }
 
     /*
     qDebug()<<"remove curVisionItem";

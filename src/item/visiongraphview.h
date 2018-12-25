@@ -320,6 +320,7 @@ private:
      */
     void push_region(XVRegion region,int index = 0);
 
+    void detailMoveEvent(QMouseEvent *event);
 };
 
 #endif // VISIONGRAPHVIEW_H

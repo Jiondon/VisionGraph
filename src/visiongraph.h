@@ -248,7 +248,7 @@ public:
     void setViewInfo_Color(QColor backgroundColor, QColor textColor);
 
     /**
-     * @brief       设置icon的路径
+     * @brief       设置工具栏的icon的路径
      */
     void setIconPath(QString iconpath);
 
@@ -269,7 +269,7 @@ public:
     void addToolButton(QToolButton* btn);
 
     /**
-     * @brief       不显示toolbar的view的信息
+     * @brief       不显示toolbar的view的信息 -- 缩放比例和视图的w，h不显示
      */
     void removeToolBarInfoWidget();
 
@@ -294,6 +294,35 @@ public:
      * @brief       设置View的算法区域的color
      */
     void setViewRegion_Color(const QColor &color);
+
+    //补充工具栏的相关api和信息获取
+    /**
+     * @brief       获取背景图片
+     */
+    QImage getBkgImg();
+
+    /**
+     * @brief       保存当前绘图区域的绘制信息，生成图片
+     * @param       path==""调用fileDialog进行设置保存
+     */
+    void saveBkgImg(QString path="");
+
+    /**
+     * @brief       删除具体的item
+     * @param       item == nullptr 默认删除选中的
+     */
+    void removeItem(VisionItem* item = nullptr);
+
+    /**
+     * @brief       设置鼠标绘制的时候，鼠标的大小
+     */
+    void setMousePaintSize(qreal qi);
+
+    /**
+     * @brief       设置view的缩放比例
+     * @param       value = 1 表示是标准大小
+     */
+    void setView_Zoom(qreal qZoom);
 
 signals:
     void signal_RectSizeChanged(VisionItem*);
