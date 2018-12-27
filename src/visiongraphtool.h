@@ -36,6 +36,14 @@ enum ToolButtonDirection{
     bottomDirection
 };
 
+enum ViewType{
+    freeItem,  //随意搭配，不限制
+    singleItem,  //单一item
+    multiItem,  //多个item
+    singleRegion,  //单一区域
+    multiRegion  //多个区域
+};
+
 enum ToolButtonType
 {
     //左侧工具栏 -- 绘制类（操作类）

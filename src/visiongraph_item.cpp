@@ -384,18 +384,36 @@ void VisionGraph_Item::initLayout(ToolButtonDirection toolButtonDirect)
     mainLayout->addLayout(m_vBoxLayout);
 }
 
+bool VisionGraph_Item::checkoutItem()
+{
+    this->scene->update();
+    //在进行交互的时候进行check   程序调用addItem是否有效？
+    if(m_viewType == ViewType::singleItem){
+        //当view要求单一item的时候，执行函数体
+        if(m_lstItem.count() >= 1){
+            //存在item
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        return true;
+    }
+}
+
 
 
 VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
 {
+    if(!checkoutItem())
+        return NULL;
+
     if(bEdit){
         VisionRectItem* item = new VisionRectItem(true);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
-            if(m_curVisionItem != nullptr){
-                m_curVisionItem->deleteLater();
-                m_curVisionItem = nullptr;
-            }
+            m_curVisionItem = nullptr;
+
         });
         item->setRect(rf);
         scene->addItem(item);
@@ -453,13 +471,14 @@ VisionArrow *VisionGraph_Item::_addArrow(QPointF pointF, QColor color)
 
 VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
 {
+    if(!checkoutItem())
+        return NULL;
+
     VisionEllipseItem *item = new VisionEllipseItem(true);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        if(m_curVisionItem != nullptr){
-            m_curVisionItem->deleteLater();
-            m_curVisionItem = nullptr;
-        }
+        m_curVisionItem = nullptr;
+
     });
     item->setRect(rf);
     scene->addItem(item);
@@ -470,13 +489,14 @@ VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
 
 VisionLineItem *VisionGraph_Item::addLine(QLine line, QColor color)
 {
+    if(!checkoutItem())
+        return NULL;
+
     VisionLineItem *item = new VisionLineItem();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        if(m_curVisionItem != nullptr){
-            m_curVisionItem->deleteLater();
-            m_curVisionItem = nullptr;
-        }
+        m_curVisionItem = nullptr;
+
     });
     item->setLine(line.p1(),line.p2());
     scene->addItem(item);
@@ -492,16 +512,17 @@ void VisionGraph_Item::addLines(QList<QLine> lstLine, QColor color)
 
 VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor color)
 {
+    if(!checkoutItem())
+        return NULL;
+
     if(vecPointF.count() <= 0)
         return NULL;
     qDebug()<<"add polygon";
     VisionPolygon *item = new VisionPolygon();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        if(m_curVisionItem != nullptr){
-            m_curVisionItem->deleteLater();
-            m_curVisionItem = nullptr;
-        }
+        m_curVisionItem = nullptr;
+
     });
     if(vecPointF.count() > 0){
         item->setPointFs(vecPointF,true);
@@ -516,15 +537,16 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor c
 
 VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
 {
+    if(!checkoutItem())
+        return NULL;
+
     VisionCrossPointItem *item = new VisionCrossPointItem(true);
 //    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
 //    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
-        if(m_curVisionItem != nullptr){
-            m_curVisionItem->deleteLater();
-            m_curVisionItem = nullptr;
-        }
+        m_curVisionItem = nullptr;
+
     });
     item->setPoint(pointF);
     scene->addItem(item);
@@ -891,6 +913,11 @@ void VisionGraph_Item::setView_Zoom(qreal qZoom)
     comboBox->setEditText(QString::number(qZoom*100)+"%");
 }
 
+void VisionGraph_Item::setViewType(ViewType type)
+{
+    m_viewType = type;
+}
+
 void VisionGraph_Item::slot_selected_action()
 {
     view->setItemType(ItemType::No);
@@ -1044,11 +1071,11 @@ void VisionGraph_Item::slot_clear_action()
     //清除当前的item
     view->clearPainter();
 
-    if(m_curVisionItem != nullptr){
-        m_curVisionItem->hide();
-        m_curVisionItem->deleteLater();
-        m_curVisionItem = nullptr;
-    }
+//    if(m_curVisionItem != nullptr){
+//        m_curVisionItem->hide();
+//        m_curVisionItem->deleteLater();
+//        m_curVisionItem = nullptr;
+//    }
 
     for(int i=0;i<m_lstItem.count();i++){
         scene->removeItem(m_lstItem[i]);
@@ -1056,6 +1083,9 @@ void VisionGraph_Item::slot_clear_action()
         m_lstItem[i] = nullptr;
     }
     m_lstItem.clear();
+
+    m_curVisionItem = nullptr;
+
     qDebug()<<scene->items().count();
 //    scene->clear();  //会将scene中的所有的item都delete
 }
@@ -1073,10 +1103,11 @@ void VisionGraph_Item::slot_removeItem_action()
         }
     }
     scene->removeItem(m_curVisionItem);
-    if(m_curVisionItem != nullptr){
-        m_curVisionItem->deleteLater();
-        m_curVisionItem = nullptr;
-    }
+    m_curVisionItem = nullptr;
+//    if(m_curVisionItem != nullptr){
+//        m_curVisionItem->deleteLater();
+//        m_curVisionItem = nullptr;
+//    }
 
     /*
     qDebug()<<"remove curVisionItem";

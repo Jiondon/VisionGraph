@@ -76,7 +76,7 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->drawRect(0,0,m_width,m_height);
 
     if(option->state & QStyle::State_Selected){
-        qDebug()<<"show miniRect";
+//        qDebug()<<"show miniRect";
         if(m_bSelected1){
             //显示圆1的编辑边框
             for(int i=0;i<4;i++){
@@ -99,7 +99,7 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             }
         }
     }else{
-        qDebug()<<"hide miniRect";
+//        qDebug()<<"hide miniRect";
         for(int i=0;i<8;i++){
             m_lstRect[i]->hide(); //top
         }

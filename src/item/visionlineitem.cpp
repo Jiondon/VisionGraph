@@ -100,7 +100,7 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->translate(m_pointF2);
 
     qreal angle = (alph*180)/3.14159;
-    qDebug()<<angle;
+//    qDebug()<<angle;
     painter->rotate(angle);
     painter->drawLine(QPointF(-10,-5),QPointF(0,0));
     painter->drawLine(QPointF(-10,+5),QPointF(0,0));

@@ -27,6 +27,7 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
         mainLayout->addWidget(m_graphWidget_Item);
         m_graphWidget_Item->setViewRegion_Visible(false);
         m_graphWidget_Item->layout()->setMargin(0);
+//        m_graphWidget_Item->setViewType(ViewType::singleItem);
         brushColor = Qt::transparent;
 
     }else{

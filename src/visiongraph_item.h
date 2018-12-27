@@ -290,11 +290,19 @@ public:
      */
     void setView_Zoom(qreal qZoom);
 
+    /**
+     * @brief       设置view的type
+     * @param       view中显示的内容（viewType） -- 单个item，多个item等
+     */
+    void setViewType(ViewType type = ViewType::freeItem);
+
 private:
     void initScene();
     void initTool_operation();  //水平的工具栏
     void initToolBar();
     void initLayout(ToolButtonDirection toolButtonDirect);
+
+    bool checkoutItem();
 
     QPainterPath and_Item(QPainterPath path1,QPainterPath path2);  //交集  &&
     QPainterPath sub_Item(QPainterPath path1,QPainterPath path2);  //差集  ！
@@ -388,6 +396,7 @@ private:
     QWidget* infoWidget = NULL;
 
     ItemModel m_model = ItemModel::un_self;   //item的模式，用户交互绘制item？
+    ViewType m_viewType = ViewType::freeItem;
 
 private slots:
     //对应Action的槽函数

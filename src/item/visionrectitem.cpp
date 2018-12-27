@@ -225,7 +225,7 @@ QRectF VisionRectItem::boundingRect() const
 
 void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "bbb";
+//    qDebug() << "bbb";
     //鼠标左键
     QGraphicsItem::mousePressEvent(event);
 
