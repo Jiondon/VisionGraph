@@ -40,7 +40,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         QString text_rgb="";
         QString text_gray="";
 //        m_pMouseInfo_Label->move(viewPos+QPoint(5,5));
-        text_pos = (QStringLiteral("坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
+        text_pos = (QStringLiteral("坐标:(")+QString::number(scenePos.x())+","+QString::number(scenePos.y())+")");
 
         //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
 
@@ -70,10 +70,9 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         m_lastPointF = viewPos;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-//        this->move(this->pos().x() - disPointF.x(),this->pos().y() - disPointF.y());
 //        this->viewport()->move(this->pos().x() - disPointF.x(),this->pos().y() - disPointF.y());
 //        this->viewport()->update();
-//        qDebug()<<this->scene()->sceneRect();
+//        qDebug()<<"disPointF : "<<disPointF<<"scene pos : "<<scenePos<<"last PointF : "<<m_lastPointF<<this->scene()->sceneRect();
 //        this->scene()->update();
         return;
     }
@@ -338,10 +337,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.drawLines(vecLines);
 
     //绘制画布的坐标系
-//    painter.setPen(QPen(Qt::red,0));
-//    painter.drawLine(this->rect().topLeft(),this->rect().topLeft()+QPointF(500,0));
-//    painter.drawLine(this->rect().topLeft(),this->rect().topLeft()+QPointF(0,500));
+    painter.setPen(QPen(Qt::red,0));
 
+    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(500,0)));
+    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(0,500)));
     //绘制list region
 //    vector<XVPointRun> vec_point;
 
@@ -420,7 +419,9 @@ void VisionGraphView::zoom(float scaleFactor)
         this->setCursor(cursor);
         viewCursor = this->cursor();
     }
-//    qDebug()<<this->sceneRect()<<this->scene()->sceneRect()<<this->rect();
+//    qDebug()<<this->width()<<m_scale<<this->mapToScene(this->rect()).boundingRect();
+    //解决放大和缩小后，将scene的画布区域设置为view的区域，（view的区域转换为scene区域）
+    this->scene()->setSceneRect(this->mapToScene(this->rect()).boundingRect());
     this->scene()->update();
     return;
 

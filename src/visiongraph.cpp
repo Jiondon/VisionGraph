@@ -18,14 +18,14 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }else if(type == GraphType::graphItem_self){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
-        m_graphWidget_Item->setViewRegion_Visible(false);
+//        m_graphWidget_Item->setViewRegion_Visible(false);
         m_graphWidget_Item->layout()->setMargin(0);
         brushColor = Qt::transparent;
 
     }else if(type == GraphType::graphItem_unSelf){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
-        m_graphWidget_Item->setViewRegion_Visible(false);
+//        m_graphWidget_Item->setViewRegion_Visible(false);
         m_graphWidget_Item->layout()->setMargin(0);
 //        m_graphWidget_Item->setViewType(ViewType::singleItem);
         brushColor = Qt::transparent;
