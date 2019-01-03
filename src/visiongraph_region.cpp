@@ -284,9 +284,9 @@ void VisionGraph_Region::initTool_operation()
     pSpinBox_w->setMinimum(1);  // 最小值
     pSpinBox_w->setMaximum(5000);  // 最大值
     pSpinBox_w->setSingleStep(5);  // 步长
-    pSpinBox_w->setValue(800);
     pSpinBox_w->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
+    pSpinBox_w->setValue(800);
     connect(pSpinBox_w,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
 
     label_h = new QLabel;
@@ -297,9 +297,9 @@ void VisionGraph_Region::initTool_operation()
     pSpinBox_h->setMinimum(1);  // 最小值
     pSpinBox_h->setMaximum(5000);  // 最大值
     pSpinBox_h->setSingleStep(5);  // 步长
-    pSpinBox_h->setValue(600);
     pSpinBox_h->setStyleSheet("QSpinBox::up-button{width:0;height:0;}"
         "QSpinBox::down-button{width:0;height:0;}");
+    pSpinBox_h->setValue(600);
     connect(pSpinBox_h,SIGNAL(valueChanged(int)),this,SLOT(slot_SpinBox_ViewRegionSize(int)));
 
 
@@ -567,6 +567,7 @@ int VisionGraph_Region::setBkImg(QImage image)
         scene->addItem(m_bkPixmapItem);
     }
     m_bkPixmapItem->setPixmap(QPixmap::fromImage(image));
+    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
 
     //根据Scene中的元件来确定Scene的大小  背景图片作为scene的大小，当设置背景图片的时候，scene的大小跟随变化
 //    if (image.width() > viewWidth)
@@ -823,6 +824,15 @@ void VisionGraph_Region::setViewRegion_Size(qreal w, qreal h)
     pSpinBox_h->setValue(h);
 }
 
+qreal VisionGraph_Region::adjustSize(qreal w, qreal h)
+{
+    qreal q = view->adjustSize(w,h);
+    pSpinBox_w->setValue(w);
+    pSpinBox_h->setValue(h);
+    comboBox->setEditText(QString::number((int)(q*100))+"%");
+    return q;
+}
+
 void VisionGraph_Region::setViewRegion_Visible(bool bVisible)
 {
     view->setViewRegion_Visible(bVisible);
@@ -990,7 +1000,8 @@ void VisionGraph_Region::slot_open_action()
 
     qDebug()<<fileName;
     if(fileName != ""){
-        m_bkPixmapItem->setPixmap(QPixmap(fileName).scaled(800,600,Qt::KeepAspectRatioByExpanding));
+        m_bkPixmapItem->setPixmap(QPixmap(fileName));
+        this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     }
 }
 
@@ -1113,6 +1124,7 @@ void VisionGraph_Region::slot_SizeChanged(QString currentSize)
     bool ok;
     float scale = str.toFloat(&ok);
     if(ok){
+        m_zoom = scale/100;
         view->zoom(scale/100);
     }
 }

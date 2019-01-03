@@ -251,6 +251,10 @@ public:
      */
     void setViewRegion_Size(qreal w,qreal h);
 
+    /**
+     * @brief       自适应大小并居中，返回缩放的比例（放大或者缩小，1-正常大小）-- 算法区域
+     */
+    qreal adjustSize(qreal w,qreal h);
 
     /**
      * @brief       设置View的算法区域的Visible

@@ -337,10 +337,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.drawLines(vecLines);
 
     //绘制画布的坐标系
-    painter.setPen(QPen(Qt::red,0));
+//    painter.setPen(QPen(Qt::red,0));
 
-    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(500,0)));
-    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(0,500)));
+//    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(500,0)));
+//    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(0,500)));
     //绘制list region
 //    vector<XVPointRun> vec_point;
 
@@ -486,7 +486,7 @@ void VisionGraphView::setViewInfo_Visible(bool bVisible)
 
 void VisionGraphView::setViewInfo_Pos(Corner corner)
 {
-    qDebug()<<this->width()<<this->height() << "111111111" <<this->sceneRect();
+//    qDebug()<<this->width()<<this->height() << "111111111" <<this->sceneRect();
     m_Corner = corner;
     if(corner == Corner::topLeft){
         m_pLabelInfo->move(2,2);
@@ -529,7 +529,6 @@ void VisionGraphView::setViewInfo_Color(QColor backgroundColor, QColor textColor
 
 void VisionGraphView::setViewRegion_Size(qreal w, qreal h)
 {
-    qDebug()<<"setViewRegion_size  "<<w<<h;
     m_frameRect.setWidth(w);
     m_frameRect.setHeight(h);
     this->scene()->update();
@@ -549,7 +548,10 @@ void VisionGraphView::setViewRegion_Color(const QColor &color)
 
 void VisionGraphView::viewRegion_OriginPos()
 {
-    this->scene()->setSceneRect((m_frameRect.width()-this->width())/2,(m_frameRect.height()-this->height())/2,
+//    QRectF rf_1 = this->mapToScene(m_frameRect.toRect()).boundingRect();
+    QRectF rf_1 = m_frameRect.toRect();
+    QRectF rf_2 = this->mapToScene(this->rect()).boundingRect();
+    this->scene()->setSceneRect((rf_1.width()-rf_2.width())/2,(rf_1.height()-rf_2.height())/2,
                                 this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
 }
 
@@ -612,6 +614,29 @@ void VisionGraphView::resize(int w, int h)
 {
     QGraphicsView::resize(w,h);
     this->scene()->setSceneRect(this->scene()->sceneRect().x(),this->scene()->sceneRect().y(),w,h);
+}
+
+qreal VisionGraphView::adjustSize(qreal w, qreal h)
+{
+    qreal qw = this->width()/w;
+    qreal qh = this->height()/h;
+    qreal q;
+//    qDebug()<<qw<<qh;
+    if(qw > qh){
+        q = qh;
+    }else{
+        q = qw;
+    }
+
+    if(q > 5){
+        q = 5;
+    }
+    zoom(q);
+
+    m_frameRect.setWidth(w);
+    m_frameRect.setHeight(h);
+    viewRegion_OriginPos();
+    return q;
 }
 
 

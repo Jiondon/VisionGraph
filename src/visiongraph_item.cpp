@@ -566,6 +566,7 @@ int VisionGraph_Item::setBkImg(QImage image)
         scene->addItem(m_bkPixmapItem);
     }
     m_bkPixmapItem->setPixmap(QPixmap::fromImage(image));
+    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     return 0;
 }
 
@@ -813,6 +814,15 @@ void VisionGraph_Item::setViewRegion_Size(qreal w, qreal h)
     pSpinBox_h->setValue(h);
 }
 
+qreal VisionGraph_Item::adjustSize(qreal w, qreal h)
+{
+    qreal q = view->adjustSize(w,h);
+    pSpinBox_w->setValue(w);
+    pSpinBox_h->setValue(h);
+    comboBox->setEditText(QString::number((int)(q*100))+"%");
+    return q;
+}
+
 void VisionGraph_Item::setViewRegion_Visible(bool bVisible)
 {
     view->setViewRegion_Visible(bVisible);
@@ -1052,7 +1062,8 @@ void VisionGraph_Item::slot_open_project()
 
     qDebug()<<fileName;
     if(fileName != ""){
-        m_bkPixmapItem->setPixmap(QPixmap(fileName).scaled(800,600));
+        m_bkPixmapItem->setPixmap(QPixmap(fileName));
+        this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     }
 }
 
@@ -1321,6 +1332,7 @@ void VisionGraph_Item::slot_SizeChanged(QString currentSize)
     bool ok;
     float scale = str.toFloat(&ok);
     if(ok){
+        m_zoom = scale/100;
         view->zoom(scale/100);
     }
 }

@@ -210,6 +210,12 @@ public:
     void resize(const QSize &size);
     void resize(int w, int h);
 
+    /**
+     * @brief       自适应大小并居中，返回缩放的比例（放大或者缩小，1-正常大小）
+     */
+    qreal adjustSize(qreal w,qreal h);
+
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);
