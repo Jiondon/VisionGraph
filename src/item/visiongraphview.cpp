@@ -64,10 +64,17 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 
     //拖动
     if(m_bPress && m_itemType == ItemType::Drag){
-        QPointF disPointF = viewPos - m_lastPointF;
+//        QPointF disPointF = viewPos - m_lastPointF;
+//        m_lastPointF = viewPos;
+        QPointF disPointF = scenePos - (this->mapToScene(m_lastPointF.toPoint()));
         m_lastPointF = viewPos;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+//        this->move(this->pos().x() - disPointF.x(),this->pos().y() - disPointF.y());
+//        this->viewport()->move(this->pos().x() - disPointF.x(),this->pos().y() - disPointF.y());
+//        this->viewport()->update();
+//        qDebug()<<this->scene()->sceneRect();
+//        this->scene()->update();
         return;
     }
 
@@ -75,7 +82,10 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     if(m_bPainter && m_bPress && m_itemType != ItemType::No){
         detailMoveEvent(event);  //事件处理函数
     }else{
-        QGraphicsView::mouseMoveEvent(event);
+        if(m_itemType != ItemType::Drag){
+            //鼠标在没有按下的情况下，鼠标拖动事件也屏蔽掉item部分
+            QGraphicsView::mouseMoveEvent(event);
+        }
     }
 
     m_lastPointF = viewPos;
@@ -84,8 +94,6 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 
 void VisionGraphView::mousePressEvent(QMouseEvent *event)
 {
-    QGraphicsView::mousePressEvent(event);
-
     QPoint viewPos = event->pos();//获取视口坐标
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
 
@@ -94,17 +102,10 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
     m_pressPointF = viewPos;
     m_pressPointF_scene = scenePos;
 
-    if(m_itemType == ItemType::Zoom){
-        //缩放
-        if(m_bZoom){
-            //放大
-            emit signal_wheel(1);
-        }else{
-            //缩小
-            emit signal_wheel(-1);
-        }
+    if(m_itemType == ItemType::Drag)
         return;
-    }
+
+    QGraphicsView::mousePressEvent(event);
 
     if(m_bPainter){
         if(event->button() == Qt::RightButton){
@@ -123,6 +124,7 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
                 //多边形绘制完成，进行转换
                 m_vecPoint_Poly.clear();
                 //绘制多边形结束
+                setItemType(ItemType::No);
             }
         }else if(event->button() == Qt::LeftButton){
             //绘制矩形
@@ -131,13 +133,10 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
             }else if(m_itemType == ItemType::EllipseItem){
 
             }else if(m_itemType == ItemType::Poly){
-
                 m_vecPoint_Poly.append(m_pressPointF_scene);
-
             }else if(m_itemType == ItemType::CrossPoint){
-
                 emit signal_Item_point(m_pressPointF_scene);
-
+                setItemType(ItemType::No);
             }else if(m_itemType == ItemType::Line){
 
             }else if(m_itemType == ItemType::polyLine){
@@ -161,22 +160,22 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
             }
         }
     }
-
-
     this->scene()->update();
 }
 
 void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseReleaseEvent(event);
-
     QPoint viewPos = event->pos();//获取视口坐标
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
-
     m_releasePointF = viewPos;
+    m_bPress = false;
+
+    if(m_itemType == ItemType::Drag)
+        return;
+
+    QGraphicsView::mouseReleaseEvent(event);
 
     if(m_bPainter){
-
         if(m_itemType == Rect){
             QPointF topLeftPoint;
             QPointF bottomRightPoint;
@@ -202,6 +201,8 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             m_path = path;
 
             m_bPainter = false;
+            setItemType(ItemType::No);
+
         }else if(m_itemType == EllipseItem){
 
             QPointF topLeftPoint;
@@ -228,6 +229,8 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             m_path = path;
 
             m_bPainter = false;
+            setItemType(ItemType::No);
+
         }else if(m_itemType == ItemType::Line){
 
             QPainterPath path;
@@ -235,7 +238,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
 
             signal_Item_Line(m_Line);
             m_bPainter = false;
-
+            setItemType(ItemType::No);
         }else if(m_itemType == ItemType::polyLine){
 
         }else if(m_itemType == ItemType::CrossPoint){
@@ -258,9 +261,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             this->scene()->update();
         }
     }
-
     m_lstPoint.clear();
-    m_bPress = false;
 }
 
 void VisionGraphView::wheelEvent(QWheelEvent *event)
@@ -270,6 +271,9 @@ void VisionGraphView::wheelEvent(QWheelEvent *event)
 
 void VisionGraphView::enterEvent(QEvent *event)
 {
+    if(m_itemType == ItemType::Drag)
+        return;
+
     QGraphicsView::enterEvent(event);
 
     if(m_itemType != ItemType::No){
@@ -300,13 +304,6 @@ void VisionGraphView::enterEvent(QEvent *event)
     }
     viewCursor = this->cursor();
 
-    //设置鼠标所在位置的信息显示
-    if(m_itemType == ItemType::No || m_itemType == ItemType::Zoom)
-    {
-//        m_pMouseInfo_Label->show();
-    }else{
-//        m_pMouseInfo_Label->hide();
-    }
 }
 
 void VisionGraphView::leaveEvent(QEvent *event)
@@ -318,19 +315,14 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 {
     QGraphicsView::paintEvent(event);
 
-
-    QPainter painter(this->viewport());    
+    QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing,true);
-
     if(m_bFrameVisible){
         painter.setPen(QPen(m_FrameColor,0));
         painter.drawPolygon(this->mapFromScene(m_frameRect));
     }
-
     painter.setPen(QPen(borderColor,0));  //区域采用填充的颜色，原因自己想
     painter.setBrush(brushColor);
-
-
     painter.drawPath(m_path);
 
     if(m_clearAll){
@@ -344,7 +336,37 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         vecLines.append(lineF);
     }
     painter.drawLines(vecLines);
+
+    //绘制画布的坐标系
+//    painter.setPen(QPen(Qt::red,0));
+//    painter.drawLine(this->rect().topLeft(),this->rect().topLeft()+QPointF(500,0));
+//    painter.drawLine(this->rect().topLeft(),this->rect().topLeft()+QPointF(0,500));
+
+    //绘制list region
+//    vector<XVPointRun> vec_point;
+
+//    for(int i=0;i<m_lstRegion.count();i++){
+//        vec_point.clear();
+//        vec_point = m_lstRegion[i].key(i).arrayPointRun;
+
+//        XVPointRun pointRun;
+//        for(int i=0;i<vec_point.size();i++){
+//            pointRun = vec_point.at(i);
+//            painter.drawLine((QPointF(pointRun.x,pointRun.y)),
+//                             (QPointF(pointRun.x+pointRun.length,pointRun.y)));
+//        }
+    //    }
 }
+
+//bool VisionGraphView::eventFilter(QObject *obj, QEvent *event)
+//{
+//    if(m_itemType == ItemType::Drag){
+//        qDebug()<<"eventFilter Drag";
+//        return true;
+//    }else{
+//        return false;
+//    }
+//}
 
 void VisionGraphView::setItemType(ItemType type){
     m_bPainter = true;
@@ -398,6 +420,7 @@ void VisionGraphView::zoom(float scaleFactor)
         this->setCursor(cursor);
         viewCursor = this->cursor();
     }
+//    qDebug()<<this->sceneRect()<<this->scene()->sceneRect()<<this->rect();
     this->scene()->update();
     return;
 
@@ -551,6 +574,31 @@ void VisionGraphView::itemCursorToViewCursor()
         this->setCursor(Qt::ArrowCursor);
     }
     viewCursor = this->cursor();
+}
+
+void VisionGraphView::addRegion(XVRegion region)
+{
+//    m_lstRegion.append(region);
+}
+
+void VisionGraphView::removeRegion(XVRegion region)
+{
+//    for(int i=0;i<m_lstRegion.count();i++){
+//        if(m_lstRegion[i] == region){
+//            m_lstRegion.removeAt(i);
+//            break;
+//        }
+//    }
+}
+
+void VisionGraphView::setRegions(QList<XVRegion> lstRegion)
+{
+//    m_lstRegion.append(lstRegion);
+}
+
+void VisionGraphView::clearRegion()
+{
+//    m_lstRegion.clear();
 }
 
 void VisionGraphView::resize(const QSize &size)

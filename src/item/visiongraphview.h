@@ -31,6 +31,12 @@ enum Corner{
     bottomLeft,
 };
 
+enum ViewModel{
+    SelectModel,
+    DragModel,
+    PaintModel
+};
+
 class VISIONGRAPHSHARED_EXPORT VisionGraphView : public QGraphicsView
 {
     Q_OBJECT
@@ -74,6 +80,8 @@ public:
      */
     void paintEvent(QPaintEvent* event);
 
+//    virtual bool eventFilter(QObject *obj, QEvent *event);
+public:
 
     /**
      * @brief       修改绘制的item时候触发
@@ -179,6 +187,25 @@ public:
      */
     void itemCursorToViewCursor();
 
+    /**
+     * @brief       多region的添加
+     */
+    void addRegion(XVRegion region);
+
+    /**
+     * @brief       多region的删除
+     */
+    void removeRegion(XVRegion region);
+
+    /**
+     * @brief       设置多region
+     */
+    void setRegions(QList<XVRegion> lstRegion);
+
+    /**
+     * @brief       清空region
+     */
+    void clearRegion();
 
     void resize(const QSize &size);
     void resize(int w, int h);
@@ -227,6 +254,7 @@ private:
     XVCreateRegionIn regionIn;
     QVector<QLineF> m_vecLines;
     XVRegion  m_region;  //记录绘制的区域  每一次新操作生成的区域，将和该区域进行并集或者差集运算
+    QList<QMap<XVRegion,int>> m_lstRegion;  //记录区域链表（多个区域）
 
     QVector<XVRegion>  m_vecRegion;   //生成区域的记录
     int m_iIndex_Region = 0;   //撤销多少步的记录
