@@ -334,27 +334,26 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
     }
-    painter.drawLines(vecLines);
+//    painter.drawLines(vecLines);
+
 
     //绘制画布的坐标系
 //    painter.setPen(QPen(Qt::red,0));
-
 //    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(500,0)));
 //    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(0,500)));
+
     //绘制list region
-//    vector<XVPointRun> vec_point;
-
-//    for(int i=0;i<m_lstRegion.count();i++){
-//        vec_point.clear();
-//        vec_point = m_lstRegion[i].key(i).arrayPointRun;
-
-//        XVPointRun pointRun;
-//        for(int i=0;i<vec_point.size();i++){
-//            pointRun = vec_point.at(i);
-//            painter.drawLine((QPointF(pointRun.x,pointRun.y)),
-//                             (QPointF(pointRun.x+pointRun.length,pointRun.y)));
-//        }
-    //    }
+    vector<XVPointRun> vec_point;
+    for(int i=0;i<m_lstRegion.count();i++){
+        vec_point.clear();
+        vec_point = m_lstRegion[i].region.arrayPointRun;
+        XVPointRun pointRun;
+        for(int i=0;i<vec_point.size();i++){
+            pointRun = vec_point.at(i);
+            painter.drawLine(this->mapFromScene(QPointF(pointRun.x,pointRun.y).toPoint()),
+                             this->mapFromScene(QPointF(pointRun.x+pointRun.length,pointRun.y).toPoint()));
+        }
+    }
 }
 
 //bool VisionGraphView::eventFilter(QObject *obj, QEvent *event)
@@ -579,29 +578,30 @@ void VisionGraphView::itemCursorToViewCursor()
     viewCursor = this->cursor();
 }
 
-void VisionGraphView::addRegion(XVRegion region)
+void VisionGraphView::addRegion(XVRegionPair regionPair)
 {
-//    m_lstRegion.append(region);
+    m_lstRegion.append(regionPair);
 }
 
-void VisionGraphView::removeRegion(XVRegion region)
+void VisionGraphView::removeRegion(XVRegionPair regionPair)
 {
-//    for(int i=0;i<m_lstRegion.count();i++){
-//        if(m_lstRegion[i] == region){
-//            m_lstRegion.removeAt(i);
-//            break;
-//        }
-//    }
+    for(int i=0;i<m_lstRegion.count();i++){
+        qDebug()<<m_lstRegion[i].value<<regionPair.value;
+        if(m_lstRegion[i].value == regionPair.value){
+            m_lstRegion.removeAt(i);
+            break;
+        }
+    }
 }
 
-void VisionGraphView::setRegions(QList<XVRegion> lstRegion)
+void VisionGraphView::setRegions(QList<XVRegionPair> lstRegionPair)
 {
-//    m_lstRegion.append(lstRegion);
+    m_lstRegion.append(lstRegionPair);
 }
 
 void VisionGraphView::clearRegion()
 {
-//    m_lstRegion.clear();
+    m_lstRegion.clear();
 }
 
 void VisionGraphView::resize(const QSize &size)
@@ -646,7 +646,7 @@ void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
     m_path = this->mapFromScene(path);
 }
 
-void VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemType type,QRectF rf,QPointF leftTop,qreal angle)
+XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemType type,QRectF rf,QPointF leftTop,qreal angle)
 {
     if(!selected){
         //编辑完成，获取已经确定的区域的点集合，同时将对应的临时path清空
@@ -677,16 +677,18 @@ void VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemType t
             QPainterPath path;
             m_path = path;
         }
-
-        item->hide();item->deleteLater();item = NULL;
+        if(item != NULL){
+            item->hide();item->deleteLater();item = NULL;
+        }
     }
     this->scene()->update();
+    return m_region;
 }
 
-void VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF)
+XVRegion VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF)
 {
     if(selected)
-        return;
+        return m_region;
 
 
     QPolygonF polyF(vecPointF);
@@ -701,8 +703,11 @@ void VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemT
     QPainterPath path;
     m_path = path;
 
-    item->hide();item->deleteLater();item = NULL;
+    if(item != NULL){
+        item->hide();item->deleteLater();item = NULL;
+    }
     this->scene()->update();
+    return m_region;
 }
 
 XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2, XVCombineRegionsType combineType)

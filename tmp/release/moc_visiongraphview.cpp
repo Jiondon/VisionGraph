@@ -52,15 +52,15 @@ QT_MOC_LITERAL(16, 167, 15), // "slot_updateItem"
 QT_MOC_LITERAL(17, 183, 12), // "QPainterPath"
 QT_MOC_LITERAL(18, 196, 4), // "path"
 QT_MOC_LITERAL(19, 201, 15), // "slot_updatePath"
-QT_MOC_LITERAL(20, 217, 8), // "selected"
-QT_MOC_LITERAL(21, 226, 11), // "VisionItem*"
-QT_MOC_LITERAL(22, 238, 4), // "item"
-QT_MOC_LITERAL(23, 243, 7), // "leftTop"
-QT_MOC_LITERAL(24, 251, 5), // "angle"
-QT_MOC_LITERAL(25, 257, 19), // "slot_CreatePolygonF"
-QT_MOC_LITERAL(26, 277, 9), // "vecPointF"
-QT_MOC_LITERAL(27, 287, 18), // "slot_CombineRegion"
-QT_MOC_LITERAL(28, 306, 8), // "XVRegion"
+QT_MOC_LITERAL(20, 217, 8), // "XVRegion"
+QT_MOC_LITERAL(21, 226, 8), // "selected"
+QT_MOC_LITERAL(22, 235, 11), // "VisionItem*"
+QT_MOC_LITERAL(23, 247, 4), // "item"
+QT_MOC_LITERAL(24, 252, 7), // "leftTop"
+QT_MOC_LITERAL(25, 260, 5), // "angle"
+QT_MOC_LITERAL(26, 266, 19), // "slot_CreatePolygonF"
+QT_MOC_LITERAL(27, 286, 9), // "vecPointF"
+QT_MOC_LITERAL(28, 296, 18), // "slot_CombineRegion"
 QT_MOC_LITERAL(29, 315, 7), // "region1"
 QT_MOC_LITERAL(30, 323, 7), // "region2"
 QT_MOC_LITERAL(31, 331, 20), // "XVCombineRegionsType"
@@ -73,11 +73,12 @@ QT_MOC_LITERAL(33, 364, 22) // "slotUpdateViewInfo_Pos"
     "type\0rf\0signal_Item_poly\0QVector<QPointF>\0"
     "vecPoint\0signal_Item_point\0signal_Item_Line\0"
     "line\0slot_updateItem\0QPainterPath\0"
-    "path\0slot_updatePath\0selected\0VisionItem*\0"
-    "item\0leftTop\0angle\0slot_CreatePolygonF\0"
-    "vecPointF\0slot_CombineRegion\0XVRegion\0"
-    "region1\0region2\0XVCombineRegionsType\0"
-    "combineType\0slotUpdateViewInfo_Pos"
+    "path\0slot_updatePath\0XVRegion\0selected\0"
+    "VisionItem*\0item\0leftTop\0angle\0"
+    "slot_CreatePolygonF\0vecPointF\0"
+    "slot_CombineRegion\0region1\0region2\0"
+    "XVCombineRegionsType\0combineType\0"
+    "slotUpdateViewInfo_Pos"
 };
 #undef QT_MOC_LITERAL
 
@@ -105,8 +106,8 @@ static const uint qt_meta_data_VisionGraphView[] = {
  // slots: name, argc, parameters, tag, flags
       16,    2,   89,    2, 0x0a /* Public */,
       19,    6,   94,    2, 0x0a /* Public */,
-      25,    4,  107,    2, 0x0a /* Public */,
-      27,    3,  116,    2, 0x0a /* Public */,
+      26,    4,  107,    2, 0x0a /* Public */,
+      28,    3,  116,    2, 0x0a /* Public */,
       33,    0,  123,    2, 0x0a /* Public */,
 
  // signals: parameters
@@ -119,9 +120,9 @@ static const uint qt_meta_data_VisionGraphView[] = {
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 7, 0x80000000 | 17,    8,   18,
-    QMetaType::Void, QMetaType::Bool, 0x80000000 | 21, 0x80000000 | 7, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,   20,   22,    8,    9,   23,   24,
-    QMetaType::Void, QMetaType::Bool, 0x80000000 | 21, 0x80000000 | 7, 0x80000000 | 11,   20,   22,    8,   26,
-    0x80000000 | 28, 0x80000000 | 28, 0x80000000 | 28, 0x80000000 | 31,   29,   30,   32,
+    0x80000000 | 20, QMetaType::Bool, 0x80000000 | 22, 0x80000000 | 7, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,   21,   23,    8,    9,   24,   25,
+    0x80000000 | 20, QMetaType::Bool, 0x80000000 | 22, 0x80000000 | 7, 0x80000000 | 11,   21,   23,    8,   27,
+    0x80000000 | 20, 0x80000000 | 20, 0x80000000 | 20, 0x80000000 | 31,   29,   30,   32,
     QMetaType::Void,
 
        0        // eod
@@ -140,8 +141,10 @@ void VisionGraphView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 4: _t->signal_Item_point((*reinterpret_cast< QPointF(*)>(_a[1]))); break;
         case 5: _t->signal_Item_Line((*reinterpret_cast< QLine(*)>(_a[1]))); break;
         case 6: _t->slot_updateItem((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QPainterPath(*)>(_a[2]))); break;
-        case 7: _t->slot_updatePath((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6]))); break;
-        case 8: _t->slot_CreatePolygonF((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4]))); break;
+        case 7: { XVRegion _r = _t->slot_updatePath((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6])));
+            if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
+        case 8: { XVRegion _r = _t->slot_CreatePolygonF((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4])));
+            if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
         case 9: { XVRegion _r = _t->slot_CombineRegion((*reinterpret_cast< XVRegion(*)>(_a[1])),(*reinterpret_cast< XVRegion(*)>(_a[2])),(*reinterpret_cast< XVCombineRegionsType(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
         case 10: _t->slotUpdateViewInfo_Pos(); break;

@@ -37,6 +37,12 @@ enum ViewModel{
     PaintModel
 };
 
+
+struct XVRegionPair {
+    XVRegion region;
+    int value;
+};
+
 class VISIONGRAPHSHARED_EXPORT VisionGraphView : public QGraphicsView
 {
     Q_OBJECT
@@ -190,17 +196,17 @@ public:
     /**
      * @brief       多region的添加
      */
-    void addRegion(XVRegion region);
+    void addRegion(XVRegionPair regionPair);
 
     /**
      * @brief       多region的删除
      */
-    void removeRegion(XVRegion region);
+    void removeRegion(XVRegionPair regionPair);
 
     /**
      * @brief       设置多region
      */
-    void setRegions(QList<XVRegion> lstRegion);
+    void setRegions(QList<XVRegionPair> lstRegionPair);
 
     /**
      * @brief       清空region
@@ -260,7 +266,7 @@ private:
     XVCreateRegionIn regionIn;
     QVector<QLineF> m_vecLines;
     XVRegion  m_region;  //记录绘制的区域  每一次新操作生成的区域，将和该区域进行并集或者差集运算
-    QList<QMap<XVRegion,int>> m_lstRegion;  //记录区域链表（多个区域）
+    QList<XVRegionPair> m_lstRegion;  //记录区域链表（多个区域）
 
     QVector<XVRegion>  m_vecRegion;   //生成区域的记录
     int m_iIndex_Region = 0;   //撤销多少步的记录
@@ -293,13 +299,13 @@ public slots:
     /**
      * @brief       接收临时绘制完成，将该次绘制的区域，通过算法进行转换转换
      */
-    void slot_updatePath(bool selected, VisionItem *item, ItemType type, QRectF rf, QPointF leftTop, qreal angle);
+    XVRegion slot_updatePath(bool selected, VisionItem *item, ItemType type, QRectF rf, QPointF leftTop, qreal angle);
 
 
     /**
      * @brief       接收临时绘制完成，将该次绘制的区域，通过算法进行转换转换
      */
-    void slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF);
+    XVRegion slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF);
 
 
 

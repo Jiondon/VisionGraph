@@ -71,7 +71,6 @@ enum ToolButtonType
     ToolButtonSys_next,   //取消撤销
     ToolButtonSys_clear,  //清空绘图区域
     ToolButtonSys_remove_item,  //删除当前选中的item
-
 };
 
 #endif // VISIONGRAPHTOOL_H
