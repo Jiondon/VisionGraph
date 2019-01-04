@@ -334,7 +334,7 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
     }
-//    painter.drawLines(vecLines);
+    painter.drawLines(vecLines);
 
 
     //绘制画布的坐标系

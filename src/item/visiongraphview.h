@@ -209,6 +209,14 @@ public:
     void setRegions(QList<XVRegionPair> lstRegionPair);
 
     /**
+     * @brief       获取多region
+     */
+    QList<XVRegionPair> getRegions()
+    {
+        return m_lstRegion;
+    }
+
+    /**
      * @brief       清空region
      */
     void clearRegion();
