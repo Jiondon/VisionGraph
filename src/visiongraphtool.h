@@ -50,6 +50,7 @@ enum ToolButtonType
     ToolButtonSys_selected, //选中
     ToolButtonSys_drag, //拖动
     ToolButtonSys_zoom, //缩放
+    ToolButtonSys_Fit,
 
     ToolButtonSys_mousePainter, //鼠标绘制
     ToolButtonSys_mouseClear, //鼠标清除

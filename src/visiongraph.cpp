@@ -34,7 +34,6 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
         qDebug()<<"VisionGraph is Error";
     }
     m_type = type;
-//    setStyleSheet(QString::fromUtf8("border:1px solid red"));
     this->setLayout(mainLayout);
 }
 

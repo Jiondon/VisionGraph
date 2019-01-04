@@ -312,7 +312,8 @@ private:
     //左侧工具栏 -- 绘制类（操作类）
     QToolButton *sys_selected_button;
     QToolButton *sys_drag_button;
-    QToolButton *sys_zoom_button;
+    QToolButton *sys_zoom_button;  //将拖动的恢复到当前窗口
+    QToolButton *sys_fit_button;  //调整比例，适应当前窗口
 
     QToolButton *sys_mousePainter_button;
     QToolButton *sys_mouseClear_button;
@@ -370,6 +371,7 @@ private slots:
     void slot_selected_action();
     void slot_drag_action();
     void slot_zoom_action();
+    void slot_fit_action();
 
     void slot_mousePainter_action();
     void slot_mouseClear_action();

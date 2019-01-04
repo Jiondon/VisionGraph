@@ -46,10 +46,8 @@ void VisionGraph_Item::initScene()
     scene = new VisionGraphScene(sceneWidget);
     scene->setSceneRect(0,0,800,600);
     view->setScene(scene);
-//    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
 
     m_bkPixmapItem = new QGraphicsPixmapItem();
-    m_bkPixmapItem->setPixmap(QPixmap(":/bgk.bmp"));
     scene->addItem(m_bkPixmapItem);
 
     m_mousePixmap = new QGraphicsPixmapItem();
@@ -57,14 +55,6 @@ void VisionGraph_Item::initScene()
     m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(10*2,10*2));
     scene->addItem(m_mousePixmap);
     m_mousePixmap->hide();
-
-
-    //显示操作信息
-//    label_Operation = new QLabel(this);
-//    label_Operation->setText(QStringLiteral(""));
-//    label_Operation->show();
-//    label_Operation->setFixedWidth(400);
-
 }
 
 
@@ -107,12 +97,9 @@ void VisionGraph_Item::initTool_operation()
     sys_remove_item_button->setDefaultAction(sys_remove_item);
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-
     tool_Widget = new QToolBar;
     tool_Widget->setMinimumHeight(20);
     tool_Widget->setMovable(false);
-//    tool_Widget->hide();
-
 
     m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
     m_lstAction.append(tool_Widget->addWidget(sys_save_button));
@@ -125,9 +112,7 @@ void VisionGraph_Item::initTool_operation()
     m_lstToolBtn.append(sys_clear_button);
     m_lstToolBtn.append(sys_remove_item_button);
 
-
     //选中按钮---绘制规则形状的时候，绘制完成后默认选中，此时高亮，其他时间都是灰色
-
     QAction* sys_selected_action = new QAction(QIcon(iconPath+"select.png"),QStringLiteral(""));
     sys_selected_action->setIconText(QStringLiteral("选择"));
     connect(sys_selected_action,SIGNAL(triggered(bool)),this,SLOT(slot_selected_action()));
@@ -139,13 +124,19 @@ void VisionGraph_Item::initTool_operation()
     connect(sys_drag_action,SIGNAL(triggered(bool)),this,SLOT(slot_drag_action()));
     sys_drag_button = new QToolButton;
     sys_drag_button->setDefaultAction(sys_drag_action);
-    //放大镜功能
-    QAction* sys_zoom_action = new QAction(QIcon(iconPath+"zoom.png"),QStringLiteral("缩放"));
-    sys_zoom_action->setIconText(QStringLiteral("缩放"));
+    //放大镜功能  --->> 恢复到起始地点
+    QAction* sys_zoom_action = new QAction(QIcon(iconPath+"zoom.png"),QStringLiteral("居中"));
+    sys_zoom_action->setIconText(QStringLiteral("居中"));
     connect(sys_zoom_action,SIGNAL(triggered(bool)),this,SLOT(slot_zoom_action()));
     sys_zoom_button = new QToolButton;
     sys_zoom_button->setDefaultAction(sys_zoom_action);
 
+    //图片自适应
+    QAction* sys_fit_action = new QAction(QIcon(iconPath+"zoomfit.png"),QStringLiteral("自适应"));
+    sys_fit_action->setIconText(QStringLiteral("自适应"));
+    connect(sys_fit_action,SIGNAL(triggered(bool)),this,SLOT(slot_fit_action()));
+    sys_fit_button = new QToolButton;
+    sys_fit_button->setDefaultAction(sys_fit_action);
 
     //鼠标擦除
     QAction* sys_mouseClear_action = new QAction(QIcon(iconPath+"clear.png"),QStringLiteral("擦除"));
@@ -213,16 +204,17 @@ void VisionGraph_Item::initTool_operation()
 
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
     m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
 
     m_lstToolBtn.append(sys_selected_button);
     m_lstToolBtn.append(sys_drag_button);
     m_lstToolBtn.append(sys_zoom_button);
+    m_lstToolBtn.append(sys_fit_button);
 
     if(m_model == ItemModel::un_self){
         qDebug()<<"VisionGraph is un_self";
@@ -240,7 +232,6 @@ void VisionGraph_Item::initTool_operation()
         m_lstToolBtn.append(sys_line_button);
 
     }
-
 
     //显示区域的信息，view的大小，缩放比例，鼠标的信息
     infoWidget_Action = new QAction;
@@ -541,9 +532,7 @@ VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
         return NULL;
 
     VisionCrossPointItem *item = new VisionCrossPointItem(true);
-//    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
-//    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType,QVector<QPointF>)));
     QObject::connect(item,&QObject::destroyed,[=](){
         m_curVisionItem = nullptr;
 
@@ -685,6 +674,8 @@ QToolButton *VisionGraph_Item::getToolButton(ToolButtonType type)
         return sys_drag_button;
     case ToolButtonType::ToolButtonSys_zoom:
         return sys_zoom_button;
+    case ToolButtonType::ToolButtonSys_Fit:
+        return sys_fit_button;
     case ToolButtonType::ToolButtonSys_mousePainter:
         return sys_mousePainter_button;
     case ToolButtonType::ToolButtonSys_mouseClear:
@@ -733,6 +724,9 @@ bool VisionGraph_Item::removeToolButton(ToolButtonType type)
         break;
     case ToolButtonType::ToolButtonSys_zoom:
         toolButton = sys_zoom_button;
+        break;
+    case ToolButtonType::ToolButtonSys_Fit:
+        toolButton = sys_fit_button;
         break;
     case ToolButtonType::ToolButtonSys_mousePainter:
         toolButton = sys_mousePainter_button;
@@ -864,16 +858,6 @@ void VisionGraph_Item::saveBkgImg(QString path)
         QPixmap map = m_bkPixmapItem->pixmap();
         if (!map.isNull())
         {
-            //默认采用时间命名法，
-            /*
-            QDateTime dataTime = QDateTime::currentDateTime();
-            QString imageName = QString::number(dataTime.date().year())+QString::number(dataTime.date().month())+
-                    QString::number(dataTime.date().day())+"_"
-                    +QString::number(dataTime.time().hour())+QString::number(dataTime.time().minute())+
-                    QString::number(dataTime.time().second())+".bmp";
-                    */
-    //        map.save(fileName,"BMP");
-
             QImage image(scene->width(), scene->height(),QImage::Format_ARGB32);
             QPainter painter(&image);
             painter.setRenderHint(QPainter::Antialiasing);
@@ -945,9 +929,16 @@ void VisionGraph_Item::slot_drag_action()
 void VisionGraph_Item::slot_zoom_action()
 {
     view->viewRegion_OriginPos();
-//    view->setItemType(ItemType::Zoom);
-//    m_itemType = ItemType::Zoom;
-//    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
+    //    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
+}
+
+void VisionGraph_Item::slot_fit_action()
+{
+    if(!m_bkPixmapItem->pixmap().isNull()){
+        this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
+    }else{
+        qDebug()<<"m_bkPixmapItem is NULL";
+    }
 }
 
 void VisionGraph_Item::slot_mousePainter_action()
@@ -969,9 +960,7 @@ void VisionGraph_Item::slot_save_action()
 
     if (m_bkPixmapItem == NULL) return;
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                                      "/",
-                                                      tr("Images (*.png *.bmp *.jpg)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),"/",tr("Images (*.png *.bmp *.jpg)"));
     if(fileName == ""){
         qDebug()<<"save is failure";
         return;
@@ -981,16 +970,6 @@ void VisionGraph_Item::slot_save_action()
     QPixmap map = m_bkPixmapItem->pixmap();
     if (!map.isNull())
     {
-        //默认采用时间命名法，
-        /*
-        QDateTime dataTime = QDateTime::currentDateTime();
-        QString imageName = QString::number(dataTime.date().year())+QString::number(dataTime.date().month())+
-                QString::number(dataTime.date().day())+"_"
-                +QString::number(dataTime.time().hour())+QString::number(dataTime.time().minute())+
-                QString::number(dataTime.time().second())+".bmp";
-                */
-//        map.save(fileName,"BMP");
-
         QImage image(scene->width(), scene->height(),QImage::Format_ARGB32);
         QPainter painter(&image);
         painter.setRenderHint(QPainter::Antialiasing);
@@ -999,7 +978,6 @@ void VisionGraph_Item::slot_save_action()
         bool saveSuccess =  image.save(fileName,"BMP");
         Q_ASSERT(saveSuccess == true);
     }
-//    emit signal_SaveBkImg();
 }
 
 void VisionGraph_Item::slot_rect_action()
@@ -1056,9 +1034,7 @@ void VisionGraph_Item::slot_polyLine_action()
 
 void VisionGraph_Item::slot_open_project()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                      "/",
-                                                      tr("Images (*.png *.bmp *.jpg)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"/",tr("Images (*.png *.bmp *.jpg)"));
 
     qDebug()<<fileName;
     if(fileName != ""){
@@ -1082,12 +1058,6 @@ void VisionGraph_Item::slot_clear_action()
     //清除当前的item
     view->clearPainter();
 
-//    if(m_curVisionItem != nullptr){
-//        m_curVisionItem->hide();
-//        m_curVisionItem->deleteLater();
-//        m_curVisionItem = nullptr;
-//    }
-
     for(int i=0;i<m_lstItem.count();i++){
         scene->removeItem(m_lstItem[i]);
         m_lstItem[i]->deleteLater();
@@ -1096,9 +1066,7 @@ void VisionGraph_Item::slot_clear_action()
     m_lstItem.clear();
 
     m_curVisionItem = nullptr;
-
     qDebug()<<scene->items().count();
-//    scene->clear();  //会将scene中的所有的item都delete
 }
 
 void VisionGraph_Item::slot_removeItem_action()
@@ -1115,31 +1083,6 @@ void VisionGraph_Item::slot_removeItem_action()
     }
     scene->removeItem(m_curVisionItem);
     m_curVisionItem = nullptr;
-//    if(m_curVisionItem != nullptr){
-//        m_curVisionItem->deleteLater();
-//        m_curVisionItem = nullptr;
-//    }
-
-    /*
-    qDebug()<<"remove curVisionItem";
-    if(m_curVisionItem != NULL){
-        if(!m_curVisionItem->getEdit()){
-            qDebug()<<"m_curVisionItem is false";
-            return;
-        }
-
-        for(int i=0;i<m_lstItem.count();i++){
-            if(m_lstItem[i] == m_curVisionItem){
-                m_lstItem.removeAt(i);
-                break;
-            }
-        }
-        scene->removeItem(m_curVisionItem);
-        m_curVisionItem = NULL;
-    }else{
-        qDebug()<<"m_curVisionItem is NULL";
-    }
-    */
 }
 
 void VisionGraph_Item::slot_addItem(ItemType type, QRectF rf)
@@ -1298,8 +1241,6 @@ void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qrea
             break;
         }
     }
-
-    //    qDebug()<<rectItem1->zValue()<<ellipseItem1->zValue()<<ellipseItem2->zValue();
 }
 
 void VisionGraph_Item::slot_wheel(qreal delta)
@@ -1323,7 +1264,6 @@ void VisionGraph_Item::slot_wheel(qreal delta)
 
 void VisionGraph_Item::slot_SizeChanged(QString currentSize)
 {
-//    qDebug()<<" view scale size is changed : "<<currentSize;
     QString str = currentSize.mid(0,currentSize.indexOf("%"));
     if(!currentSize.contains("%") && currentSize != ""){
         comboBox->setEditText(currentSize+"%");
@@ -1341,9 +1281,6 @@ void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width(),sceneWidget->height());
-//    scene->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
-//    view->setScene(scene);
-//    view->setSceneRect(0,0,sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
 }
 
