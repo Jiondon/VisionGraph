@@ -125,6 +125,16 @@ bool VisionRectItem::getPosInArea(qreal x, qreal y)
 
 }
 
+QVector<QPointF> VisionRectItem::getPoints()
+{
+    QVector<QPointF> vec_p;
+    vec_p.append(m_pointF1);
+    vec_p.append(m_pointF2);
+    vec_p.append(m_pointF3);
+    vec_p.append(m_pointF4);
+    return vec_p;
+}
+
 void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)

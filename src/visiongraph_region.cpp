@@ -893,6 +893,11 @@ void VisionGraph_Region::setView_Zoom(qreal qZoom)
     comboBox->setEditText(QString::number(qZoom*100)+"%");
 }
 
+void VisionGraph_Region::setViewType(ViewType type)
+{
+    //todo region版本，本身无法存在多个item
+}
+
 void VisionGraph_Region::slot_selected_action()
 {
     view->setItemType(ItemType::No);

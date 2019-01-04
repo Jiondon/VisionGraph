@@ -61,6 +61,20 @@ QPainterPath VisionRing::getPainterPath()
     return path;
 }
 
+QVector<QPointF> VisionRing::getPoints()
+{
+    QVector<QPointF> vec_p;
+    vec_p.append(m_rf1.topLeft());
+    vec_p.append(m_rf1.topRight());
+    vec_p.append(m_rf1.bottomRight());
+    vec_p.append(m_rf1.bottomLeft());
+    vec_p.append(m_rf2.topLeft());
+    vec_p.append(m_rf2.topRight());
+    vec_p.append(m_rf2.bottomRight());
+    vec_p.append(m_rf2.bottomLeft());
+    return vec_p;
+}
+
 void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)

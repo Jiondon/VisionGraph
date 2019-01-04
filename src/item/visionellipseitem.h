@@ -95,6 +95,13 @@ public:
      */
     bool getPosInArea(qreal x, qreal y);
 
+
+    /**
+     * @brief       获取每个顶点（外切矩形）
+     * @param       point vec
+     */
+    QVector<QPointF> getPoints();
+
 signals:
 
 

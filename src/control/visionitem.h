@@ -35,7 +35,6 @@ enum ItemType{
     NoPoint  //擦除item
 };
 
-
 /**
  * @brief       枚举类型  鼠标的样式方向--对应想要的鼠标事件
  */
@@ -53,19 +52,6 @@ enum DirecCursor
     right_bottom_rect,
 
     arrowsUp
-};
-
-enum Operation_enum{
-    AND,   //交集
-    OR,   //并集
-    SUB,  //差集
-    NOR   //异或
-};
-//图形之间的关系
-struct OperationStruct{
-    void* item1;  //item
-    void* item2;  //item
-    Operation_enum operation;   //运算 交集，差集，并集，异或
 };
 
 class VISIONGRAPHSHARED_EXPORT VisionItem : public QObject,public QGraphicsItem
@@ -117,7 +103,6 @@ public:
         m_bEdit = edit;
     }
 
-
     /**
      * @brief       获取item的编辑状态
      * @param       bool
@@ -150,15 +135,19 @@ public:
         return m_path;
     }
 
-
     QPainterPath m_path;    //暂时无用
-
 
     /**
      * @brief       判断点（x,y）是否在该item内
      * @param       bool
      */
     virtual bool getPosInArea(qreal x,qreal y);
+
+    /**
+     * @brief       获取item的顶点--（圆（椭圆）的顶点为外切矩形）
+     * @param       QVector<QPointF>
+     */
+    virtual QVector<QPointF> getPoints(){return m_vec_p;}
 
     ItemType m_type = Rect;
 
@@ -194,9 +183,8 @@ protected:
 private:
     bool m_bSelectedStatus = false;  //未选中状态
     bool m_bEdit = false;
-
     bool m_bInArea = false;
-
+    QVector<QPointF> m_vec_p;
 };
 
 #endif // VISIONITEM_H

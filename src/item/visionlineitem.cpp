@@ -71,6 +71,13 @@ bool VisionLineItem::getPosInArea(qreal x, qreal y)
     }
 }
 
+QVector<QPointF> VisionLineItem::getPoints(){
+    QVector<QPointF> vec_p;
+    vec_p.append(m_pointF1);
+    vec_p.append(m_pointF2);
+    return vec_p;
+}
+
 QRectF VisionLineItem::boundingRect() const
 {
     return QRectF(m_x-5,m_y-5,m_width+10,m_height+10);

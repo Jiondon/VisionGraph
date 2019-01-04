@@ -54,6 +54,13 @@ bool VisionCrossPointItem::getPosInArea(qreal x, qreal y)
     }
 }
 
+QVector<QPointF> VisionCrossPointItem::getPoints()
+{
+    QVector<QPointF> vec_p;
+    vec_p.append(m_pointF);
+    return vec_p;
+}
+
 QRectF VisionCrossPointItem::boundingRect() const
 {
     QRectF rf = QRectF(m_pointF.x()-2,m_pointF.y()-2,4,4);

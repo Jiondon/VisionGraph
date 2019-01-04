@@ -87,6 +87,12 @@ public:
         return m_angle;
     }
 
+    /**
+     * @brief       获取item的顶点
+     * @param       QVector<QPointF>
+     */
+    QVector<QPointF> getPoints();
+
 signals:
     void signal_RectSizeChanged();
 

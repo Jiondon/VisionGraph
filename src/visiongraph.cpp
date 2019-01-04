@@ -699,3 +699,16 @@ void VisionGraph::setView_Zoom(qreal qZoom)
         qDebug()<<"VisionGraph is Error";
     }
 }
+
+void VisionGraph::setViewType(ViewType type)
+{
+    if(m_type == GraphType::graphRegion){
+        m_graphWidget_Region->setViewType(type);
+    }else if(m_type == GraphType::graphItem_self){
+        m_graphWidget_Item->setViewType(type);
+    }else if(m_type == GraphType::graphItem_unSelf){
+        m_graphWidget_Item->setViewType(type);
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+}

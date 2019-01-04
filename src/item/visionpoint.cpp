@@ -13,6 +13,12 @@ void VisionPoint::setPointF(QPointF pointF)
     m_pointF = pointF;
 }
 
+QVector<QPointF> VisionPoint::getPoints(){
+    QVector<QPointF> vec_p;
+    vec_p.append(m_pointF);
+    return vec_p;
+}
+
 void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)

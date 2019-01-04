@@ -59,6 +59,14 @@ public:
     {
         return m_iDirection;
     }
+
+
+    /**
+     * @brief       获取item的顶点(外切矩形的顶点)
+     * @param       QVector<QPointF>
+     */
+    QVector<QPointF> getPoints();
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;

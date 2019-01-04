@@ -324,6 +324,12 @@ public:
      */
     void setView_Zoom(qreal qZoom);
 
+    /**
+     * @brief       设置view的type
+     * @param       view中显示的内容（viewType） -- 单个item，多个item等
+     */
+    void setViewType(ViewType type = ViewType::freeItem);
+
 signals:
     void signal_RectSizeChanged(VisionItem*);
 

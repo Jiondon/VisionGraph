@@ -26,6 +26,12 @@ public:
         return m_pointF;
     }
 
+    /**
+     * @brief       获取每个顶点
+     * @param       point vec
+     */
+    QVector<QPointF> getPoints();
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;

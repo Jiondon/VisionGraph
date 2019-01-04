@@ -41,7 +41,7 @@ public:
      * @brief       获取多边形的每个顶点
      * @param       point vec
      */
-    QVector<QPointF> getPointS(){
+    QVector<QPointF> getPoints(){
         return m_vecPointFs;
     }
 
