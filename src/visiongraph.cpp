@@ -14,22 +14,21 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
         m_graphWidget_Region = new VisionGraph_Region(toolButtonDirect);
         m_graphWidget_Region->layout()->setMargin(0);
         mainLayout->addWidget(m_graphWidget_Region);
-
+        connect(m_graphWidget_Region,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
     }else if(type == GraphType::graphItem_self){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
 //        m_graphWidget_Item->setViewRegion_Visible(false);
         m_graphWidget_Item->layout()->setMargin(0);
         brushColor = Qt::transparent;
-
+        connect(m_graphWidget_Item,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
     }else if(type == GraphType::graphItem_unSelf){
         m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         mainLayout->addWidget(m_graphWidget_Item);
 //        m_graphWidget_Item->setViewRegion_Visible(false);
         m_graphWidget_Item->layout()->setMargin(0);
-//        m_graphWidget_Item->setViewType(ViewType::singleItem);
         brushColor = Qt::transparent;
-
+        connect(m_graphWidget_Item,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
     }else{
         qDebug()<<"VisionGraph is Error";
     }
@@ -297,6 +296,22 @@ XVRegion* VisionGraph::getRegion()
     if(m_graphWidget_Region == nullptr)
         return NULL;
     return m_graphWidget_Region->getRegion();
+}
+
+QList<VisionItem *> VisionGraph::getItems()
+{
+    QList<VisionItem *> lstItem;
+    lstItem.clear();
+    if(m_type == GraphType::graphRegion){
+        lstItem = m_graphWidget_Region->getItems();
+    }else if(m_type == GraphType::graphItem_self){
+        lstItem = m_graphWidget_Item->getItems();
+    }else if(m_type == GraphType::graphItem_unSelf){
+        lstItem = m_graphWidget_Item->getItems();
+    }else{
+        qDebug()<<"VisionGraph is Error";
+    }
+    return lstItem;
 }
 
 void VisionGraph::setBkImg(QImage image)

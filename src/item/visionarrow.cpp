@@ -24,6 +24,12 @@ void VisionArrow::setColor(QColor color)
     m_borderColor = color;
 }
 
+QVector<QPointF> VisionArrow::getPoints(){
+    QVector<QPointF> vec_p;
+    vec_p.append(m_pointF);
+    return vec_p;
+}
+
 void VisionArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)

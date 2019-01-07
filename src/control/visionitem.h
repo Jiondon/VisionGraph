@@ -147,7 +147,7 @@ public:
      * @brief       获取item的顶点--（圆（椭圆）的顶点为外切矩形）
      * @param       QVector<QPointF>
      */
-    virtual QVector<QPointF> getPoints(){return m_vec_p;}
+    virtual QVector<QPointF> getPoints() = 0;
 
     ItemType m_type = Rect;
 
@@ -184,7 +184,6 @@ private:
     bool m_bSelectedStatus = false;  //未选中状态
     bool m_bEdit = false;
     bool m_bInArea = false;
-    QVector<QPointF> m_vec_p;
 };
 
 #endif // VISIONITEM_H

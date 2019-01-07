@@ -93,6 +93,11 @@ QList<QPointF> VisionChainItem::getChainPoints()
     return m_lstPointF;
 }
 
+QVector<QPointF> VisionChainItem::getPoints()
+{
+    return m_lstPointF.toVector();
+}
+
 
 void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {

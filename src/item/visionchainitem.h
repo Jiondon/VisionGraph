@@ -23,6 +23,8 @@ public:
 
     QList<QPointF> getChainPoints();  //获取链的节点
 
+    QVector<QPointF> getPoints();  //继承基类，在此类中暂时不需要
+
 signals:
     void signalMouse(qreal x,qreal y);
     void signalSelected(bool selected,int index);

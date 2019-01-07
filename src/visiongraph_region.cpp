@@ -414,6 +414,7 @@ VisionRectItem *VisionGraph_Region::addRect(QRectF rf, bool bEdit, QColor color)
         item->setRect(rf);
         scene->addItem(item);
         m_curVisionItem = item;
+        emit signal_itemFinished(item);
         return item;
     }
     return NULL;
@@ -478,6 +479,7 @@ VisionEllipseItem *VisionGraph_Region::addEllipse(QRectF rf, QColor color)
     item->setRect(rf);
     scene->addItem(item);
     m_curVisionItem = item;
+    emit signal_itemFinished(item);
     return item;
 }
 
@@ -495,6 +497,7 @@ VisionLineItem *VisionGraph_Region::addLine(QLine line, QColor color)
     item->setLine(line.p1(),line.p2());
     scene->addItem(item);
     m_curVisionItem = item;
+    emit signal_itemFinished(item);
     return item;
 }
 
@@ -521,6 +524,7 @@ VisionPolygon *VisionGraph_Region::addPolygon(QVector<QPointF> vecPointF, QColor
     }
     scene->addItem(item);
     m_curVisionItem = item;
+    emit signal_itemFinished(item);
     return item;
 }
 
@@ -538,6 +542,7 @@ VisionCrossPointItem *VisionGraph_Region::addPoint(QPointF pointF, QColor color)
     item->setPoint(pointF);
     scene->addItem(item);
     m_curVisionItem = item;
+    emit signal_itemFinished(item);
     return item;
 }
 

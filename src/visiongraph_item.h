@@ -181,6 +181,14 @@ public:
     }
 
     /**
+     * @brief       获取当前view中的所有的item
+     * @param       VisionItem*
+     */
+    QList<VisionItem*> getItems(){
+        return m_lstItem;
+    }
+
+    /**
      * @brief       设置View信息框的显示或者隐藏
      */
     void setViewInfo_Visible(bool bVisible);
@@ -299,6 +307,9 @@ public:
      * @param       view中显示的内容（viewType） -- 单个item，多个item等
      */
     void setViewType(ViewType type = ViewType::freeItem);
+
+signals:
+    void signal_itemFinished(VisionItem* item);
 
 private:
     void initScene();

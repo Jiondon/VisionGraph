@@ -124,6 +124,12 @@ public:
     XVRegion *getRegion();
 
     /**
+     * @brief       获取当前view中的所有的item
+     * @param       VisionItem*
+     */
+    QList<VisionItem*> getItems();
+
+    /**
      * @brief       设置VisionGraph的背景，区分版本
      */
     void setBkImg(QImage image);
@@ -332,6 +338,7 @@ public:
 
 signals:
     void signal_RectSizeChanged(VisionItem*);
+    void signal_PaintFinishedChanged(VisionItem*);
 
 protected:
 

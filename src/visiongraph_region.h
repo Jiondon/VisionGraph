@@ -104,6 +104,16 @@ public:
         return view->getRegion();
     }
 
+    /**
+     * @brief       获取当前view中的所有的item，在region版本中，只存在m_curVisionItem
+     * @param       VisionItem*
+     */
+    QList<VisionItem*> getItems(){
+        QList<VisionItem*> lstItem;
+        lstItem.clear();
+        lstItem.append(m_curVisionItem);
+        return lstItem;
+    }
 
     /**
      * @brief       设置toolButton的布局
@@ -290,6 +300,9 @@ public:
      */
     void setViewType(ViewType type = ViewType::freeItem);
 
+signals:
+    void signal_itemFinished(VisionItem* item);
+
 protected:
 
 private:
@@ -354,7 +367,6 @@ private:
     QLabel *label_slider = NULL;
     QSlider *pSlider = NULL;
 
-//    Q
     QLabel *label_w;
     QSpinBox *pSpinBox_w;
     QLabel *label_h;
@@ -370,6 +382,8 @@ private:
     VisionGraphWidget *sceneWidget = NULL;
     QAction *infoWidget_Action = NULL;
     QWidget* infoWidget = NULL;
+
+    QList<VisionItem*> m_lstItem;
 
 private slots:
     //对应Action的槽函数
