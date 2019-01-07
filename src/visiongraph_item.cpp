@@ -381,12 +381,17 @@ bool VisionGraph_Item::checkoutItem()
     //在进行交互的时候进行check   程序调用addItem是否有效？
     if(m_viewType == ViewType::singleItem){
         //当view要求单一item的时候，执行函数体
+        //存在item,判断，删除当前view中的item，并进行绘制 or 不做操作
         if(m_lstItem.count() >= 1){
-            //存在item
             return false;
         }else{
             return true;
         }
+    }else if(m_viewType == ViewType::_singleItem){
+        if(m_lstItem.count() >= 1){
+            clearPainter();
+        }
+        return true;
     }else{
         return true;
     }

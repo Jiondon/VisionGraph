@@ -38,6 +38,7 @@ enum ToolButtonDirection{
 
 enum ViewType{
     freeItem,  //随意搭配，不限制
+    _singleItem,  //单一item (绘制的时候会删除view中其他的item)
     singleItem,  //单一item
     multiItem,  //多个item
     singleRegion,  //单一区域
