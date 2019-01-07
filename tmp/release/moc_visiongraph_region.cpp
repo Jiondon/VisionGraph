@@ -246,7 +246,7 @@ void VisionGraph_Region::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
 }
 
 const QMetaObject VisionGraph_Region::staticMetaObject = {
-    { &QFrame::staticMetaObject, qt_meta_stringdata_VisionGraph_Region.data,
+    { &VisionGraph_Base::staticMetaObject, qt_meta_stringdata_VisionGraph_Region.data,
       qt_meta_data_VisionGraph_Region,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -261,12 +261,12 @@ void *VisionGraph_Region::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_VisionGraph_Region.stringdata0))
         return static_cast<void*>(const_cast< VisionGraph_Region*>(this));
-    return QFrame::qt_metacast(_clname);
+    return VisionGraph_Base::qt_metacast(_clname);
 }
 
 int VisionGraph_Region::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QFrame::qt_metacall(_c, _id, _a);
+    _id = VisionGraph_Base::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

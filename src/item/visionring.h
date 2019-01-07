@@ -79,6 +79,7 @@ protected:
 //    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
 //    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 signals:
+    void signalChanged(VisionItem* item);
 
 private:
 

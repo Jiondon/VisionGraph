@@ -337,7 +337,6 @@ public:
     void setViewType(ViewType type = ViewType::freeItem);
 
 signals:
-    void signal_RectSizeChanged(VisionItem*);
     void signal_PaintFinishedChanged(VisionItem*);
 
 protected:

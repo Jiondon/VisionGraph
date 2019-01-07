@@ -87,6 +87,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
+    void signalChanged(VisionItem* item);
 
 private:
     qreal m_x=0;qreal m_y;qreal m_width=0;qreal m_height=0;

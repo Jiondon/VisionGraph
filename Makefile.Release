@@ -64,7 +64,8 @@ SOURCES       = src\visiongraph.cpp \
 		src\control\color.cpp \
 		src\visiongraphwidget.cpp \
 		src\item\visionchainitem.cpp \
-		src\item\visionarrow.cpp tmp\release\qrc_image.cpp \
+		src\item\visionarrow.cpp \
+		src\visiongraph_base.cpp tmp\release\qrc_image.cpp \
 		tmp\release\moc_visiongraph.cpp \
 		tmp\release\moc_visiongraph_item.cpp \
 		tmp\release\moc_visiongraph_region.cpp \
@@ -84,7 +85,8 @@ SOURCES       = src\visiongraph.cpp \
 		tmp\release\moc_visionitem.cpp \
 		tmp\release\moc_visiongraphwidget.cpp \
 		tmp\release\moc_visionchainitem.cpp \
-		tmp\release\moc_visionarrow.cpp
+		tmp\release\moc_visionarrow.cpp \
+		tmp\release\moc_visiongraph_base.cpp
 OBJECTS       = tmp\release\visiongraph.obj \
 		tmp\release\visiongraph_item.obj \
 		tmp\release\visiongraph_region.obj \
@@ -107,6 +109,7 @@ OBJECTS       = tmp\release\visiongraph.obj \
 		tmp\release\visiongraphwidget.obj \
 		tmp\release\visionchainitem.obj \
 		tmp\release\visionarrow.obj \
+		tmp\release\visiongraph_base.obj \
 		tmp\release\qrc_image.obj \
 		tmp\release\moc_visiongraph.obj \
 		tmp\release\moc_visiongraph_item.obj \
@@ -127,7 +130,8 @@ OBJECTS       = tmp\release\visiongraph.obj \
 		tmp\release\moc_visionitem.obj \
 		tmp\release\moc_visiongraphwidget.obj \
 		tmp\release\moc_visionchainitem.obj \
-		tmp\release\moc_visionarrow.obj
+		tmp\release\moc_visionarrow.obj \
+		tmp\release\moc_visiongraph_base.obj
 
 DIST          =  src\visiongraph.h \
 		src\visiongraph_global.h \
@@ -151,7 +155,8 @@ DIST          =  src\visiongraph.h \
 		src\control\color.h \
 		src\visiongraphwidget.h \
 		src\item\visionchainitem.h \
-		src\item\visionarrow.h src\visiongraph.cpp \
+		src\item\visionarrow.h \
+		src\visiongraph_base.h src\visiongraph.cpp \
 		src\visiongraph_item.cpp \
 		src\visiongraph_region.cpp \
 		src\visiongraphtool.cpp \
@@ -172,7 +177,8 @@ DIST          =  src\visiongraph.h \
 		src\control\color.cpp \
 		src\visiongraphwidget.cpp \
 		src\item\visionchainitem.cpp \
-		src\item\visionarrow.cpp
+		src\item\visionarrow.cpp \
+		src\visiongraph_base.cpp
 QMAKE_TARGET  = VisionGraph
 DESTDIR        = ..\bin\release\ #avoid trailing-slash linebreak
 TARGET         = VisionGraph.dll
@@ -318,10 +324,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) VisionGraph.zip $(SOURCES) $(DIST) VisionGraph.pro D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\angle.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-base.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\qconfig.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_clucene_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_functions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013\qmake.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\toolchain.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resolve_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\build_pass.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qml_debug.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\rtti.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\precompile_header.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\warn_on.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resources.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\moc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\uic.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qmake_use.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\file_copies.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\windows.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exceptions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\yacc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\lex.prf VisionGraph.pro image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgets.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Gui.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Core.prl   image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp src\visiongraph.h src\visiongraph_global.h src\visiongraph_item.h src\visiongraph_region.h src\visiongraphtool.h src\item\lineitem.h src\item\visioncrosspointitem.h src\item\visionellipseitem.h src\item\visiongraphscene.h src\item\visiongraphview.h src\item\visionlineitem.h src\item\visionpathitem.h src\item\visionpoint.h src\item\visionpolygon.h src\item\visionrectitem.h src\item\visionring.h src\control\minirect.h src\control\visionarrows_rotate.h src\control\visionitem.h src\control\color.h src\visiongraphwidget.h src\item\visionchainitem.h src\item\visionarrow.h src\visiongraph.cpp src\visiongraph_item.cpp src\visiongraph_region.cpp src\visiongraphtool.cpp src\item\lineitem.cpp src\item\visioncrosspointitem.cpp src\item\visionellipseitem.cpp src\item\visiongraphscene.cpp src\item\visiongraphview.cpp src\item\visionlineitem.cpp src\item\visionpathitem.cpp src\item\visionpoint.cpp src\item\visionpolygon.cpp src\item\visionrectitem.cpp src\item\visionring.cpp src\control\minirect.cpp src\control\visionarrows_rotate.cpp src\control\visionitem.cpp src\control\color.cpp src\visiongraphwidget.cpp src\item\visionchainitem.cpp src\item\visionarrow.cpp     
+	$(ZIP) VisionGraph.zip $(SOURCES) $(DIST) VisionGraph.pro D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\angle.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-base.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\qconfig.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_clucene_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_functions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013\qmake.conf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\toolchain.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\default_pre.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resolve_config.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\default_post.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\build_pass.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qml_debug.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\rtti.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\precompile_header.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\warn_on.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qt.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\resources.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\moc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\uic.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\qmake_use.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\file_copies.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\win32\windows.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\exceptions.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\yacc.prf D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\lex.prf VisionGraph.pro image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgets.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Gui.prl D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Core.prl   image.qrc D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp src\visiongraph.h src\visiongraph_global.h src\visiongraph_item.h src\visiongraph_region.h src\visiongraphtool.h src\item\lineitem.h src\item\visioncrosspointitem.h src\item\visionellipseitem.h src\item\visiongraphscene.h src\item\visiongraphview.h src\item\visionlineitem.h src\item\visionpathitem.h src\item\visionpoint.h src\item\visionpolygon.h src\item\visionrectitem.h src\item\visionring.h src\control\minirect.h src\control\visionarrows_rotate.h src\control\visionitem.h src\control\color.h src\visiongraphwidget.h src\item\visionchainitem.h src\item\visionarrow.h src\visiongraph_base.h src\visiongraph.cpp src\visiongraph_item.cpp src\visiongraph_region.cpp src\visiongraphtool.cpp src\item\lineitem.cpp src\item\visioncrosspointitem.cpp src\item\visionellipseitem.cpp src\item\visiongraphscene.cpp src\item\visiongraphview.cpp src\item\visionlineitem.cpp src\item\visionpathitem.cpp src\item\visionpoint.cpp src\item\visionpolygon.cpp src\item\visionrectitem.cpp src\item\visionring.cpp src\control\minirect.cpp src\control\visionarrows_rotate.cpp src\control\visionitem.cpp src\control\color.cpp src\visiongraphwidget.cpp src\item\visionchainitem.cpp src\item\visionarrow.cpp src\visiongraph_base.cpp     
 
 clean: compiler_clean 
-	-$(DEL_FILE) tmp\release\visiongraph.obj tmp\release\visiongraph_item.obj tmp\release\visiongraph_region.obj tmp\release\visiongraphtool.obj tmp\release\lineitem.obj tmp\release\visioncrosspointitem.obj tmp\release\visionellipseitem.obj tmp\release\visiongraphscene.obj tmp\release\visiongraphview.obj tmp\release\visionlineitem.obj tmp\release\visionpathitem.obj tmp\release\visionpoint.obj tmp\release\visionpolygon.obj tmp\release\visionrectitem.obj tmp\release\visionring.obj tmp\release\minirect.obj tmp\release\visionarrows_rotate.obj tmp\release\visionitem.obj tmp\release\color.obj tmp\release\visiongraphwidget.obj tmp\release\visionchainitem.obj tmp\release\visionarrow.obj tmp\release\qrc_image.obj tmp\release\moc_visiongraph.obj tmp\release\moc_visiongraph_item.obj tmp\release\moc_visiongraph_region.obj tmp\release\moc_lineitem.obj tmp\release\moc_visioncrosspointitem.obj tmp\release\moc_visionellipseitem.obj tmp\release\moc_visiongraphscene.obj tmp\release\moc_visiongraphview.obj tmp\release\moc_visionlineitem.obj tmp\release\moc_visionpathitem.obj tmp\release\moc_visionpoint.obj tmp\release\moc_visionpolygon.obj tmp\release\moc_visionrectitem.obj tmp\release\moc_visionring.obj tmp\release\moc_minirect.obj tmp\release\moc_visionarrows_rotate.obj tmp\release\moc_visionitem.obj tmp\release\moc_visiongraphwidget.obj tmp\release\moc_visionchainitem.obj tmp\release\moc_visionarrow.obj
+	-$(DEL_FILE) tmp\release\visiongraph.obj tmp\release\visiongraph_item.obj tmp\release\visiongraph_region.obj tmp\release\visiongraphtool.obj tmp\release\lineitem.obj tmp\release\visioncrosspointitem.obj tmp\release\visionellipseitem.obj tmp\release\visiongraphscene.obj tmp\release\visiongraphview.obj tmp\release\visionlineitem.obj tmp\release\visionpathitem.obj tmp\release\visionpoint.obj tmp\release\visionpolygon.obj tmp\release\visionrectitem.obj tmp\release\visionring.obj tmp\release\minirect.obj tmp\release\visionarrows_rotate.obj tmp\release\visionitem.obj tmp\release\color.obj tmp\release\visiongraphwidget.obj tmp\release\visionchainitem.obj tmp\release\visionarrow.obj tmp\release\visiongraph_base.obj tmp\release\qrc_image.obj tmp\release\moc_visiongraph.obj tmp\release\moc_visiongraph_item.obj tmp\release\moc_visiongraph_region.obj tmp\release\moc_lineitem.obj tmp\release\moc_visioncrosspointitem.obj tmp\release\moc_visionellipseitem.obj tmp\release\moc_visiongraphscene.obj tmp\release\moc_visiongraphview.obj tmp\release\moc_visionlineitem.obj tmp\release\moc_visionpathitem.obj tmp\release\moc_visionpoint.obj tmp\release\moc_visionpolygon.obj tmp\release\moc_visionrectitem.obj tmp\release\moc_visionring.obj tmp\release\moc_minirect.obj tmp\release\moc_visionarrows_rotate.obj tmp\release\moc_visionitem.obj tmp\release\moc_visiongraphwidget.obj tmp\release\moc_visionchainitem.obj tmp\release\moc_visionarrow.obj tmp\release\moc_visiongraph_base.obj
 	-$(DEL_FILE) ..\bin\release\VisionGraph.exp
 
 distclean: clean 
@@ -378,9 +384,9 @@ compiler_moc_predefs_clean:
 tmp\release\moc_predefs.h: D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp
 	cl -BxD:\Qt\Qt5.8.0\5.8\msvc2013\bin\qmake.exe -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -GR -W3 -w34100 -w34189 -w44996 -E -Za D:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\features\data\dummy.cpp 2>NUL >tmp\release\moc_predefs.h
 
-compiler_moc_header_make_all: tmp\release\moc_visiongraph.cpp tmp\release\moc_visiongraph_item.cpp tmp\release\moc_visiongraph_region.cpp tmp\release\moc_lineitem.cpp tmp\release\moc_visioncrosspointitem.cpp tmp\release\moc_visionellipseitem.cpp tmp\release\moc_visiongraphscene.cpp tmp\release\moc_visiongraphview.cpp tmp\release\moc_visionlineitem.cpp tmp\release\moc_visionpathitem.cpp tmp\release\moc_visionpoint.cpp tmp\release\moc_visionpolygon.cpp tmp\release\moc_visionrectitem.cpp tmp\release\moc_visionring.cpp tmp\release\moc_minirect.cpp tmp\release\moc_visionarrows_rotate.cpp tmp\release\moc_visionitem.cpp tmp\release\moc_visiongraphwidget.cpp tmp\release\moc_visionchainitem.cpp tmp\release\moc_visionarrow.cpp
+compiler_moc_header_make_all: tmp\release\moc_visiongraph.cpp tmp\release\moc_visiongraph_item.cpp tmp\release\moc_visiongraph_region.cpp tmp\release\moc_lineitem.cpp tmp\release\moc_visioncrosspointitem.cpp tmp\release\moc_visionellipseitem.cpp tmp\release\moc_visiongraphscene.cpp tmp\release\moc_visiongraphview.cpp tmp\release\moc_visionlineitem.cpp tmp\release\moc_visionpathitem.cpp tmp\release\moc_visionpoint.cpp tmp\release\moc_visionpolygon.cpp tmp\release\moc_visionrectitem.cpp tmp\release\moc_visionring.cpp tmp\release\moc_minirect.cpp tmp\release\moc_visionarrows_rotate.cpp tmp\release\moc_visionitem.cpp tmp\release\moc_visiongraphwidget.cpp tmp\release\moc_visionchainitem.cpp tmp\release\moc_visionarrow.cpp tmp\release\moc_visiongraph_base.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) tmp\release\moc_visiongraph.cpp tmp\release\moc_visiongraph_item.cpp tmp\release\moc_visiongraph_region.cpp tmp\release\moc_lineitem.cpp tmp\release\moc_visioncrosspointitem.cpp tmp\release\moc_visionellipseitem.cpp tmp\release\moc_visiongraphscene.cpp tmp\release\moc_visiongraphview.cpp tmp\release\moc_visionlineitem.cpp tmp\release\moc_visionpathitem.cpp tmp\release\moc_visionpoint.cpp tmp\release\moc_visionpolygon.cpp tmp\release\moc_visionrectitem.cpp tmp\release\moc_visionring.cpp tmp\release\moc_minirect.cpp tmp\release\moc_visionarrows_rotate.cpp tmp\release\moc_visionitem.cpp tmp\release\moc_visiongraphwidget.cpp tmp\release\moc_visionchainitem.cpp tmp\release\moc_visionarrow.cpp
+	-$(DEL_FILE) tmp\release\moc_visiongraph.cpp tmp\release\moc_visiongraph_item.cpp tmp\release\moc_visiongraph_region.cpp tmp\release\moc_lineitem.cpp tmp\release\moc_visioncrosspointitem.cpp tmp\release\moc_visionellipseitem.cpp tmp\release\moc_visiongraphscene.cpp tmp\release\moc_visiongraphview.cpp tmp\release\moc_visionlineitem.cpp tmp\release\moc_visionpathitem.cpp tmp\release\moc_visionpoint.cpp tmp\release\moc_visionpolygon.cpp tmp\release\moc_visionrectitem.cpp tmp\release\moc_visionring.cpp tmp\release\moc_minirect.cpp tmp\release\moc_visionarrows_rotate.cpp tmp\release\moc_visionitem.cpp tmp\release\moc_visiongraphwidget.cpp tmp\release\moc_visionchainitem.cpp tmp\release\moc_visionarrow.cpp tmp\release\moc_visiongraph_base.cpp
 tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgetsglobal.h \
@@ -4017,6 +4023,441 @@ tmp\release\moc_visionarrow.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObje
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
 	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/AVL.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarrow.h -o tmp\release\moc_visionarrow.cpp
+
+tmp\release\moc_visiongraph_base.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobjectdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qnamespace.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qconfig-bootstrapped.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qconfig.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtcore-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsystemdetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qprocessordetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcompilerdetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtypeinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsysinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlogging.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qflags.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtypetraits.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbasicatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_bootstrap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qgenericatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_cxx11.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_msvc.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qglobalstatic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmutex.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qnumeric.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qversiontagging.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobjectdefs_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstring.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qchar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbytearray.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrefcount.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qarraydata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringbuilder.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qalgorithms.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiterator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhashfunctions.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpair.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbytearraylist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringlist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregexp.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringmatcher.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcoreevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qscopedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmetatype.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvarlengtharray.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontainerfwd.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgetsglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgets-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvariant.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdebug.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtextstream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlocale.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qset.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontiguouscache.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
+		src\visiongraphtool.h \
+		src\visiongraph_global.h \
+		src\item\visiongraphscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
+		src\item\visiongraphview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src\control\visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\XVBase.h \
+		include\XVCreateRegion.h \
+		include\AVL.h \
+		include\ATL\Array.h \
+		include\ATL\Utils.h \
+		include\ATL\Platform.h \
+		include\ATL\Array.hxx \
+		include\ATL\Error.h \
+		include\ATL\AtlString.h \
+		include\ATL\AtlTypes.h \
+		include\ATL\AtlString.hxx \
+		include\ATL\AtlMemory.h \
+		include\AVLCommon\Config.h \
+		include\ATL\Dummy.h \
+		include\ATL\Math.hxx \
+		include\ATL\Optional.h \
+		include\AVLCommon\BaseState.h \
+		include\AVLCommon\Enums\FileSortingOrder.h \
+		include\AVLCommon\Enums\MEstimator.h \
+		include\AVLCommon\Enums\SortingOrder.h \
+		include\AVLCommon\Enums\TheilSenVariant.h \
+		include\AVLCommon\MatrixTypes.h \
+		include\ATL\Array2D.hxx \
+		include\ATL\Array2D.h \
+		include\AVLCommon\RandomTypes.h \
+		include\AVLCommon\RandomStateImplBase.h \
+		include\AVLCommon\Settings.h \
+		include\AVLCommon\VersionProtection.h \
+		include\Basic\Box.h \
+		include\Enums\Anchor2D.h \
+		include\Enums\SplitDirection.h \
+		include\Basic\Types.h \
+		include\Geometry\Geometry.h \
+		include\Basic\Format.h \
+		include\Geometry3D\Geometry3D.h \
+		include\Basic\LinearFunction.h \
+		include\Basic\Location.h \
+		include\Basic\Pixel.h \
+		include\Basic\Size.h \
+		include\ComputerVision\1DEdgeDetection.h \
+		include\Enums\EdgeTransition.h \
+		include\Enums\Polarity.h \
+		include\Enums\Selection.h \
+		include\Enums\InterpolationMethod.h \
+		include\Enums\ProfileInterpolationMethod.h \
+		include\Image\Image.h \
+		include\Image\PlainTypes.h \
+		include\ATL\Blob.h \
+		include\Region\Region.h \
+		include\Image\ImageFormat.h \
+		include\Path\Path.h \
+		include\Profile\Profile.h \
+		include\ComputerVision\1DEdgeDetection\ScanMap.h \
+		include\ComputerVision\1DEdgeDetection\ScanMapState.h \
+		include\ComputerVision\ImageAnalysis\ScanFields.h \
+		include\ComputerVision\1DEdgeDetection\ScanParams.h \
+		include\Enums\RidgeOperator.h \
+		include\ComputerVision\1DEdgeDetection\ScanStructs.h \
+		include\ComputerVision\1DEdgeDetection\ScanParams3D.h \
+		include\Enums\SurfaceEdgeTransition.h \
+		include\Enums\SurfaceStripePolarity.h \
+		include\ComputerVision\1DEdgeDetection\ScanStructs3D.h \
+		include\ComputerVision\1DEdgeDetection3D.h \
+		include\Surface\Surface.h \
+		include\ATL\NumericRange.h \
+		include\Surface\SurfaceFormat.h \
+		include\ComputerVision\2DEdgeDetection.h \
+		include\ComputerVision\Barcodes.h \
+		include\ComputerVision\Barcodes\BarcodeGrades.h \
+		include\Enums\BarcodesGrading.h \
+		include\ComputerVision\CameraCalibration.h \
+		include\Image\SpatialMap.h \
+		include\ComputerVision\CameraCalibration\CameraCalibrationStructs.h \
+		include\ComputerVision\COM-Filter\KNCooccurrence.h \
+		include\ComputerVision\COM-Filter\NDCooccurrenceParams.h \
+		include\ComputerVision\Datacodes.h \
+		include\Enums\DataMatrixCodeType.h \
+		include\ComputerVision\Datacodes\DataMatrix.h \
+		include\ComputerVision\Datacodes\QRCode.h \
+		include\Enums\DataMatrixGapSize.h \
+		include\Enums\DataMatrixDetectionMethod.h \
+		include\ComputerVision\Datacodes\DataCode.h \
+		include\Enums\DataMatrixOutlineStrategy.h \
+		include\Enums\DataMatrixPyramidStrategy.h \
+		include\ComputerVision\DeepLearning.h \
+		include\Enums\SamplingDensity.h \
+		include\ComputerVision\FourierAnalysis.h \
+		include\ComputerVision\GoldenTemplate\EdgeGoldenTemplate.h \
+		include\ComputerVision\GoldenTemplate\GrayGoldenTemplate.h \
+		include\ComputerVision\GoldenTemplate2\GoldenTemplate2Model_Intensity.h \
+		include\ComputerVision\HoughTransform.h \
+		include\ComputerVision\HoughTransform\HoughCircle.h \
+		include\ComputerVision\ImageAnalysis.h \
+		include\Enums\ImageLocalTransformsEnums.h \
+		include\Enums\MeasureObjectMethod.h \
+		include\Enums\RegionConnectivity.h \
+		include\Enums\HSxColorModel.h \
+		include\ComputerVision\ImageAnalysis\ShapeRegion.h \
+		include\Enums\RectangularRoiMask.h \
+		include\ComputerVision\ImageSegmentation.h \
+		include\ComputerVision\ImageSegmentation\ExtractBlobsStructs.h \
+		include\ComputerVision\ImageSegmentation\RegionProcessingParams.h \
+		include\Enums\KernelShape.h \
+		include\ComputerVision\OpticalCharacterRecognition.h \
+		include\Enums\MlpPreprocessing.h \
+		include\ComputerVision\TextThresholdingMethod.h \
+		include\Enums\OpticalCharacterRecognitionEnums.h \
+		include\Enums\ThresholdMethod.h \
+		include\ComputerVision\TextSegmentation.h \
+		include\ComputerVision\TextSegmentationMethod.h \
+		include\ComputerVision\SampleBasedInspection\SampleBasedInspection.h \
+		include\DataClassification\PCAModel.h \
+		include\ComputerVision\ShapeAdjustment.h \
+		include\Enums\AdjustmentMetric.h \
+		include\ComputerVision\ShapeFitting.h \
+		include\Enums\CircleFittingMethod.h \
+		include\ComputerVision\ShapeFitting\FittingMap.h \
+		include\ComputerVision\ShapeFitting\FittingFields.h \
+		include\ComputerVision\ShapeFitting3D.h \
+		include\ComputerVision\TemplateMatching.h \
+		include\ComputerVision\TemplateMatching\EdgeModel.h \
+		include\ComputerVision\TemplateMatching\GrayModel.h \
+		include\ComputerVision\TemplateMatching\Object2D.h \
+		include\ComputerVision\TEXEM-Filter\KNTexem.h \
+		include\ComputerVision\TEXEM-Filter\NDTexem.h \
+		include\ComputerVision\TEXEM-Filter\NDGaussianMixtureParams.h \
+		include\ComputerVision\TextureAnalysis\TextureAnalysis.h \
+		include\Histogram\Histogram.h \
+		include\ComputerVision\TextureModel.h \
+		include\DataClassification\Gaussian.h \
+		include\ComputerVision\WorldCoordinates.h \
+		include\Conversions\AVLConversions.h \
+		include\Point3DGrid\Point3DGrid.h \
+		include\Region\RegionOfInterest.h \
+		include\DataClassification\Clustering\Clustering.h \
+		include\DataClassification\Common\DataClassificationCommon.h \
+		include\DataClassification\GaussianMixture.h \
+		include\DataClassification\KNearestNeighbors.h \
+		include\Enums\Metric.h \
+		include\DataClassification\LinearRegression.h \
+		include\DataClassification\MultilayerPerceptron.h \
+		include\DataClassification\PrincipalComponentAnalysis.h \
+		include\DataClassification\SupportVectorMachines.h \
+		include\DebugPreview\DebugPreviewWindows.h \
+		include\Enums\Anchor3D.h \
+		include\Enums\Anchor1D.h \
+		include\Enums\AngleRange.h \
+		include\Enums\Axis.h \
+		include\Enums\BoundingRectangleFeature.h \
+		include\Enums\CircularityMeasure.h \
+		include\Enums\ColorPalette.h \
+		include\Enums\CropScaleMode.h \
+		include\Enums\DistanceMeasure.h \
+		include\Enums\ExtremumType.h \
+		include\Enums\ImageFileFormat.h \
+		include\Enums\Metric3D.h \
+		include\Enums\MirrorDirection.h \
+		include\Enums\PolarSpaceType.h \
+		include\Enums\ProjectionDirection.h \
+		include\Enums\RectangleOrientation.h \
+		include\Enums\RegionFeature.h \
+		include\Enums\RegionSkeletonMethod.h \
+		include\Enums\RotationDirection.h \
+		include\Enums\RotationSizeMode.h \
+		include\Enums\TestImageId.h \
+		include\Enums\TiffImageCompressionScheme.h \
+		include\Geometry\GeometryAngleMetrics.h \
+		include\Geometry\GeometryBasics.h \
+		include\Geometry\GeometryConstructions.h \
+		include\Geometry\GeometryDistanceMetrics.h \
+		include\Geometry\GeometryFeatures.h \
+		include\Geometry\GeometryFitting.h \
+		include\Geometry\GeometryInterpolations.h \
+		include\Geometry\GeometryIntersections.h \
+		include\Geometry\GeometryNormalizations.h \
+		include\Geometry\GeometryRelations.h \
+		include\Geometry\GeometrySpatialTransforms.h \
+		include\Geometry3D\Geometry3DBasics.h \
+		include\Geometry3D\Geometry3DConstructions.h \
+		include\Geometry3D\Geometry3DDistanceMetrics.h \
+		include\Geometry3D\Geometry3DFeatures.h \
+		include\Geometry3D\Geometry3DFitting.h \
+		include\Geometry3D\Geometry3DInterpolations.h \
+		include\Geometry3D\Geometry3DIntersections.h \
+		include\Geometry3D\Geometry3DRelations.h \
+		include\Geometry3D\Geometry3DSpatialTransforms.h \
+		include\Histogram\HistogramBasics.h \
+		include\Histogram\HistogramCombinators.h \
+		include\Histogram\HistogramDataStatistics.h \
+		include\Histogram\HistogramFeatures.h \
+		include\Histogram\HistogramLocalTransforms.h \
+		include\Histogram\HistogramMetrics.h \
+		include\Histogram\HistogramPointTransforms.h \
+		include\Histogram\HistogramRelations.h \
+		include\Histogram\HistogramSpatialTransforms.h \
+		include\Image\DrawingStyle.h \
+		include\Enums\DrawingMode.h \
+		include\Enums\PointShape.h \
+		include\Image\Extremum2D.h \
+		include\Image\ImageBasics.h \
+		include\Image\ImageColorSpaces.h \
+		include\Image\ImageCombinators.h \
+		include\Image\ImagePointTransformsState.h \
+		include\Image\ImageConversions.h \
+		include\Image\ImageDrawing.h \
+		include\Image\ImageEnhancement.h \
+		include\Image\ImageFeatures.h \
+		include\Image\ImageLocalExtremaVerification.h \
+		include\Image\ImageIO.h \
+		include\System\EnumerateFilesState.h \
+		include\System\ByteBuffer.h \
+		include\Image\SaveImageStateImplBase.h \
+		include\Image\ImageLocalTransforms.h \
+		include\Image\ImageLookUpTables.h \
+		include\Image\PixelLut.h \
+		include\Image\Pixel.hxx \
+		include\Image\ImageMetrics.h \
+		include\Image\ImagePixelStatistics.h \
+		include\Image\ImagePointTransforms.h \
+		include\Image\ImageRelations.h \
+		include\Image\ImageSpatialTransforms.h \
+		include\Image\ImageSpatialTransformsMaps.h \
+		include\Image\ImageThresholding.h \
+		include\Image\ImageTiling.h \
+		include\Image\ImageVectorTransforms.h \
+		include\Path\PathBasics.h \
+		include\Path\PathClassification.h \
+		include\Path\PathCombinators.h \
+		include\Path\PathFeatures.h \
+		include\Path\PathGlobalTransforms.h \
+		include\Path\PathLocalTransforms.h \
+		include\Path\PathMetrics.h \
+		include\Path\PathSpatialTransforms.h \
+		include\Path\ShapeFeatures.h \
+		include\Path\ShapeRelations.h \
+		include\Point3DGrid\Point3DGridBasics.h \
+		include\Point3DGrid\Point3DGridFeatures.h \
+		include\Point3DGrid\Point3DGridSpatialTransforms.h \
+		include\Profile\Extremum1D.h \
+		include\Profile\ProfileBasics.h \
+		include\Profile\ProfileCombinators.h \
+		include\Profile\ProfileFeatures.h \
+		include\Profile\ProfileScanStructs.h \
+		include\Profile\ProfileLocalTransforms.h \
+		include\Profile\ProfileMetrics.h \
+		include\Profile\ProfilePointTransforms.h \
+		include\Profile\ProfileRelations.h \
+		include\Profile\ProfileSpatialTransforms.h \
+		include\Region\RegionBasics.h \
+		include\Region\RegionCombinators.h \
+		include\Region\RegionFeatures.h \
+		include\Region\RegionGlobalTransforms.h \
+		include\Region\RegionMetrics.h \
+		include\Region\RegionMorphology.h \
+		include\Region\RegionPointTransforms.h \
+		include\Region\RegionRelations.h \
+		include\Region\RegionSpatialTransforms.h \
+		include\Surface\SurfaceBasics.h \
+		include\Surface\SurfaceFeatures.h \
+		include\Surface\SurfaceFitting.h \
+		include\Surface\SurfaceInterpolations.h \
+		include\Surface\SurfaceSpatialTransforms.h \
+		include\System\Configuration.h \
+		include\System\FTP.h \
+		include\System\Interoperability.h \
+		include\XVCombineRegions.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src\visiongraphwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
+		src\item\visionrectitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabbar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
+		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src\control\visionarrows_rotate.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		src\item\visionellipseitem.h \
+		src\item\visionlineitem.h \
+		src\item\visionpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPolygonF \
+		src\item\visionpoint.h \
+		src\item\visionring.h \
+		src\item\visioncrosspointitem.h \
+		src\item\visionchainitem.h \
+		src\item\visionarrow.h \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		src\visiongraph_base.h \
+		tmp\release\moc_predefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/AVL.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_base.h -o tmp\release\moc_visiongraph_base.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -8188,6 +8629,438 @@ tmp\release\visionarrow.obj: src\item\visionarrow.cpp src/item/visionarrow.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h
 
+tmp\release\visiongraph_base.obj: src\visiongraph_base.cpp src/visiongraph_base.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobjectdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qnamespace.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qconfig-bootstrapped.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qconfig.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtcore-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsystemdetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qprocessordetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcompilerdetection.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtypeinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsysinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlogging.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qflags.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtypetraits.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbasicatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_bootstrap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qgenericatomic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_cxx11.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qatomic_msvc.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qglobalstatic.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmutex.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qnumeric.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qversiontagging.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobjectdefs_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstring.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qchar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbytearray.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrefcount.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qarraydata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringbuilder.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qalgorithms.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiterator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhashfunctions.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpair.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qbytearraylist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringlist.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregexp.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qstringmatcher.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcoreevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qscopedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmetatype.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvarlengtharray.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontainerfwd.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgetsglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgets-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvariant.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdebug.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtextstream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlocale.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qset.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontiguouscache.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtoolbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractbutton.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
+		src/visiongraphtool.h \
+		src/visiongraph_global.h \
+		src/item/visiongraphscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
+		src/item/visiongraphview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src/control/visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\XVBase.h \
+		include\XVCreateRegion.h \
+		include\AVL.h \
+		include\ATL\Array.h \
+		include\ATL\Utils.h \
+		include\ATL\Platform.h \
+		include\ATL\Array.hxx \
+		include\ATL\Error.h \
+		include\ATL\AtlString.h \
+		include\ATL\AtlTypes.h \
+		include\ATL\AtlString.hxx \
+		include\ATL\AtlMemory.h \
+		include\AVLCommon\Config.h \
+		include\ATL\Dummy.h \
+		include\ATL\Math.hxx \
+		include\ATL\Optional.h \
+		include\AVLCommon\BaseState.h \
+		include\AVLCommon\Enums\FileSortingOrder.h \
+		include\AVLCommon\Enums\MEstimator.h \
+		include\AVLCommon\Enums\SortingOrder.h \
+		include\AVLCommon\Enums\TheilSenVariant.h \
+		include\AVLCommon\MatrixTypes.h \
+		include\ATL\Array2D.hxx \
+		include\ATL\Array2D.h \
+		include\AVLCommon\RandomTypes.h \
+		include\AVLCommon\RandomStateImplBase.h \
+		include\AVLCommon\Settings.h \
+		include\AVLCommon\VersionProtection.h \
+		include\Basic\Box.h \
+		include\Enums\Anchor2D.h \
+		include\Enums\SplitDirection.h \
+		include\Basic\Types.h \
+		include\Geometry\Geometry.h \
+		include\Basic\Format.h \
+		include\Geometry3D\Geometry3D.h \
+		include\Basic\LinearFunction.h \
+		include\Basic\Location.h \
+		include\Basic\Pixel.h \
+		include\Basic\Size.h \
+		include\ComputerVision\1DEdgeDetection.h \
+		include\Enums\EdgeTransition.h \
+		include\Enums\Polarity.h \
+		include\Enums\Selection.h \
+		include\Enums\InterpolationMethod.h \
+		include\Enums\ProfileInterpolationMethod.h \
+		include\Image\Image.h \
+		include\Image\PlainTypes.h \
+		include\ATL\Blob.h \
+		include\Region\Region.h \
+		include\Image\ImageFormat.h \
+		include\Path\Path.h \
+		include\Profile\Profile.h \
+		include\ComputerVision\1DEdgeDetection\ScanMap.h \
+		include\ComputerVision\1DEdgeDetection\ScanMapState.h \
+		include\ComputerVision\ImageAnalysis\ScanFields.h \
+		include\ComputerVision\1DEdgeDetection\ScanParams.h \
+		include\Enums\RidgeOperator.h \
+		include\ComputerVision\1DEdgeDetection\ScanStructs.h \
+		include\ComputerVision\1DEdgeDetection\ScanParams3D.h \
+		include\Enums\SurfaceEdgeTransition.h \
+		include\Enums\SurfaceStripePolarity.h \
+		include\ComputerVision\1DEdgeDetection\ScanStructs3D.h \
+		include\ComputerVision\1DEdgeDetection3D.h \
+		include\Surface\Surface.h \
+		include\ATL\NumericRange.h \
+		include\Surface\SurfaceFormat.h \
+		include\ComputerVision\2DEdgeDetection.h \
+		include\ComputerVision\Barcodes.h \
+		include\ComputerVision\Barcodes\BarcodeGrades.h \
+		include\Enums\BarcodesGrading.h \
+		include\ComputerVision\CameraCalibration.h \
+		include\Image\SpatialMap.h \
+		include\ComputerVision\CameraCalibration\CameraCalibrationStructs.h \
+		include\ComputerVision\COM-Filter\KNCooccurrence.h \
+		include\ComputerVision\COM-Filter\NDCooccurrenceParams.h \
+		include\ComputerVision\Datacodes.h \
+		include\Enums\DataMatrixCodeType.h \
+		include\ComputerVision\Datacodes\DataMatrix.h \
+		include\ComputerVision\Datacodes\QRCode.h \
+		include\Enums\DataMatrixGapSize.h \
+		include\Enums\DataMatrixDetectionMethod.h \
+		include\ComputerVision\Datacodes\DataCode.h \
+		include\Enums\DataMatrixOutlineStrategy.h \
+		include\Enums\DataMatrixPyramidStrategy.h \
+		include\ComputerVision\DeepLearning.h \
+		include\Enums\SamplingDensity.h \
+		include\ComputerVision\FourierAnalysis.h \
+		include\ComputerVision\GoldenTemplate\EdgeGoldenTemplate.h \
+		include\ComputerVision\GoldenTemplate\GrayGoldenTemplate.h \
+		include\ComputerVision\GoldenTemplate2\GoldenTemplate2Model_Intensity.h \
+		include\ComputerVision\HoughTransform.h \
+		include\ComputerVision\HoughTransform\HoughCircle.h \
+		include\ComputerVision\ImageAnalysis.h \
+		include\Enums\ImageLocalTransformsEnums.h \
+		include\Enums\MeasureObjectMethod.h \
+		include\Enums\RegionConnectivity.h \
+		include\Enums\HSxColorModel.h \
+		include\ComputerVision\ImageAnalysis\ShapeRegion.h \
+		include\Enums\RectangularRoiMask.h \
+		include\ComputerVision\ImageSegmentation.h \
+		include\ComputerVision\ImageSegmentation\ExtractBlobsStructs.h \
+		include\ComputerVision\ImageSegmentation\RegionProcessingParams.h \
+		include\Enums\KernelShape.h \
+		include\ComputerVision\OpticalCharacterRecognition.h \
+		include\Enums\MlpPreprocessing.h \
+		include\ComputerVision\TextThresholdingMethod.h \
+		include\Enums\OpticalCharacterRecognitionEnums.h \
+		include\Enums\ThresholdMethod.h \
+		include\ComputerVision\TextSegmentation.h \
+		include\ComputerVision\TextSegmentationMethod.h \
+		include\ComputerVision\SampleBasedInspection\SampleBasedInspection.h \
+		include\DataClassification\PCAModel.h \
+		include\ComputerVision\ShapeAdjustment.h \
+		include\Enums\AdjustmentMetric.h \
+		include\ComputerVision\ShapeFitting.h \
+		include\Enums\CircleFittingMethod.h \
+		include\ComputerVision\ShapeFitting\FittingMap.h \
+		include\ComputerVision\ShapeFitting\FittingFields.h \
+		include\ComputerVision\ShapeFitting3D.h \
+		include\ComputerVision\TemplateMatching.h \
+		include\ComputerVision\TemplateMatching\EdgeModel.h \
+		include\ComputerVision\TemplateMatching\GrayModel.h \
+		include\ComputerVision\TemplateMatching\Object2D.h \
+		include\ComputerVision\TEXEM-Filter\KNTexem.h \
+		include\ComputerVision\TEXEM-Filter\NDTexem.h \
+		include\ComputerVision\TEXEM-Filter\NDGaussianMixtureParams.h \
+		include\ComputerVision\TextureAnalysis\TextureAnalysis.h \
+		include\Histogram\Histogram.h \
+		include\ComputerVision\TextureModel.h \
+		include\DataClassification\Gaussian.h \
+		include\ComputerVision\WorldCoordinates.h \
+		include\Conversions\AVLConversions.h \
+		include\Point3DGrid\Point3DGrid.h \
+		include\Region\RegionOfInterest.h \
+		include\DataClassification\Clustering\Clustering.h \
+		include\DataClassification\Common\DataClassificationCommon.h \
+		include\DataClassification\GaussianMixture.h \
+		include\DataClassification\KNearestNeighbors.h \
+		include\Enums\Metric.h \
+		include\DataClassification\LinearRegression.h \
+		include\DataClassification\MultilayerPerceptron.h \
+		include\DataClassification\PrincipalComponentAnalysis.h \
+		include\DataClassification\SupportVectorMachines.h \
+		include\DebugPreview\DebugPreviewWindows.h \
+		include\Enums\Anchor3D.h \
+		include\Enums\Anchor1D.h \
+		include\Enums\AngleRange.h \
+		include\Enums\Axis.h \
+		include\Enums\BoundingRectangleFeature.h \
+		include\Enums\CircularityMeasure.h \
+		include\Enums\ColorPalette.h \
+		include\Enums\CropScaleMode.h \
+		include\Enums\DistanceMeasure.h \
+		include\Enums\ExtremumType.h \
+		include\Enums\ImageFileFormat.h \
+		include\Enums\Metric3D.h \
+		include\Enums\MirrorDirection.h \
+		include\Enums\PolarSpaceType.h \
+		include\Enums\ProjectionDirection.h \
+		include\Enums\RectangleOrientation.h \
+		include\Enums\RegionFeature.h \
+		include\Enums\RegionSkeletonMethod.h \
+		include\Enums\RotationDirection.h \
+		include\Enums\RotationSizeMode.h \
+		include\Enums\TestImageId.h \
+		include\Enums\TiffImageCompressionScheme.h \
+		include\Geometry\GeometryAngleMetrics.h \
+		include\Geometry\GeometryBasics.h \
+		include\Geometry\GeometryConstructions.h \
+		include\Geometry\GeometryDistanceMetrics.h \
+		include\Geometry\GeometryFeatures.h \
+		include\Geometry\GeometryFitting.h \
+		include\Geometry\GeometryInterpolations.h \
+		include\Geometry\GeometryIntersections.h \
+		include\Geometry\GeometryNormalizations.h \
+		include\Geometry\GeometryRelations.h \
+		include\Geometry\GeometrySpatialTransforms.h \
+		include\Geometry3D\Geometry3DBasics.h \
+		include\Geometry3D\Geometry3DConstructions.h \
+		include\Geometry3D\Geometry3DDistanceMetrics.h \
+		include\Geometry3D\Geometry3DFeatures.h \
+		include\Geometry3D\Geometry3DFitting.h \
+		include\Geometry3D\Geometry3DInterpolations.h \
+		include\Geometry3D\Geometry3DIntersections.h \
+		include\Geometry3D\Geometry3DRelations.h \
+		include\Geometry3D\Geometry3DSpatialTransforms.h \
+		include\Histogram\HistogramBasics.h \
+		include\Histogram\HistogramCombinators.h \
+		include\Histogram\HistogramDataStatistics.h \
+		include\Histogram\HistogramFeatures.h \
+		include\Histogram\HistogramLocalTransforms.h \
+		include\Histogram\HistogramMetrics.h \
+		include\Histogram\HistogramPointTransforms.h \
+		include\Histogram\HistogramRelations.h \
+		include\Histogram\HistogramSpatialTransforms.h \
+		include\Image\DrawingStyle.h \
+		include\Enums\DrawingMode.h \
+		include\Enums\PointShape.h \
+		include\Image\Extremum2D.h \
+		include\Image\ImageBasics.h \
+		include\Image\ImageColorSpaces.h \
+		include\Image\ImageCombinators.h \
+		include\Image\ImagePointTransformsState.h \
+		include\Image\ImageConversions.h \
+		include\Image\ImageDrawing.h \
+		include\Image\ImageEnhancement.h \
+		include\Image\ImageFeatures.h \
+		include\Image\ImageLocalExtremaVerification.h \
+		include\Image\ImageIO.h \
+		include\System\EnumerateFilesState.h \
+		include\System\ByteBuffer.h \
+		include\Image\SaveImageStateImplBase.h \
+		include\Image\ImageLocalTransforms.h \
+		include\Image\ImageLookUpTables.h \
+		include\Image\PixelLut.h \
+		include\Image\Pixel.hxx \
+		include\Image\ImageMetrics.h \
+		include\Image\ImagePixelStatistics.h \
+		include\Image\ImagePointTransforms.h \
+		include\Image\ImageRelations.h \
+		include\Image\ImageSpatialTransforms.h \
+		include\Image\ImageSpatialTransformsMaps.h \
+		include\Image\ImageThresholding.h \
+		include\Image\ImageTiling.h \
+		include\Image\ImageVectorTransforms.h \
+		include\Path\PathBasics.h \
+		include\Path\PathClassification.h \
+		include\Path\PathCombinators.h \
+		include\Path\PathFeatures.h \
+		include\Path\PathGlobalTransforms.h \
+		include\Path\PathLocalTransforms.h \
+		include\Path\PathMetrics.h \
+		include\Path\PathSpatialTransforms.h \
+		include\Path\ShapeFeatures.h \
+		include\Path\ShapeRelations.h \
+		include\Point3DGrid\Point3DGridBasics.h \
+		include\Point3DGrid\Point3DGridFeatures.h \
+		include\Point3DGrid\Point3DGridSpatialTransforms.h \
+		include\Profile\Extremum1D.h \
+		include\Profile\ProfileBasics.h \
+		include\Profile\ProfileCombinators.h \
+		include\Profile\ProfileFeatures.h \
+		include\Profile\ProfileScanStructs.h \
+		include\Profile\ProfileLocalTransforms.h \
+		include\Profile\ProfileMetrics.h \
+		include\Profile\ProfilePointTransforms.h \
+		include\Profile\ProfileRelations.h \
+		include\Profile\ProfileSpatialTransforms.h \
+		include\Region\RegionBasics.h \
+		include\Region\RegionCombinators.h \
+		include\Region\RegionFeatures.h \
+		include\Region\RegionGlobalTransforms.h \
+		include\Region\RegionMetrics.h \
+		include\Region\RegionMorphology.h \
+		include\Region\RegionPointTransforms.h \
+		include\Region\RegionRelations.h \
+		include\Region\RegionSpatialTransforms.h \
+		include\Surface\SurfaceBasics.h \
+		include\Surface\SurfaceFeatures.h \
+		include\Surface\SurfaceFitting.h \
+		include\Surface\SurfaceInterpolations.h \
+		include\Surface\SurfaceSpatialTransforms.h \
+		include\System\Configuration.h \
+		include\System\FTP.h \
+		include\System\Interoperability.h \
+		include\XVCombineRegions.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/visiongraphwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
+		src/item/visionrectitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabbar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
+		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		src/control/visionarrows_rotate.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		src/item/visionellipseitem.h \
+		src/item/visionlineitem.h \
+		src/item/visionpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPolygonF \
+		src/item/visionpoint.h \
+		src/item/visionring.h \
+		src/item/visioncrosspointitem.h \
+		src/item/visionchainitem.h \
+		src/item/visionarrow.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor
+
 tmp\release\qrc_image.obj: tmp\release\qrc_image.cpp 
 
 tmp\release\moc_visiongraph.obj: tmp\release\moc_visiongraph.cpp 
@@ -8229,6 +9102,8 @@ tmp\release\moc_visiongraphwidget.obj: tmp\release\moc_visiongraphwidget.cpp
 tmp\release\moc_visionchainitem.obj: tmp\release\moc_visionchainitem.cpp 
 
 tmp\release\moc_visionarrow.obj: tmp\release\moc_visionarrow.cpp 
+
+tmp\release\moc_visiongraph_base.obj: tmp\release\moc_visiongraph_base.cpp 
 
 ####### Install
 

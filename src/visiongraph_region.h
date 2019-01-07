@@ -22,9 +22,9 @@
 #include <QToolButton>
 #include <QSpinBox>
 
-#include "visiongraphtool.h"
+#include "visiongraph_base.h"
 
-class VisionGraph_Region : public QFrame
+class VisionGraph_Region : public VisionGraph_Base
 {
     Q_OBJECT
 public:

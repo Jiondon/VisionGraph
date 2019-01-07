@@ -103,7 +103,7 @@ public:
     QVector<QPointF> getPoints();
 
 signals:
-
+    void signalChanged(VisionItem* item);
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

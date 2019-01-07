@@ -172,10 +172,10 @@ signals:
     void selectedChanged(bool selected,VisionItem* item,ItemType type, QVector<QPointF> vecPointF);
 
     /**
-     * @brief       当item的boundingRect()发生变化的事触发
+     * @brief       当item的boundingRect()发生变化的事触发,主要用于提供数据更新
      * @param
      */
-    void signalChanged(VisionItem* item);
+    virtual void signalChanged(VisionItem* item) = 0;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

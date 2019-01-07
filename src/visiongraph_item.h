@@ -16,7 +16,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QToolButton>
-#include "visiongraphtool.h"
+#include "visiongraph_base.h"
 
 #include <QLabel>
 #include <QComboBox>
@@ -32,7 +32,7 @@ enum ItemModel{
     un_self
 };
 
-class VISIONGRAPHSHARED_EXPORT VisionGraph_Item : public QFrame
+class VISIONGRAPHSHARED_EXPORT VisionGraph_Item : public VisionGraph_Base
 {
     Q_OBJECT
 public:

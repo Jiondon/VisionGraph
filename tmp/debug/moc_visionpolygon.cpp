@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionPolygon_t {
-    QByteArrayData data[4];
-    char stringdata0[31];
+    QByteArrayData data[7];
+    char stringdata0[62];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,16 @@ struct qt_meta_stringdata_VisionPolygon_t {
 static const qt_meta_stringdata_VisionPolygon_t qt_meta_stringdata_VisionPolygon = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "VisionPolygon"
-QT_MOC_LITERAL(1, 14, 9), // "slotIndex"
-QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 5) // "index"
+QT_MOC_LITERAL(1, 14, 13), // "signalChanged"
+QT_MOC_LITERAL(2, 28, 0), // ""
+QT_MOC_LITERAL(3, 29, 11), // "VisionItem*"
+QT_MOC_LITERAL(4, 41, 4), // "item"
+QT_MOC_LITERAL(5, 46, 9), // "slotIndex"
+QT_MOC_LITERAL(6, 56, 5) // "index"
 
     },
-    "VisionPolygon\0slotIndex\0\0index"
+    "VisionPolygon\0signalChanged\0\0VisionItem*\0"
+    "item\0slotIndex\0index"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,18 +51,24 @@ static const uint qt_meta_data_VisionPolygon[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    1,   24,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x08 /* Private */,
+       5,    1,   27,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3,    4,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int,    6,
 
        0        // eod
 };
@@ -69,8 +79,30 @@ void VisionPolygon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         VisionPolygon *_t = static_cast<VisionPolygon *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->slotIndex((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->signalChanged((*reinterpret_cast< VisionItem*(*)>(_a[1]))); break;
+        case 1: _t->slotIndex((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
+            }
+            break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (VisionPolygon::*_t)(VisionItem * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&VisionPolygon::signalChanged)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -100,15 +132,22 @@ int VisionPolygon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
     }
     return _id;
+}
+
+// SIGNAL 0
+void VisionPolygon::signalChanged(VisionItem * _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

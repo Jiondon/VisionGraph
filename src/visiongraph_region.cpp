@@ -7,7 +7,7 @@
 #include <QMatrix>
 #include <QFileDialog>
 
-VisionGraph_Region::VisionGraph_Region(ToolButtonDirection toolButtonDirect,QWidget *parent) : QFrame(parent)
+VisionGraph_Region::VisionGraph_Region(ToolButtonDirection toolButtonDirect,QWidget *parent) : VisionGraph_Base(parent)
 {
 //    setMinimumSize(1200,800);
     mainLayout = new QVBoxLayout;

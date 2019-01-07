@@ -37,6 +37,7 @@ public:
     QRectF boundingRect() const;
 
 signals:
+    void signalChanged(VisionItem* item);
 
 private:
     QPointF m_pointF;

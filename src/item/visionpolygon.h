@@ -54,6 +54,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
+    void signalChanged(VisionItem* item);
 
 private:
 

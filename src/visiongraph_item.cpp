@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include <QWidget>
 
-VisionGraph_Item::VisionGraph_Item(ItemModel model, ToolButtonDirection toolButtonDirect, QWidget *parent) : QFrame(parent)
+VisionGraph_Item::VisionGraph_Item(ItemModel model, ToolButtonDirection toolButtonDirect, QWidget *parent) : VisionGraph_Base(parent)
 {
     mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
@@ -1082,6 +1082,7 @@ void VisionGraph_Item::slot_removeItem_action()
 
     for(int i=0;i<m_lstItem.count();i++){
         if(m_lstItem[i] == m_curVisionItem){
+            m_lstItem[i]->deleteLater();
             m_lstItem.removeAt(i);
             break;
         }

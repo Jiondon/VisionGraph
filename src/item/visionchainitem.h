@@ -29,6 +29,8 @@ signals:
     void signalMouse(qreal x,qreal y);
     void signalSelected(bool selected,int index);
 
+    void signalChanged(VisionItem* item);
+
 protected:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

@@ -60,6 +60,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
+    void signalChanged(VisionItem* item);
 
 private:
     QPointF m_pointF;

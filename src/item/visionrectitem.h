@@ -95,6 +95,7 @@ public:
 
 signals:
     void signal_RectSizeChanged();
+    void signalChanged(VisionItem* item);
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

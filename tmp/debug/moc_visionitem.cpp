@@ -312,12 +312,5 @@ void VisionItem::selectedChanged(bool _t1, VisionItem * _t2, ItemType _t3, QVect
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
     QMetaObject::activate(this, &staticMetaObject, 8, _a);
 }
-
-// SIGNAL 9
-void VisionItem::signalChanged(VisionItem * _t1)
-{
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 9, _a);
-}
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
