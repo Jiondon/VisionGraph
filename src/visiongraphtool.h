@@ -29,6 +29,9 @@
 
 #include "./control/color.h"
 
+/**
+ * @brief       枚举工具栏的摆放方式和位置，
+ */
 enum ToolButtonDirection{
     leftDirection,
     topDirection,
@@ -36,6 +39,10 @@ enum ToolButtonDirection{
     bottomDirection
 };
 
+/**
+ * @brief       枚举view中绘制控件的限制
+ * @note        可随意搭配
+ */
 enum ViewType{
     freeItem,  //随意搭配，不限制
     _singleItem,  //单一item (绘制的时候会删除view中其他的item)
@@ -52,11 +59,18 @@ enum ToolButtonType
     ToolButtonSys_drag, //拖动
     ToolButtonSys_zoom, //缩放
     ToolButtonSys_Fit,
+    ToolButtonSys_save, //保存
+
+    //右侧工具栏 -- 功能类
+    ToolButtonSys_open_project,  //打开工程
+    ToolButtonSys_front,  //撤销
+    ToolButtonSys_next,   //取消撤销
+    ToolButtonSys_clear,  //清空绘图区域
+    ToolButtonSys_remove_item,  //删除当前选中的item
+
 
     ToolButtonSys_mousePainter, //鼠标绘制
     ToolButtonSys_mouseClear, //鼠标清除
-
-    ToolButtonSys_save, //保存
 
     ToolButtonSys_rect, //绘制矩形
     ToolButtonSys_ellipse, //绘制椭圆或者圆
@@ -65,13 +79,6 @@ enum ToolButtonType
     ToolButtonSys_point, //绘制点
     ToolButtonSys_line, //绘制线
     ToolButtonSys_polyLine, //绘制折线
-
-    //右侧工具栏 -- 功能类
-    ToolButtonSys_open_project,  //打开工程
-    ToolButtonSys_front,  //撤销
-    ToolButtonSys_next,   //取消撤销
-    ToolButtonSys_clear,  //清空绘图区域
-    ToolButtonSys_remove_item,  //删除当前选中的item
 };
 
 #endif // VISIONGRAPHTOOL_H

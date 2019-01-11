@@ -934,48 +934,46 @@ void VisionGraph_Region::slot_fit_action()
 
 void VisionGraph_Region::slot_mousePainter_action()
 {
-    view->setItemType(ItemType::Point);
-    m_itemType = ItemType::Point;
+    view->setItemType(ItemType::Paint_Point);
+    m_itemType = ItemType::Paint_Point;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
 
 }
 
 void VisionGraph_Region::slot_mouseClear_action()
 {
-    view->setItemType(ItemType::NoPoint);
-    m_itemType = ItemType::NoPoint;
+    view->setItemType(ItemType::Paint_NoPoint);
+    m_itemType = ItemType::Paint_NoPoint;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
-
-
 }
 
 void VisionGraph_Region::slot_rect_action()
 {
-    view->setItemType(ItemType::Rect);
-    m_itemType = ItemType::Rect;
+    view->setItemType(ItemType::Paint_Rect);
+    m_itemType = ItemType::Paint_Rect;
 //    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Rectangle"));
 }
 
 void VisionGraph_Region::slot_ellipse_action()
 {
-    view->setItemType(ItemType::EllipseItem);
-    m_itemType = ItemType::EllipseItem;
+    view->setItemType(ItemType::Paint_EllipseItem);
+    m_itemType = ItemType::Paint_EllipseItem;
 //    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Ellipse"));
 
 }
 
 void VisionGraph_Region::slot_poly_action()
 {
-    view->setItemType(ItemType::Poly);
-    m_itemType = ItemType::Poly;
+    view->setItemType(ItemType::Paint_Poly);
+    m_itemType = ItemType::Paint_Poly;
 //    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 path"));
 
 }
 
 void VisionGraph_Region::slot_poly_elli_action()
 {
-    view->setItemType(ItemType::Region);
-    m_itemType = ItemType::Region;
+    view->setItemType(ItemType::Paint_Region);
+    m_itemType = ItemType::Paint_Region;
 //    label_Operation->setText(QStringLiteral("点击，创建任意的多边形"));
 }
 
@@ -1036,9 +1034,9 @@ void VisionGraph_Region::slot_clear_action()
 
 void VisionGraph_Region::slot_addItem(ItemType type, QRectF rf)
 {
-    if(type == Rect){
+    if(type == ItemType::Paint_Rect){
         addRect(rf);
-    }else if(type == EllipseItem){
+    }else if(type == ItemType::Paint_EllipseItem){
         addEllipse(rf);
     }
 }
@@ -1110,6 +1108,7 @@ void VisionGraph_Region::slot_SceneMouseMove(qreal x, qreal y)
 
 void VisionGraph_Region::slot_actionTriggered(QAction *action)
 {
+    //region版本，发现存在item，在进行其他绘制操作的时候，会将存在的item自动转换成region
     if(action->text() == "rectangle" || action->text() == "ellipse" || action->text() == "poly" ||
             action->text() == "region" || action->text() == "mousePainter" || action->text() == "mouseClear"){
         if(m_curVisionItem != nullptr){

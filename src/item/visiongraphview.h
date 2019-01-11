@@ -22,6 +22,7 @@
 #include <QLabel>
 
 #include "../visiongraph_global.h"
+#include "../control/color.h"
 
 using namespace XVCreateR;
 enum Corner{
@@ -268,7 +269,7 @@ private:
 
     QLine m_Line;  //记录绘制的直线
 
-    ItemType m_itemType = ItemType::Point;  //绘制的控件类型
+    ItemType m_itemType = ItemType::Paint_Point;  //绘制的控件类型
 
 
     XVCreateRegionIn regionIn;
@@ -369,6 +370,11 @@ private:
     void push_region(XVRegion region,int index = 0);
 
     void detailMoveEvent(QMouseEvent *event);
+
+    /**
+     * @brief       处理鼠标释放时间，根据当前的GraphType来进行分类处理
+     */
+    void detailReleaseEvent(QMouseEvent *event);
 };
 
 #endif // VISIONGRAPHVIEW_H

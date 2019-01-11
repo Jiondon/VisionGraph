@@ -30,6 +30,8 @@ void VisionChainItem::setChainPos(QList<qreal> lst_x, QList<qreal> lst_y)
     for(int i=0;i<lst_x.count();i++){
         m_lstChainPoint.append(QPointF(lst_x[i],lst_y[i]));
         MiniRect* rectItem = new MiniRect(lst_x[i]-2.5,lst_y[i]-2.5,5,5,QColor(255,0,0),this);
+        rectItem->setIndex(i);
+        QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         rectItem->hide();
         m_lstMiniRect.append(rectItem);
     }
@@ -55,6 +57,8 @@ void VisionChainItem::setChainPos(QList<QPointF> lst_p)
         m_lst_x.append(lst_p[i].x());
         m_lst_y.append(lst_p[i].y());
         MiniRect* rectItem = new MiniRect(lst_p[i].x()-2.5,lst_p[i].y()-2.5,5,5,QColor(255,0,0),this);
+        rectItem->setIndex(i);
+        QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         rectItem->hide();
         m_lstMiniRect.append(rectItem);
     }
@@ -107,7 +111,7 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     // 反走样
     painter->setRenderHint(QPainter::Antialiasing, true);
     // 设置画笔颜色
-    if(m_selected){
+    if(option->state & QStyle::State_Selected){
         painter->setPen(QPen(QBrush(m_selectedColor),0));
         painter->setBrush(m_selectedColor);
     }else{
@@ -117,7 +121,7 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     // 绘制直线
     QPointF p1,p2;
-    qreal d = 3;
+    qreal d = 1.5;
     if(m_bClosed){
         //是封闭图形
         for(int i =0;i<m_lstChainPoint.count();i++){
@@ -137,6 +141,7 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->drawLine(QPointF(-(d*2),-d),QPointF(0,0));
             painter->drawLine(QPointF(-(d*2),+d),QPointF(0,0));
             painter->drawLine(QPointF(-(d*2),+d),QPointF(-(d*2),-d));
+//            painter->drawPolygon({QPointF(-(d*2),-d),QPointF(0,0),QPointF(-(d*2),+d)});
 
             painter->rotate(-angle);
             painter->translate(QPointF(-p2.x(),-p2.y()));
@@ -156,6 +161,7 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->drawLine(QPointF(-(d*2),-d),QPointF(0,0));
             painter->drawLine(QPointF(-(d*2),+d),QPointF(0,0));
             painter->drawLine(QPointF(-(d*2),+d),QPointF(-(d*2),-d));
+//            painter->drawPolygon({QPointF(-(d*2),-d),QPointF(0,0),QPointF(-(d*2),+d)});
 
             painter->rotate(-angle);
             painter->translate(QPointF(-p2.x(),-p2.y()));
@@ -172,14 +178,16 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
 
     //绘制矩形框  -- 每个点绑定一个矩形框
-    if(m_selected){
+    if(option->state & QStyle::State_Selected){
         for(int i=0;i<m_lstMiniRect.count();i++){
             m_lstMiniRect[i]->show();
         }
+        m_selected = true;
     }else{
         for(int i=0;i<m_lstMiniRect.count();i++){
             m_lstMiniRect[i]->hide();
         }
+        m_selected = false;
     }
 }
 
@@ -204,13 +212,28 @@ QRectF VisionChainItem::boundingRect() const
 
 void VisionChainItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-//    qDebug()<<"mouse move line";
-    QGraphicsItem::mouseMoveEvent(event);
+    if(m_bEdit && m_selected){
+        QPointF disPoint = event->scenePos() - m_lastPointF;
+        if(m_iIndex == -1){
+            //整体拖动
+//            QGraphicsItem::mouseMoveEvent(event);  //采用Qt本身的拖动，数据不会跟着变化，只会改变pos属性，
+            for(int i=0;i<m_lstChainPoint.count();i++){
+                m_lstChainPoint[i] = m_lstChainPoint[i] + disPoint;
+                m_lstMiniRect[i]->setPos(m_lstChainPoint[i].x()-2.5,m_lstChainPoint[i].y()-2.5);
+            }
+        }else{
+            //拖动某一个点
+            m_lstChainPoint[m_iIndex] = event->scenePos();
+            m_lstMiniRect[m_iIndex]->setPos(event->scenePos().x()-2.5,event->scenePos().y()-2.5);
+        }
+        updateData();
+    }
+    m_lastPointF = event->scenePos();
+    this->scene()->update();
 }
 
 void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-//    qDebug()<<"mouse release event";
     QGraphicsItem::mouseReleaseEvent(event);
 
 }
@@ -218,45 +241,36 @@ void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VisionChainItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
+    m_selected = true;
 
-    if(m_selected){
-        m_selected = false;
-    }else{
-        m_selected = true;
-    }
-    update();
+    setSelected(true);
+
+
+    m_lastPointF = event->scenePos();
+    this->scene()->update();
 }
 
-//void VisionChainItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-//{
-//}
-
-//void VisionChainItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
-//{
-////    setCursor(QCursor(Qt::CrossCursor));
-//}
-
-//void VisionChainItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-//{
-////    setCursor(QCursor(Qt::ArrowCursor));
-////    qDebug()<<"hover leave";
-//}
-
-QRectF VisionChainItem::addRect()
+void VisionChainItem::updateData()
 {
-    if(m_x1 <= m_x2)
-    {
-        if(m_y1 <= m_y2){
-            return QRectF(m_x1,m_y1,m_x2-m_x1,m_y2-m_y1);
-        }else{
-            return QRectF(m_x1,m_y2,m_x2-m_x1,m_y1-m_y2);
-        }
+    for(int i=0;i<m_lstChainPoint.count();i++){
+        m_lst_x.append(m_lstChainPoint[i].x());
+        m_lst_y.append(m_lstChainPoint[i].y());
+    }
+//    m_lst_x = lst_x;m_lst_y = lst_y;
+    //获取链表的最大最小值--排序
+    qSort(m_lst_x.begin(), m_lst_x.end());
+    qSort(m_lst_y.begin(), m_lst_y.end());
+    m_x1 = m_lst_x[0];m_x2 = m_lst_x[m_lst_x.count()-1];m_y1 = m_lst_y[0];m_y2 = m_lst_y[m_lst_y.count()-1];
+}
+
+void VisionChainItem::slotMiniRectIndex(int index)
+{
+    qDebug()<<index;
+    m_iIndex = index;
+    if(index == -1){
+        this->scene()->views().at(0)->setCursor(viewCursor);
     }else{
-        if(m_y1 <= m_y2){
-            return QRectF(m_x2,m_y1,m_x1-m_x2,m_y2-m_y1);
-        }else{
-            return QRectF(m_x2,m_y2,m_x1-m_x2,m_y1-m_y2);
-        }
+        this->scene()->views().at(0)->setCursor(Qt::SizeAllCursor);
     }
 }
 

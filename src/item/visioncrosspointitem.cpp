@@ -13,21 +13,21 @@ VisionCrossPointItem::VisionCrossPointItem(bool edit, VisionItem *parent) : Visi
     m_selectedColor = m_selectedColor;
     m_bEdit = edit;
     setAcceptHoverEvents(true);
-    m_type = ItemType::CrossPoint;
+    m_type = ItemType::Paint_CrossPoint;
 }
 
 VisionCrossPointItem::VisionCrossPointItem(QPointF pointF, VisionItem *parent) : VisionItem(parent)
 {
     m_pointF = pointF;
     setAcceptHoverEvents(true);
-    m_type = ItemType::CrossPoint;
+    m_type = ItemType::Paint_CrossPoint;
 }
 
 VisionCrossPointItem::VisionCrossPointItem(qreal x, qreal y, VisionItem *parent) : VisionItem(parent)
 {
     m_pointF = QPointF(x,y);
     setAcceptHoverEvents(true);
-    m_type = ItemType::CrossPoint;
+    m_type = ItemType::Paint_CrossPoint;
 }
 
 void VisionCrossPointItem::setPoint(qreal x, qreal y)

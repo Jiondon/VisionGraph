@@ -1,14 +1,15 @@
 ﻿/****************************************************************************
 ** @brief       VisionGraph,绘制模块的widget
-** @note        会生成一个widget来进行展示绘制模块  item版本
+** @note        会生成一个widget来进行展示绘制模块---主要是优化region和item版本
+** @note        不同版本合并为一个类，通过构造的参数来区分版本，方便后续拓展
 ** @author      xiaodongLi
-** @date        create:2018-10-24
+** @date        create:2019-1-9
 ** @example
 ****************************************************************************/
 
 
-#ifndef VISIONGRAPH_ITEM_H
-#define VISIONGRAPH_ITEM_H
+#ifndef VISIONGRAPH__H
+#define VISIONGRAPH__H
 
 #include <QFrame>
 #include <QWidget>
@@ -16,7 +17,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QToolButton>
-#include "visiongraph_base.h"
+#include <QIntValidator>
 
 #include <QLabel>
 #include <QComboBox>
@@ -26,14 +27,20 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include "visiongraphwidget.h"
+#include "visiongraph_base.h"
 
-class VISIONGRAPHSHARED_EXPORT VisionGraph_Item : public VisionGraph_Base
+class VISIONGRAPHSHARED_EXPORT VisionGraph_ : public VisionGraph_Base
 {
     Q_OBJECT
 public:
-    explicit VisionGraph_Item(ItemModel model = self,ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection
+    explicit VisionGraph_(GraphType type = GraphType::graphItem_self,ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection
             ,QWidget *parent = 0);
 public:
+    /**
+     * @brief       设置GraphType
+     * @param       此接口作废---使用此接口和设置工具栏Direction，会导致工具栏出问题（内部调用）
+     */
+    void setGraphType(GraphType type);
 
     /**
      * @brief       添加rectangle  可旋转的矩形
@@ -314,21 +321,12 @@ private:
 
     bool checkoutItem();
 
-    QPainterPath and_Item(QPainterPath path1,QPainterPath path2);  //交集  &&
-    QPainterPath sub_Item(QPainterPath path1,QPainterPath path2);  //差集  ！
-    QPainterPath or_Item(QPainterPath path1,QPainterPath path2);  //并集 ||
-    QPainterPath nor_Item(QPainterPath path1,QPainterPath path2); //异或
-
-
 private:
     VisionGraphScene *scene = nullptr;
     VisionGraphView *view = nullptr;
 
     QList<VisionItem*> m_lstItem;
     QList<VisionItem*> m_lstItemSelected;
-
-
-    QPainterPath m_path;
 
 
     QList<QPointF> m_lstPainterPointF;  //绘制算法提供的直线的点的集合（两两配对）
@@ -366,8 +364,6 @@ private:
     QToolButton *sys_line_button;
     QToolButton *sys_polyLine_button;
 
-
-
     //右侧工具栏 -- 功能类
     QToolButton *sys_open_project_button;  //打开工程
     QToolButton *sys_front_button;  //撤销
@@ -384,30 +380,36 @@ private:
     Qt::ToolButtonStyle m_ToolStyle = Qt::ToolButtonIconOnly;//记录工具栏整体的ToolButtonStyle
 
     //显示的信息 -- 鼠标的移动坐标信息和操作信息
-    QLabel *label_Operation;
+    QLabel *label_Operation = NULL;
 
     //记录item的类型  ====  同时也作为鼠标的状态标志 --- 鼠标事件发生的时候执行什么操作（绘制，清空，缩放，拖动等）
     ItemType m_itemType = ItemType::No;
     VisionItem* m_curVisionItem = nullptr;
 
-    QLabel *label_w;
-    QSpinBox *pSpinBox_w;
-    QLabel *label_h;
-    QSpinBox *pSpinBox_h;
+    QLabel *label_mouseSizeText = NULL;
+    QLabel *label_slider = NULL;
+    QSlider *pSlider = NULL;
+
+    QSpinBox *pSpinBox = NULL;
+    QLabel *label_w = NULL;
+    QSpinBox *pSpinBox_w = NULL;
+    QLabel *label_h = NULL;
+    QSpinBox *pSpinBox_h = NULL;
     //缩放的比例显示
     QComboBox *comboBox = NULL;
     QLabel *label_size = NULL;
+    QToolBar *tool_infoWidget = NULL;
 
     QVBoxLayout *mainLayout = NULL;   //主布局
     QHBoxLayout *m_hBoxLayout = NULL;
     QVBoxLayout *m_vBoxLayout = NULL;
 
-    VisionGraphWidget *sceneWidget;
+    VisionGraphWidget *sceneWidget = NULL;
 
     QAction *infoWidget_Action;
     QWidget* infoWidget = NULL;
 
-    ItemModel m_model = ItemModel::un_self;   //item的模式，用户交互绘制item？
+    GraphType m_graphType = GraphType::graphItem_unSelf;   //item的模式，用户交互绘制item？
     ViewType m_viewType = ViewType::freeItem;
 
 private slots:
@@ -453,8 +455,21 @@ private slots:
     void slot_SizeChanged(QString currentSize);
     void slot_SizeChanged(qreal w,qreal h);
 
+    //调节鼠标绘制的时候，鼠标的半径
+    void slot_valueChanged(int qR);  //绘制鼠标的半径
+
+    void slot_SceneMouseMove(qreal x,qreal y);
+    void slot_actionTriggered(QAction* action);
+
     void slot_SpinBox_ViewRegionSize(int w);
+
+    //当GraphType变化的时候，调用该函数刷新
+    void slot_GraphTypeChanged(GraphType type);
+
+private:
+    void init_graphRegion();
+    void init_graphItem_self();
+    void init_graphItem_unSelf();
 };
 
-
-#endif // VISIONGRAPH_ITEM_H
+#endif // VISIONGRAPH__H

@@ -9,30 +9,27 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }else{
         setMinimumSize(650,450);
     }
+    g_graphType = type;
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
+
+    m_graphWidget_Base = new VisionGraph_(g_graphType,toolButtonDirect);
+
     if(type == GraphType::graphRegion){
-        m_graphWidget_Region = new VisionGraph_Region(toolButtonDirect);
-        m_graphWidget_Region->layout()->setMargin(0);
-        mainLayout->addWidget(m_graphWidget_Region);
-        connect(m_graphWidget_Region,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
+//        m_graphWidget_Base = new VisionGraph_Region(toolButtonDirect);
     }else if(type == GraphType::graphItem_self){
-        m_graphWidget_Item = new VisionGraph_Item(ItemModel::self,toolButtonDirect);
-        mainLayout->addWidget(m_graphWidget_Item);
-//        m_graphWidget_Item->setViewRegion_Visible(false);
-        m_graphWidget_Item->layout()->setMargin(0);
+//        m_graphWidget_Base = new VisionGraph_Item(GraphType::self,toolButtonDirect);
         brushColor = Qt::transparent;
-        connect(m_graphWidget_Item,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
     }else if(type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
-        mainLayout->addWidget(m_graphWidget_Item);
-//        m_graphWidget_Item->setViewRegion_Visible(false);
-        m_graphWidget_Item->layout()->setMargin(0);
+//        m_graphWidget_Base = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         brushColor = Qt::transparent;
-        connect(m_graphWidget_Item,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
     }else{
         qDebug()<<"VisionGraph is Error";
     }
-    m_type = type;
+    mainLayout->addWidget(m_graphWidget_Base);
+    m_graphWidget_Base->layout()->setMargin(0);
+    connect(m_graphWidget_Base,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
+
     this->setLayout(mainLayout);
 }
 
@@ -40,304 +37,106 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
 
 void VisionGraph::setSceneWidgetSize(QSize size)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setSceneWidgetSize(size);
-
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setSceneWidgetSize(size);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setSceneWidgetSize(size);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setSceneWidgetSize(size);
 }
 
 void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setSceneWidgetSize(w,h);
-
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setSceneWidgetSize(w,h);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setSceneWidgetSize(w,h);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setSceneWidgetSize(w,h);
 }
 
 
 VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->addRect(rf, bEdit);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->addRect(rf, bEdit);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->addRect(rf, bEdit);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->addRect(rf, bEdit);
 }
 
 QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addRect(rect,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addRect(rect,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addRect(rect,pen,brush);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addRect(rect,pen,brush);
 }
 
 QGraphicsPolygonItem *VisionGraph::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addPolygon(polygon,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addPolygon(polygon,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addPolygon(polygon,pen,brush);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addPolygon(polygon,pen,brush);
 }
 
 QGraphicsLineItem *VisionGraph::_addLine(const QLineF &line, const QPen &pen)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addLine(line,pen);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addLine(line,pen);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addLine(line,pen);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addLine(line,pen);
 }
 
 QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addEllipse(rect,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addEllipse(rect,pen,brush);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addEllipse(rect,pen,brush);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addEllipse(rect,pen,brush);
 }
 
 VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addPoint(pointF);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addPoint(pointF);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addPoint(pointF);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addPoint(pointF);
 }
 
 VisionArrow *VisionGraph::_addArrow(QPointF pointF, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addArrow(pointF,color);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addArrow(pointF,color);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addArrow(pointF,color);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addArrow(pointF,color);
 }
 
 VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->_addChain(lstP);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->_addChain(lstP);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->_addChain(lstP);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->_addChain(lstP);
 }
 
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->addEllipse(rf);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->addEllipse(rf);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->addEllipse(rf);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->addEllipse(rf);
 }
 
 VisionLineItem *VisionGraph::addLine(QLine line, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->addLine(line);
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->addLine(line);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->addLine(line);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->addLine(line);
 }
 
 void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addLines(lstLine);
-
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addLines(lstLine);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addLines(lstLine);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->addLines(lstLine);
 }
 
 VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->addPolygon(vecPointF);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->addPolygon(vecPointF);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->addPolygon(vecPointF);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->addPolygon(vecPointF);
 }
 
 VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF, QColor color)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->addPoint(pointF);
-
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->addPoint(pointF);
-
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->addPoint(pointF);
-
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->addPoint(pointF);
 }
 
 XVRegion* VisionGraph::getRegion()
 {
 //    XVRegion xvRegin;
-    if(m_graphWidget_Region == nullptr)
+    if(m_graphWidget_Base == nullptr)
         return NULL;
-    return m_graphWidget_Region->getRegion();
+    return m_graphWidget_Base->getRegion();
 }
 
 QList<VisionItem *> VisionGraph::getItems()
 {
     QList<VisionItem *> lstItem;
     lstItem.clear();
-    if(m_type == GraphType::graphRegion){
-        lstItem = m_graphWidget_Region->getItems();
-    }else if(m_type == GraphType::graphItem_self){
-        lstItem = m_graphWidget_Item->getItems();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        lstItem = m_graphWidget_Item->getItems();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+
+        lstItem = m_graphWidget_Base->getItems();
+
     return lstItem;
 }
 
 void VisionGraph::setBkImg(QImage image)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setBkImg(image);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setBkImg(image);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setBkImg(image);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setBkImg(image);
 }
 
 void VisionGraph::setToolButton_Direction(ToolButtonDirection direct)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setToolButton_Direction(direct);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setToolButton_Direction(direct);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setToolButton_Direction(direct);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setToolButton_Direction(direct);
 }
 
 void VisionGraph::setSelectedColor(QColor color)
@@ -363,185 +162,79 @@ void VisionGraph::setRegionColor(QColor color)
 
 void VisionGraph::show()
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->show();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->show();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->show();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->show();
 }
 
 VisionGraphView *VisionGraph::getView()
 {
     VisionGraphView* view = NULL;
-    if(m_type == GraphType::graphRegion){
-        view = m_graphWidget_Region->getView();
-    }else if(m_type == GraphType::graphItem_self){
-        view = m_graphWidget_Item->getView();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        view = m_graphWidget_Item->getView();
-    }
+    view = m_graphWidget_Base->getView();
     return view;
 }
 
-void VisionGraph::setPainterCursorR(qreal qR){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setPainterCursorR(qR);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setPainterCursorR(qR);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setPainterCursorR(qR);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setPainterCursorR(qreal qR)
+{
+    m_graphWidget_Base->setPainterCursorR(qR);
 }
 
-void VisionGraph::setItemType(ItemType type){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setItemType(type);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setItemType(type);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setItemType(type);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setItemType(ItemType type)
+{
+    m_graphWidget_Base->setItemType(type);
 }
 
-void VisionGraph::zoom(float scaleFactor){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->zoom(scaleFactor);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->zoom(scaleFactor);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->zoom(scaleFactor);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::zoom(float scaleFactor)
+{
+    m_graphWidget_Base->zoom(scaleFactor);
 }
 
-void VisionGraph::back_region(){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->back_region();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->back_region();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->back_region();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::back_region()
+{
+    m_graphWidget_Base->back_region();
 }
 
-void VisionGraph::front_region(){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->front_region();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->front_region();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->front_region();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::front_region()
+{
+    m_graphWidget_Base->front_region();
 }
 
-void VisionGraph::clearPainter(){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->clearPainter();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->clearPainter();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->clearPainter();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::clearPainter()
+{
+    m_graphWidget_Base->clearPainter();
 }
 
 void VisionGraph::setViewInfo_Visible(bool bVisible)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Visible(bVisible);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Visible(bVisible);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Visible(bVisible);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setViewInfo_Visible(bVisible);
 }
 
-void VisionGraph::setViewInfo_Pos(Corner corner){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Pos(corner);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Pos(corner);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Pos(corner);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_Pos(Corner corner)
+{
+    m_graphWidget_Base->setViewInfo_Pos(corner);
 }
 
-void VisionGraph::setViewInfo_Pos(qreal x, qreal y){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Pos(x,y);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Pos(x,y);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Pos(x,y);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_Pos(qreal x, qreal y)
+{
+    m_graphWidget_Base->setViewInfo_Pos(x,y);
 }
 
-void VisionGraph::setViewInfo_Size(QSize size){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Size(size);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Size(size);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Size(size);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_Size(QSize size)
+{
+    m_graphWidget_Base->setViewInfo_Size(size);
 }
 
-void VisionGraph::setViewInfo_Size(qreal w, qreal h){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Size(w,h);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Size(w,h);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Size(w,h);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_Size(qreal w, qreal h)
+{
+    m_graphWidget_Base->setViewInfo_Size(w,h);
 }
 
-void VisionGraph::setViewInfo_text(QString text){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_text(text);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_text(text);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_text(text);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_text(QString text)
+{
+    m_graphWidget_Base->setViewInfo_text(text);
 }
 
-void VisionGraph::setViewInfo_Color(QColor backgroundColor,QColor textColor){
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewInfo_Color(backgroundColor,textColor);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewInfo_Color(backgroundColor,textColor);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewInfo_Color(backgroundColor,textColor);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+void VisionGraph::setViewInfo_Color(QColor backgroundColor,QColor textColor)
+{
+    m_graphWidget_Base->setViewInfo_Color(backgroundColor,textColor);
 }
 
 void VisionGraph::setIconPath(QString iconpath)
@@ -551,56 +244,22 @@ void VisionGraph::setIconPath(QString iconpath)
 
 QToolButton *VisionGraph::getToolButton(ToolButtonType type)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->getToolButton(type);
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->getToolButton(type);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->getToolButton(type);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->getToolButton(type);
 }
 
 bool VisionGraph::removeToolButton(ToolButtonType type)
 {
-    if(m_type == GraphType::graphRegion){
-        return m_graphWidget_Region->removeToolButton(type);
-    }else if(m_type == GraphType::graphItem_self){
-        return m_graphWidget_Item->removeToolButton(type);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        return m_graphWidget_Item->removeToolButton(type);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-        return NULL;
-    }
+    return m_graphWidget_Base->removeToolButton(type);
 }
 
 void VisionGraph::addToolButton(QToolButton *btn)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->addToolButton(btn);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->addToolButton(btn);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->addToolButton(btn);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->addToolButton(btn);
 }
 
 void VisionGraph::removeToolBarInfoWidget()
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->removeToolBarInfoWidget();
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->removeToolBarInfoWidget();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->removeToolBarInfoWidget();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->removeToolBarInfoWidget();
 }
 
 void VisionGraph::addToolFrame()
@@ -610,120 +269,47 @@ void VisionGraph::addToolFrame()
 
 void VisionGraph::setViewRegion_Size(qreal w, qreal h)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewRegion_Size(w,h);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewRegion_Size(w,h);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewRegion_Size(w,h);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setViewRegion_Size(w,h);
 }
 
 void VisionGraph::setViewRegion_Visible(bool bVisible)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewRegion_Visible(bVisible);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewRegion_Visible(bVisible);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewRegion_Visible(bVisible);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setViewRegion_Visible(bVisible);
 }
 
 void VisionGraph::setViewRegion_Color(const QColor &color)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewRegion_Color(color);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewRegion_Color(color);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewRegion_Color(color);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setViewRegion_Color(color);
 }
 
 QImage VisionGraph::getBkgImg()
 {
     QImage image;
-    if(m_type == GraphType::graphRegion){
-        image = m_graphWidget_Region->getBkgImg();
-    }else if(m_type == GraphType::graphItem_self){
-        image = m_graphWidget_Item->getBkgImg();
-    }else if(m_type == GraphType::graphItem_unSelf){
-        image = m_graphWidget_Item->getBkgImg();
-    }else{
-        qDebug()<<"VisionGraph is Error";
-//        return NULL;
-    }
+    image = m_graphWidget_Base->getBkgImg();
     return image;
 }
 
 void VisionGraph::saveBkgImg(QString path)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->saveBkgImg(path);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->saveBkgImg(path);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->saveBkgImg(path);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->saveBkgImg(path);
 }
 
 void VisionGraph::removeItem(VisionItem *item)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->removeItem(item);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->removeItem(item);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->removeItem(item);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->removeItem(item);
 }
 
 void VisionGraph::setMousePaintSize(qreal qi)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setMousePaintSize(qi);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setMousePaintSize(qi);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setMousePaintSize(qi);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setMousePaintSize(qi);
 }
 
 void VisionGraph::setView_Zoom(qreal qZoom)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setView_Zoom(qZoom);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setView_Zoom(qZoom);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setView_Zoom(qZoom);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setView_Zoom(qZoom);
 }
 
 void VisionGraph::setViewType(ViewType type)
 {
-    if(m_type == GraphType::graphRegion){
-        m_graphWidget_Region->setViewType(type);
-    }else if(m_type == GraphType::graphItem_self){
-        m_graphWidget_Item->setViewType(type);
-    }else if(m_type == GraphType::graphItem_unSelf){
-        m_graphWidget_Item->setViewType(type);
-    }else{
-        qDebug()<<"VisionGraph is Error";
-    }
+    m_graphWidget_Base->setViewType(type);
 }

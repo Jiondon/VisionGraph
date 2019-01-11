@@ -108,11 +108,11 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
 
     if(m_bPainter){
         if(event->button() == Qt::RightButton){
-            if(m_itemType == ItemType::Rect){
+            if(m_itemType == ItemType::Paint_Rect){
 
-            }else if(m_itemType == ItemType::EllipseItem){
+            }else if(m_itemType == ItemType::Paint_EllipseItem){
 
-            }else if(m_itemType == ItemType::Poly){
+            }else if(m_itemType == ItemType::Paint_Poly){
                 m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
                 emit signal_Item_poly(m_vecPoint_Poly);
 
@@ -127,20 +127,20 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
             }
         }else if(event->button() == Qt::LeftButton){
             //绘制矩形
-            if(m_itemType == ItemType::Rect){
+            if(m_itemType == ItemType::Paint_Rect){
 
-            }else if(m_itemType == ItemType::EllipseItem){
+            }else if(m_itemType == ItemType::Paint_EllipseItem){
 
-            }else if(m_itemType == ItemType::Poly){
+            }else if(m_itemType == ItemType::Paint_Poly){
                 m_vecPoint_Poly.append(m_pressPointF_scene);
-            }else if(m_itemType == ItemType::CrossPoint){
+            }else if(m_itemType == ItemType::Paint_CrossPoint){
                 emit signal_Item_point(m_pressPointF_scene);
                 setItemType(ItemType::No);
-            }else if(m_itemType == ItemType::Line){
+            }else if(m_itemType == ItemType::Paint_Line){
 
-            }else if(m_itemType == ItemType::polyLine){
+            }else if(m_itemType == ItemType::Paint_polyLine){
 
-            }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+            }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
 
                 //计算区域
                 QPainterPath path1;
@@ -150,7 +150,7 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
                                                       this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
                 XVRegion region = createEllipse(rf11,rf11.topLeft(),0);
 
-                if(m_itemType == ItemType::Point){
+                if(m_itemType == ItemType::Paint_Point){
                     m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
                 }else{
                     m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
@@ -175,7 +175,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
     QGraphicsView::mouseReleaseEvent(event);
 
     if(m_bPainter){
-        if(m_itemType == Rect){
+        if(m_itemType == ItemType::Paint_Rect){
             QPointF topLeftPoint;
             QPointF bottomRightPoint;
             if(m_pressPointF_scene.x() < scenePos.x()){
@@ -202,7 +202,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             m_bPainter = false;
             setItemType(ItemType::No);
 
-        }else if(m_itemType == EllipseItem){
+        }else if(m_itemType == ItemType::Paint_EllipseItem){
 
             QPointF topLeftPoint;
             QPointF bottomRightPoint;
@@ -230,7 +230,7 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             m_bPainter = false;
             setItemType(ItemType::No);
 
-        }else if(m_itemType == ItemType::Line){
+        }else if(m_itemType == ItemType::Paint_Line){
 
             QPainterPath path;
             m_path = path;
@@ -238,16 +238,16 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             signal_Item_Line(m_Line);
             m_bPainter = false;
             setItemType(ItemType::No);
-        }else if(m_itemType == ItemType::polyLine){
+        }else if(m_itemType == ItemType::Paint_polyLine){
 
-        }else if(m_itemType == ItemType::CrossPoint){
+        }else if(m_itemType == ItemType::Paint_CrossPoint){
             m_bPainter = false;
-        }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
             //对于鼠标绘制，鼠标释放为一次记录
             push_region(m_region);
-        }else if(m_itemType == ItemType::Poly){
+        }else if(m_itemType == ItemType::Paint_Poly){
 
-        }else if(m_itemType == ItemType::Region){
+        }else if(m_itemType == ItemType::Paint_Region){
             //鼠标释放后，将鼠标绘制的任意区域转换成算法提供的区域
             XVRegion region = createPolygon(this->mapToScene(m_path).toFillPolygon());
             m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
@@ -276,7 +276,7 @@ void VisionGraphView::enterEvent(QEvent *event)
     QGraphicsView::enterEvent(event);
 
     if(m_itemType != ItemType::No){
-        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
             //修改鼠标为绘图样式
             QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
                                                                                        Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -356,16 +356,6 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     }
 }
 
-//bool VisionGraphView::eventFilter(QObject *obj, QEvent *event)
-//{
-//    if(m_itemType == ItemType::Drag){
-//        qDebug()<<"eventFilter Drag";
-//        return true;
-//    }else{
-//        return false;
-//    }
-//}
-
 void VisionGraphView::setItemType(ItemType type){
     m_bPainter = true;
     m_itemType = type;
@@ -374,7 +364,7 @@ void VisionGraphView::setItemType(ItemType type){
     m_vecPoint_Region.clear();  //记录任意区域的操作的点
 
     if(m_itemType != ItemType::No){
-        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
             //修改鼠标为绘图样式
             QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
                                                                                        Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -411,7 +401,7 @@ void VisionGraphView::zoom(float scaleFactor)
     m_scale = scaleFactor;
     scale(scaleTemp, scaleTemp);
 
-    if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+    if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
         //修改鼠标为绘图样式
         QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
                                                                                    Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -557,7 +547,7 @@ void VisionGraphView::viewRegion_OriginPos()
 void VisionGraphView::itemCursorToViewCursor()
 {
     if(m_itemType != ItemType::No){
-        if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+        if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
             //修改鼠标为绘图样式
             QCursor cursor = QCursor(QPixmap(iconPath+"cursor-size_Circle.png").scaled(m_qCircleR*2*m_scale,m_qCircleR*2*m_scale,
                                                                                        Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -642,17 +632,23 @@ qreal VisionGraphView::adjustSize(qreal w, qreal h)
 
 void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
 {
+    if(g_graphType != GraphType::graphRegion)
+        return;
     //编辑的控件在未确定之前，不调用算法生成点集合，临时绘制    item版本中作废
     m_path = this->mapFromScene(path);
 }
 
 XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemType type,QRectF rf,QPointF leftTop,qreal angle)
 {
+    if(g_graphType != GraphType::graphRegion)
+        return m_region;
+
     if(!selected){
+        qDebug()<<"create region";
         //编辑完成，获取已经确定的区域的点集合，同时将对应的临时path清空
         rf =  QRectF((rf.topLeft()),(rf.bottomRight()));
         XVCreateRegionOut regionOut;
-        if(type == Rect){
+        if(type == ItemType::Paint_Rect){
 
 
             XVRegion region = createRectangle(rf,leftTop,angle);
@@ -665,7 +661,7 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
             QPainterPath path;
             m_path = path;
 
-        }else if(type == EllipseItem){
+        }else if(type == ItemType::Paint_EllipseItem){
             XVRegion region = createEllipse(rf,leftTop,angle);
 
             m_region = slot_CombineRegion(m_region,region,Union);
@@ -687,9 +683,11 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
 
 XVRegion VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF)
 {
-    if(selected)
+    if(g_graphType != GraphType::graphRegion)
         return m_region;
 
+    if(selected)
+        return m_region;
 
     QPolygonF polyF(vecPointF);
 
@@ -774,10 +772,6 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     return region;
 }
 
-//XVRegion VisionGraphView::createCircle(QRectF rf)
-//{
-
-//}
 
 XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 {
@@ -892,38 +886,38 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
 
     //2.修改在点击选择选项的时候，item在选中情况下无法move    m_itemType != ItemType::No的原因
 
-    if(m_itemType == ItemType::Rect){
+    if(m_itemType == ItemType::Paint_Rect){
         //绘制矩形
         QPainterPath path;
         path.addRect(QRectF(m_pressPointF,viewPos));
         m_path = path;
-    }else if(m_itemType == ItemType::EllipseItem){
+    }else if(m_itemType == ItemType::Paint_EllipseItem){
         //绘制椭圆
         QPainterPath path;
         path.addEllipse(QRectF(m_pressPointF,viewPos));
         m_path = path;
-    }else if(m_itemType == ItemType::Poly){
+    }else if(m_itemType == ItemType::Paint_Poly){
         QPainterPath path;
         QPolygonF poly(m_vecPoint_Poly);
         poly.insert(m_vecPoint_Poly.count(),scenePos);  //将最后一点替换成掉
         path.addPolygon(this->mapFromScene(poly));
         m_path = path;
 
-    }else if(m_itemType == ItemType::Region){
+    }else if(m_itemType == ItemType::Paint_Region){
         //鼠标绘制任意区域
         m_vecPoint_Region.append(scenePos);
         QPainterPath path;
         QPolygonF poly(m_vecPoint_Region);
         path.addPolygon(poly);
         m_path = this->mapFromScene(path);
-    }else if(m_itemType == ItemType::Line){
+    }else if(m_itemType == ItemType::Paint_Line){
         m_Line.setPoints(m_pressPointF_scene.toPoint(),scenePos.toPoint());
         m_path = QPainterPath(this->mapFromScene(m_pressPointF_scene));
         m_path.lineTo(this->mapFromScene(scenePos));
 
-    }else if(m_itemType == ItemType::polyLine){
+    }else if(m_itemType == ItemType::Paint_polyLine){
 
-    }else if(m_itemType == ItemType::Point || m_itemType == ItemType::NoPoint){
+    }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
         //鼠标绘制(擦除)
 
         //计算区域
@@ -971,7 +965,7 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
 
         XVRegion region = createPolygon(polygonF);
 
-        if(m_itemType == ItemType::Point){
+        if(m_itemType == ItemType::Paint_Point){
             m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
         }else{
             m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
@@ -985,7 +979,7 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
                                               this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
         XVRegion region1 = createEllipse(rf11,rf11.topLeft(),0);
 
-        if(m_itemType == ItemType::Point){
+        if(m_itemType == ItemType::Paint_Point){
             m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Union);
         }else{
             m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Difference);
@@ -993,6 +987,127 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
         analysis_region(m_region);
     }
     this->scene()->update();
+}
+
+void VisionGraphView::detailReleaseEvent(QMouseEvent *event)
+{
+    QPoint viewPos = event->pos();//获取视口坐标
+    QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
+    m_releasePointF = viewPos;
+    m_bPress = false;
+
+    if(m_itemType == ItemType::Drag)
+        return;
+
+    QGraphicsView::mouseReleaseEvent(event);
+
+    if(!m_bPainter){
+        m_lstPoint.clear();
+        return;
+    }
+
+    if(m_itemType == ItemType::Paint_Rect){
+        QPointF topLeftPoint;
+        QPointF bottomRightPoint;
+        if(m_pressPointF_scene.x() < scenePos.x()){
+            topLeftPoint.setX(m_pressPointF_scene.x());
+            bottomRightPoint.setX(scenePos.x());
+        }else{
+            topLeftPoint.setX(scenePos.x());
+            bottomRightPoint.setX(m_pressPointF_scene.x());
+        }
+
+        if(m_pressPointF_scene.y() < scenePos.y()){
+            topLeftPoint.setY(m_pressPointF_scene.y());
+            bottomRightPoint.setY(scenePos.y());
+        }else{
+            topLeftPoint.setY(scenePos.y());
+            bottomRightPoint.setY(m_pressPointF_scene.y());
+        }
+
+        emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+
+        QPainterPath path;
+        m_path = path;
+
+        //单次绘制
+        m_bPainter = false;
+        setItemType(ItemType::No);
+
+    }else if(m_itemType == ItemType::Paint_EllipseItem){
+
+        QPointF topLeftPoint;
+        QPointF bottomRightPoint;
+        if(m_pressPointF_scene.x() < scenePos.x()){
+            topLeftPoint.setX(m_pressPointF_scene.x());
+            bottomRightPoint.setX(scenePos.x());
+        }else{
+            topLeftPoint.setX(scenePos.x());
+            bottomRightPoint.setX(m_pressPointF_scene.x());
+        }
+
+        if(m_pressPointF_scene.y() < scenePos.y()){
+            topLeftPoint.setY(m_pressPointF_scene.y());
+            bottomRightPoint.setY(scenePos.y());
+        }else{
+            topLeftPoint.setY(scenePos.y());
+            bottomRightPoint.setY(m_pressPointF_scene.y());
+        }
+
+        emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+
+        QPainterPath path;
+        m_path = path;
+
+        m_bPainter = false;
+        setItemType(ItemType::No);
+
+    }else if(m_itemType == ItemType::Paint_Line){
+
+        QPainterPath path;
+        m_path = path;
+
+        signal_Item_Line(m_Line);
+        m_bPainter = false;
+        setItemType(ItemType::No);
+    }else if(m_itemType == ItemType::Paint_polyLine){
+
+    }else if(m_itemType == ItemType::Paint_CrossPoint){
+        m_bPainter = false;
+    }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
+        //对于鼠标绘制，鼠标释放为一次记录
+        push_region(m_region);
+    }else if(m_itemType == ItemType::Paint_Poly){
+
+    }else if(m_itemType == ItemType::Paint_Region){
+        //鼠标释放后，将鼠标绘制的任意区域转换成算法提供的区域
+        XVRegion region = createPolygon(this->mapToScene(m_path).toFillPolygon());
+        m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
+        push_region(m_region);
+        analysis_region(m_region);
+
+        QPainterPath path;
+        m_path = path;
+        m_vecPoint_Region.clear();
+        this->scene()->update();
+    }
+    m_lstPoint.clear();
+
+
+    switch (g_graphType) {
+    case GraphType::graphRegion:{
+//        init_graphRegion();
+        break;
+    }
+    case GraphType::graphItem_self:
+//        init_graphItem_self();
+        break;
+    case GraphType::graphItem_unSelf:
+//        init_graphItem_unSelf();
+        break;
+    default:
+        break;
+    }
 }
 
 void VisionGraphView::slotUpdateViewInfo_Pos()

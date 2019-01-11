@@ -73,7 +73,8 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QRectF addRect();  //根据起点和终点坐标绘制一个矩形将线条包住 的一个运算
+    void updateData();  //数据刷新---当某些数据变化的时候，对应的rect，等其他属性刷新
+
     void updateMiniRect();
 
 private:
@@ -89,7 +90,7 @@ private:
 
 
     bool m_selected = false;  //选中状态 false-未选中 true--选中
-    int m_iIndex = 0; //线的索引,用来区分每根线
+    int m_iIndex = -1; //标记链被选中后的小矩形框的index （-1表示，鼠标不在矩形框中，其他数值表示鼠标在对应的index小矩形框上）
 
     bool m_bEdit = true;   //和基类的edit区别开，
     bool m_bClosed = false;     //是否是封闭
@@ -98,12 +99,20 @@ private:
     QList<QPointF> m_lstChainPoint;  //链的节点
     QList<MiniRect*> m_lstMiniRect;
 
+    QPointF m_lastPointF;  //
+
     QColor m_borderColor;
     QColor m_brushColor;
     QColor m_selectedColor;
 
     QColor m_pointFColor;  //链上的点的颜色
 
+private slots:
+    /**
+     * @brief       控制miniRect的下标
+     * @param       编辑模式下，确认鼠标所控制的miniRect的下标
+     */
+    void slotMiniRectIndex(int index);
 };
 
 #endif // VISIONCHAINITEM_H

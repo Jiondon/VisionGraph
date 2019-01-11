@@ -11,22 +11,13 @@
 
 #include <QWidget>
 #include "visiongraph_global.h"
-
+#include "visiongraphtool.h"
+#include "visiongraph_base.h"
 #include "visiongraph_region.h"
 #include "visiongraph_item.h"
+#include "visiongraph_.h"
 
 
-/**
- * @brief       枚举VisionGraph的几种版本，
- * @note        graphRegion --- region版本（绘制item后，item失焦后，会通过算法生成区域，此过程不可逆）,需要用户交互（绘制需要用户进行操作）
- * @note        graphItem_self --- item版本（绘制item后，在整个过程中都是可调节的）,不要用户交互，主要是代码中直接调用放开的api来进行绘制
- * @note        graphItem_unSelf --- item版本，需要用户交互（绘制需要用户进行操作）
- */
-enum GraphType{
-    graphRegion,
-    graphItem_self,
-    graphItem_unSelf
-};
 
 class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 {
@@ -341,13 +332,9 @@ signals:
 
 protected:
 
-private:
-    GraphType m_type;
 
 private:
-    VisionGraph_Region *m_graphWidget_Region = nullptr;
-    VisionGraph_Item *m_graphWidget_Item = nullptr;
-
+    VisionGraph_ *m_graphWidget_Base = nullptr;
 };
 
 #endif // VISIONGRAPH_H

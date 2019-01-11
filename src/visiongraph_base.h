@@ -8,6 +8,14 @@
 
 #include "visiongraphtool.h"
 
+
+enum ItemModel{
+    self,
+    un_self,
+    region_self
+};
+
+
 class VISIONGRAPHSHARED_EXPORT VisionGraph_Base : public QFrame
 {
     Q_OBJECT

@@ -14,7 +14,7 @@ VisionLineItem::VisionLineItem(QPointF p1, QPointF p2, bool bEdit, qreal penWidt
     m_penColor = penColor;
     m_penWidth = penWidth;
     m_bEditStatus = bEdit;
-    m_type = ItemType::Line;
+    m_type = ItemType::Paint_Line;
     if(m_bEditStatus){
         m_bSelected = true;
     }else{

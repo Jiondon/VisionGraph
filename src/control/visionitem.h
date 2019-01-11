@@ -17,22 +17,24 @@
 
 /**
  * @brief       枚举类型，item类型或者鼠标控制的类型（鼠标事件执行的对应的类型）-- 主要是绘图的view的状态的标记，包含了鼠标事件和绘制的item的记录等
+ * @param       鼠标触发事件的所要执行的操作
  */
 enum ItemType{
     No,   //选择状态
     Drag,  //拖动
     Zoom, //缩放状态
-    Rect,  //矩形
-    EllipseItem,  //圆或者椭圆
-    Poly,  //多边形
-    Region,  //区域 -- 鼠标绘制，自动连接起始和结尾的区域，任意区域
-    Line,  //线
-    polyLine,  //折线
-    Arrow,  //圆弧
-    Chain,   //链--（线和圆弧混用）
-    CrossPoint,  //单独一个真正意义上的点
-    Point,  //点
-    NoPoint  //擦除item
+
+    Paint_Rect,  //矩形
+    Paint_EllipseItem,  //圆或者椭圆
+    Paint_Poly,  //多边形
+    Paint_Region,  //区域 -- 鼠标绘制，自动连接起始和结尾的区域，任意区域
+    Paint_Line,  //线
+    Paint_polyLine,  //折线
+    Paint_Arrow,  //箭头（）
+    Paint_Chain,   //链--（线和圆弧混用）
+    Paint_CrossPoint,  //单独一个真正意义上的点
+    Paint_Point,  //点
+    Paint_NoPoint  //擦除item
 };
 
 /**
@@ -149,7 +151,7 @@ public:
      */
     virtual QVector<QPointF> getPoints() = 0;
 
-    ItemType m_type = Rect;
+    ItemType m_type = ItemType::Paint_Rect;
 
 signals:
     void signal_clicked(VisionItem* item,bool selected,bool bIn = true,qreal x=0,qreal y=0);

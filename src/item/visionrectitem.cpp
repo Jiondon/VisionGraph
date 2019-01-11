@@ -21,7 +21,7 @@ VisionRectItem::VisionRectItem(bool rotation, VisionItem *parent):VisionItem(par
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
-    m_type = Rect;
+    m_type = ItemType::Paint_Rect;
     setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren,true);
 //    this->setOpacity(0);
     setFlag(QGraphicsItem::ItemClipsChildrenToShape);
@@ -177,7 +177,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     QPolygonF poly(points);
     path.addPolygon(poly);
-    emit signal_painterInfo(ItemType::Rect,path);
+    emit signal_painterInfo(ItemType::Paint_Rect,path);
 
     //item pos ()
     if(option->state & QStyle::State_Selected){
@@ -188,7 +188,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         }
 
         if(!m_bEdit){
-            emit selectedChanged(true,this,Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+            emit selectedChanged(true,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
         m_bEdit = true;
@@ -200,7 +200,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         }
 
         if(m_bEdit){
-            emit selectedChanged(false,this,Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+            emit selectedChanged(false,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
         m_bEdit = false;

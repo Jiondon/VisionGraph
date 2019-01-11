@@ -79,7 +79,8 @@ SOURCES += src/visiongraph.cpp \
     src/visiongraphwidget.cpp \
     src/item/visionchainitem.cpp \
     src/item/visionarrow.cpp \
-    src/visiongraph_base.cpp
+    src/visiongraph_base.cpp \
+    src/visiongraph_.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
@@ -104,7 +105,8 @@ HEADERS += src/visiongraph.h \
     src/visiongraphwidget.h \
     src/item/visionchainitem.h \
     src/item/visionarrow.h \
-    src/visiongraph_base.h
+    src/visiongraph_base.h \
+    src/visiongraph_.h
 
 unix {
     target.path = /usr/lib

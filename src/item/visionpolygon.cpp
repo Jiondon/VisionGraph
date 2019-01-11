@@ -11,7 +11,7 @@ VisionPolygon::VisionPolygon(VisionItem *parent) : VisionItem(parent)
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
-    m_type = ItemType::Poly;
+    m_type = ItemType::Paint_Poly;
     m_bEdit = true;
     setSelected(true);
 }
@@ -72,7 +72,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         }
 
         if(!m_bEdit){
-            emit selectedChanged(true,this,ItemType::Poly,m_vecPointFs);
+            emit selectedChanged(true,this,ItemType::Paint_Poly,m_vecPointFs);
         }
         m_bEdit = true;
         setEdit(m_bEdit);
@@ -85,7 +85,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
             m_lstRect[i]->setVisible(false);
         }
         if(m_bEdit){
-            emit selectedChanged(false,this,ItemType::Poly,m_vecPointFs);
+            emit selectedChanged(false,this,ItemType::Paint_Poly,m_vecPointFs);
         }
 
         m_bEdit = false;
@@ -99,7 +99,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     if(m_bEdit){
         QPainterPath path;
         path.addPolygon(m_polygonF);
-        emit signal_painterInfo(ItemType::Poly,path);
+        emit signal_painterInfo(ItemType::Paint_Poly,path);
     }
 
 }

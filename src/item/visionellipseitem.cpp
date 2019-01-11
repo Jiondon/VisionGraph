@@ -21,7 +21,7 @@ VisionEllipseItem::VisionEllipseItem(bool rotation, VisionItem *parent):VisionIt
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
-    m_type = ItemType::EllipseItem;
+    m_type = ItemType::Paint_EllipseItem;
 
     setSelected(true);
     setEdit(true);
@@ -136,7 +136,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         }
 
         if(!m_bEdit){
-            emit selectedChanged(true,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+            emit selectedChanged(true,this,ItemType::Paint_EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
         m_bEdit = true;
@@ -150,7 +150,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         }
 
         if(m_bEdit){
-            emit selectedChanged(false,this,EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
+            emit selectedChanged(false,this,ItemType::Paint_EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
         m_bEdit = false;

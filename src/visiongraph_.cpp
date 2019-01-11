@@ -1,35 +1,45 @@
-﻿#include "visiongraph_item.h"
+﻿#include "visiongraph_.h"
 
 #include <QDebug>
 #include <QtMath>
 #include <QFileDialog>
 #include <QDateTime>
 #include <QWidget>
+#include <QFileDialog>
 
-VisionGraph_Item::VisionGraph_Item(ItemModel model, ToolButtonDirection toolButtonDirect, QWidget *parent) : VisionGraph_Base(parent)
+VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : VisionGraph_Base(parent)
 {
     mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 
     m_toolButtonDirection = toolButtonDirect;
-    m_model = model;
+    m_graphType = type;
 
     initScene();
     initLayout(toolButtonDirect);
+
+    setGraphType(type);
 }
 
-void VisionGraph_Item::setSceneWidgetSize(QSize size)
+void VisionGraph_::setGraphType(GraphType type)
+{
+    g_graphType = type;
+    m_graphType = type;
+    slot_GraphTypeChanged(type);
+}
+
+void VisionGraph_::setSceneWidgetSize(QSize size)
 {
     sceneWidget->resize(size);
 }
 
-void VisionGraph_Item::setSceneWidgetSize(qreal w, qreal h)
+void VisionGraph_::setSceneWidgetSize(qreal w, qreal h)
 {
     sceneWidget->resize(w,h);
 }
 
 
-void VisionGraph_Item::initScene()
+void VisionGraph_::initScene()
 {
     sceneWidget = new VisionGraphWidget;
     sceneWidget->setMinimumSize(400,300);
@@ -44,6 +54,7 @@ void VisionGraph_Item::initScene()
     QObject::connect(view,SIGNAL(signal_wheel(qreal)),this,SLOT(slot_wheel(qreal)));
 
     scene = new VisionGraphScene(sceneWidget);
+    connect(scene,SIGNAL(signal_MouseMove(qreal,qreal)),this,SLOT(slot_SceneMouseMove(qreal,qreal)));
     scene->setSceneRect(0,0,800,600);
     view->setScene(scene);
 
@@ -58,7 +69,7 @@ void VisionGraph_Item::initScene()
 }
 
 
-void VisionGraph_Item::initTool_operation()
+void VisionGraph_::initTool_operation()
 {
     QAction* sys_open_project = new QAction(QIcon(iconPath+"open.png"),QStringLiteral("打开"));
     sys_open_project->setIconText(QStringLiteral("打开"));
@@ -101,14 +112,18 @@ void VisionGraph_Item::initTool_operation()
     tool_Widget->setMinimumHeight(20);
     tool_Widget->setMovable(false);
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
-    tool_Widget->addSeparator();
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_front_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_next_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
+//    tool_Widget->addSeparator();
 
     m_lstToolBtn.append(sys_open_project_button);
     m_lstToolBtn.append(sys_save_button);
+    m_lstToolBtn.append(sys_front_button);
+    m_lstToolBtn.append(sys_next_button);
     m_lstToolBtn.append(sys_clear_button);
     m_lstToolBtn.append(sys_remove_item_button);
 
@@ -118,7 +133,7 @@ void VisionGraph_Item::initTool_operation()
     connect(sys_selected_action,SIGNAL(triggered(bool)),this,SLOT(slot_selected_action()));
     sys_selected_button = new QToolButton;
     sys_selected_button->setDefaultAction(sys_selected_action);
-    //拖动按钮---拖动整个绘制的区域的位置---目前暂时不提供（后期加）
+    //拖动按钮---拖动整个绘制的区域的位置
     QAction* sys_drag_action = new QAction(QIcon(iconPath+"drag.png"),QStringLiteral("拖动当前视图"));
     sys_drag_action->setIconText(QStringLiteral("拖动"));
     connect(sys_drag_action,SIGNAL(triggered(bool)),this,SLOT(slot_drag_action()));
@@ -204,34 +219,88 @@ void VisionGraph_Item::initTool_operation()
 
     //调整鼠标的大小--针对鼠标擦除和鼠标绘制
 
-    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
-    m_insertAction = tool_Widget->addSeparator();
+//    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+//    m_insertAction = tool_Widget->addSeparator();
 
+//    m_lstAction.append(tool_Widget->addWidget(sys_mouseClear_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_mousePainter_button));
+//    tool_Widget->addSeparator();
+
+//    m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_poly_elli_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_point_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_line_button));
+//    m_insertAction = tool_Widget->addSeparator();
+
+    connect(tool_Widget,SIGNAL(actionTriggered(QAction*)),this,SLOT(slot_actionTriggered(QAction*)));
 
     m_lstToolBtn.append(sys_selected_button);
     m_lstToolBtn.append(sys_drag_button);
     m_lstToolBtn.append(sys_zoom_button);
     m_lstToolBtn.append(sys_fit_button);
+    m_lstToolBtn.append(sys_mouseClear_button);
+    m_lstToolBtn.append(sys_mousePainter_button);
+    m_lstToolBtn.append(sys_rect_button);
+    m_lstToolBtn.append(sys_ellipse_button);
+    m_lstToolBtn.append(sys_poly_button);
+    m_lstToolBtn.append(sys_poly_elli_button);
+    m_lstToolBtn.append(sys_point_button);
+    m_lstToolBtn.append(sys_line_button);
 
-    if(m_model == ItemModel::un_self){
-        qDebug()<<"VisionGraph is un_self";
-        m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
-        m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
-        m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
-        m_lstAction.append(tool_Widget->addWidget(sys_point_button));
-        m_lstAction.append(tool_Widget->addWidget(sys_line_button));
-        m_insertAction = tool_Widget->addSeparator();
+    //设置绘制鼠标的大小
+    label_mouseSizeText = new QLabel;
+    label_mouseSizeText->setText(QStringLiteral("大小"));
+    label_mouseSizeText->setAlignment(Qt::AlignCenter);
 
-        m_lstToolBtn.append(sys_rect_button);
-        m_lstToolBtn.append(sys_ellipse_button);
-        m_lstToolBtn.append(sys_poly_button);
-        m_lstToolBtn.append(sys_point_button);
-        m_lstToolBtn.append(sys_line_button);
+    label_slider = new QLabel;
 
+    pSlider = new QSlider(label_slider);
+    if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
+            m_toolButtonDirection == ToolButtonDirection::rightDirection){
+        label_slider->setFixedSize(40,120);
+        pSlider->setOrientation(Qt::Vertical);  // 竖直方向
+        pSlider->setFixedHeight(100);
+        pSlider->setMinimumWidth(20);
+        QHBoxLayout *layout = new QHBoxLayout(label_slider);
+        layout->addWidget(pSlider);
+        layout->addStretch();
+    }else{
+        label_slider->setFixedSize(120,40);
+
+        QVBoxLayout *layout = new QVBoxLayout(label_slider);
+
+        pSlider->setOrientation(Qt::Horizontal);
+        pSlider->setFixedWidth(100);
+        pSlider->setMinimumHeight(20);
+        layout->addWidget(pSlider);
+        layout->addStretch();
     }
+
+    pSlider->setMinimum(1);  // 最小值
+    pSlider->setMaximum(300);  // 最大值
+    pSlider->setSingleStep(1);  // 步长
+
+    // 微调框
+    pSpinBox = new QSpinBox;
+    pSpinBox->setMinimum(1);  // 最小值
+    pSpinBox->setMaximum(300);  // 最大值
+    pSpinBox->setSingleStep(1);  // 步长
+
+    // 连接信号槽（相互改变）
+    connect(pSpinBox, SIGNAL(valueChanged(int)), pSlider, SLOT(setValue(int)));
+    connect(pSlider, SIGNAL(valueChanged(int)), pSpinBox, SLOT(setValue(int)));
+    connect(pSlider,SIGNAL(valueChanged(int)),this,SLOT(slot_valueChanged(int)));
+
+    pSlider->setValue(10);  //默认值
+//    tool_Widget->addWidget(label_mouseSizeText);
+//    tool_Widget->addWidget(label_slider);
+//    tool_Widget->addWidget(pSpinBox);
+//    tool_Widget->addSeparator();
 
     //显示区域的信息，view的大小，缩放比例，鼠标的信息
     infoWidget_Action = new QAction;
@@ -311,7 +380,7 @@ void VisionGraph_Item::initTool_operation()
     }
     infoWidget->show();
 
-    QToolBar *tool_infoWidget = new QToolBar;
+    tool_infoWidget = new QToolBar;
     tool_infoWidget->addWidget(infoWidget);
     tool_infoWidget->addSeparator();
 
@@ -322,7 +391,7 @@ void VisionGraph_Item::initTool_operation()
         tool_infoWidget->setOrientation(Qt::Horizontal);
     }
 
-    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+//    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
 
     for(int i=0;i<m_lstToolBtn.count();i++){
         m_lstToolBtn[i]->setToolButtonStyle(m_ToolStyle);
@@ -331,12 +400,12 @@ void VisionGraph_Item::initTool_operation()
     }
 }
 
-void VisionGraph_Item::initToolBar()
+void VisionGraph_::initToolBar()
 {
 
 }
 
-void VisionGraph_Item::initLayout(ToolButtonDirection toolButtonDirect)
+void VisionGraph_::initLayout(ToolButtonDirection toolButtonDirect)
 {
     m_hBoxLayout = new QHBoxLayout;
     m_vBoxLayout = new QVBoxLayout;
@@ -375,8 +444,11 @@ void VisionGraph_Item::initLayout(ToolButtonDirection toolButtonDirect)
     mainLayout->addLayout(m_vBoxLayout);
 }
 
-bool VisionGraph_Item::checkoutItem()
+bool VisionGraph_::checkoutItem()
 {
+    if(m_graphType == GraphType::graphRegion)
+        return true;
+
     this->scene->update();
     //在进行交互的时候进行check   程序调用addItem是否有效？
     if(m_viewType == ViewType::singleItem){
@@ -399,7 +471,7 @@ bool VisionGraph_Item::checkoutItem()
 
 
 
-VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
+VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, QColor color)
 {
     if(!checkoutItem())
         return NULL;
@@ -407,7 +479,11 @@ VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
     if(bEdit){
         VisionRectItem* item = new VisionRectItem(true);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+
+        QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+        QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
+            m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
 
         });
@@ -421,27 +497,27 @@ VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
     return NULL;
 }
 
-QGraphicsRectItem *VisionGraph_Item::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
+QGraphicsRectItem *VisionGraph_::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
     return scene->addRect(rect,pen,brush);
 }
 
-QGraphicsPolygonItem *VisionGraph_Item::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
+QGraphicsPolygonItem *VisionGraph_::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
 {
     return scene->addPolygon(polygon,pen,brush);
 }
 
-QGraphicsLineItem *VisionGraph_Item::_addLine(const QLineF &line, const QPen &pen)
+QGraphicsLineItem *VisionGraph_::_addLine(const QLineF &line, const QPen &pen)
 {
     return scene->addLine(line,pen);
 }
 
-QGraphicsEllipseItem *VisionGraph_Item::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
+QGraphicsEllipseItem *VisionGraph_::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
     return scene->addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF, QColor color)
+VisionCrossPointItem *VisionGraph_::_addPoint(QPointF pointF, QColor color)
 {
     VisionCrossPointItem *item = new VisionCrossPointItem();
     item->setPoint(pointF);
@@ -449,7 +525,7 @@ VisionCrossPointItem *VisionGraph_Item::_addPoint(QPointF pointF, QColor color)
     return item;
 }
 
-VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP, QColor color)
+VisionChainItem *VisionGraph_::_addChain(QList<QPointF> lstP, QColor color)
 {
     VisionChainItem* item = new VisionChainItem();
     item->setChainPos(lstP);
@@ -457,7 +533,7 @@ VisionChainItem *VisionGraph_Item::_addChain(QList<QPointF> lstP, QColor color)
     return item;
 }
 
-VisionArrow *VisionGraph_Item::_addArrow(QPointF pointF, QColor color)
+VisionArrow *VisionGraph_::_addArrow(QPointF pointF, QColor color)
 {
     VisionArrow* item = new VisionArrow();
     item->setPointF(pointF);
@@ -466,14 +542,17 @@ VisionArrow *VisionGraph_Item::_addArrow(QPointF pointF, QColor color)
     return item;
 }
 
-VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
+VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, QColor color)
 {
     if(!checkoutItem())
         return NULL;
 
     VisionEllipseItem *item = new VisionEllipseItem(true);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
 
     });
@@ -485,14 +564,17 @@ VisionEllipseItem *VisionGraph_Item::addEllipse(QRectF rf, QColor color)
     return item;
 }
 
-VisionLineItem *VisionGraph_Item::addLine(QLine line, QColor color)
+VisionLineItem *VisionGraph_::addLine(QLine line, QColor color)
 {
     if(!checkoutItem())
         return NULL;
 
     VisionLineItem *item = new VisionLineItem();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
 
     });
@@ -504,12 +586,12 @@ VisionLineItem *VisionGraph_Item::addLine(QLine line, QColor color)
     return item;
 }
 
-void VisionGraph_Item::addLines(QList<QLine> lstLine, QColor color)
+void VisionGraph_::addLines(QList<QLine> lstLine, QColor color)
 {
 
 }
 
-VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor color)
+VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, QColor color)
 {
     if(!checkoutItem())
         return NULL;
@@ -519,7 +601,10 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor c
     qDebug()<<"add polygon";
     VisionPolygon *item = new VisionPolygon();
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
 
     });
@@ -535,14 +620,17 @@ VisionPolygon *VisionGraph_Item::addPolygon(QVector<QPointF> vecPointF, QColor c
     return item;
 }
 
-VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
+VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, QColor color)
 {
     if(!checkoutItem())
         return NULL;
 
     VisionCrossPointItem *item = new VisionCrossPointItem(true);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
 
     });
@@ -555,7 +643,7 @@ VisionCrossPointItem* VisionGraph_Item::addPoint(QPointF pointF, QColor color)
 }
 
 
-int VisionGraph_Item::setBkImg(QImage image)
+int VisionGraph_::setBkImg(QImage image)
 {
     if (image.isNull())
         return -1;
@@ -569,7 +657,7 @@ int VisionGraph_Item::setBkImg(QImage image)
     return 0;
 }
 
-void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
+void VisionGraph_::setToolButton_Direction(ToolButtonDirection direct){
     m_toolButtonDirection = direct;
 
     if(infoWidget != NULL){
@@ -581,6 +669,11 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
     tool_Widget->removeAction(infoWidget_Action);
     if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
             m_toolButtonDirection == ToolButtonDirection::rightDirection){
+
+        label_slider->setFixedSize(40,120);
+        pSlider->setOrientation(Qt::Vertical);  // 竖直方向
+        pSlider->setFixedHeight(100);
+        pSlider->setMinimumWidth(20);
 
         QVBoxLayout* vBoxLayout = new QVBoxLayout;
         infoWidget->setLayout(vBoxLayout);
@@ -597,6 +690,11 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         tool_Widget->setMinimumWidth(45);
     }else{
 
+        label_slider->setFixedSize(120,40);
+        pSlider->setOrientation(Qt::Horizontal);  // shuiping方向
+        pSlider->setFixedWidth(100);
+        pSlider->setMinimumHeight(20);
+
         QHBoxLayout* hBoxLayout = new QHBoxLayout;
         infoWidget->setLayout(hBoxLayout);
 
@@ -612,7 +710,11 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         tool_Widget->setMinimumHeight(45);
     }
 
-    QToolBar *tool_infoWidget = new QToolBar;
+    if(tool_infoWidget != NULL){
+        tool_infoWidget->deleteLater();
+        tool_infoWidget = NULL;
+    }
+    tool_infoWidget = new QToolBar;
     tool_infoWidget->addWidget(infoWidget);
     tool_infoWidget->addSeparator();
 
@@ -665,16 +767,19 @@ void VisionGraph_Item::setToolButton_Direction(ToolButtonDirection direct){
         m_vBoxLayout->addWidget(tool_Widget);
     }
 
-
     mainLayout->addLayout(m_vBoxLayout);
+
+    //由于布局改变了，故重新设置下
+    //todo
+//    slot_GraphTypeChanged(m_graphType);
 }
 
-void VisionGraph_Item::setViewInfo_Visible(bool bVisible)
+void VisionGraph_::setViewInfo_Visible(bool bVisible)
 {
     view->setViewInfo_Visible(bVisible);
 }
 
-QToolButton *VisionGraph_Item::getToolButton(ToolButtonType type)
+QToolButton *VisionGraph_::getToolButton(ToolButtonType type)
 {
     switch(type)
     {
@@ -721,7 +826,7 @@ QToolButton *VisionGraph_Item::getToolButton(ToolButtonType type)
     }
 }
 
-bool VisionGraph_Item::removeToolButton(ToolButtonType type)
+bool VisionGraph_::removeToolButton(ToolButtonType type)
 {
     QToolButton* toolButton = NULL;
     switch(type)
@@ -797,7 +902,7 @@ bool VisionGraph_Item::removeToolButton(ToolButtonType type)
 }
 
 
-void VisionGraph_Item::addToolButton(QToolButton *btn)
+void VisionGraph_::addToolButton(QToolButton *btn)
 {
     btn->setToolButtonStyle(m_ToolStyle);
     btn->setIconSize(m_ToolIconSize);
@@ -806,19 +911,19 @@ void VisionGraph_Item::addToolButton(QToolButton *btn)
     m_lstToolBtn.append(btn);
 }
 
-void VisionGraph_Item::removeToolBarInfoWidget()
+void VisionGraph_::removeToolBarInfoWidget()
 {
     tool_Widget->removeAction(infoWidget_Action);
 }
 
-void VisionGraph_Item::setViewRegion_Size(qreal w, qreal h)
+void VisionGraph_::setViewRegion_Size(qreal w, qreal h)
 {
     view->setViewRegion_Size(w,h);
     pSpinBox_w->setValue(w);
     pSpinBox_h->setValue(h);
 }
 
-qreal VisionGraph_Item::adjustSize(qreal w, qreal h)
+qreal VisionGraph_::adjustSize(qreal w, qreal h)
 {
     qreal q = view->adjustSize(w,h);
     pSpinBox_w->setValue(w);
@@ -827,17 +932,17 @@ qreal VisionGraph_Item::adjustSize(qreal w, qreal h)
     return q;
 }
 
-void VisionGraph_Item::setViewRegion_Visible(bool bVisible)
+void VisionGraph_::setViewRegion_Visible(bool bVisible)
 {
     view->setViewRegion_Visible(bVisible);
 }
 
-void VisionGraph_Item::setViewRegion_Color(const QColor &color)
+void VisionGraph_::setViewRegion_Color(const QColor &color)
 {
     view->setViewRegion_Color(color);
 }
 
-QImage VisionGraph_Item::getBkgImg()
+QImage VisionGraph_::getBkgImg()
 {
     QImage image;
     if(m_bkPixmapItem != nullptr){
@@ -848,7 +953,7 @@ QImage VisionGraph_Item::getBkgImg()
     return image;
 }
 
-void VisionGraph_Item::saveBkgImg(QString path)
+void VisionGraph_::saveBkgImg(QString path)
 {
     //path==""调用fileDialog进行设置保存
     if(path == ""){
@@ -879,7 +984,7 @@ void VisionGraph_Item::saveBkgImg(QString path)
     }
 }
 
-void VisionGraph_Item::removeItem(VisionItem *item)
+void VisionGraph_::removeItem(VisionItem *item)
 {
     //item == nullptr 默认删除选中的
     if(item == nullptr){
@@ -906,43 +1011,46 @@ void VisionGraph_Item::removeItem(VisionItem *item)
     }
 }
 
-void VisionGraph_Item::setMousePaintSize(qreal qi)
+void VisionGraph_::setMousePaintSize(qreal qi)
 {
-    view->setPainterCursorR(qi);
+    view->setPainterCursorR(qi/2);
+    if(pSlider != nullptr){
+        pSlider->setValue(qi);
+    }
 }
 
-void VisionGraph_Item::setView_Zoom(qreal qZoom)
+void VisionGraph_::setView_Zoom(qreal qZoom)
 {
     view->zoom(qZoom);
     comboBox->setEditText(QString::number(qZoom*100)+"%");
 }
 
-void VisionGraph_Item::setViewType(ViewType type)
+void VisionGraph_::setViewType(ViewType type)
 {
     m_viewType = type;
 }
 
-void VisionGraph_Item::slot_selected_action()
+void VisionGraph_::slot_selected_action()
 {
     view->setItemType(ItemType::No);
     m_itemType = ItemType::No;
 //    label_Operation->setText(QStringLiteral("无状态"));
 }
 
-void VisionGraph_Item::slot_drag_action()
+void VisionGraph_::slot_drag_action()
 {
     view->setItemType(ItemType::Drag);
     m_itemType = ItemType::Drag;
 //    label_Operation->setText(QStringLiteral("通过鼠标的拖动，拖动视图区域"));
 }
 
-void VisionGraph_Item::slot_zoom_action()
+void VisionGraph_::slot_zoom_action()
 {
     view->viewRegion_OriginPos();
     //    label_Operation->setText(QStringLiteral("通过鼠标的滚轮，缩放视图区域"));
 }
 
-void VisionGraph_Item::slot_fit_action()
+void VisionGraph_::slot_fit_action()
 {
     if(!m_bkPixmapItem->pixmap().isNull()){
         this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
@@ -951,21 +1059,21 @@ void VisionGraph_Item::slot_fit_action()
     }
 }
 
-void VisionGraph_Item::slot_mousePainter_action()
+void VisionGraph_::slot_mousePainter_action()
 {
     view->setItemType(ItemType::Paint_Point);
     m_itemType = ItemType::Paint_Point;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
 }
 
-void VisionGraph_Item::slot_mouseClear_action()
+void VisionGraph_::slot_mouseClear_action()
 {
     view->setItemType(ItemType::Paint_NoPoint);
     m_itemType = ItemType::Paint_NoPoint;
 //    label_Operation->setText(QStringLiteral("点击绘制任意图形"));
 }
 
-void VisionGraph_Item::slot_save_action()
+void VisionGraph_::slot_save_action()
 {
 
     if (m_bkPixmapItem == NULL) return;
@@ -990,7 +1098,7 @@ void VisionGraph_Item::slot_save_action()
     }
 }
 
-void VisionGraph_Item::slot_rect_action()
+void VisionGraph_::slot_rect_action()
 {
     view->setItemType(ItemType::Paint_Rect);
     m_itemType = ItemType::Paint_Rect;
@@ -998,7 +1106,7 @@ void VisionGraph_Item::slot_rect_action()
 
 }
 
-void VisionGraph_Item::slot_ellipse_action()
+void VisionGraph_::slot_ellipse_action()
 {
     view->setItemType(ItemType::Paint_EllipseItem);
     m_itemType = ItemType::Paint_EllipseItem;
@@ -1006,7 +1114,7 @@ void VisionGraph_Item::slot_ellipse_action()
 
 }
 
-void VisionGraph_Item::slot_poly_action()
+void VisionGraph_::slot_poly_action()
 {
     view->setItemType(ItemType::Paint_Poly);
     m_itemType = ItemType::Paint_Poly;
@@ -1014,35 +1122,35 @@ void VisionGraph_Item::slot_poly_action()
 
 }
 
-void VisionGraph_Item::slot_poly_elli_action()
+void VisionGraph_::slot_poly_elli_action()
 {
     view->setItemType(ItemType::Paint_Region);
     m_itemType = ItemType::Paint_Region;
 //    label_Operation->setText(QStringLiteral("点击，创建任意的多边形"));
 }
 
-void VisionGraph_Item::slot_point_action()
+void VisionGraph_::slot_point_action()
 {
     view->setItemType(ItemType::Paint_CrossPoint);
     m_itemType = ItemType::Paint_CrossPoint;
 //    label_Operation->setText(QStringLiteral("点击，创建一个点"));
 }
 
-void VisionGraph_Item::slot_line_action()
+void VisionGraph_::slot_line_action()
 {
     view->setItemType(ItemType::Paint_Line);
     m_itemType = ItemType::Paint_Line;
 //    label_Operation->setText(QStringLiteral("点击，创建一个线段"));
 }
 
-void VisionGraph_Item::slot_polyLine_action()
+void VisionGraph_::slot_polyLine_action()
 {
     view->setItemType(ItemType::Paint_polyLine);
     m_itemType = ItemType::Paint_polyLine;
 //    label_Operation->setText(QStringLiteral("点击，创建折线段"));
 }
 
-void VisionGraph_Item::slot_open_project()
+void VisionGraph_::slot_open_project()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"/",tr("Images (*.png *.bmp *.jpg)"));
 
@@ -1053,33 +1161,42 @@ void VisionGraph_Item::slot_open_project()
     }
 }
 
-void VisionGraph_Item::slot_front_action()
+void VisionGraph_::slot_front_action()
 {
-//    view->back_region();
+    view->back_region();
 }
 
-void VisionGraph_Item::slot_next_action()
+void VisionGraph_::slot_next_action()
 {
-//    view->front_region();
+    view->front_region();
 }
 
-void VisionGraph_Item::slot_clear_action()
+void VisionGraph_::slot_clear_action()
 {
     //清除当前的item
     view->clearPainter();
 
-    for(int i=0;i<m_lstItem.count();i++){
-        scene->removeItem(m_lstItem[i]);
-        m_lstItem[i]->deleteLater();
-        m_lstItem[i] = nullptr;
+    if(m_lstItem.count() > 0){
+        for(int i=0;i<m_lstItem.count();i++){
+            if(m_lstItem[i] != nullptr){
+                scene->removeItem(m_lstItem[i]);
+                m_lstItem[i]->deleteLater();
+            }
+            m_lstItem[i] = nullptr;
+        }
+        m_lstItem.clear();
     }
-    m_lstItem.clear();
 
-    m_curVisionItem = nullptr;
+    //清除当前的item
+    if(m_curVisionItem != nullptr){
+        m_curVisionItem->hide();
+        m_curVisionItem->deleteLater();
+        m_curVisionItem = nullptr;
+    }
     qDebug()<<scene->items().count();
 }
 
-void VisionGraph_Item::slot_removeItem_action()
+void VisionGraph_::slot_removeItem_action()
 {
     //直接进行筛选，不考虑当前的
     if(m_lstItem.count() == 0)
@@ -1087,7 +1204,9 @@ void VisionGraph_Item::slot_removeItem_action()
 
     for(int i=0;i<m_lstItem.count();i++){
         if(m_lstItem[i] == m_curVisionItem){
-            m_lstItem[i]->deleteLater();
+            if(m_lstItem[i] != nullptr){
+                m_lstItem[i]->deleteLater();
+            }
             m_lstItem.removeAt(i);
             break;
         }
@@ -1096,7 +1215,7 @@ void VisionGraph_Item::slot_removeItem_action()
     m_curVisionItem = nullptr;
 }
 
-void VisionGraph_Item::slot_addItem(ItemType type, QRectF rf)
+void VisionGraph_::slot_addItem(ItemType type, QRectF rf)
 {
     if(type == ItemType::Paint_Rect){
         addRect(rf);
@@ -1105,54 +1224,27 @@ void VisionGraph_Item::slot_addItem(ItemType type, QRectF rf)
     }
 }
 
-void VisionGraph_Item::slot_addPoly(QVector<QPointF> vecPointF)
+void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF)
 {
     addPolygon(vecPointF);
 }
 
-void VisionGraph_Item::slot_addPoint(QPointF pointF)
+void VisionGraph_::slot_addPoint(QPointF pointF)
 {
     addPoint(pointF);
 }
 
-void VisionGraph_Item::slot_addLine(QLine line)
+void VisionGraph_::slot_addLine(QLine line)
 {
     addLine(line);
 }
 
-void VisionGraph_Item::slot_mouseMove(QPointF pointF)
+void VisionGraph_::slot_mouseMove(QPointF pointF)
 {
     m_mousePixmap->hide();
 }
 
-
-QPainterPath VisionGraph_Item::and_Item(QPainterPath path1,QPainterPath path2)
-{
-    //获取到一个公共的区域，将该区域的表达式传给每个item，在绘制每个item 的时候，判断绘制的点是否在公共区域，在的话绘制特殊颜色，不在的话，绘制其他颜色
-    //A和B的交集 属于A并且也属于B
-    return (path1+path2)-(path1-path2)-(path2-path1);
-}
-
-QPainterPath VisionGraph_Item::sub_Item(QPainterPath path1,QPainterPath path2)
-{
-    //A和B的差集  属于A，但不属于B的点
-    return path1.subtracted(path2);
-}
-
-QPainterPath VisionGraph_Item::or_Item(QPainterPath path1,QPainterPath path2)
-{
-    //A和B的并集 属于A或者属于B
-    return path1.united(path2);
-}
-
-QPainterPath VisionGraph_Item::nor_Item(QPainterPath path1,QPainterPath path2)
-{
-    //A异或B，属于A并且不属于B 或者 属于B并且不属于A
-    return (path2-path1)+(path1-path2);
-}
-
-
-void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,qreal y)
+void VisionGraph_::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,qreal y)
 {
     //修改，该函数的触发，改成有基类VisionItem进行触发，限制在点击item的时候触发
 
@@ -1254,7 +1346,7 @@ void VisionGraph_Item::slot_Press(VisionItem *item, bool bSelected,bool bIn,qrea
     }
 }
 
-void VisionGraph_Item::slot_wheel(qreal delta)
+void VisionGraph_::slot_wheel(qreal delta)
 {
     if(delta > 0){
         //放大
@@ -1273,7 +1365,7 @@ void VisionGraph_Item::slot_wheel(qreal delta)
     comboBox->setCurrentText(QString::number(m_zoom*100)+"%");
 }
 
-void VisionGraph_Item::slot_SizeChanged(QString currentSize)
+void VisionGraph_::slot_SizeChanged(QString currentSize)
 {
     QString str = currentSize.mid(0,currentSize.indexOf("%"));
     if(!currentSize.contains("%") && currentSize != ""){
@@ -1288,14 +1380,153 @@ void VisionGraph_Item::slot_SizeChanged(QString currentSize)
     }
 }
 
-void VisionGraph_Item::slot_SizeChanged(qreal w, qreal h)
+void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
 {
     qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
 }
 
-void VisionGraph_Item::slot_SpinBox_ViewRegionSize(int w)
+void VisionGraph_::slot_valueChanged(int qR)
+{
+    m_mousePixmap->show();
+    m_mousePixmap->setPixmap(QPixmap(iconPath+"cursor-size_Circle.png").scaled(qR,qR,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    qreal qx = view->sceneRect().x()+view->sceneRect().width()/2;
+    qreal qy = view->sceneRect().y()+view->sceneRect().height()/2;
+    m_mousePixmap->setPos(qx-m_mousePixmap->boundingRect().width()/2,qy-m_mousePixmap->boundingRect().height()/2);
+    view->setPainterCursorR((qreal)qR/2);
+}
+
+void VisionGraph_::slot_SceneMouseMove(qreal x, qreal y)
+{
+    m_mousePixmap->hide();
+}
+
+void VisionGraph_::slot_actionTriggered(QAction *action)
+{
+    //region版本，发现存在item，在进行其他绘制操作的时候，会将存在的item自动转换成region
+    if(action->text() == "rectangle" || action->text() == "ellipse" || action->text() == "poly" ||
+            action->text() == "region" || action->text() == "mousePainter" || action->text() == "mouseClear"){
+
+        if(m_lstItem.count() == 0)
+            return;
+
+        for(int i=0;i<m_lstItem.count();i++){
+            if(m_lstItem[i] == m_curVisionItem){
+                m_lstItem[i]->deleteLater();
+                m_lstItem.removeAt(i);
+                break;
+            }
+        }
+
+        if(m_curVisionItem != nullptr){
+            m_curVisionItem->setEdit(false);
+            m_curVisionItem->setSelected(false);
+            m_curVisionItem->scene()->update();
+        }
+    }
+}
+
+void VisionGraph_::slot_SpinBox_ViewRegionSize(int w)
 {
     view->setViewRegion_Size(pSpinBox_w->value(),pSpinBox_h->value());
+}
+
+void VisionGraph_::slot_GraphTypeChanged(GraphType type)
+{
+    switch (type) {
+    case GraphType::graphRegion:
+        init_graphRegion();
+        break;
+    case GraphType::graphItem_self:
+        init_graphItem_self();
+        break;
+    case GraphType::graphItem_unSelf:
+        init_graphItem_unSelf();
+        break;
+    default:
+        break;
+    }
+}
+
+void VisionGraph_::init_graphRegion()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_front_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_next_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_mouseClear_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_mousePainter_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_elli_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    tool_Widget->addWidget(label_mouseSizeText);
+    tool_Widget->addWidget(label_slider);
+    tool_Widget->addWidget(pSpinBox);
+    tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::init_graphItem_self()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::init_graphItem_unSelf()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_point_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_line_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
 }
