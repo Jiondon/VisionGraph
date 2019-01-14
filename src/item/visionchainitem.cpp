@@ -5,7 +5,7 @@
 
 #include "../control/color.h"
 
-VisionChainItem::VisionChainItem(bool edit, bool bClosed, QObject *parent) : QObject(parent)
+VisionChainItem::VisionChainItem(bool bClosed, bool edit, QObject *parent) : QObject(parent)
 {
 //    setAcceptHoverEvents(true);
     m_borderColor = borderColor;
@@ -265,7 +265,7 @@ void VisionChainItem::updateData()
 
 void VisionChainItem::slotMiniRectIndex(int index)
 {
-    qDebug()<<index;
+//    qDebug()<<index;
     m_iIndex = index;
     if(index == -1){
         this->scene()->views().at(0)->setCursor(viewCursor);

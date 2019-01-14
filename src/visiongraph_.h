@@ -90,10 +90,10 @@ public:
 
 
     /**
-     * @brief       添加多边形
+     * @brief       添加多边形/close为false，为折线
      * @param       点的集合，点的集合一次连接
      */
-    VisionPolygon* addPolygon(QVector<QPointF> vecPointF,QColor color = QColor(255,255,255));
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加一个点
@@ -101,6 +101,11 @@ public:
      */
     VisionCrossPointItem *addPoint(QPointF pointF,QColor color = QColor(255,255,255));
 
+    /**
+     * @brief       添加一个链
+     * @param
+     */
+    VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,bool edit = true,QColor color = QColor(255,255,255));
 
     /**
      * @brief       设置view的背景图片
@@ -439,7 +444,7 @@ private slots:
     void slot_removeItem_action();
 
     void slot_addItem(ItemType type, QRectF rf);
-    void slot_addPoly(QVector<QPointF> vecPointF);
+    void slot_addPoly(QVector<QPointF> vecPointF, ItemType type);
     void slot_addPoint(QPointF pointF);
     void slot_addLine(QLine line);
 
@@ -470,6 +475,7 @@ private:
     void init_graphRegion();
     void init_graphItem_self();
     void init_graphItem_unSelf();
+    void init_graphChain();
 };
 
 #endif // VISIONGRAPH__H

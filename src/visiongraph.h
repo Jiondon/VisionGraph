@@ -107,6 +107,11 @@ public:
      */
     VisionCrossPointItem* addPoint(QPointF pointF,QColor color = QColor(255,255,255));
 
+    /**
+     * @brief       添加一个链
+     * @param
+     */
+    VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,QColor color = QColor(255,255,255));
 
     /**
      * @brief       获取当前绘制在view的区域  region版本

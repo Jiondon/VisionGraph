@@ -235,7 +235,7 @@ signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);
     void signal_Item(ItemType type,QRectF rf);  //rect ellipse
-    void signal_Item_poly(QVector<QPointF> vecPoint);  //
+    void signal_Item_poly(QVector<QPointF> vecPoint,ItemType type=ItemType::Paint_Poly);  //
     void signal_Item_point(QPointF pointF);
     void signal_Item_Line(QLine line);
 
@@ -370,11 +370,6 @@ private:
     void push_region(XVRegion region,int index = 0);
 
     void detailMoveEvent(QMouseEvent *event);
-
-    /**
-     * @brief       处理鼠标释放时间，根据当前的GraphType来进行分类处理
-     */
-    void detailReleaseEvent(QMouseEvent *event);
 };
 
 #endif // VISIONGRAPHVIEW_H

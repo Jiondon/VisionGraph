@@ -22,7 +22,8 @@
 enum GraphType{
     graphRegion,
     graphItem_self,
-    graphItem_unSelf
+    graphItem_unSelf,
+    graphChain
 };
 
 

@@ -47,7 +47,7 @@ void VisionGraph_::initScene()
 
     view = new VisionGraphView(sceneWidget);
     QObject::connect(view,SIGNAL(signal_Item(ItemType,QRectF)),this,SLOT(slot_addItem(ItemType,QRectF)));
-    QObject::connect(view,SIGNAL(signal_Item_poly(QVector<QPointF>)),this,SLOT(slot_addPoly(QVector<QPointF>)));
+    QObject::connect(view,SIGNAL(signal_Item_poly(QVector<QPointF>,ItemType)),this,SLOT(slot_addPoly(QVector<QPointF>,ItemType)));
     QObject::connect(view,SIGNAL(signal_Item_point(QPointF)),this,SLOT(slot_addPoint(QPointF)));
     QObject::connect(view,SIGNAL(signal_Item_Line(QLine)),this,SLOT(slot_addLine(QLine)));
     QObject::connect(view,SIGNAL(signal_Move(QPointF)),this,SLOT(slot_mouseMove(QPointF)));
@@ -591,7 +591,7 @@ void VisionGraph_::addLines(QList<QLine> lstLine, QColor color)
 
 }
 
-VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, QColor color)
+VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF,bool bClose, QColor color)
 {
     if(!checkoutItem())
         return NULL;
@@ -599,7 +599,7 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, QColor color
     if(vecPointF.count() <= 0)
         return NULL;
     qDebug()<<"add polygon";
-    VisionPolygon *item = new VisionPolygon();
+    VisionPolygon *item = new VisionPolygon(bClose);
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -635,6 +635,28 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, QColor color)
 
     });
     item->setPoint(pointF);
+    scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
+    return item;
+}
+
+VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool edit, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    VisionChainItem *item = new VisionChainItem(close,edit);
+    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
+        m_curVisionItem = nullptr;
+
+    });
+    item->setChainPos(lstP);
     scene->addItem(item);
     m_curVisionItem = item;
     m_lstItem.push_back(item);
@@ -1217,16 +1239,43 @@ void VisionGraph_::slot_removeItem_action()
 
 void VisionGraph_::slot_addItem(ItemType type, QRectF rf)
 {
-    if(type == ItemType::Paint_Rect){
-        addRect(rf);
-    }else if(type == ItemType::Paint_EllipseItem){
-        addEllipse(rf);
+    if(m_graphType == GraphType::graphChain){
+        //绘制链类型
+        QList<QPointF> lstP;
+        lstP.clear();
+        if(type == ItemType::Paint_Rect){
+            lstP.append({rf.topLeft(),rf.topRight(),rf.bottomRight(),rf.bottomLeft()});
+            addChain(lstP,true);
+        }else if(type == ItemType::Paint_EllipseItem){
+            QPainterPath path;
+            path.addEllipse(rf);
+            lstP = path.toFillPolygon().toList();
+            addChain(lstP,true);
+        }
+    }else{
+        if(type == ItemType::Paint_Rect){
+            addRect(rf);
+        }else if(type == ItemType::Paint_EllipseItem){
+            addEllipse(rf);
+        }
     }
 }
 
-void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF)
+void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF,ItemType type)
 {
-    addPolygon(vecPointF);
+    if(m_graphType == GraphType::graphChain){
+        if(type == ItemType::Paint_Poly){
+            addChain(vecPointF.toList(),true);
+        }else if(type == ItemType::Paint_polyLine){
+            addChain(vecPointF.toList(),false);
+        }
+    }else{
+        if(type == ItemType::Paint_Poly){
+            addPolygon(vecPointF);
+        }else if(type == ItemType::Paint_polyLine){
+            addPolygon(vecPointF,false);
+        }
+    }
 }
 
 void VisionGraph_::slot_addPoint(QPointF pointF)
@@ -1236,7 +1285,11 @@ void VisionGraph_::slot_addPoint(QPointF pointF)
 
 void VisionGraph_::slot_addLine(QLine line)
 {
-    addLine(line);
+    if(m_graphType == GraphType::graphChain){
+        addChain({line.p1(),line.p2()},true);
+    }else{
+        addLine(line);
+    }
 }
 
 void VisionGraph_::slot_mouseMove(QPointF pointF)
@@ -1444,6 +1497,9 @@ void VisionGraph_::slot_GraphTypeChanged(GraphType type)
     case GraphType::graphItem_unSelf:
         init_graphItem_unSelf();
         break;
+    case GraphType::graphChain:
+        init_graphChain();
+        break;
     default:
         break;
     }
@@ -1524,7 +1580,35 @@ void VisionGraph_::init_graphItem_unSelf()
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_point_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_line_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::init_graphChain()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_line_button));
     m_insertAction = tool_Widget->addSeparator();
 

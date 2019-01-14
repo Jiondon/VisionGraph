@@ -68,10 +68,10 @@ public:
     virtual void addLines(QList<QLine> lstLine,QColor color = QColor(255,255,255)) = 0;
 
     /**
-     * @brief       添加多边形
+     * @brief       添加多边形/close为false，为折线
      * @param       点的集合，点的集合一次连接
      */
-    virtual VisionPolygon* addPolygon(QVector<QPointF> vecPointF,QColor color = QColor(255,255,255)) = 0;
+    virtual VisionPolygon* addPolygon(QVector<QPointF> vecPointF,bool bClose = true,QColor color = QColor(255,255,255)) = 0;
 
     /**
      * @brief       添加一个点
@@ -79,6 +79,11 @@ public:
      */
     virtual VisionCrossPointItem* addPoint(QPointF pointF,QColor color = QColor(255,255,255)) = 0;
 
+    /**
+     * @brief       添加一个链
+     * @param
+     */
+    virtual VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,bool edit = true,QColor color = QColor(255,255,255)) = 0;
 
     /**
      * @brief       设置view的背景图片

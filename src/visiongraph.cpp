@@ -23,6 +23,8 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }else if(type == GraphType::graphItem_unSelf){
 //        m_graphWidget_Base = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         brushColor = Qt::transparent;
+    }else if(type == GraphType::graphRegion){
+        brushColor = Qt::transparent;
     }else{
         qDebug()<<"VisionGraph is Error";
     }
@@ -109,6 +111,11 @@ VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF, QColor color)
 VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF, QColor color)
 {
     return m_graphWidget_Base->addPoint(pointF);
+}
+
+VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close, QColor color)
+{
+    return m_graphWidget_Base->addChain(lstP,close,true,color);
 }
 
 XVRegion* VisionGraph::getRegion()

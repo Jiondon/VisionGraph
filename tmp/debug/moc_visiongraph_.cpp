@@ -150,19 +150,19 @@ static const uint qt_meta_data_VisionGraph_[] = {
       22,    0,  204,    2, 0x08 /* Private */,
       23,    0,  205,    2, 0x08 /* Private */,
       24,    2,  206,    2, 0x08 /* Private */,
-      28,    1,  211,    2, 0x08 /* Private */,
-      31,    1,  214,    2, 0x08 /* Private */,
-      33,    1,  217,    2, 0x08 /* Private */,
-      35,    1,  220,    2, 0x08 /* Private */,
-      36,    5,  223,    2, 0x08 /* Private */,
-      41,    1,  234,    2, 0x08 /* Private */,
-      43,    1,  237,    2, 0x08 /* Private */,
-      43,    2,  240,    2, 0x08 /* Private */,
-      47,    1,  245,    2, 0x08 /* Private */,
-      49,    2,  248,    2, 0x08 /* Private */,
-      50,    1,  253,    2, 0x08 /* Private */,
-      53,    1,  256,    2, 0x08 /* Private */,
-      54,    1,  259,    2, 0x08 /* Private */,
+      28,    2,  211,    2, 0x08 /* Private */,
+      31,    1,  216,    2, 0x08 /* Private */,
+      33,    1,  219,    2, 0x08 /* Private */,
+      35,    1,  222,    2, 0x08 /* Private */,
+      36,    5,  225,    2, 0x08 /* Private */,
+      41,    1,  236,    2, 0x08 /* Private */,
+      43,    1,  239,    2, 0x08 /* Private */,
+      43,    2,  242,    2, 0x08 /* Private */,
+      47,    1,  247,    2, 0x08 /* Private */,
+      49,    2,  250,    2, 0x08 /* Private */,
+      50,    1,  255,    2, 0x08 /* Private */,
+      53,    1,  258,    2, 0x08 /* Private */,
+      54,    1,  261,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -188,7 +188,7 @@ static const uint qt_meta_data_VisionGraph_[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 25, QMetaType::QRectF,   26,   27,
-    QMetaType::Void, 0x80000000 | 29,   30,
+    QMetaType::Void, 0x80000000 | 29, 0x80000000 | 25,   30,   26,
     QMetaType::Void, QMetaType::QPointF,   32,
     QMetaType::Void, QMetaType::QLine,   34,
     QMetaType::Void, QMetaType::QPointF,   32,
@@ -232,7 +232,7 @@ void VisionGraph_::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 18: _t->slot_clear_action(); break;
         case 19: _t->slot_removeItem_action(); break;
         case 20: _t->slot_addItem((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QRectF(*)>(_a[2]))); break;
-        case 21: _t->slot_addPoly((*reinterpret_cast< QVector<QPointF>(*)>(_a[1]))); break;
+        case 21: _t->slot_addPoly((*reinterpret_cast< QVector<QPointF>(*)>(_a[1])),(*reinterpret_cast< ItemType(*)>(_a[2]))); break;
         case 22: _t->slot_addPoint((*reinterpret_cast< QPointF(*)>(_a[1]))); break;
         case 23: _t->slot_addLine((*reinterpret_cast< QLine(*)>(_a[1]))); break;
         case 24: _t->slot_mouseMove((*reinterpret_cast< QPointF(*)>(_a[1]))); break;

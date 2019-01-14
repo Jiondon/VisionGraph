@@ -1,6 +1,6 @@
 ﻿/****************************************************************************
 ** @brief       自定义polygon
-** @note        可编辑的多边形，
+** @note        可编辑的多边形，或者折线（折线封闭的话，即为多边形），统称为多边形，折线为未封闭的多边形
 ** @author      xiaodongLi
 ** @date        create:2018-09-28
 ** @example
@@ -21,7 +21,7 @@ class VISIONGRAPHSHARED_EXPORT VisionPolygon : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionPolygon(VisionItem *parent = 0);
+    explicit VisionPolygon(bool close = true,VisionItem *parent = 0);
     ~VisionPolygon();
 
     /**
@@ -36,6 +36,15 @@ public:
      * @param       bool
      */
     bool getPosInArea(qreal x, qreal y);
+
+    /**
+     * @brief       获取该类的close属性
+     * @param       bool
+     */
+    bool isClosed()
+    {
+        return m_bClose;
+    }
 
     /**
      * @brief       获取多边形的每个顶点
@@ -73,6 +82,7 @@ private:
 
 
     bool m_bEdit = false;  //flag 选中未选中
+    bool m_bClose = true; //多边形是否封闭变量控制
 
     QColor m_borderColor;
     QColor m_brushColor;
