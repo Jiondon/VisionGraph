@@ -33,7 +33,7 @@ class VISIONGRAPHSHARED_EXPORT VisionEllipseItem : public VisionItem
 {
     Q_OBJECT
 public:
-    VisionEllipseItem(bool edit = false,bool rotation = false, VisionItem *parent = 0);
+    VisionEllipseItem(bool edit = false,bool rotation = false ,QColor color = QColor(255,0,0),VisionItem *parent = 0);
     /**
      * @brief       设置矩形
      */

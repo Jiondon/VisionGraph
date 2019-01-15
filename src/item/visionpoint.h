@@ -18,7 +18,7 @@ class VISIONGRAPHSHARED_EXPORT VisionPoint : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionPoint(VisionItem *parent = 0);
+    explicit VisionPoint(QColor color = QColor(255,0,0),VisionItem *parent = 0);
 
     void setPointF(QPointF pointF);
 

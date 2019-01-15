@@ -2,7 +2,7 @@
 #include <QDebug>
 #include "../control/color.h"
 
-VisionPolygon::VisionPolygon(bool close, bool edit, VisionItem *parent) : VisionItem(parent)
+VisionPolygon::VisionPolygon(bool close, bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -82,7 +82,6 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         setSelectedStatus(m_bSelected);
 
     }else{
-        qDebug()<<"......................................."<<m_bEdit;
         painter->setPen(QPen(QBrush(m_borderColor),0));
 
         for(int i=0;i<m_lstRect.count();i++){

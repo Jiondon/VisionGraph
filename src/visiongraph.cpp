@@ -13,24 +13,24 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    m_graphWidget_Base = new VisionGraph_(g_graphType,toolButtonDirect);
+    m_graphWidget = new VisionGraph_(g_graphType,toolButtonDirect);
 
     if(type == GraphType::graphRegion){
-//        m_graphWidget_Base = new VisionGraph_Region(toolButtonDirect);
+//        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
     }else if(type == GraphType::graphItem_self){
-//        m_graphWidget_Base = new VisionGraph_Item(GraphType::self,toolButtonDirect);
+//        m_graphWidget = new VisionGraph_Item(GraphType::self,toolButtonDirect);
         brushColor = Qt::transparent;
     }else if(type == GraphType::graphItem_unSelf){
-//        m_graphWidget_Base = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
+//        m_graphWidget = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
         brushColor = Qt::transparent;
     }else if(type == GraphType::graphRegion){
         brushColor = Qt::transparent;
     }else{
         qDebug()<<"VisionGraph is Error";
     }
-    mainLayout->addWidget(m_graphWidget_Base);
-    m_graphWidget_Base->layout()->setMargin(0);
-    connect(m_graphWidget_Base,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
+    mainLayout->addWidget(m_graphWidget);
+    m_graphWidget->layout()->setMargin(0);
+    connect(m_graphWidget,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
 
     this->setLayout(mainLayout);
 }
@@ -39,91 +39,91 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
 
 void VisionGraph::setSceneWidgetSize(QSize size)
 {
-    m_graphWidget_Base->setSceneWidgetSize(size);
+    m_graphWidget->setSceneWidgetSize(size);
 }
 
 void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 {
-    m_graphWidget_Base->setSceneWidgetSize(w,h);
+    m_graphWidget->setSceneWidgetSize(w,h);
 }
 
 
 VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit,bool bRotation, QColor color)
 {
-    return m_graphWidget_Base->addRect(rf,bEdit,bRotation);
+    return m_graphWidget->addRect(rf,bEdit,bRotation,color);
 }
 
 QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
-    return m_graphWidget_Base->_addRect(rect,pen,brush);
+    return m_graphWidget->_addRect(rect,pen,brush);
 }
 
 QGraphicsPolygonItem *VisionGraph::_addPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush)
 {
-    return m_graphWidget_Base->_addPolygon(polygon,pen,brush);
+    return m_graphWidget->_addPolygon(polygon,pen,brush);
 }
 
 QGraphicsLineItem *VisionGraph::_addLine(const QLineF &line, const QPen &pen)
 {
-    return m_graphWidget_Base->_addLine(line,pen);
+    return m_graphWidget->_addLine(line,pen);
 }
 
 QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
-    return m_graphWidget_Base->_addEllipse(rect,pen,brush);
+    return m_graphWidget->_addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, QColor color)
+VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, bool edit, QColor color)
 {
-    return m_graphWidget_Base->_addPoint(pointF);
+    return m_graphWidget->_addPoint(pointF,edit,color);
 }
 
 VisionArrow *VisionGraph::_addArrow(QPointF pointF,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->_addArrow(pointF,bEdit,color);
+    return m_graphWidget->_addArrow(pointF,bEdit,color);
 }
 
-VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, QColor color)
+VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, bool bClosed, bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->_addChain(lstP);
+    return m_graphWidget->_addChain(lstP,bClosed,bEdit,color);
 }
 
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, QColor color)
 {
-    return m_graphWidget_Base->addEllipse(rf,bEdit,bRotation);
+    return m_graphWidget->addEllipse(rf,bEdit,bRotation,color);
 }
 
 VisionLineItem *VisionGraph::addLine(QLine line,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addLine(line,bEdit,color);
+    return m_graphWidget->addLine(line,bEdit,color);
 }
 
 void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
 {
-    m_graphWidget_Base->addLines(lstLine);
+    m_graphWidget->addLines(lstLine,color);
 }
 
 VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addPolygon(vecPointF,bClose,bEdit,color);
+    return m_graphWidget->addPolygon(vecPointF,bClose,bEdit,color);
 }
 
 VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addPoint(pointF,bEdit);
+    return m_graphWidget->addPoint(pointF,bEdit,color);
 }
 
 VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close,bool edit, QColor color)
 {
-    return m_graphWidget_Base->addChain(lstP,close,edit,color);
+    return m_graphWidget->addChain(lstP,close,edit,color);
 }
 
 XVRegion* VisionGraph::getRegion()
 {
 //    XVRegion xvRegin;
-    if(m_graphWidget_Base == nullptr)
+    if(m_graphWidget == nullptr)
         return NULL;
-    return m_graphWidget_Base->getRegion();
+    return m_graphWidget->getRegion();
 }
 
 QList<VisionItem *> VisionGraph::getItems()
@@ -131,19 +131,19 @@ QList<VisionItem *> VisionGraph::getItems()
     QList<VisionItem *> lstItem;
     lstItem.clear();
 
-        lstItem = m_graphWidget_Base->getItems();
+        lstItem = m_graphWidget->getItems();
 
     return lstItem;
 }
 
 void VisionGraph::setBkImg(QImage image)
 {
-    m_graphWidget_Base->setBkImg(image);
+    m_graphWidget->setBkImg(image);
 }
 
 void VisionGraph::setToolButton_Direction(ToolButtonDirection direct)
 {
-    m_graphWidget_Base->setToolButton_Direction(direct);
+    m_graphWidget->setToolButton_Direction(direct);
 }
 
 void VisionGraph::setSelectedColor(QColor color)
@@ -169,79 +169,79 @@ void VisionGraph::setRegionColor(QColor color)
 
 void VisionGraph::show()
 {
-    m_graphWidget_Base->show();
+    m_graphWidget->show();
 }
 
 VisionGraphView *VisionGraph::getView()
 {
     VisionGraphView* view = NULL;
-    view = m_graphWidget_Base->getView();
+    view = m_graphWidget->getView();
     return view;
 }
 
 void VisionGraph::setPainterCursorR(qreal qR)
 {
-    m_graphWidget_Base->setPainterCursorR(qR);
+    m_graphWidget->setPainterCursorR(qR);
 }
 
 void VisionGraph::setItemType(ItemType type)
 {
-    m_graphWidget_Base->setItemType(type);
+    m_graphWidget->setItemType(type);
 }
 
 void VisionGraph::zoom(float scaleFactor)
 {
-    m_graphWidget_Base->zoom(scaleFactor);
+    m_graphWidget->zoom(scaleFactor);
 }
 
 void VisionGraph::back_region()
 {
-    m_graphWidget_Base->back_region();
+    m_graphWidget->back_region();
 }
 
 void VisionGraph::front_region()
 {
-    m_graphWidget_Base->front_region();
+    m_graphWidget->front_region();
 }
 
 void VisionGraph::clearPainter()
 {
-    m_graphWidget_Base->clearPainter();
+    m_graphWidget->clearPainter();
 }
 
 void VisionGraph::setViewInfo_Visible(bool bVisible)
 {
-    m_graphWidget_Base->setViewInfo_Visible(bVisible);
+    m_graphWidget->setViewInfo_Visible(bVisible);
 }
 
 void VisionGraph::setViewInfo_Pos(Corner corner)
 {
-    m_graphWidget_Base->setViewInfo_Pos(corner);
+    m_graphWidget->setViewInfo_Pos(corner);
 }
 
 void VisionGraph::setViewInfo_Pos(qreal x, qreal y)
 {
-    m_graphWidget_Base->setViewInfo_Pos(x,y);
+    m_graphWidget->setViewInfo_Pos(x,y);
 }
 
 void VisionGraph::setViewInfo_Size(QSize size)
 {
-    m_graphWidget_Base->setViewInfo_Size(size);
+    m_graphWidget->setViewInfo_Size(size);
 }
 
 void VisionGraph::setViewInfo_Size(qreal w, qreal h)
 {
-    m_graphWidget_Base->setViewInfo_Size(w,h);
+    m_graphWidget->setViewInfo_Size(w,h);
 }
 
 void VisionGraph::setViewInfo_text(QString text)
 {
-    m_graphWidget_Base->setViewInfo_text(text);
+    m_graphWidget->setViewInfo_text(text);
 }
 
 void VisionGraph::setViewInfo_Color(QColor backgroundColor,QColor textColor)
 {
-    m_graphWidget_Base->setViewInfo_Color(backgroundColor,textColor);
+    m_graphWidget->setViewInfo_Color(backgroundColor,textColor);
 }
 
 void VisionGraph::setIconPath(QString iconpath)
@@ -251,22 +251,22 @@ void VisionGraph::setIconPath(QString iconpath)
 
 QToolButton *VisionGraph::getToolButton(ToolButtonType type)
 {
-    return m_graphWidget_Base->getToolButton(type);
+    return m_graphWidget->getToolButton(type);
 }
 
 bool VisionGraph::removeToolButton(ToolButtonType type)
 {
-    return m_graphWidget_Base->removeToolButton(type);
+    return m_graphWidget->removeToolButton(type);
 }
 
 void VisionGraph::addToolButton(QToolButton *btn)
 {
-    m_graphWidget_Base->addToolButton(btn);
+    m_graphWidget->addToolButton(btn);
 }
 
 void VisionGraph::removeToolBarInfoWidget()
 {
-    m_graphWidget_Base->removeToolBarInfoWidget();
+    m_graphWidget->removeToolBarInfoWidget();
 }
 
 void VisionGraph::addToolFrame()
@@ -276,47 +276,47 @@ void VisionGraph::addToolFrame()
 
 void VisionGraph::setViewRegion_Size(qreal w, qreal h)
 {
-    m_graphWidget_Base->setViewRegion_Size(w,h);
+    m_graphWidget->setViewRegion_Size(w,h);
 }
 
 void VisionGraph::setViewRegion_Visible(bool bVisible)
 {
-    m_graphWidget_Base->setViewRegion_Visible(bVisible);
+    m_graphWidget->setViewRegion_Visible(bVisible);
 }
 
 void VisionGraph::setViewRegion_Color(const QColor &color)
 {
-    m_graphWidget_Base->setViewRegion_Color(color);
+    m_graphWidget->setViewRegion_Color(color);
 }
 
 QImage VisionGraph::getBkgImg()
 {
     QImage image;
-    image = m_graphWidget_Base->getBkgImg();
+    image = m_graphWidget->getBkgImg();
     return image;
 }
 
 void VisionGraph::saveBkgImg(QString path)
 {
-    m_graphWidget_Base->saveBkgImg(path);
+    m_graphWidget->saveBkgImg(path);
 }
 
 void VisionGraph::removeItem(VisionItem *item)
 {
-    m_graphWidget_Base->removeItem(item);
+    m_graphWidget->removeItem(item);
 }
 
 void VisionGraph::setMousePaintSize(qreal qi)
 {
-    m_graphWidget_Base->setMousePaintSize(qi);
+    m_graphWidget->setMousePaintSize(qi);
 }
 
 void VisionGraph::setView_Zoom(qreal qZoom)
 {
-    m_graphWidget_Base->setView_Zoom(qZoom);
+    m_graphWidget->setView_Zoom(qZoom);
 }
 
 void VisionGraph::setViewType(ViewType type)
 {
-    m_graphWidget_Base->setViewType(type);
+    m_graphWidget->setViewType(type);
 }

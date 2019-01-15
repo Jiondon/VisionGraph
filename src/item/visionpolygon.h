@@ -21,7 +21,7 @@ class VISIONGRAPHSHARED_EXPORT VisionPolygon : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionPolygon(bool close = true,bool edit = true,VisionItem *parent = 0);
+    explicit VisionPolygon(bool close = true,bool edit = true,QColor color = QColor(255,0,0),VisionItem *parent = 0);
     ~VisionPolygon();
 
     /**

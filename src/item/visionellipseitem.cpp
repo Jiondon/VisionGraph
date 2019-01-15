@@ -9,7 +9,7 @@
 
 #define pi 3.1415926
 
-VisionEllipseItem::VisionEllipseItem(bool edit, bool rotation, VisionItem *parent):VisionItem(parent)
+VisionEllipseItem::VisionEllipseItem(bool edit, bool rotation, QColor color, VisionItem *parent):VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;

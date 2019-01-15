@@ -4565,7 +4565,6 @@ tmp\release\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\Q
 		src\visiongraphwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
-		src\visiongraph_base.h \
 		src\visiongraphtool.h \
 		src\visiongraph_global.h \
 		src\item\visiongraphscene.h \
@@ -9658,7 +9657,6 @@ tmp\release\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		src/visiongraphwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
-		src/visiongraph_base.h \
 		src/visiongraphtool.h \
 		src/visiongraph_global.h \
 		src/item/visiongraphscene.h \

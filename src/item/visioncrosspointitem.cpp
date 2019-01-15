@@ -6,7 +6,7 @@
 
 #include "../control/color.h"
 
-VisionCrossPointItem::VisionCrossPointItem(bool edit, VisionItem *parent) : VisionItem(parent)
+VisionCrossPointItem::VisionCrossPointItem(bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;

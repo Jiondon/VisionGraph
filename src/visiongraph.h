@@ -36,7 +36,7 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    VisionRectItem *addRect(QRectF rf, bool bEdit = true,bool bRotation = true, QColor color = QColor(255,255,255));
+    VisionRectItem *addRect(QRectF rf, bool bEdit = true,bool bRotation = true, QColor color = QColor(255,0,0));
 
 
     /**
@@ -62,7 +62,7 @@ public:
     /**
      * @brief       在scene中添加CrossPoint  不可编辑
      */
-    VisionCrossPointItem* _addPoint(QPointF pointF,QColor color = QColor(255,255,255));
+    VisionCrossPointItem* _addPoint(QPointF pointF,bool edit = false,QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个arrow
@@ -73,45 +73,45 @@ public:
     /**
      * @brief       在scene中添加链
      */
-    VisionChainItem* _addChain(QList<QPointF> lstP,QColor color = QColor(255,255,255));
+    VisionChainItem* _addChain(QList<QPointF> lstP, bool bClosed = false, bool bEdit = false,QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    VisionEllipseItem* addEllipse(QRectF rf,bool bEdit = true, bool bRotation = true, QColor color = QColor(255,255,255));
+    VisionEllipseItem* addEllipse(QRectF rf,bool bEdit = true, bool bRotation = true, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    VisionLineItem* addLine(QLine line, bool bEdit = true, QColor color = QColor(255,255,255));
+    VisionLineItem* addLine(QLine line, bool bEdit = true, QColor color = QColor(255,0,0));
 
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    void addLines(QList<QLine> lstLine,QColor color = QColor(255,255,255));
+    void addLines(QList<QLine> lstLine,QColor color = QColor(255,0,0));
 
 
     /**
      * @brief       添加多边形
      * @param       点的集合，点的集合一次连接
      */
-    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, bool bEdit = false, QColor color = QColor(255,255,255));
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, bool bEdit = false, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个点
      * @param       具体方法未实现
      */
-    VisionCrossPointItem* addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,255,255));
+    VisionCrossPointItem* addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个链
      * @param
      */
-    VisionChainItem *addChain(QList<QPointF> lstP, bool close = false,bool edit = true, QColor color = QColor(255,255,255));
+    VisionChainItem *addChain(QList<QPointF> lstP, bool close = false,bool edit = true, QColor color = QColor(255,0,0));
 
     /**
      * @brief       获取当前绘制在view的区域  region版本
@@ -339,7 +339,7 @@ protected:
 
 
 private:
-    VisionGraph_ *m_graphWidget_Base = nullptr;
+    VisionGraph_ *m_graphWidget = nullptr;
 };
 
 #endif // VISIONGRAPH_H

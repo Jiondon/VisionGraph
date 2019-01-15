@@ -1,7 +1,7 @@
 ﻿#include "visionpoint.h"
 #include "../control/color.h"
 
-VisionPoint::VisionPoint(VisionItem *parent) : VisionItem(parent)
+VisionPoint::VisionPoint(QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
