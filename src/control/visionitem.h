@@ -67,15 +67,14 @@ public:
      * @param       QString
      */
      void setType(ItemType type){
-        m_type = type;
-    }
+         m_type = type;
+     }
 
      /**
       * @brief       获取图形的类型
       * @param       QString
       */
-    ItemType getType()
-    {
+    ItemType getType(){
         return m_type;
     }
 
@@ -83,8 +82,9 @@ public:
      * @brief       设置item的状态
      * @param       bool
      */
-    void setSelectedStatus(bool selectedStatus){
-        m_bSelectedStatus = selectedStatus;
+    void setSelectedStatus(bool bSelected){
+        setSelected(bSelected);
+        m_bSelected = bSelected;
     }
 
 
@@ -93,9 +93,8 @@ public:
      * @param       bool
      */
     bool getSelectedStatus(){
-        return m_bSelectedStatus;
+        return m_bSelected;
     }
-
 
     /**
      * @brief       设置item的编辑状态
@@ -118,40 +117,30 @@ public:
      * @param       bool
      */
     void setItemEnable(bool enable){
-        setEnabled(enable);
+        this->setEnabled(enable);
     }
 
     /**
      * @brief       获取item的Enable使能
      * @param       bool
      */
-    bool getEnable(){
+    bool getItemEnable(){
         return this->isEnabled();
     }
 
-    /**
-     * @brief       获取item的painterPath,
-     * @param       item绘制的时候。需要生成对应的绘制路径（点的集合）PainterPath
-     */
-    QPainterPath getPainterPath(){
-        return m_path;
-    }
-
-    QPainterPath m_path;    //暂时无用
-
+public:
+    //虚函数
     /**
      * @brief       判断点（x,y）是否在该item内
      * @param       bool
      */
-    virtual bool getPosInArea(qreal x,qreal y);
+    virtual bool getPosInArea(qreal x,qreal y) = 0;
 
     /**
      * @brief       获取item的顶点--（圆（椭圆）的顶点为外切矩形）
      * @param       QVector<QPointF>
      */
     virtual QVector<QPointF> getPoints() = 0;
-
-    ItemType m_type = ItemType::Paint_Rect;
 
 signals:
     void signal_clicked(VisionItem* item,bool selected,bool bIn = true,qreal x=0,qreal y=0);
@@ -182,10 +171,11 @@ signals:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-private:
-    bool m_bSelectedStatus = false;  //未选中状态
+public:
+    ItemType m_type;
     bool m_bEdit = false;
-    bool m_bInArea = false;
+    bool m_bSelected = false;
+
 };
 
 #endif // VISIONITEM_H

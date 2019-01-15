@@ -9,7 +9,7 @@
 
 #define pi 3.1415926
 
-VisionRectItem::VisionRectItem(bool rotation, VisionItem *parent):VisionItem(parent)
+VisionRectItem::VisionRectItem(bool edit, bool rotation, VisionItem *parent):VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -21,13 +21,17 @@ VisionRectItem::VisionRectItem(bool rotation, VisionItem *parent):VisionItem(par
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
-    m_type = ItemType::Paint_Rect;
     setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren,true);
-//    this->setOpacity(0);
     setFlag(QGraphicsItem::ItemClipsChildrenToShape);
 
-    setSelected(true);
-    m_bEdit = true;
+    m_type = ItemType::Paint_Rect;
+
+    m_bEdit = edit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
 }
 
 void VisionRectItem::setRect(qreal x, qreal y, qreal width, qreal height)
@@ -46,7 +50,7 @@ void VisionRectItem::setRect(qreal x, qreal y, qreal width, qreal height)
 
     initItem();
 
-    if(m_bRotation){
+    if(m_bRotation && m_bEdit){
         arrowsItem = new VisionArrows_Rotate(m_width/2,height/2,30,10,QColor(255,0,0),this);
         connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
@@ -69,7 +73,7 @@ void VisionRectItem::setRect(QRectF rf)
 
     initItem();
 
-    if(m_bRotation){
+    if(m_bRotation && m_bEdit){
         arrowsItem = new VisionArrows_Rotate(m_width/2,m_height/2,30,10,QColor(255,0,0),this);
         connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
@@ -88,8 +92,7 @@ QPainterPath VisionRectItem::getPainterPath()
     QPolygonF polygonF = QPolygonF(vec_point);
     path.addPolygon(polygonF);
     path.closeSubpath();
-    m_path = path;
-    return m_path;
+    return path;
 }
 
 bool VisionRectItem::getPosInArea(qreal x, qreal y)
@@ -140,7 +143,6 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    //item pos ()
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
@@ -157,16 +159,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     points1.append(m_pointF2-originPointF);
     points1.append(m_pointF3-originPointF);
     points1.append(m_pointF4-originPointF);
-//    painter->drawLine(m_pointF1-originPointF,m_pointF2-originPointF);
-//    painter->drawLine(m_pointF2-originPointF,m_pointF3-originPointF);
-//    painter->drawLine(m_pointF3-originPointF,m_pointF4-originPointF);
-//    painter->drawLine(m_pointF4-originPointF,m_pointF1-originPointF);
     painter->drawPolygon(points1);
-//    painter->drawLines({m_pointF1-originPointF,m_pointF2-originPointF,
-//                        m_pointF2-originPointF,m_pointF3-originPointF,
-//                        m_pointF3-originPointF,m_pointF4-originPointF,
-//                        m_pointF4-originPointF,m_pointF1-originPointF});
-
 
     QPainterPath path;
     QVector<QPointF> points;
@@ -187,24 +180,25 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
             m_lstRect[i]->setVisible(true);
         }
 
-        if(!m_bEdit){
-            emit selectedChanged(true,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
-        }
+        emit selectedChanged(true,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
 
-        m_bEdit = true;
-        setEdit(m_bEdit);
+        m_bSelected = true;
+        setSelectedStatus(m_bSelected);
     }else{
 
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(false);
         }
 
+        //通知view将该item转换为区域 ---
+        //由选中状态变为非选中状态，由于，构造函数默认为选中状态，故当item为未选中状态，则必定是由选中状态变为未选中状态，直接传输信号通知
+        //前提是item是可编辑的
         if(m_bEdit){
             emit selectedChanged(false,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
-        m_bEdit = false;
-        setEdit(m_bEdit);
+        m_bSelected = false;
+        setSelectedStatus(m_bSelected);
 
         if(directCursor != arrowsUp){
             this->scene()->views().at(0)->setCursor(viewCursor);
@@ -235,10 +229,11 @@ QRectF VisionRectItem::boundingRect() const
 
 void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-//    qDebug() << "bbb";
     //鼠标左键
     QGraphicsItem::mousePressEvent(event);
 
+    if(!m_bEdit)
+        return;
 
     //说明鼠标处于小编辑框，忽略该事件
     if(m_iIndex != -1)
@@ -275,7 +270,7 @@ void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //得到四个直线方程，然后相对的两条直线之间的距离是固定的，点在矩形的内部，则满足 到相对的两条直线的距离是固定的分别是h和w
     // <和+1是为了防止出现四舍五入导致数据不能绝对的等于，-- 理论上四舍五入不会出现这样的情况，但是为了保险起见,+5考虑到编辑状态下的小边框
     if(!(h1+h2 <= m_height+10+2 && h3+h4 <= m_width+10+2)){
-        setSelected(false);
+        setSelectedStatus(false);
         this->scene()->update();
 //        qDebug()<<"out of range";
         return;
@@ -289,7 +284,7 @@ void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         } else if (event->modifiers() == Qt::AltModifier) {
 
         } else {
-            setSelected(true);
+            setSelectedStatus(true);
             qDebug() << "Custom item left clicked.";
             QGraphicsItem::mousePressEvent(event);
             event->accept();
@@ -305,6 +300,9 @@ void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+
+    if(!m_bEdit)
+        return;
 
     //说明鼠标处于小编辑框，忽略该事件
     if(m_iIndex != -1)
@@ -344,12 +342,10 @@ void VisionRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-//    qDebug()<<event->scenePos();
+    if(!m_bEdit)
+        return;
+
     if(directCursor != arrowsUp){
-        if(!m_bEdit){
-            qDebug()<<"is not edit";
-            return;
-        }
         //计算两次move的鼠标的差值，
         //计算两次move的鼠标的差值，
         QPointF curPoint = event->scenePos();
@@ -491,7 +487,6 @@ void VisionRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             else{
                 qDebug()<<"error directCursor";
             }
-
 
             if(m_width < 1)
                 m_width = 1;

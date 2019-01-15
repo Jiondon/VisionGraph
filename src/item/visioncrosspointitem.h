@@ -51,6 +51,7 @@ public:
      */
     QVector<QPointF> getPoints();
 
+
 protected:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -64,8 +65,6 @@ signals:
 
 private:
     QPointF m_pointF;
-
-    bool m_bEdit = false;
 
     QColor m_borderColor;
     QColor m_brushColor;

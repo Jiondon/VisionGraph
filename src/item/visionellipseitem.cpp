@@ -9,7 +9,7 @@
 
 #define pi 3.1415926
 
-VisionEllipseItem::VisionEllipseItem(bool rotation, VisionItem *parent):VisionItem(parent)
+VisionEllipseItem::VisionEllipseItem(bool edit, bool rotation, VisionItem *parent):VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -23,9 +23,12 @@ VisionEllipseItem::VisionEllipseItem(bool rotation, VisionItem *parent):VisionIt
     setFlag(QGraphicsItem::ItemIsSelectable,true);
     m_type = ItemType::Paint_EllipseItem;
 
-    setSelected(true);
-    setEdit(true);
-    m_bEdit = true;
+    m_bEdit = edit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
 }
 
 void VisionEllipseItem::setRect(qreal x, qreal y, qreal width, qreal height)
@@ -44,7 +47,7 @@ void VisionEllipseItem::setRect(qreal x, qreal y, qreal width, qreal height)
 
     initItem();
 
-    if(m_bRotation){
+    if(m_bRotation && m_bEdit){
         arrowsItem = new VisionArrows_Rotate(m_width/2,m_height/2,30,10,QColor(255,0,0),this);
         QObject::connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         QObject::connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
@@ -67,7 +70,7 @@ void VisionEllipseItem::setRect(QRectF rf)
 
     initItem();
 
-    if(m_bRotation){
+    if(m_bRotation && m_bEdit){
         arrowsItem = new VisionArrows_Rotate(m_width/2,m_height/2,30,10,QColor(255,0,0),this);
         connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
@@ -79,8 +82,7 @@ QPainterPath VisionEllipseItem::getPainterPath()
 {
     QPainterPath path;
     path.addEllipse(m_x,m_y,m_width,m_height);
-    m_path = path;
-    return m_path;
+    return path;
 }
 
 bool VisionEllipseItem::getPosInArea(qreal x, qreal y)
@@ -122,6 +124,8 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
+
+    //保证在非编辑模式下，不会执行该语句---构造函数中做了setSelected(false)处理
     if(option->state & QStyle::State_Selected){
 
         painter->setPen(QPen(QBrush(m_selectedColor),0));
@@ -135,12 +139,11 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             }
         }
 
-        if(!m_bEdit){
-            emit selectedChanged(true,this,ItemType::Paint_EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
-        }
+        //用处不大，主要考虑对应关系
+        emit selectedChanged(true,this,ItemType::Paint_EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
 
-        m_bEdit = true;
-        setEdit(m_bEdit);
+        m_bSelected = true;
+        setSelectedStatus(m_bSelected);
     }else{
 
         painter->setPen(QPen(QBrush(m_borderColor),0));
@@ -149,12 +152,15 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             m_lstRect[i]->setVisible(false);
         }
 
+        //通知view将该item转换为区域 ---
+        //由选中状态变为非选中状态，由于，构造函数默认为选中状态，故当item为未选中状态，则必定是由选中状态变为未选中状态，直接传输信号通知
+        //前提是item是可编辑的
         if(m_bEdit){
             emit selectedChanged(false,this,ItemType::Paint_EllipseItem,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
         }
 
-        m_bEdit = false;
-        setEdit(m_bEdit);
+        m_bSelected = false;
+        setSelectedStatus(m_bSelected);
 
         if(directCursor != arrowsUp){
             this->scene()->views().at(0)->setCursor(viewCursor);
@@ -162,55 +168,35 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         }
     }
 
-
-
     painter->setBrush(m_brushColor);
 
     painter->translate(m_width/2,m_height/2);
     painter->rotate(m_angle);
     painter->drawEllipse(QRectF(-m_width/2,-m_height/2,m_width,m_height));
-    //item pos ()
 
+    //item pos ()
     QVector<QPointF> points;
     points.append(m_pointF1);
     points.append(m_pointF2);
     points.append(m_pointF3);
     points.append(m_pointF4);
-
-//    QPolygonF poly(points);
-//    QRectF rf1(-m_width/2,-m_height/2,m_width,m_height);
-//    rf1.moveTopLeft(m_pointF1);
-//    rf1.moveTopRight(m_pointF2);
-//    rf1.moveBottomRight(m_pointF3);
-//    rf1.moveBottomLeft(m_pointF4);
-
-//    painter->setPen(QPen(QBrush(QColor(0,0,0)),0));
-//    painter->rotate(0);
-//    painter->drawEllipse(rf1);
-
-//    QPainterPath path;
-//    path.addEllipse(rf1);
-
-//    path.addEllipse(QPointF((m_pointF1.x()+m_pointF3.x())/2,(m_pointF1.y()+m_pointF3.y())/2),m_width/2,m_height/2);
-//    emit signal_painterInfo(EllipseItem,path);
-
 }
 
 QRectF VisionEllipseItem::boundingRect() const
 {
     //为方便旋转后的区域变化问题，临时的将有效区域设置为圆（直径为矩形的对角线）
     qreal r = sqrt((m_width)*(m_width)+(m_height)*(m_height));
-//    QRectF rf = QRectF(-5-10+(m_width/2-r/2)-m_width/2,-5-10+(m_height/2-r/2)-m_height/2,r+20,r+20);
     QRectF rf = QRectF(-5-10,-5-10,r+20,r+20);
     return rf;
 }
 
 void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "aaa";
-
     //鼠标左键
     QGraphicsItem::mousePressEvent(event);
+
+    if(!m_bEdit)
+        return;
 
     if(m_iIndex != -1)
         return;
@@ -228,7 +214,7 @@ void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qreal l = sqrt(dx1*dx1+dy1*dy1)+sqrt(dx2*dx2+dy2*dy2);
     if(l <= m_height || l <= m_width){
     }else{
-        setSelected(false);
+        setSelectedStatus(false);
         this->scene()->update();
         return;
     }
@@ -241,7 +227,7 @@ void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         } else if (event->modifiers() == Qt::AltModifier) {
 
         } else {
-            setSelected(true);
+            setSelectedStatus(true);
             qDebug() << "Custom item left clicked.";
             QGraphicsItem::mousePressEvent(event);
             event->accept();
@@ -257,6 +243,9 @@ void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionEllipseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     if(m_iIndex != -1)
         return;
 
@@ -281,17 +270,16 @@ void VisionEllipseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     if(directCursor != arrowsUp){
-        if(!m_bEdit){
-            return;
-        }
         //计算两次move的鼠标的差值，
         //计算两次move的鼠标的差值，
         QPointF curPoint = event->scenePos();
         QPointF disPoint = curPoint - lastPoint;
         lastPoint = curPoint;
         QGraphicsItem::mouseMoveEvent(event);
-
 
         if(directCursor == normal_rect){
             m_pointF1 = m_pointF1+disPoint;
@@ -300,7 +288,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             m_pointF4 = m_pointF4+disPoint;
             m_x = m_x + disPoint.x();m_y = m_y + disPoint.y();
         }else{
-
             //当存在旋转的时候，计算三条线的交点，
             //获取到线的斜率
 //            A = Y2 - Y1
@@ -314,7 +301,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             qreal a2 = (m_pointF4.y()-m_pointF3.y());
             qreal b2 = (m_pointF3.x()-m_pointF4.x());
             qreal c2 = m_pointF4.x()*m_pointF3.y() - m_pointF3.x()*m_pointF4.y();
-
 
             qreal a3 = (m_pointF3.y()-m_pointF2.y());
             qreal b3 = (m_pointF2.x()-m_pointF3.x());
@@ -350,35 +336,35 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             if(directCursor == top_rect){
                 //top point
                 //修改点1和点2的坐标,l4 l3
+
                 //点1坐标  la-l4
                 m_pointF1 = QPointF((B1*c4-b4*C1)/(A1*b4-a4*B1),-(A1*c4-a4*C1)/(A1*b4-a4*B1));
                 //点2坐标  la-l3
                 m_pointF2 = QPointF((B1*c3-b3*C1)/(A1*b3-a3*B1),-(A1*c3-a3*C1)/(A1*b3-a3*B1));
-
             }else if(directCursor == right_rect){
                 //right point
                 //修改点2和点3的坐标 l1 l2
+
                 //点2坐标  lb-l1
                 m_pointF2 = QPointF((B2*c1-b1*C2)/(A2*b1-a1*B2),-(A2*c1-a1*C2)/(A2*b1-a1*B2));
                 //点3坐标  lb-l2
                 m_pointF3 = QPointF((B2*c2-b2*C2)/(A2*b2-a2*B2),-(A2*c2-a2*C2)/(A2*b2-a2*B2));
-
             }else if(directCursor == bottom_rect){
                 //bottom point
                 //修改点3和点4的坐标 l3 l4
+
                 //点4坐标  la-l4
                 m_pointF4 = QPointF((B1*c4-b4*C1)/(A1*b4-a4*B1),-(A1*c4-a4*C1)/(A1*b4-a4*B1));
                 //点3坐标  la-l3
                 m_pointF3 = QPointF((B1*c3-b3*C1)/(A1*b3-a3*B1),-(A1*c3-a3*C1)/(A1*b3-a3*B1));
-
             }else if(directCursor == left_rect){
                 //left point
                 //修改点4和点1的坐标 l1 l2
+
                 //点1坐标  lb-l1
                 m_pointF1 = QPointF((B2*c1-b1*C2)/(A2*b1-a1*B2),-(A2*c1-a1*C2)/(A2*b1-a1*B2));
                 //点4坐标  lb-l2
                 m_pointF4 = QPointF((B2*c2-b2*C2)/(A2*b2-a2*B2),-(A2*c2-a2*C2)/(A2*b2-a2*B2));
-
             }else if(directCursor == left_Top_rect){
                 //left top
                 //修改4，1，2的坐标
@@ -389,7 +375,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                 m_pointF4 = QPointF((B2*c2-b2*C2)/(A2*b2-a2*B2),-(A2*c2-a2*C2)/(A2*b2-a2*B2));
                 //点2坐标  la-l3
                 m_pointF2 = QPointF((B1*c3-b3*C1)/(A1*b3-a3*B1),-(A1*c3-a3*C1)/(A1*b3-a3*B1));
-
             } else if(directCursor == left_bottom_rect){
                 //left bottom
                 //修改4，1，3的坐标
@@ -400,7 +385,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                 m_pointF1 = QPointF((B2*c1-b1*C2)/(A2*b1-a1*B2),-(A2*c1-a1*C2)/(A2*b1-a1*B2));
                 //点3坐标  la-l3
                 m_pointF3 = QPointF((B1*c3-b3*C1)/(A1*b3-a3*B1),-(A1*c3-a3*C1)/(A1*b3-a3*B1));
-
             } else if(directCursor == right_top_rect){
                 //right top
                 //修改1,2,3的坐标
@@ -411,7 +395,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                 m_pointF1 = QPointF((B1*c4-b4*C1)/(A1*b4-a4*B1),-(A1*c4-a4*C1)/(A1*b4-a4*B1));
                 //点3坐标  lb-l2
                 m_pointF3 = QPointF((B2*c2-b2*C2)/(A2*b2-a2*B2),-(A2*c2-a2*C2)/(A2*b2-a2*B2));
-
             }else if(directCursor == right_bottom_rect){
                 //right bottom
                 //修改2,3,4的坐标
@@ -427,7 +410,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                 qDebug()<<"error directCursor";
             }
 
-
             if(m_width < 1)
                 m_width = 1;
             if(m_height < 1)
@@ -439,14 +421,6 @@ void VisionEllipseItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         updateItem();
     }else{
 //        qDebug()<<"arrow up";
-
-        //角度计算有瑕疵，角度的变化不能完全跟随鼠标，可能是应为采用的pos坐标
-        /*
-        qreal x = event->pos().x();
-        qreal y = event->pos().y();
-        qreal z = sqrt(x*x+y*y);
-        */
-
         qreal x = event->scenePos().x()-(m_x+m_width/2);
         qreal y = event->scenePos().y()-(m_y+m_height/2);
         qreal z = sqrt(x*x+y*y);

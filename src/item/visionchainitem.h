@@ -57,6 +57,14 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    /**
+     * @brief       判断点（x,y）是否在该item内
+     * @param       bool
+     */
+    bool getPosInArea(qreal x,qreal y){
+        return true;
+    }
+
 signals:
     void signalChanged(VisionItem* item);
 
@@ -86,11 +94,9 @@ private:
     QList<qreal> m_lst_y;
 
 
-    bool m_selected = false;  //选中状态 false-未选中 true--选中
     int m_iIndex = -1; //标记链被选中后的小矩形框的index （-1表示，鼠标不在矩形框中，其他数值表示鼠标在对应的index小矩形框上）
 
-    bool m_bEdit = true;   //和基类的edit区别开，
-    bool m_bClosed = false;     //是否是封闭
+    bool m_bClosed = false;
 
     QList<QPointF> m_lstPointF; //添加的点的集合
     QList<QPointF> m_lstChainPoint;  //链的节点
@@ -103,6 +109,7 @@ private:
     QColor m_selectedColor;
 
     QColor m_pointFColor;  //链上的点的颜色
+    ItemType m_type;
 
 private slots:
     /**

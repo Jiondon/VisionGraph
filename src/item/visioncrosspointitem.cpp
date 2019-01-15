@@ -12,6 +12,11 @@ VisionCrossPointItem::VisionCrossPointItem(bool edit, VisionItem *parent) : Visi
     m_brushColor = brushColor;
     m_selectedColor = m_selectedColor;
     m_bEdit = edit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
     setAcceptHoverEvents(true);
     m_type = ItemType::Paint_CrossPoint;
 }
@@ -76,10 +81,10 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     if(option->state & QStyle::State_Selected){
         painter->setPen(QPen(QBrush(m_selectedColor),0));
-        setEdit(true);
+        setSelectedStatus(true);
     }else{
         painter->setPen(QPen(QBrush(m_borderColor),0));
-        setEdit(false);
+        setSelectedStatus(false);
     }
 
 //    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
@@ -95,10 +100,10 @@ void VisionCrossPointItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(boundingRect().contains(event->scenePos())){
         qDebug()<<"in area";
-        setSelected(true);
+        setSelectedStatus(true);
     }else{
         qDebug()<<"out area";
-        setSelected(false);
+        setSelectedStatus(false);
     }
 
     this->scene()->update();

@@ -405,7 +405,7 @@ VisionRectItem *VisionGraph_Item::addRect(QRectF rf, bool bEdit, QColor color)
         return NULL;
 
     if(bEdit){
-        VisionRectItem* item = new VisionRectItem(true);
+        VisionRectItem* item = new VisionRectItem(bEdit,true);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
             m_curVisionItem = nullptr;

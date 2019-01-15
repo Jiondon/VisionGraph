@@ -5,7 +5,7 @@
 #include <QDebug>
 #include "../control/color.h"
 
-VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
+VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bEdit, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -25,14 +25,18 @@ VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, qreal p
     m_penColor = penColor;
     m_penWidth = penWidth;
 
-    setEdit(true);
-
+    m_bEdit = bEdit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
 
     setItemPos();
     initMiniRect();
 }
 
-VisionRing::VisionRing(QRectF rf1, QRectF rf2, qreal penWidth, QColor penColor, QGraphicsItem *parent)
+VisionRing::VisionRing(QRectF rf1, QRectF rf2, bool bEdit, qreal penWidth, QColor penColor, QGraphicsItem *parent)
 {
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);
@@ -82,7 +86,6 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-//    qDebug()<<"VisionRingItem paint";
 //    qDebug()<<m_width<<m_height<<m_r1<<m_r2;
     painter->setPen(QPen(m_borderColor,0));
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r1,m_r1);
@@ -177,6 +180,9 @@ QRectF VisionRing::boundingRect() const
 void VisionRing::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mouseMoveEvent(event);
+    if(!m_bEdit)
+        return;
+
     qreal qx = event->scenePos().x()-m_centerX;
     qreal qy = event->scenePos().y()-m_centerY;
     qreal qr = sqrt(qx*qx+qy*qy);
@@ -207,6 +213,9 @@ void VisionRing::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void VisionRing::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
+    if(!m_bEdit)
+        return;
+
     qreal qx = event->scenePos().x()-m_centerX;
     qreal qy = event->scenePos().y()-m_centerY;
     qreal qr = sqrt(qx*qx+qy*qy);
@@ -215,7 +224,7 @@ void VisionRing::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(qr > m_r1+5 && qr > m_r2+5){
         m_bSelected1 = false;
         m_bSelected2 = false;
-        setSelected(false);
+        setSelectedStatus(false);
         this->scene()->update();
         return;
     }

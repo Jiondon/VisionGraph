@@ -18,12 +18,16 @@
  * @note        graphRegion --- region版本（绘制item后，item失焦后，会通过算法生成区域，此过程不可逆）,需要用户交互（绘制需要用户进行操作）
  * @note        graphItem_self --- item版本（绘制item后，在整个过程中都是可调节的）,不要用户交互，主要是代码中直接调用放开的api来进行绘制
  * @note        graphItem_unSelf --- item版本，需要用户交互（绘制需要用户进行操作）
+ * @note        graphChain --- Chain版本，需要用户交互
+ * @note        graphItem_Fitting --- Fitting版本，需要用户交互，绘制item后，会根据鼠标拖动形成一个区域
+
  */
 enum GraphType{
     graphRegion,
     graphItem_self,
     graphItem_unSelf,
-    graphChain
+    graphChain,
+    graphItem_Fitting
 };
 
 

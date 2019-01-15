@@ -15,6 +15,11 @@ VisionChainItem::VisionChainItem(bool bClosed, bool edit, QObject *parent) : QOb
     m_pointFColor = borderColor;
     m_lstChainPoint.clear();
     m_bEdit = edit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
     m_bClosed = bClosed;
 }
 
@@ -177,17 +182,20 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     }
 
 
+    if(!m_bEdit)
+        return;
+
     //绘制矩形框  -- 每个点绑定一个矩形框
     if(option->state & QStyle::State_Selected){
         for(int i=0;i<m_lstMiniRect.count();i++){
             m_lstMiniRect[i]->show();
         }
-        m_selected = true;
+        m_bSelected = true;
     }else{
         for(int i=0;i<m_lstMiniRect.count();i++){
             m_lstMiniRect[i]->hide();
         }
-        m_selected = false;
+        m_bSelected = false;
     }
 }
 
@@ -212,7 +220,7 @@ QRectF VisionChainItem::boundingRect() const
 
 void VisionChainItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(m_bEdit && m_selected){
+    if(m_bEdit && m_bSelected){
         QPointF disPoint = event->scenePos() - m_lastPointF;
         if(m_iIndex == -1){
             //整体拖动
@@ -241,9 +249,12 @@ void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VisionChainItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
-    m_selected = true;
 
-    setSelected(true);
+    if(!m_bEdit)
+        return;
+
+    m_bSelected = true;
+    setSelectedStatus(true);
 
 
     m_lastPointF = event->scenePos();

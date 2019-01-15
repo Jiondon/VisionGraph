@@ -1,12 +1,12 @@
 ﻿#include "visionarrow.h"
 #include "../control/color.h"
 
-VisionArrow::VisionArrow(QObject *parent) : QObject(parent)
+VisionArrow::VisionArrow(bool bEdit, QObject *parent) : QObject(parent)
 {
-
     m_borderColor = borderColor;
     m_brushColor = brushColor;
     m_selectedColor = m_selectedColor;
+    m_bEdit = bEdit;
 }
 
 void VisionArrow::setPointF(QPointF pointF)

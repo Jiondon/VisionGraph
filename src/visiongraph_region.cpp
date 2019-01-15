@@ -402,7 +402,7 @@ void VisionGraph_Region::initLayout(ToolButtonDirection toolButtonDirect)
 VisionRectItem *VisionGraph_Region::addRect(QRectF rf, bool bEdit, QColor color)
 {
     if(bEdit){
-        VisionRectItem* item = new VisionRectItem(true);
+        VisionRectItem* item = new VisionRectItem(bEdit,true);
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){

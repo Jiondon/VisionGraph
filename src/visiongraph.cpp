@@ -48,9 +48,9 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 }
 
 
-VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit, QColor color)
+VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit,bool bRotation, QColor color)
 {
-    return m_graphWidget_Base->addRect(rf, bEdit);
+    return m_graphWidget_Base->addRect(rf,bEdit,bRotation);
 }
 
 QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
@@ -78,9 +78,9 @@ VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, QColor color)
     return m_graphWidget_Base->_addPoint(pointF);
 }
 
-VisionArrow *VisionGraph::_addArrow(QPointF pointF, QColor color)
+VisionArrow *VisionGraph::_addArrow(QPointF pointF,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->_addArrow(pointF,color);
+    return m_graphWidget_Base->_addArrow(pointF,bEdit,color);
 }
 
 VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, QColor color)
@@ -88,14 +88,14 @@ VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, QColor color)
     return m_graphWidget_Base->_addChain(lstP);
 }
 
-VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, QColor color)
+VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, QColor color)
 {
-    return m_graphWidget_Base->addEllipse(rf);
+    return m_graphWidget_Base->addEllipse(rf,bEdit,bRotation);
 }
 
-VisionLineItem *VisionGraph::addLine(QLine line, QColor color)
+VisionLineItem *VisionGraph::addLine(QLine line,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addLine(line);
+    return m_graphWidget_Base->addLine(line,bEdit,color);
 }
 
 void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
@@ -103,19 +103,19 @@ void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
     m_graphWidget_Base->addLines(lstLine);
 }
 
-VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF, QColor color)
+VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addPolygon(vecPointF);
+    return m_graphWidget_Base->addPolygon(vecPointF,bClose,bEdit,color);
 }
 
-VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF, QColor color)
+VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit, QColor color)
 {
-    return m_graphWidget_Base->addPoint(pointF);
+    return m_graphWidget_Base->addPoint(pointF,bEdit);
 }
 
-VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close, QColor color)
+VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close,bool edit, QColor color)
 {
-    return m_graphWidget_Base->addChain(lstP,close,true,color);
+    return m_graphWidget_Base->addChain(lstP,close,edit,color);
 }
 
 XVRegion* VisionGraph::getRegion()

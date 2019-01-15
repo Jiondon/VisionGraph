@@ -2,7 +2,7 @@
 #include <QDebug>
 #include "../control/color.h"
 
-VisionPolygon::VisionPolygon(bool close, VisionItem *parent) : VisionItem(parent)
+VisionPolygon::VisionPolygon(bool close, bool edit, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -12,9 +12,13 @@ VisionPolygon::VisionPolygon(bool close, VisionItem *parent) : VisionItem(parent
     setFlag(QGraphicsItem::ItemIsMovable,true);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
     m_type = ItemType::Paint_Poly;
-    m_bEdit = true;
+    m_bEdit = edit;
+    if(m_bEdit){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
     m_bClose = close;
-    setSelected(true);
 }
 
 VisionPolygon::~VisionPolygon()
@@ -69,28 +73,30 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         painter->setPen(QPen(QBrush(m_selectedColor),0));
 
         for(int i=0;i<m_lstRect.count();i++){
-            m_lstRect[i]->setVisible(true);
+            m_lstRect[i]->show();
         }
 
-        if(!m_bEdit){
-            emit selectedChanged(true,this,ItemType::Paint_Poly,m_vecPointFs);
-        }
-        m_bEdit = true;
-        setEdit(m_bEdit);
+        emit selectedChanged(true,this,ItemType::Paint_Poly,m_vecPointFs);
+
+        m_bSelected = true;
+        setSelectedStatus(m_bSelected);
 
     }else{
-
-        painter->setPen(QPen(QBrush(borderColor),0));
+        qDebug()<<"......................................."<<m_bEdit;
+        painter->setPen(QPen(QBrush(m_borderColor),0));
 
         for(int i=0;i<m_lstRect.count();i++){
-            m_lstRect[i]->setVisible(false);
+            m_lstRect[i]->hide();
         }
+
+        //通知view将该item转换为区域 ---
+        //由选中状态变为非选中状态，由于，构造函数默认为选中状态，故当item为未选中状态，则必定是由选中状态变为未选中状态，直接传输信号通知
+        //前提是item是可编辑的
         if(m_bEdit){
             emit selectedChanged(false,this,ItemType::Paint_Poly,m_vecPointFs);
         }
-
-        m_bEdit = false;
-        setEdit(m_bEdit);
+        m_bSelected = false;
+        setSelectedStatus(m_bSelected);
     }
 
     if(m_bClose){
@@ -101,7 +107,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     }
 
 
-    if(m_bEdit){
+    if(m_bSelected){
         QPainterPath path;
         path.addPolygon(m_polygonF);
         emit signal_painterInfo(ItemType::Paint_Poly,path);
@@ -120,6 +126,10 @@ QRectF VisionPolygon::boundingRect() const
 void VisionPolygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
+
+    if(!m_bEdit)
+        return;
+
     m_lastPointF = event->scenePos();
 
     //鼠标属于非正常状态--拖动小矩形框，当鼠标在编辑框状态，不处理按下事件，此时只需要处理moveEvent事件即可
@@ -128,9 +138,9 @@ void VisionPolygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(m_polygonF_temp.containsPoint(event->pos(),Qt::OddEvenFill)){
 //        qDebug()<<" mouse press Event : true";
-        setSelected(true);
+        setSelectedStatus(true);
     }else{
-        setSelected(false);
+        setSelectedStatus(false);
 //        qDebug()<<" mouse press Event false";
     }
     this->scene()->update();
@@ -138,6 +148,9 @@ void VisionPolygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionPolygon::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
     if(m_iIndex != -1)
         return;
 
@@ -152,7 +165,6 @@ void VisionPolygon::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionPolygon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-
     if(!m_bEdit)
         return;
 

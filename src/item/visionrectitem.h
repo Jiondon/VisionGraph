@@ -24,7 +24,7 @@ class VISIONGRAPHSHARED_EXPORT VisionRectItem : public VisionItem
     Q_OBJECT
 public:
 
-    VisionRectItem(bool rotation,VisionItem *parent = 0);
+    VisionRectItem(bool edit = false,bool rotation = false,VisionItem *parent = 0);
     /**
      * @brief       设置矩形
      */
@@ -126,7 +126,6 @@ private:
     qreal m_angle = 0;  //旋转的角度
 
     bool m_bCircle = false;
-    bool m_bEdit = false;
 
     QTransform m_transform;
 

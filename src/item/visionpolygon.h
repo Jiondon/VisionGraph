@@ -21,7 +21,7 @@ class VISIONGRAPHSHARED_EXPORT VisionPolygon : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionPolygon(bool close = true,VisionItem *parent = 0);
+    explicit VisionPolygon(bool close = true,bool edit = true,VisionItem *parent = 0);
     ~VisionPolygon();
 
     /**
@@ -80,8 +80,6 @@ private:
     QPolygonF m_polygonF;
     QPolygonF m_polygonF_temp;
 
-
-    bool m_bEdit = false;  //flag 选中未选中
     bool m_bClose = true; //多边形是否封闭变量控制
 
     QColor m_borderColor;

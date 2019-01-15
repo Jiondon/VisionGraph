@@ -25,7 +25,7 @@ public:
      * @param       对line的一些属性进行设置
      * @param       p1 p2 起点和终点 bEdit控制该line是否是可编辑的（起点终点可更改），penWidth penColor画笔的属性
      */
-    explicit VisionLineItem(QPointF p1 = QPointF(0,0),QPointF p2 = QPointF(0,0),bool bEdit = true,qreal penWidth = 0,
+    explicit VisionLineItem(bool bEdit = true,QPointF p1 = QPointF(0,0),QPointF p2 = QPointF(0,0),qreal penWidth = 0,
                             QColor penColor = QColor(0,0,0),VisionItem *parent = 0);
 
     /**
@@ -33,13 +33,6 @@ public:
      * @param       p1 p2 起点和终点
      */
     void setLine(QPointF p1,QPointF p2);
-
-
-    /**
-     * @brief       设置线的编辑属性
-     * @param       bEdit控制该line是否是可编辑的（起点终点可更改）
-     */
-    void setEditStatus(bool edit);
 
     /**
      * @brief       设置画笔宽度
@@ -95,8 +88,6 @@ private:
     QPointF m_pointF2 = QPointF(0,0);
     qreal m_penWidth = 0;
     QColor m_penColor = QColor(0,0,0);
-    bool m_bEditStatus = false;
-    bool m_bSelected = false;
 
     int m_iIndex = -1;
     MiniRect* m_miniRect1 = nullptr;
@@ -108,6 +99,7 @@ private:
     QColor m_borderColor;
     QColor m_brushColor;
     QColor m_selectedColor;
+
 private:
 
     /**

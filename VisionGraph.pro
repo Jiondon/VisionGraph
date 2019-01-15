@@ -61,7 +61,6 @@ SOURCES += src/visiongraph.cpp \
     src/visiongraph_item.cpp \
     src/visiongraph_region.cpp \
     src/visiongraphtool.cpp \
-    src/item/lineitem.cpp \
     src/item/visioncrosspointitem.cpp \
     src/item/visionellipseitem.cpp \
     src/item/visiongraphscene.cpp \
@@ -80,14 +79,14 @@ SOURCES += src/visiongraph.cpp \
     src/item/visionchainitem.cpp \
     src/item/visionarrow.cpp \
     src/visiongraph_base.cpp \
-    src/visiongraph_.cpp
+    src/visiongraph_.cpp \
+    src/item/visionlineitemfitting.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
     src/visiongraph_item.h \
     src/visiongraph_region.h \
     src/visiongraphtool.h \
-    src/item/lineitem.h \
     src/item/visioncrosspointitem.h \
     src/item/visionellipseitem.h \
     src/item/visiongraphscene.h \
@@ -106,7 +105,8 @@ HEADERS += src/visiongraph.h \
     src/item/visionchainitem.h \
     src/item/visionarrow.h \
     src/visiongraph_base.h \
-    src/visiongraph_.h
+    src/visiongraph_.h \
+    src/item/visionlineitemfitting.h
 
 unix {
     target.path = /usr/lib

@@ -4,7 +4,7 @@
 
 #include "../control/color.h"
 
-VisionLineItem::VisionLineItem(QPointF p1, QPointF p2, bool bEdit, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
+VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -13,14 +13,14 @@ VisionLineItem::VisionLineItem(QPointF p1, QPointF p2, bool bEdit, qreal penWidt
     m_pointF1 = p1;m_pointF2 = p2;
     m_penColor = penColor;
     m_penWidth = penWidth;
-    m_bEditStatus = bEdit;
+    m_bEdit = bEdit;
     m_type = ItemType::Paint_Line;
-    if(m_bEditStatus){
-        m_bSelected = true;
+
+    if(m_bEdit){
+        setSelectedStatus(true);
     }else{
-        m_bSelected = true;
+        setSelectedStatus(true);
     }
-    setEdit(m_bSelected);
 
     m_miniRect1 = new MiniRect(m_pointF1.x()-5,m_pointF1.y()-5,10,10,QColor(255,0,0),this);
     m_miniRect1->setIndex(1);
@@ -39,11 +39,6 @@ void VisionLineItem::setLine(QPointF p1, QPointF p2)
     m_miniRect2->setRect(m_pointF2.x()-5,m_pointF2.y()-5,10,10);
 
     updateRect(m_pointF1,m_pointF2);
-}
-
-void VisionLineItem::setEditStatus(bool edit)
-{
-    m_bEditStatus = edit;
 }
 
 void VisionLineItem::setPenWidth(qreal penWidth)
@@ -97,8 +92,6 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->setPen(QPen(QBrush(m_borderColor),0));
 
     }
-//    if(pen)
-//    qDebug()<<painter->clipPath().currentPosition();
 
     painter->drawLine(m_pointF1,m_pointF2);
 
@@ -112,7 +105,7 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawLine(QPointF(-10,-5),QPointF(0,0));
     painter->drawLine(QPointF(-10,+5),QPointF(0,0));
 
-    if(!m_bEditStatus)
+    if(!m_bEdit)
         return;
 
     //绘制编辑框
@@ -120,12 +113,12 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         m_miniRect1->show();
         m_miniRect2->show();
         m_bSelected = true;
-        setEdit(m_bSelected);
+        setSelectedStatus(m_bSelected);
     }else{
         m_miniRect1->hide();
         m_miniRect2->hide();
         m_bSelected = false;
-        setEdit(m_bSelected);
+        setSelectedStatus(m_bSelected);
     }
 }
 
@@ -136,10 +129,10 @@ void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //            C = X2*Y1 - X1*Y2
     QGraphicsItem::mousePressEvent(event);
 
-    if(m_iIndex != -1)
+    if(!m_bEdit)
         return;
 
-    if(!m_bEditStatus)
+    if(m_iIndex != -1)
         return;
 
     qreal A = m_pointF2.y() - m_pointF1.y();
@@ -151,11 +144,10 @@ void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qDebug()<<"l:: "<<l<<A<<B<<C;
     if(l < 5 || this->cursor().shape() == Qt::SizeAllCursor){
         qDebug()<<"in area";
-        setSelected(true);
+        setSelectedStatus(true);
     }else{
         qDebug()<<"out area";
-        setSelected(false);
-//        m_iIndex = -1;
+        setSelectedStatus(false);
         this->scene()->update();
         return;
     }
@@ -164,7 +156,7 @@ void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!m_bEditStatus)
+    if(!m_bEdit)
         return;
 
     if(!m_bSelected)
@@ -189,10 +181,11 @@ void VisionLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(m_iIndex != -1)
+
+    if(!m_bEdit)
         return;
 
-    if(!m_bEditStatus)
+    if(m_iIndex != -1)
         return;
 
     qreal A = m_pointF2.y() - m_pointF1.y();

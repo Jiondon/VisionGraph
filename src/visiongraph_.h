@@ -27,9 +27,9 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include "visiongraphwidget.h"
-#include "visiongraph_base.h"
+#include "visiongraphtool.h"
 
-class VISIONGRAPHSHARED_EXPORT VisionGraph_ : public VisionGraph_Base
+class VISIONGRAPHSHARED_EXPORT VisionGraph_ : public QFrame
 {
     Q_OBJECT
 public:
@@ -53,7 +53,7 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    VisionRectItem* addRect(QRectF rf,bool bEdit = true,QColor color = QColor(255,255,255));
+    VisionRectItem* addRect(QRectF rf,bool bEdit = true, bool bRotation = true,QColor color = QColor(255,255,255));
 
 
     QGraphicsRectItem* _addRect(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
@@ -66,20 +66,20 @@ public:
      * @brief       添加一个arrow
      * @param       不可编辑的坐标系
      */
-    VisionArrow *_addArrow(QPointF pointF,QColor color = QColor(255,255,255));
+    VisionArrow *_addArrow(QPointF pointF,bool bEdit = false,QColor color = QColor(255,255,255));
 
 
     /**
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    VisionEllipseItem* addEllipse(QRectF rf,QColor color = QColor(255,255,255));
+    VisionEllipseItem* addEllipse(QRectF rf, bool bEdit = true, bool bRotation = true, QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    VisionLineItem* addLine(QLine line,QColor color = QColor(255,255,255));
+    VisionLineItem* addLine(QLine line, bool bEdit = true, QColor color = QColor(255,255,255));
 
 
     /**
@@ -93,13 +93,13 @@ public:
      * @brief       添加多边形/close为false，为折线
      * @param       点的集合，点的集合一次连接
      */
-    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, QColor color = QColor(255,255,255));
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, bool bEdit = true, QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加一个点
      * @param
      */
-    VisionCrossPointItem *addPoint(QPointF pointF,QColor color = QColor(255,255,255));
+    VisionCrossPointItem *addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,255,255));
 
     /**
      * @brief       添加一个链
