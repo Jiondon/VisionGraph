@@ -1,4 +1,12 @@
-﻿#ifndef VISIONCHAINITEM_H
+﻿/****************************************************************************
+** @brief       基于VisionItem类封装的链类
+** @note        多个点相连形成的n条线段
+** @author      xiaodongLi
+** @date        create:2019-01-06
+****************************************************************************/
+
+
+#ifndef VISIONCHAINITEM_H
 #define VISIONCHAINITEM_H
 
 #include <QObject>

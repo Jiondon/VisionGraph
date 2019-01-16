@@ -82,6 +82,12 @@ public:
     VisionEllipseItem* addEllipse(QRectF rf,bool bEdit = true, bool bRotation = true, QColor color = QColor(255,0,0));
 
     /**
+     * @brief       添加圆弧
+     * @param       默认是可编辑的，未添加不可编辑的圆弧
+     */
+    VisionArcItem *addArc(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true, QColor color = QColor(255,0,0));
+
+    /**
      * @brief       添加线
      * @param       具体方法未实现
      */

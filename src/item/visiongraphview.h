@@ -243,9 +243,9 @@ private:
 
     QVector<QLineF> m_lstLines;
 
-    bool m_bPainter = true;   //绘制
+    bool m_bPainter = true;   //绘制状态
     bool m_bPainter_Delect;  //删除绘制的区域
-    bool m_bPress = false;  //记录鼠标的按下状态
+    bool m_bPress = false;  //表示当前开始收集鼠标事件--进行绘制
     qreal m_qCircleR = 10;
     QPointF  m_lastPointF;  //记录上次的鼠标的点的位置
 

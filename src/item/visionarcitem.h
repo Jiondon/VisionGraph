@@ -1,0 +1,65 @@
+﻿/****************************************************************************
+** @brief       基于VisionItem类封装的圆弧
+** @note        三点形成一条圆弧，起点中点终点，（三点在编辑情况下可变化，变化后新的圆弧对三点进行重置）
+** @author      xiaodongLi
+** @date        create:2019-01-15
+****************************************************************************/
+
+
+#ifndef VISIONARCITEM_H
+#define VISIONARCITEM_H
+
+#include <QObject>
+#include <QPainter>
+#include "../control/color.h"
+#include "../control/visionitem.h"
+
+class VisionArcItem : public VisionItem
+{
+    Q_OBJECT
+public:
+    explicit VisionArcItem(bool bEdit = false,QColor color = QColor(255,0,0),VisionItem *parent = 0);
+
+    void setPointFs(QPointF sP = QPointF(0,0),QPointF mP = QPointF(0,0),QPointF fP = QPointF(0,0));
+
+    QVector<QPointF> getPoints();
+    bool getPosInArea(qreal x, qreal y){
+        return true;
+    }
+
+
+public:
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
+
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+signals:
+    void signalChanged(VisionItem *item);
+
+private:
+    QPointF m_p1;
+    QPointF m_p2;
+    QPointF m_p3;
+
+    qreal m_x;
+    qreal m_y;
+    qreal m_width;
+    qreal m_height;
+
+    QPointF m_center;
+    double m_r;
+    double m_angle;
+    double m_spanAngle;
+
+private:
+
+    //三点计算对应的圆心和直径，以及圆弧在圆中的角度范围
+    bool detailData(QPointF sP,QPointF mP,QPointF fP);
+
+public slots:
+};
+
+#endif // VISIONARCITEM_H

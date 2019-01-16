@@ -181,6 +181,13 @@ void VisionGraph_::initTool_operation()
     connect(sys_ellipse_action,SIGNAL(triggered(bool)),this,SLOT(slot_ellipse_action()));
     sys_ellipse_button = new QToolButton;
     sys_ellipse_button->setDefaultAction(sys_ellipse_action);
+    //圆弧
+    QAction* sys_arc_action = new QAction(QIcon(iconPath+"arc.png"),QStringLiteral("新建一个圆弧"));
+    sys_arc_action->setIconText(QStringLiteral("圆弧"));
+    sys_arc_action->setText("Arc");
+    connect(sys_arc_action,SIGNAL(triggered(bool)),this,SLOT(slot_arc_action()));
+    sys_arc_button = new QToolButton;
+    sys_arc_button->setDefaultAction(sys_arc_action);
     //不规则多边形---直线连接各点
     QAction* sys_poly_action = new QAction(QIcon(iconPath+"poly.png"),QStringLiteral("新建一个不规则多边形区域"));
     sys_poly_action->setIconText(QStringLiteral("多边形"));
@@ -247,6 +254,7 @@ void VisionGraph_::initTool_operation()
     m_lstToolBtn.append(sys_mousePainter_button);
     m_lstToolBtn.append(sys_rect_button);
     m_lstToolBtn.append(sys_ellipse_button);
+    m_lstToolBtn.append(sys_arc_button);
     m_lstToolBtn.append(sys_poly_button);
     m_lstToolBtn.append(sys_poly_elli_button);
     m_lstToolBtn.append(sys_point_button);
@@ -564,6 +572,29 @@ VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf,bool bEdit,bool bRotation,
     return item;
 }
 
+
+VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    VisionArcItem *item = new VisionArcItem(bEdit,color);
+//    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+//    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+//    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
+        m_curVisionItem = nullptr;
+
+    });
+    item->setPointFs(sP,mP,fP);
+    scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
+    return item;
+}
+
 VisionLineItem *VisionGraph_::addLine(QLine line,bool bEdit, QColor color)
 {
     if(!checkoutItem())
@@ -823,6 +854,8 @@ QToolButton *VisionGraph_::getToolButton(ToolButtonType type)
         return sys_rect_button;
     case ToolButtonType::ToolButtonSys_ellipse:
         return sys_ellipse_button;
+    case ToolButtonType::ToolButtonSys_Arc:
+        return sys_arc_button;
     case ToolButtonType::ToolButtonSys_poly:
         return sys_poly_button;
     case ToolButtonType::ToolButtonSys_poly_elli:
@@ -879,6 +912,9 @@ bool VisionGraph_::removeToolButton(ToolButtonType type)
         break;
     case ToolButtonType::ToolButtonSys_ellipse:
         toolButton = sys_ellipse_button;
+        break;
+    case ToolButtonType::ToolButtonSys_Arc:
+        toolButton = sys_arc_button;
         break;
     case ToolButtonType::ToolButtonSys_poly:
         toolButton = sys_poly_button;
@@ -1136,6 +1172,14 @@ void VisionGraph_::slot_ellipse_action()
 
 }
 
+void VisionGraph_::slot_arc_action()
+{
+    view->setItemType(ItemType::Paint_Arc);
+    m_itemType = ItemType::Paint_Arc;
+//    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Ellipse"));
+
+}
+
 void VisionGraph_::slot_poly_action()
 {
     view->setItemType(ItemType::Paint_Poly);
@@ -1268,12 +1312,17 @@ void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF,ItemType type)
             addChain(vecPointF.toList(),true);
         }else if(type == ItemType::Paint_polyLine){
             addChain(vecPointF.toList(),false);
+        }else if(type == ItemType::Paint_Arc){
+            //todo
+            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true);
         }
     }else{
         if(type == ItemType::Paint_Poly){
             addPolygon(vecPointF);
         }else if(type == ItemType::Paint_polyLine){
             addPolygon(vecPointF,false);
+        }else if(type == ItemType::Paint_Arc){
+            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true);
         }
     }
 }
@@ -1579,6 +1628,7 @@ void VisionGraph_::init_graphItem_unSelf()
 
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_arc_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_point_button));

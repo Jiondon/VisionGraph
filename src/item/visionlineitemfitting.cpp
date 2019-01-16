@@ -1,6 +1,6 @@
 ﻿#include "visionlineitemfitting.h"
 
-VisionLineItemFitting::VisionLineItemFitting(VisionItem *parent) : VisionItem(parent)
+VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QColor color, VisionItem *parent) : VisionItem(parent)
 {
 
 }

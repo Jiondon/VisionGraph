@@ -26,6 +26,7 @@
 #include "./item/visioncrosspointitem.h"
 #include "./item/visionchainitem.h"
 #include "./item/visionarrow.h"
+#include "./item/visionarcitem.h"
 
 #include "./control/color.h"
 
@@ -74,6 +75,7 @@ enum ToolButtonType
 
     ToolButtonSys_rect, //绘制矩形
     ToolButtonSys_ellipse, //绘制椭圆或者圆
+    ToolButtonSys_Arc,//绘制圆弧
     ToolButtonSys_poly, //绘制多边形
     ToolButtonSys_poly_elli, //绘制任意区域
     ToolButtonSys_point, //绘制点
