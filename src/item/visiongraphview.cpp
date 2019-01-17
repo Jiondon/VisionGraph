@@ -4,6 +4,8 @@
 #include "visiongraphscene.h"
 #include "../control/color.h"
 
+#define Pi 3.1415926
+
 VisionGraphView::VisionGraphView(QWidget *parent):
     QGraphicsView(parent)
 {
@@ -105,142 +107,7 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
 
     if(m_bPainter){
         //View是绘制item模式下
-        if(event->button() == Qt::RightButton){
-            //多边形和折线右击结束绘制
-            if(m_itemType == ItemType::Paint_Poly){
-                m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
-                emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_Poly);
-            }else if(m_itemType == ItemType::Paint_polyLine){
-                m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
-                emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_polyLine);
-            }
-            m_bPress = false;  //绘制结束
-
-            //绘制结束
-            QPainterPath path;
-            m_path = path;
-            m_vecPoint_Poly.clear();
-            setItemType(ItemType::No);
-        }else if(event->button() == Qt::LeftButton){
-            m_bPress = true;  //表示在绘制过程中
-
-            //绘制矩形
-            if(m_itemType == ItemType::Paint_Rect){
-                m_vecPoint_Poly.append(scenePos);
-                if(m_vecPoint_Poly.count() >= 2){
-                    //绘制结束  记录的点击的点存在2个或者两个以上的时候
-                    QPointF topLeftPoint;
-                    QPointF bottomRightPoint;
-                    if(m_vecPoint_Poly[0].x() < m_vecPoint_Poly[1].x()){
-                        topLeftPoint.setX(m_vecPoint_Poly[0].x());
-                        bottomRightPoint.setX(m_vecPoint_Poly[1].x());
-                    }else{
-                        topLeftPoint.setX(m_vecPoint_Poly[1].x());
-                        bottomRightPoint.setX(m_vecPoint_Poly[0].x());
-                    }
-
-                    if(m_vecPoint_Poly[0].y() < m_vecPoint_Poly[1].y()){
-                        topLeftPoint.setY(m_vecPoint_Poly[0].y());
-                        bottomRightPoint.setY(m_vecPoint_Poly[1].y());
-                    }else{
-                        topLeftPoint.setY(m_vecPoint_Poly[1].y());
-                        bottomRightPoint.setY(m_vecPoint_Poly[0].y());
-                    }
-
-                    emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
-                    m_bPress = false;  //绘制结束
-
-                    QPainterPath path;
-                    m_path = path;
-                    m_vecPoint_Poly.clear();
-                    setItemType(ItemType::No);
-                }
-            }else if(m_itemType == ItemType::Paint_EllipseItem){
-                m_vecPoint_Poly.append(scenePos);
-                if(m_vecPoint_Poly.count() >= 2){
-                    //绘制结束
-                    QPointF topLeftPoint;
-                    QPointF bottomRightPoint;
-                    if(m_vecPoint_Poly[0].x() < m_vecPoint_Poly[1].x()){
-                        topLeftPoint.setX(m_vecPoint_Poly[0].x());
-                        bottomRightPoint.setX(m_vecPoint_Poly[1].x());
-                    }else{
-                        topLeftPoint.setX(m_vecPoint_Poly[1].x());
-                        bottomRightPoint.setX(m_vecPoint_Poly[0].x());
-                    }
-
-                    if(m_vecPoint_Poly[0].y() < m_vecPoint_Poly[1].y()){
-                        topLeftPoint.setY(m_vecPoint_Poly[0].y());
-                        bottomRightPoint.setY(m_vecPoint_Poly[1].y());
-                    }else{
-                        topLeftPoint.setY(m_vecPoint_Poly[1].y());
-                        bottomRightPoint.setY(m_vecPoint_Poly[0].y());
-                    }
-
-                    emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
-                    m_bPress = false;  //绘制结束
-
-                    QPainterPath path;
-                    m_path = path;
-                    m_vecPoint_Poly.clear();
-                    setItemType(ItemType::No);
-                }
-            }else if(m_itemType == ItemType::Paint_Arc){
-                //释放，记录坐标，记录的是第三个点，则说明绘制结束
-                m_vecPoint_Poly.append(scenePos);
-                if(m_vecPoint_Poly.count() >= 3){
-                    //绘制结束
-                    emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_Arc);
-                    m_bPress = false;  //绘制结束
-
-                    QPainterPath path;
-                    m_path = path;
-                    m_bPainter = false;
-                    //圆弧绘制完成，进行转换
-                    m_vecPoint_Poly.clear();
-                    //绘制圆弧结束
-                    setItemType(ItemType::No);
-                }
-            }else if(m_itemType == ItemType::Paint_Poly){
-                m_vecPoint_Poly.append(scenePos);
-            }else if(m_itemType == ItemType::Paint_CrossPoint){
-                emit signal_Item_point(scenePos);
-                setItemType(ItemType::No);
-            }else if(m_itemType == ItemType::Paint_Line){
-                m_vecPoint_Poly.append(scenePos);
-                if(m_vecPoint_Poly.count() >= 2){
-                    //绘制结束
-                    m_Line.setPoints(m_vecPoint_Poly[0].toPoint(),m_vecPoint_Poly[1].toPoint());
-
-                    emit signal_Item_Line(m_Line);
-                    m_bPress = false;  //绘制结束
-
-                    QPainterPath path;
-                    m_path = path;
-                    m_vecPoint_Poly.clear();
-                    setItemType(ItemType::No);
-                }
-
-            }else if(m_itemType == ItemType::Paint_polyLine){
-                m_vecPoint_Poly.append(scenePos);
-            }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
-
-                //计算区域
-                QPainterPath path1;
-                path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
-
-                QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
-                                                      this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
-                XVRegion region = createEllipse(rf11,rf11.topLeft(),0);
-
-                if(m_itemType == ItemType::Paint_Point){
-                    m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
-                }else{
-                    m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
-                }
-                analysis_region(m_region);
-            }
-        }
+        detailPressEvent(event);
     }
     this->scene()->update();
 }
@@ -924,9 +791,36 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
     }else if(m_itemType == ItemType::Paint_Arc){
         //释放，记录坐标，有一个点，跟随鼠标绘制直线，有两个点，跟随鼠标绘制圆弧
         QPainterPath path;
-        QPolygonF poly(m_vecPoint_Poly);
-        poly.insert(m_vecPoint_Poly.count(),scenePos);  //将最后一点替换成掉
-        path.addPolygon(this->mapFromScene(poly));
+        //获取已经存在的m_vecPoint_Poly存在一个点，绘制直线
+        if(m_vecPoint_Poly.count() == 1){
+            path = QPainterPath(this->mapFromScene(m_vecPoint_Poly[0]));
+            path.lineTo(this->mapFromScene(scenePos));
+        }else if(m_vecPoint_Poly.count() == 2){
+            //m_vecPoint_Poly存在两个点，和动态的点，组合成一个圆
+            qreal r;qreal angle;qreal spanAngle;QPointF center;qreal bDirect = 1;
+            QList<qreal> lst = getArc(this->mapFromScene(m_vecPoint_Poly[0]),this->mapFromScene(scenePos),this->mapFromScene(m_vecPoint_Poly[1]));
+            if(lst.count() == 0){
+                //三点一线
+                path = QPainterPath(this->mapFromScene(m_vecPoint_Poly[0]));
+                path.lineTo(this->mapFromScene(scenePos));
+                path.lineTo(this->mapFromScene(m_vecPoint_Poly[1]));
+            }else if(lst.count() >= 6){
+                center = QPointF(lst[0],lst[1]);
+                r = lst[2];
+                angle = lst[3];
+                spanAngle = lst[4];
+                bDirect = lst[5];
+//                path = QPainterPath(this->mapFromScene(scenePos));
+                if(bDirect == 1){
+                    path.moveTo(this->mapFromScene(m_vecPoint_Poly[0]));  //绘制起点位置
+                }else{
+                    path.moveTo(this->mapFromScene(m_vecPoint_Poly[1]));  //绘制起点位置
+                }
+                path.arcTo(center.x()-r,center.y()-r,2*r,2*r,angle,spanAngle);
+            }else{
+
+            }
+        }
         m_path = path;
 
     }else if(m_itemType == ItemType::Paint_Poly){
@@ -1029,6 +923,252 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
         analysis_region(m_region);
     }
     this->scene()->update();
+}
+
+void VisionGraphView::detailPressEvent(QMouseEvent *event)
+{
+    QPoint viewPos = event->pos();//获取视口坐标
+    QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
+
+    //当前只存在两种模式
+    //第一次按下开始，第二次按下结束
+    //第一次按下开始，直到双击或者右击结束或者一定数量的单击结束
+    //
+    m_pressPointF = viewPos;
+    m_pressPointF_scene = scenePos;
+
+    if(event->button() == Qt::RightButton){
+        //多边形和折线右击结束绘制
+        if(m_itemType == ItemType::Paint_Poly){
+            m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
+            emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_Poly);
+        }else if(m_itemType == ItemType::Paint_polyLine){
+            m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
+            emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_polyLine);
+        }
+        m_bPress = false;  //绘制结束
+
+        //绘制结束
+        QPainterPath path;
+        m_path = path;
+        m_vecPoint_Poly.clear();
+        setItemType(ItemType::No);
+    }else if(event->button() == Qt::LeftButton){
+        m_bPress = true;  //表示在绘制过程中
+
+        //绘制矩形
+        if(m_itemType == ItemType::Paint_Rect){
+            m_vecPoint_Poly.append(scenePos);
+            if(m_vecPoint_Poly.count() >= 2){
+                //绘制结束  记录的点击的点存在2个或者两个以上的时候
+                QPointF topLeftPoint;
+                QPointF bottomRightPoint;
+                if(m_vecPoint_Poly[0].x() < m_vecPoint_Poly[1].x()){
+                    topLeftPoint.setX(m_vecPoint_Poly[0].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[1].x());
+                }else{
+                    topLeftPoint.setX(m_vecPoint_Poly[1].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[0].x());
+                }
+
+                if(m_vecPoint_Poly[0].y() < m_vecPoint_Poly[1].y()){
+                    topLeftPoint.setY(m_vecPoint_Poly[0].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[1].y());
+                }else{
+                    topLeftPoint.setY(m_vecPoint_Poly[1].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[0].y());
+                }
+
+                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                m_bPress = false;  //绘制结束
+
+                QPainterPath path;
+                m_path = path;
+                m_vecPoint_Poly.clear();
+                setItemType(ItemType::No);
+            }
+        }else if(m_itemType == ItemType::Paint_EllipseItem){
+            m_vecPoint_Poly.append(scenePos);
+            if(m_vecPoint_Poly.count() >= 2){
+                //绘制结束
+                QPointF topLeftPoint;
+                QPointF bottomRightPoint;
+                if(m_vecPoint_Poly[0].x() < m_vecPoint_Poly[1].x()){
+                    topLeftPoint.setX(m_vecPoint_Poly[0].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[1].x());
+                }else{
+                    topLeftPoint.setX(m_vecPoint_Poly[1].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[0].x());
+                }
+
+                if(m_vecPoint_Poly[0].y() < m_vecPoint_Poly[1].y()){
+                    topLeftPoint.setY(m_vecPoint_Poly[0].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[1].y());
+                }else{
+                    topLeftPoint.setY(m_vecPoint_Poly[1].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[0].y());
+                }
+
+                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                m_bPress = false;  //绘制结束
+
+                QPainterPath path;
+                m_path = path;
+                m_vecPoint_Poly.clear();
+                setItemType(ItemType::No);
+            }
+        }else if(m_itemType == ItemType::Paint_Arc){
+            //释放，记录坐标，记录的是第三个点，则说明绘制结束
+            m_vecPoint_Poly.append(scenePos);
+            if(m_vecPoint_Poly.count() >= 3){
+                //绘制结束
+                emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_Arc);
+                m_bPress = false;  //绘制结束
+
+                QPainterPath path;
+                m_path = path;
+                m_bPainter = false;
+                //圆弧绘制完成，进行转换
+                m_vecPoint_Poly.clear();
+                //绘制圆弧结束
+                setItemType(ItemType::No);
+            }
+        }else if(m_itemType == ItemType::Paint_Poly){
+            m_vecPoint_Poly.append(scenePos);
+        }else if(m_itemType == ItemType::Paint_CrossPoint){
+            emit signal_Item_point(scenePos);
+            setItemType(ItemType::No);
+        }else if(m_itemType == ItemType::Paint_Line){
+            m_vecPoint_Poly.append(scenePos);
+            if(m_vecPoint_Poly.count() >= 2){
+                //绘制结束
+                m_Line.setPoints(m_vecPoint_Poly[0].toPoint(),m_vecPoint_Poly[1].toPoint());
+
+                emit signal_Item_Line(m_Line);
+                m_bPress = false;  //绘制结束
+
+                QPainterPath path;
+                m_path = path;
+                m_vecPoint_Poly.clear();
+                setItemType(ItemType::No);
+            }
+
+        }else if(m_itemType == ItemType::Paint_polyLine){
+            m_vecPoint_Poly.append(scenePos);
+        }else if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
+
+            //计算区域
+            QPainterPath path1;
+            path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
+
+            QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
+                                                  this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
+            XVRegion region = createEllipse(rf11,rf11.topLeft(),0);
+
+            if(m_itemType == ItemType::Paint_Point){
+                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
+            }else{
+                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
+            }
+            analysis_region(m_region);
+        }
+    }
+}
+
+QList<qreal> VisionGraphView::getArc(QPointF sP, QPointF mP, QPointF fP)
+{
+    QPointF center; qreal r; qreal angle; qreal spanAngle; qreal bDirect = 1;  //方向：1 sp->mp->fp  0 fp->mp->sp
+    QList<qreal> lstData;
+    lstData.clear();
+
+    //三点确定一个圆,硬解，可得到表达式（三点一线的时候，则无法形成圆）
+    double x1 = sP.x(), x2 = mP.x(), x3 = fP.x();
+    double y1 = sP.y(), y2 = mP.y(), y3 = fP.y();
+    double a = x1 - x2;
+    double b = y1 - y2;
+    double c = x1 - x3;
+    double d = y1 - y3;
+    double e = ((x1 * x1 - x2 * x2) + (y1 * y1 - y2 * y2)) / 2.0;
+    double f = ((x1 * x1 - x3 * x3) + (y1 * y1 - y3 * y3)) / 2.0;
+    double det = b * c - a * d;
+
+    if((x1 == x2 && x1 == x3) || (y1 == y2 && y1 == y3))
+    {
+        //三点一线,
+        return lstData;
+    }
+
+//    if( fabs(det) < 1e-5)
+//    {
+//        radius = -1;
+//        return QPointF(0,0);
+//    }
+
+    double x0 = -(d * e - b * f) / det;
+    double y0 = -(a * f - c * e) / det;
+    center.setX(x0);
+    center.setY(y0);
+    r = hypot(x1 - x0, y1 - y0);
+
+    //
+    double angle1 = acos((x1-x0)/(hypot((x1-x0),(y1-y0))));
+    double angle2 = acos((x2-x0)/(hypot((x2-x0),(y2-y0))));
+    double angle3 = acos((x3-x0)/(hypot((x3-x0),(y3-y0))));
+    if(y1-y0 < 0){
+        angle1 = 2*Pi - angle1;
+    }else{
+        angle1 = angle1;
+    }
+    if(y3-y0 < 0){
+        angle3 = 2*Pi - angle3;
+    }else{
+        angle3 = angle3;
+    }
+
+    if(y2-y0 < 0){
+        angle2 = 2*Pi - angle2;
+    }else{
+        angle2 = angle2;
+    }
+
+    //上面计算的角度是基于QGraphicsView中的坐标，需要进行转换为数学坐标中的角度
+    angle1 = 360-angle1*180/Pi;
+    angle2 = 360-angle2*180/Pi;
+    angle3 = 360-angle3*180/Pi;
+
+//    qDebug()<<angle1<<angle2<<angle3;
+    if(angle1 < angle3){
+        //1是起点，3是终点
+        if(angle2 < angle3 && angle2 > angle1){
+            //2在中间，1-2-3
+            angle = angle1;
+            spanAngle = angle3 - angle1;
+            bDirect = 1;
+        }else{
+            // 2在1-3外面   3-2-1
+            angle = angle3;
+            spanAngle = 360-(angle3 - angle1);
+            bDirect = 0;
+        }
+    }else{
+        //3是起点，1是终点  正方向--  3-2-1
+        if(angle2 < angle1 && angle2 > angle3){
+            //3-2-1
+            angle = angle3;
+            spanAngle = angle1 - angle3;
+            bDirect = 0;
+        }else{
+            //1-2-3
+            angle = angle1;
+            spanAngle = 360-(angle1 - angle3);
+            bDirect = 1;
+        }
+    }
+
+    lstData.append({center.x(),center.y(),r,angle,spanAngle,bDirect});
+//    qDebug()<<angle<<spanAngle;
+    return lstData;
+
 }
 
 void VisionGraphView::slotUpdateViewInfo_Pos()

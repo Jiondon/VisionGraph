@@ -46,11 +46,11 @@ void VisionArcItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->drawArc(boundingRect(),m_angle*16,m_spanAngle*16);
 
-    painter->drawLine(m_center,m_p1);
-    painter->setPen(QPen(QBrush(Qt::green),0));
-    painter->drawLine(m_center,m_p2);
-    painter->setPen(QPen(QBrush(Qt::blue),0));
-    painter->drawLine(m_center,m_p3);
+//    painter->drawLine(m_center,m_p1);
+//    painter->setPen(QPen(QBrush(Qt::green),0));
+//    painter->drawLine(m_center,m_p2);
+//    painter->setPen(QPen(QBrush(Qt::blue),0));
+//    painter->drawLine(m_center,m_p3);
 
 //    painter->drawRect(boundingRect());
 //    painter->drawEllipse(boundingRect());

@@ -370,6 +370,9 @@ private:
     void push_region(XVRegion region,int index = 0);
 
     void detailMoveEvent(QMouseEvent *event);
+    void detailPressEvent(QMouseEvent *event);
+
+    QList<qreal> getArc(QPointF sP, QPointF mP, QPointF fP);
 };
 
 #endif // VISIONGRAPHVIEW_H
