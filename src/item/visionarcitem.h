@@ -13,6 +13,7 @@
 #include <QPainter>
 #include "../control/color.h"
 #include "../control/visionitem.h"
+#include "../control/minirect.h"
 
 class VisionArcItem : public VisionItem
 {
@@ -23,9 +24,7 @@ public:
     void setPointFs(QPointF sP = QPointF(0,0),QPointF mP = QPointF(0,0),QPointF fP = QPointF(0,0));
 
     QVector<QPointF> getPoints();
-    bool getPosInArea(qreal x, qreal y){
-        return true;
-    }
+    bool getPosInArea(qreal x, qreal y);
 
 
 public:
@@ -54,12 +53,26 @@ private:
     double m_angle;
     double m_spanAngle;
 
+
+    MiniRect *m_sMiniRect = NULL;
+    MiniRect *m_mMiniRect = NULL;
+    MiniRect *m_fMiniRect = NULL;
+    int m_iIndex = -1;
+
+    QPointF m_lastPoint_Press;
+
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
+
 private:
 
+    void initMiniRect();
     //三点计算对应的圆心和直径，以及圆弧在圆中的角度范围
     bool detailData(QPointF sP,QPointF mP,QPointF fP);
 
 public slots:
+    void slotMiniRectIndex(int index);
 };
 
 #endif // VISIONARCITEM_H

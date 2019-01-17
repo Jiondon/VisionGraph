@@ -6,7 +6,11 @@
 
 VisionArcItem::VisionArcItem(bool bEdit, QColor color, VisionItem *parent) : VisionItem(parent)
 {
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = m_selectedColor;
 
+    m_bEdit = bEdit;
     if(m_bEdit){
         setSelectedStatus(true);
     }else{
@@ -23,6 +27,8 @@ void VisionArcItem::setPointFs(QPointF sP, QPointF mP, QPointF fP)
     detailData(sP,mP,fP);
     m_x = m_center.x() - m_r;
     m_y = m_center.y() - m_r;
+    this->setPos(m_x,m_y);
+    initMiniRect();
 }
 
 QVector<QPointF> VisionArcItem::getPoints()
@@ -34,48 +40,172 @@ QVector<QPointF> VisionArcItem::getPoints()
     return vec_p;
 }
 
+bool VisionArcItem::getPosInArea(qreal x, qreal y){
+    //x,y是外部坐标，
+    //在圆弧的范围内要满足两个条件：1，点在圆弧附近，误差设为5；2，点的角度要在m_angle到m_angle+m_spanAngle范围角度误差也设为5
+    double d = hypot(m_center.x()-x,m_center.y()-y) - m_r;
+    double x1 = x-m_center.x();
+    double y1 = y-m_center.y();
+    double angle = acos((x1)/(hypot(x1,y1)));
+    //(x1,y1)表示原点为圆心，r半斤的圆上的一点，y1<0 表示在三四象限，
+    if(y1 < 0){
+        angle = 2*Pi - angle;
+    }else{
+        angle = angle;
+    }
+    //转换角度为数学坐标系，并转化为具体度数
+    angle = 360-angle*180/Pi;
+
+    qDebug()<<d<<angle<<m_angle<<m_angle+m_spanAngle;
+    if(fabs(d) < 5){
+        if(m_angle+m_spanAngle <= 360 && (angle >= (m_angle-5) && angle < (m_angle+m_spanAngle+5))){
+            qDebug()<<"arc in area";
+            return true;
+        }else if(m_angle+m_spanAngle > 360 && (angle >= (m_angle-5) && angle < 360)){
+            qDebug()<<"arc in area";
+            return true;
+        }else if(m_angle+m_spanAngle > 360 && (angle >= 0 && angle < (m_angle+m_spanAngle-360+5))){
+            qDebug()<<"arc in area";
+            return true;
+        }else{
+            qDebug()<<"arc out area";
+            return false;
+        }
+    }else{
+        qDebug()<<"arc out area";
+        return false;
+    }
+}
+
 void VisionArcItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
     painter->setRenderHint(QPainter::Antialiasing, true);
-    painter->setPen(QPen(QBrush(Qt::red),0));
+    if(option->state & QStyle::State_Selected){
+        painter->setPen(QPen(QBrush(m_selectedColor),0));
+    }else{
+        painter->setPen(QPen(QBrush(m_borderColor),0));
+    }
 
-//    painter->drawLine(QPointF(m_pointF.x()-m_iLength,m_pointF.y()),QPointF(m_pointF.x()+m_iLength,m_pointF.y()));
+    painter->drawArc(QRectF(0,0,2*m_r,2*m_r),m_angle*16,m_spanAngle*16);
 
-    painter->drawArc(boundingRect(),m_angle*16,m_spanAngle*16);
+    if(option->state & QStyle::State_Selected){
+        m_sMiniRect->show();
+        m_mMiniRect->show();
+        m_fMiniRect->show();
+    }else{
+        m_sMiniRect->hide();
+        m_mMiniRect->hide();
+        m_fMiniRect->hide();
 
-//    painter->drawLine(m_center,m_p1);
-//    painter->setPen(QPen(QBrush(Qt::green),0));
-//    painter->drawLine(m_center,m_p2);
-//    painter->setPen(QPen(QBrush(Qt::blue),0));
-//    painter->drawLine(m_center,m_p3);
-
-//    painter->drawRect(boundingRect());
-//    painter->drawEllipse(boundingRect());
-
+        //todo 中间的编辑点调整到中间位置
+//        m_p2 = m_arc_center;
+//        m_mMiniRect->setRect(m_p2.x()-2.5,m_p2.y()-2.5,5,5);
+    }
 }
 
 QRectF VisionArcItem::boundingRect() const
 {
-    QRectF rf = QRectF(m_x,m_y,2*m_r,2*m_r);
+    QRectF rf = QRectF(0,0,2*m_r,2*m_r);
     return rf;
 }
 
 void VisionArcItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
 
+    if(!m_bSelected)
+        return;
+
+    //在执行QGraphicsItem的时候。会自动的进行pos的重新设置
+    QGraphicsItem::mouseMoveEvent(event);
+
+    if(m_iIndex == -1){
+        QPointF disPoint = event->scenePos() - m_lastPoint_Press;
+        m_lastPoint_Press = event->scenePos();
+        //整体move
+        m_p1 = m_p1 + disPoint;
+        m_p2 = m_p2 + disPoint;
+        m_p3 = m_p3 + disPoint;
+    }else{
+        //移动某一个点
+        if(m_iIndex == 1){
+            m_p1 = event->scenePos();
+        }else if(m_iIndex == 2){
+            m_p2 = event->scenePos();
+        }else if(m_iIndex == 3){
+            m_p3 = event->scenePos();
+        }
+    }
+    detailData(m_p1,m_p2,m_p3);
+    m_x = m_center.x() - m_r;
+    m_y = m_center.y() - m_r;
+    m_sMiniRect->setRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5);
+    m_mMiniRect->setRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5);
+    m_fMiniRect->setRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5);
+    this->setPos(m_x,m_y);
+    this->scene()->update();
 }
 
 void VisionArcItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    QGraphicsItem::mousePressEvent(event);
 
+    if(!m_bEdit)
+        return;
+
+    if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
+        setSelectedStatus(false);
+        return;
+    }
+
+    setSelectedStatus(true);
+    m_lastPoint_Press = event->scenePos();
 }
 
 void VisionArcItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
 
+    if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
+        return;
+    }
+
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void VisionArcItem::initMiniRect()
+{
+    if(m_sMiniRect == NULL){
+        m_sMiniRect = new MiniRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_sMiniRect->setIndex(1);
+        QObject::connect(m_sMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
+        m_sMiniRect->hide();
+    }else{
+        m_sMiniRect->setRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5);
+    }
+
+    if(m_mMiniRect == NULL){
+        m_mMiniRect = new MiniRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_mMiniRect->setIndex(2);
+        QObject::connect(m_mMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
+        m_mMiniRect->hide();
+    }else{
+        m_mMiniRect->setRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5);
+    }
+
+    if(m_fMiniRect == NULL){
+        m_fMiniRect = new MiniRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_fMiniRect->setIndex(3);
+        QObject::connect(m_fMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
+        m_fMiniRect->hide();
+    }else{
+        m_fMiniRect->setRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5);
+    }
 }
 
 bool VisionArcItem::detailData(QPointF sP, QPointF mP, QPointF fP)
@@ -97,19 +227,13 @@ bool VisionArcItem::detailData(QPointF sP, QPointF mP, QPointF fP)
         return false;
     }
 
-//    if( fabs(det) < 1e-5)
-//    {
-//        radius = -1;
-//        return QPointF(0,0);
-//    }
-
     double x0 = -(d * e - b * f) / det;
     double y0 = -(a * f - c * e) / det;
     m_center.setX(x0);
     m_center.setY(y0);
     m_r = hypot(x1 - x0, y1 - y0);
 
-    //
+    //计算每个点和圆心所形成的的角度
     double angle1 = acos((x1-x0)/(hypot((x1-x0),(y1-y0))));
     double angle2 = acos((x2-x0)/(hypot((x2-x0),(y2-y0))));
     double angle3 = acos((x3-x0)/(hypot((x3-x0),(y3-y0))));
@@ -135,7 +259,7 @@ bool VisionArcItem::detailData(QPointF sP, QPointF mP, QPointF fP)
     angle2 = 360-angle2*180/Pi;
     angle3 = 360-angle3*180/Pi;
 
-    qDebug()<<angle1<<angle2<<angle3;
+//    qDebug()<<angle1<<angle2<<angle3;
     if(angle1 < angle3){
         //1是起点，3是终点
         if(angle2 < angle3 && angle2 > angle1){
@@ -159,7 +283,17 @@ bool VisionArcItem::detailData(QPointF sP, QPointF mP, QPointF fP)
             m_spanAngle = 360-(angle1 - angle3);
         }
     }
-
-    qDebug()<<m_angle<<m_spanAngle;
+//    m_arc_center = m_center + QPointF(m_r*cos((m_angle+m_spanAngle/2)),m_r*sin((m_angle+m_spanAngle/2)));
+//    qDebug()<<m_angle<<m_spanAngle;
     return true;
+}
+
+void VisionArcItem::slotMiniRectIndex(int index)
+{
+    m_iIndex = index;
+    if(index == -1){
+        this->scene()->views().at(0)->setCursor(viewCursor);
+    }else{
+        this->scene()->views().at(0)->setCursor(Qt::SizeAllCursor);
+    }
 }

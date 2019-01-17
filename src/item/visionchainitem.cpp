@@ -227,12 +227,12 @@ void VisionChainItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //            QGraphicsItem::mouseMoveEvent(event);  //采用Qt本身的拖动，数据不会跟着变化，只会改变pos属性，
             for(int i=0;i<m_lstChainPoint.count();i++){
                 m_lstChainPoint[i] = m_lstChainPoint[i] + disPoint;
-                m_lstMiniRect[i]->setPos(m_lstChainPoint[i].x()-2.5,m_lstChainPoint[i].y()-2.5);
+                m_lstMiniRect[i]->setRect(m_lstChainPoint[i].x()-2.5,m_lstChainPoint[i].y()-2.5,5,5);
             }
         }else{
             //拖动某一个点
             m_lstChainPoint[m_iIndex] = event->scenePos();
-            m_lstMiniRect[m_iIndex]->setPos(event->scenePos().x()-2.5,event->scenePos().y()-2.5);
+            m_lstMiniRect[m_iIndex]->setRect(event->scenePos().x()-2.5,event->scenePos().y()-2.5,5,5);
         }
         updateData();
     }
