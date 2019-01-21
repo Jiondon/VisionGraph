@@ -96,6 +96,7 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawLine(m_pointF1,m_pointF2);
 
 
+    //绘制箭头
     qreal alph = atan2(m_pointF2.y()-m_pointF1.y(), m_pointF2.x()-m_pointF1.x());
     painter->translate(m_pointF2);
 

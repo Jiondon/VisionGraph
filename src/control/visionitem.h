@@ -24,6 +24,9 @@ enum ItemType{
     Drag,  //拖动
     Zoom, //缩放状态
 
+    Paint_LineFitting,
+
+
     Paint_Rect,  //矩形
     Paint_EllipseItem,  //圆或者椭圆
     Paint_Arc,  //圆弧
@@ -36,6 +39,7 @@ enum ItemType{
     Paint_CrossPoint,  //单独一个真正意义上的点
     Paint_Point,  //点
     Paint_NoPoint  //擦除item
+
 };
 
 /**

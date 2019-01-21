@@ -487,7 +487,6 @@ VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, QCo
     if(bEdit){
         VisionRectItem* item = new VisionRectItem(bEdit,bRotation,color);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
-
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
         QObject::connect(item,&QObject::destroyed,[=](){
@@ -579,9 +578,9 @@ VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEd
         return NULL;
 
     VisionArcItem *item = new VisionArcItem(bEdit,color);
-//    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
-//    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
-//    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
     QObject::connect(item,&QObject::destroyed,[=](){
         m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
@@ -601,6 +600,7 @@ VisionLineItem *VisionGraph_::addLine(QLine line,bool bEdit, QColor color)
         return NULL;
 
     VisionLineItem *item = new VisionLineItem(bEdit,line.p1(),line.p2(),0,color);
+
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -688,6 +688,29 @@ VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool ed
 
     });
     item->setChainPos(lstP);
+    scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
+    return item;
+}
+
+VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qreal length, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    VisionLineItemFitting *item = new VisionLineItemFitting(bEdit,line.p1(),line.p2(),length,0,color);
+
+    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
+        m_curVisionItem = nullptr;
+
+    });
+//    item->setLine(line.p1(),line.p2());
     scene->addItem(item);
     m_curVisionItem = item;
     m_lstItem.push_back(item);
@@ -1270,6 +1293,7 @@ void VisionGraph_::slot_removeItem_action()
 
     for(int i=0;i<m_lstItem.count();i++){
         if(m_lstItem[i] == m_curVisionItem){
+//            scene->removeItem(m_lstItem[i]);
             if(m_lstItem[i] != nullptr){
                 m_lstItem[i]->deleteLater();
             }
@@ -1336,6 +1360,8 @@ void VisionGraph_::slot_addLine(QLine line)
 {
     if(m_graphType == GraphType::graphChain){
         addChain({line.p1(),line.p2()},true);
+    }else if(g_graphType == GraphType::graphItem_Fitting){
+        addLineFitting(line,true);
     }else{
         addLine(line);
     }
@@ -1357,66 +1383,21 @@ void VisionGraph_::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,
     //点击item，如果该item是被选中的，则直接改为未选中，同时判断其底部是否有其他的item
     //如果有，则将该item的zValue值设为5，同时将该item的状态设置为选中状态
 
-    //需要对基类添加的函数，设置选中和未选中的接口，获取选中状态的接口,获取item的painterPath，获取坐标是否在item的有效区域内
+    //需要对基类添加的函数，设置选中和未选中的接口，获取选中状态的接口，获取坐标是否在item的有效区域内
 
     QList<VisionItem*> lstClickedItem;
     lstClickedItem.clear();
-//    qDebug()<<m_lstItem.count()<<x<<y;
     for(int i=0;i<m_lstItem.count();i++){
         //点击了某一个item的无效区域，该item的z值是0，显示是in area，
         //clicked some item's uneffect area, and this item's z value is 0, this if think it is in area
         //but this item’s mousePressEvent() will think the click event is uneffect,and no deal with
 
         //此处判断修改，改为传输坐标给item，返回值为该坐标是否在该item内部---   true-in  false-out
-        if(m_lstItem[i]->getType() == ItemType::Paint_Rect){
-            VisionRectItem* itemTest = (VisionRectItem*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"VisionRectItem in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"VisionRectItem out of range";
-            }
-        }else if (m_lstItem[i]->getType() == ItemType::Paint_EllipseItem) {
-            VisionEllipseItem* itemTest = (VisionEllipseItem*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"VisionEllipseItem in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"VisionEllipseItem out of range";
-            }
-        }else if (m_lstItem[i]->getType() == ItemType::Paint_Poly) {
-            VisionPolygon* itemTest = (VisionPolygon*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"VisionPolygon in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"VisionPolygon out of range";
-            }
-        }else if(m_lstItem[i]->getType() == ItemType::Paint_CrossPoint){
-            VisionCrossPointItem* itemTest = (VisionCrossPointItem*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"VisionCrossPointItem in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"VisionCrossPointItem out of range";
-            }
-        }else if(m_lstItem[i]->getType() == ItemType::Paint_Line){
-            VisionLineItem* itemTest = (VisionLineItem*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"VisionLineItem in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"VisionLineItem out of range";
-            }
+        if(m_lstItem[i]->getPosInArea(x,y)){
+//            qDebug()<<"in";
+            lstClickedItem.push_back(m_lstItem[i]);
         }else{
-            VisionRectItem* itemTest = (VisionRectItem*)m_lstItem[i];
-            if(itemTest->getPosInArea(x,y)){
-//                qDebug()<<"in of range";
-                lstClickedItem.push_back(m_lstItem[i]);
-            }else{
-//                qDebug()<<"out of range";
-            }
-
+//            qDebug()<<"out";
         }
     }
 
@@ -1549,6 +1530,8 @@ void VisionGraph_::slot_GraphTypeChanged(GraphType type)
     case GraphType::graphChain:
         init_graphChain();
         break;
+    case GraphType::graphItem_Fitting:
+        init_graphFitting();
     default:
         break;
     }
@@ -1657,6 +1640,33 @@ void VisionGraph_::init_graphChain()
 
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_line_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::init_graphFitting()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_arc_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_line_button));

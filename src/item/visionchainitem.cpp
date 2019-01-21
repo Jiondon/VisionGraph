@@ -110,6 +110,16 @@ QVector<QPointF> VisionChainItem::getPoints()
     return m_lstChainPoint.toVector();
 }
 
+bool VisionChainItem::getPosInArea(qreal x, qreal y){
+    QPolygonF polygonF;
+    polygonF.append(m_lstChainPoint.toVector());
+    if(polygonF.containsPoint(QPointF(x,y),Qt::OddEvenFill)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -242,6 +252,16 @@ void VisionChainItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!m_bEdit)
+        return;
+
+    QPolygonF polygonF;
+    polygonF.append(m_lstChainPoint.toVector());
+    if(!polygonF.containsPoint(event->scenePos(),Qt::OddEvenFill)){
+        emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
+        return;
+    }
+    emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
     QGraphicsItem::mouseReleaseEvent(event);
 
 }

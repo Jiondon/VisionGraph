@@ -28,6 +28,8 @@
 #include "./item/visionarrow.h"
 #include "./item/visionarcitem.h"
 
+#include "./item/visionlineitemfitting.h"
+
 #include "./control/color.h"
 
 /**

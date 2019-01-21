@@ -113,6 +113,14 @@ public:
      */
     VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,bool edit = true,QColor color = QColor(255,0,0));
 
+
+    // Fitting
+
+    /**
+     * @brief       添加线Fitting
+     */
+    VisionLineItemFitting* addLineFitting(QLine line, bool bEdit = true, qreal length = 0, QColor color = QColor(255,0,0));
+
     /**
      * @brief       设置view的背景图片
      * @param
@@ -484,6 +492,7 @@ private:
     void init_graphItem_self();
     void init_graphItem_unSelf();
     void init_graphChain();
+    void init_graphFitting();
 };
 
 #endif // VISIONGRAPH__H

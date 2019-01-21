@@ -69,9 +69,7 @@ public:
      * @brief       判断点（x,y）是否在该item内
      * @param       bool
      */
-    bool getPosInArea(qreal x,qreal y){
-        return true;
-    }
+    bool getPosInArea(qreal x,qreal y);
 
 signals:
     void signalChanged(VisionItem* item);

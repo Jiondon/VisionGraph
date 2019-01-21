@@ -53,7 +53,7 @@ void VisionPolygon::setPointFs(QVector<QPointF> pointFs, bool bFinished)
 
 bool VisionPolygon::getPosInArea(qreal x, qreal y)
 {
-    if(m_polygonF_temp.containsPoint(QPointF(x,y),Qt::OddEvenFill)){
+    if(m_polygonF_temp.containsPoint(this->mapFromScene(QPointF(x,y)),Qt::OddEvenFill)){
         return true;
     }else{
         return false;
@@ -154,10 +154,10 @@ void VisionPolygon::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     if(!m_polygonF_temp.containsPoint(event->pos(),Qt::OddEvenFill)){
-        emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
+        emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
         return;
     }
-    emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
+    emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
     QGraphicsItem::mouseReleaseEvent(event);
 
 }

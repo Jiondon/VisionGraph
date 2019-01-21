@@ -826,6 +826,7 @@ tmp\debug\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWid
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
+		src\item\visionlineitemfitting.h \
 		src\visiongraph_base.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
@@ -1291,6 +1292,7 @@ tmp\debug\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
+		src\item\visionlineitemfitting.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QComboBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qcombobox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractitemdelegate.h \
@@ -1763,6 +1765,7 @@ tmp\debug\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidge
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
+		src\item\visionlineitemfitting.h \
 		src\visiongraph_region.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -4417,6 +4420,7 @@ tmp\debug\moc_visiongraph_base.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
+		src\item\visionlineitemfitting.h \
 		src\visiongraph_base.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -4873,6 +4877,7 @@ tmp\debug\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
+		src\item\visionlineitemfitting.h \
 		src\visiongraph_.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -4926,50 +4931,92 @@ tmp\debug\moc_visionlineitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCo
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvarlengtharray.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontainerfwd.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgetsglobal.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgets-config.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvariant.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmap.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdebug.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtextstream.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlocale.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qset.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontiguouscache.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		src\visiongraph_global.h \
+		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabbar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		src\item\visionlineitemfitting.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -5560,6 +5607,7 @@ tmp\debug\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h \
 		src/visiongraph_base.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QToolButton \
@@ -6022,6 +6070,7 @@ tmp\debug\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.h 
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QComboBox \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qcombobox.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractitemdelegate.h \
@@ -6500,6 +6549,7 @@ tmp\debug\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_reg
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QSlider \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLineEdit \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlineedit.h \
@@ -6938,7 +6988,8 @@ tmp\debug\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		src/item/visioncrosspointitem.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
-		src/item/visionarcitem.h
+		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h
 
 tmp\debug\visioncrosspointitem.obj: src\item\visioncrosspointitem.cpp src/item/visioncrosspointitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -9658,7 +9709,8 @@ tmp\debug\visiongraph_base.obj: src\visiongraph_base.cpp src/visiongraph_base.h 
 		src/item/visioncrosspointitem.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
-		src/item/visionarcitem.h
+		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h
 
 tmp\debug\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
@@ -10112,6 +10164,7 @@ tmp\debug\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
+		src/item/visionlineitemfitting.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QtMath \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmath.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFileDialog \
@@ -10171,50 +10224,96 @@ tmp\debug\visionlineitemfitting.obj: src\item\visionlineitemfitting.cpp src/item
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvarlengtharray.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontainerfwd.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgetsglobal.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtguiglobal.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtgui-config.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtwidgets-config.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvariant.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmap.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdebug.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qhash.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qtextstream.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qiodevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlocale.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qshareddata.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qvector.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qpoint.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qset.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qcontiguouscache.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsharedpointer_impl.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qrect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qmargins.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qsize.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainterpath.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qmatrix.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpolygon.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qregion.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qwindowdefs_win.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatastream.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qline.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixmap.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpaintdevice.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcolor.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgb.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qrgba64.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qimage.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpixelformat.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtransform.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/visiongraph_global.h
+		src/visiongraph_global.h \
+		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractspinbox.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvalidator.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qregularexpression.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qicon.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyle.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabbar.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor
 
 tmp\debug\visionarcitem.obj: src\item\visionarcitem.cpp src/item/visionarcitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \

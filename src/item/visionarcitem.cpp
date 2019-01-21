@@ -175,7 +175,51 @@ void VisionArcItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
-    QGraphicsItem::mouseReleaseEvent(event);
+    double x=event->scenePos().x();
+    double y=event->scenePos().y();
+    double d = hypot(m_center.x()-x,m_center.y()-y) - m_r;
+    double x1 = x-m_center.x();
+    double y1 = y-m_center.y();
+    double angle = acos((x1)/(hypot(x1,y1)));
+    //(x1,y1)表示原点为圆心，r半斤的圆上的一点，y1<0 表示在三四象限，
+    if(y1 < 0){
+        angle = 2*Pi - angle;
+    }else{
+        angle = angle;
+    }
+    //转换角度为数学坐标系，并转化为具体度数
+    angle = 360-angle*180/Pi;
+
+    qDebug()<<d<<angle<<m_angle<<m_angle+m_spanAngle;
+    if(fabs(d) < 5){
+        if(m_angle+m_spanAngle <= 360 && (angle >= (m_angle-5) && angle < (m_angle+m_spanAngle+5))){
+            qDebug()<<"arc in area";
+            emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
+            QGraphicsItem::mouseReleaseEvent(event);
+            return ;
+        }else if(m_angle+m_spanAngle > 360 && (angle >= (m_angle-5) && angle < 360)){
+            qDebug()<<"arc in area";
+            emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
+            QGraphicsItem::mouseReleaseEvent(event);
+            return ;
+        }else if(m_angle+m_spanAngle > 360 && (angle >= 0 && angle < (m_angle+m_spanAngle-360+5))){
+            qDebug()<<"arc in area";
+            emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
+            QGraphicsItem::mouseReleaseEvent(event);
+            return ;
+        }else{
+            qDebug()<<"arc out area";
+            emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
+            return ;
+        }
+    }else{
+        qDebug()<<"arc out area";
+        emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
+        return ;
+    }
+
+    emit signal_clicked(this,true,true,event->scenePos().x(),event->scenePos().y());
+
 }
 
 void VisionArcItem::initMiniRect()
