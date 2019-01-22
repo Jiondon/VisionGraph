@@ -710,7 +710,6 @@ VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qrea
         m_curVisionItem = nullptr;
 
     });
-//    item->setLine(line.p1(),line.p2());
     scene->addItem(item);
     m_curVisionItem = item;
     m_lstItem.push_back(item);
@@ -1085,7 +1084,7 @@ void VisionGraph_::removeItem(VisionItem *item)
 
         if(item == m_curVisionItem){
             if(m_curVisionItem != nullptr){
-                m_curVisionItem->deleteLater();
+//                m_curVisionItem->deleteLater();
                 m_curVisionItem = nullptr;
             }
         }
@@ -1279,7 +1278,7 @@ void VisionGraph_::slot_clear_action()
     //清除当前的item
     if(m_curVisionItem != nullptr){
         m_curVisionItem->hide();
-        m_curVisionItem->deleteLater();
+//        m_curVisionItem->deleteLater();
         m_curVisionItem = nullptr;
     }
     qDebug()<<scene->items().count();
@@ -1287,21 +1286,23 @@ void VisionGraph_::slot_clear_action()
 
 void VisionGraph_::slot_removeItem_action()
 {
-    //直接进行筛选，不考虑当前的
-    if(m_lstItem.count() == 0)
+    if(m_curVisionItem == nullptr)
         return;
+
+    //直接进行筛选，不考虑当前的
+    if(m_lstItem.count() == 0){
+        m_curVisionItem = nullptr;
+        return;
+    }
 
     for(int i=0;i<m_lstItem.count();i++){
         if(m_lstItem[i] == m_curVisionItem){
-//            scene->removeItem(m_lstItem[i]);
-            if(m_lstItem[i] != nullptr){
-                m_lstItem[i]->deleteLater();
-            }
+            m_lstItem[i]->deleteLater();
             m_lstItem.removeAt(i);
             break;
         }
     }
-    scene->removeItem(m_curVisionItem);
+    scene->removeItem(m_curVisionItem);  //不会delete
     m_curVisionItem = nullptr;
 }
 
