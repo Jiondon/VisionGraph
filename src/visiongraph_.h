@@ -122,6 +122,13 @@ public:
     VisionLineItemFitting* addLineFitting(QLine line, bool bEdit = true, qreal length = 0, QColor color = QColor(255,0,0));
 
     /**
+     * @brief       添加圆弧Fitting
+     * @param       默认是可编辑的，未添加不可编辑
+     */
+    VisionArcItemFitting *addArcFitting(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true, qreal length = 0,QColor color = QColor(255,0,0));
+
+
+    /**
      * @brief       设置view的背景图片
      * @param
      */

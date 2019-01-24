@@ -29,6 +29,7 @@
 #include "./item/visionarcitem.h"
 
 #include "./item/visionlineitemfitting.h"
+#include "./item/visionarcitemfitting.h"
 
 #include "./control/color.h"
 

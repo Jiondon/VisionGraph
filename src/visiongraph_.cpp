@@ -717,6 +717,29 @@ VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qrea
     return item;
 }
 
+VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPointF fP, bool bEdit, qreal length, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    VisionArcItemFitting *item = new VisionArcItemFitting(bEdit,length,color);
+
+    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
+        m_curVisionItem = nullptr;
+
+    });
+    item->setPointFs(sP,mP,fP);
+    scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
+    return item;
+}
+
 
 int VisionGraph_::setBkImg(QImage image)
 {
@@ -1341,6 +1364,14 @@ void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF,ItemType type)
             //todo
             addArc(vecPointF[0],vecPointF[2],vecPointF[1],true);
         }
+    }else if(m_graphType == GraphType::graphItem_Fitting){
+        if(type == ItemType::Paint_Poly){
+            addPolygon(vecPointF);
+        }else if(type == ItemType::Paint_polyLine){
+            addPolygon(vecPointF,false);
+        }else if(type == ItemType::Paint_Arc){
+            addArcFitting(vecPointF[0],vecPointF[2],vecPointF[1],true);
+        }
     }else{
         if(type == ItemType::Paint_Poly){
             addPolygon(vecPointF);
@@ -1361,7 +1392,7 @@ void VisionGraph_::slot_addLine(QLine line)
 {
     if(m_graphType == GraphType::graphChain){
         addChain({line.p1(),line.p2()},true);
-    }else if(g_graphType == GraphType::graphItem_Fitting){
+    }else if(m_graphType == GraphType::graphItem_Fitting){
         addLineFitting(line,true);
     }else{
         addLine(line);
