@@ -29,6 +29,7 @@ enum ItemType{
 
     Paint_Rect,  //矩形
     Paint_EllipseItem,  //圆或者椭圆
+    Paint_CirCle,   //圆
     Paint_Arc,  //圆弧
     Paint_Poly,  //多边形
     Paint_Region,  //区域 -- 鼠标绘制，自动连接起始和结尾的区域，任意区域

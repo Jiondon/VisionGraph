@@ -740,6 +740,33 @@ VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPoint
     return item;
 }
 
+VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPointF, bool bClose, bool bEdit, qreal length, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    VisionPolygonItemFitting *item = new VisionPolygonItemFitting(bClose,bEdit,length,color);
+
+    QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+    QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+    QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,&QObject::destroyed,[=](){
+        m_lstItem.removeOne(item);
+        m_curVisionItem = nullptr;
+
+    });
+    if(vecPointF.count() > 0){
+        item->setPointFs(vecPointF,true);
+    }else{
+        item->setPointFs(vecPointF,false);
+    }
+    scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
+    return item;
+}
+
 
 int VisionGraph_::setBkImg(QImage image)
 {
@@ -1304,6 +1331,7 @@ void VisionGraph_::slot_clear_action()
 //        m_curVisionItem->deleteLater();
         m_curVisionItem = nullptr;
     }
+    scene->clear();
     qDebug()<<scene->items().count();
 }
 
@@ -1366,9 +1394,9 @@ void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF,ItemType type)
         }
     }else if(m_graphType == GraphType::graphItem_Fitting){
         if(type == ItemType::Paint_Poly){
-            addPolygon(vecPointF);
+            addPolygonFitting(vecPointF);
         }else if(type == ItemType::Paint_polyLine){
-            addPolygon(vecPointF,false);
+            addPolygonFitting(vecPointF,false);
         }else if(type == ItemType::Paint_Arc){
             addArcFitting(vecPointF[0],vecPointF[2],vecPointF[1],true);
         }

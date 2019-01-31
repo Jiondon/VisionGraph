@@ -30,6 +30,7 @@
 
 #include "./item/visionlineitemfitting.h"
 #include "./item/visionarcitemfitting.h"
+#include "./item/visionpolygonitemfitting.h"
 
 #include "./control/color.h"
 
