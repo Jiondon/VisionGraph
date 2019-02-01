@@ -9,7 +9,9 @@
 
 
 struct Line_Struct{
-
+    QLine line1;
+    QLine line2;
+    QLine line;
 };
 
 class VisionPolygonItemFitting : public VisionItem
@@ -92,6 +94,7 @@ private:
     QPolygonF m_poly;
     QVector<QPointF> m_lstPointF;
     QVector<QPointF> m_lstPointF1;
+    QList<Line_Struct> m_lstLineStruct;
 
 private:
     void initMiniRect();

@@ -288,6 +288,7 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
 
     m_lstPointF.clear();
     m_lstPointF1.clear();
+    m_lstLineStruct.clear();
 //    QList<QPointF> lstP1;
 //    QList<QPointF> lstP2;
 
@@ -306,30 +307,25 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
         for(int i=0;i<vec_p.count()-2;i++){
             m_lstPoly.append(getLineCircle(vec_p.at(i),vec_p.at(i+1),length));
         }
+        //获取到所有的点
+        //处理获取到的点的集合
+        //如果就一个，则直接结束
+        if(m_lstLineStruct.count() <= 0){
+            return poly;
+        }else if(m_lstLineStruct.count() == 1){
 
-        //获取首尾的两个点的半圆，
-//        QPainterPath path;
-//        path.moveTo(m_lstPointF.first());
-//        path.arcTo(m_vecPointFs_temp.first().x() - m_length,m_vecPointFs_temp.first().y()-m_length,2*m_length,2*m_length,
-//                   acos(m_lstPointF.first().x()/m_length)*180/Pi,180);
-
-//        QPainterPath path1;
-//        path1.moveTo(m_lstPointF.last());
-//        path1.arcTo(m_vecPointFs_temp.last().x() - m_length,m_vecPointFs_temp.last().y()-m_length,2*m_length,2*m_length,
-//                   acos(m_lstPointF.last().x()/m_length)*180/Pi,-180);
+        }else{
+            int j=0;
+            while ( j>= (m_lstLineStruct.count()-2)) {
+                struct1 = m_lstLineStruct.at(j);
+                struct2 = m_lstLineStruct.at(j+1);
+                //结构体中的line夹角<180 1,3是交点  >180 2,4是交点，=180 部分区别
 
 
 
-//        //外部轨迹  直线-圆弧-直线-圆弧
-//        vecP.append(m_lstPointF.first());
-//        for(int j=1;j<m_lstPointF.count()-2;j+=2){
-//            vecP.append(drawArc(m_lstPointF[j],m_lstPointF[j+1],vec_p[(j+1)/2],m_length));
-//        }
-//        vecP.append(m_lstPointF.last());
-
-////        内部轨迹 全部直线
-//        vecP.append(getCrossP(m_lstPointF1,m_bClose));
-
+                j++;
+            }
+        }
     }else{
         //封闭的图形
         //n个点--  n直线 -- n圆弧
@@ -337,14 +333,6 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
             m_lstPoly.append(getLineCircle(vec_p.at(i),vec_p.at(i+1),length));
         }
         m_lstPoly.append(getLineCircle(vec_p.at(vec_p.count()-2),vec_p.first(),length));
-
-
-
-//        for(int j=1;j<m_lstPointF.count()-2;j+=2){
-//            vecP.append(drawArc(m_lstPointF[j],m_lstPointF[j+1],vec_p[(j+1)/2],m_length));
-//        }
-//        vecP.append(drawArc(m_lstPointF.last(),m_lstPointF.first(),vec_p.last(),m_length));
-
     }
 
     poly.append(vecP);
@@ -379,45 +367,12 @@ QPolygonF VisionPolygonItemFitting::getLineCircle(QPointF p1, QPointF p2, qreal 
     //谁在前，谁在后
     m_lstPointF.append({tempP1,tempP3});
     m_lstPointF1.append({tempP2,tempP4});
+    Line_Struct lineStruct;
+    lineStruct.line1 = QLine(tempP1,tempP3);
+    lineStruct.line2 = QLine(tempP2,tempP4);
+    lineStruct.line = QLine(p1,p2);
+
     return QPolygonF({tempP1,tempP2,tempP4,tempP3});
-}
-
-QVector<QPointF> VisionPolygonItemFitting::drawArc(QPointF sP, QPointF fP, QPointF center, qreal r)
-{
-    QPainterPath path;
-    qreal sAngle;
-    qreal fAngle;
-    if(sP.y() > 0){
-        sAngle = (180/Pi)*acos((sP.x()-center.x())/r);
-    }else{
-        fAngle = 360 - (180/Pi)*acos((sP.x()-center.x())/r);
-    }
-
-    if(fP.y() > 0){
-        fAngle = (180/Pi)*acos((fP.x()-center.x())/r);
-    }else{
-        fAngle = 360 - (180/Pi)*acos((fP.x()-center.x())/r);
-    }
-
-    path.moveTo(center);
-    path.arcTo(center.x()-r,center.y()-r,2*r,2*r,360-sAngle,-(fAngle-sAngle));
-    QVector<QPointF> vecP = path.toFillPolygon().toList().toVector();
-    if(vecP.isEmpty())
-        return vecP;
-
-    vecP.removeFirst();
-    vecP.removeLast();
-    return vecP;
-}
-
-QVector<QPointF> VisionPolygonItemFitting::getCrossP(QVector<QPointF> vec_p, bool close)
-{
-    QVector<QPointF> vec;
-    vec.clear();
-    for(int i=0;i<(vec_p.count()/2-1);i++){
-        vec.append(getLineCrossP(vec_p[i],vec_p[i+1],vec_p[i+2],vec_p[i+3]));
-    }
-    return vec;
 }
 
 QPointF VisionPolygonItemFitting::getLineCrossP(QPointF p1, QPointF p2, QPointF p3, QPointF p4)
