@@ -50,24 +50,27 @@ public:
     void setSceneWidgetSize(qreal w,qreal h);
 
     /**
-     * @brief       添加rectangle  可旋转的矩形
-     * @param       bEdit 表示编辑
+     * @brief       带下划线的表示通过程序调用非编辑模式的，不带下划线的，通过绘制操作调用api
      */
-    VisionRectItem* addRect(QRectF rf,bool bEdit = true, bool bRotation = true,QColor color = QColor(255,0,0));
-
-
     QGraphicsRectItem* _addRect(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     QGraphicsPolygonItem* _addPolygon(const QPolygonF &polygon, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     QGraphicsLineItem* _addLine(const QLineF &line, const QPen &pen = QPen());
     QGraphicsEllipseItem* _addEllipse(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     VisionCrossPointItem* _addPoint(QPointF pointF,bool edit = false,QColor color = QColor(255,0,0));
     VisionChainItem* _addChain(QList<QPointF> lstP, bool bClosed = false, bool bEdit = false, QColor color = QColor(255,0,0));
+    VisionArrow *_addArrow(QPointF pointF,bool bEdit = false,QColor color = QColor(255,0,0));
+
+    /**
+     * @brief       添加rectangle  可旋转的矩形
+     * @param       bEdit 表示编辑
+     */
+    VisionRectItem* addRect(QRectF rf,bool bEdit = true, bool bRotation = true,QColor color = QColor(255,0,0));
+
     /**
      * @brief       添加一个arrow
      * @param       不可编辑的坐标系
      */
-    VisionArrow *_addArrow(QPointF pointF,bool bEdit = false,QColor color = QColor(255,0,0));
-
+    VisionArrow *addArrow(QPointF pointF,bool bEdit = false,QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加椭圆
