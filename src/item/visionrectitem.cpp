@@ -231,16 +231,15 @@ QRectF VisionRectItem::boundingRect() const
 
 void VisionRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //鼠标左键
-    QGraphicsItem::mousePressEvent(event);
-
     if(!m_bEdit)
         return;
+
+    //鼠标左键
+    QGraphicsItem::mousePressEvent(event);
 
     //说明鼠标处于小编辑框，忽略该事件
     if(m_iIndex != -1)
         return;
-
 
     //过滤掉在boundingRect但是不在绘制的有效区域的点击
 

@@ -155,10 +155,11 @@ void VisionArcItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionArcItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mousePressEvent(event);
-
     if(!m_bEdit)
         return;
+
+    QGraphicsItem::mousePressEvent(event);
+
 
     if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
         setSelectedStatus(false);

@@ -138,12 +138,12 @@ void VisionArcItemFitting::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void VisionArcItemFitting::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mousePressEvent(event);
     m_bFitting = false;
 
     if(!m_bEdit)
         return;
 
+    QGraphicsItem::mousePressEvent(event);
 
     if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
         setSelectedStatus(false);

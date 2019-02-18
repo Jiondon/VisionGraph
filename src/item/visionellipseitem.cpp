@@ -194,11 +194,11 @@ QRectF VisionEllipseItem::boundingRect() const
 
 void VisionEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //鼠标左键
-    QGraphicsItem::mousePressEvent(event);
-
     if(!m_bEdit)
         return;
+
+    //鼠标左键
+    QGraphicsItem::mousePressEvent(event);
 
     if(m_iIndex != -1)
         return;

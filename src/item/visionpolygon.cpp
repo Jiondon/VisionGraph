@@ -126,10 +126,10 @@ QRectF VisionPolygon::boundingRect() const
 
 void VisionPolygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mousePressEvent(event);
-
     if(!m_bEdit)
         return;
+
+    QGraphicsItem::mousePressEvent(event);
 
     m_lastPointF = event->scenePos();
 

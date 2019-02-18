@@ -19,7 +19,7 @@ VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidt
     if(m_bEdit){
         setSelectedStatus(true);
     }else{
-        setSelectedStatus(true);
+        setSelectedStatus(false);
     }
 
     m_miniRect1 = new MiniRect(m_pointF1.x()-5,m_pointF1.y()-5,10,10,QColor(255,0,0),this);
@@ -127,13 +127,14 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+
+    if(!m_bEdit)
+        return;
+
     //            A = Y2 - Y1
     //            B = X1 - X2
     //            C = X2*Y1 - X1*Y2
     QGraphicsItem::mousePressEvent(event);
-
-    if(!m_bEdit)
-        return;
 
     if(m_iIndex != -1)
         return;
