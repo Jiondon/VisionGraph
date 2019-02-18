@@ -304,7 +304,7 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
         //非封闭的图形
         //获取首尾两个点的半圆
         //n个点--  n-1直线 -- n-2圆弧
-        for(int i=0;i<vec_p.count()-2;i++){
+        for(int i=0;i<vec_p.count()-1;i++){
             m_lstPoly.append(getLineCircle(vec_p.at(i),vec_p.at(i+1),length));
         }
         //获取到所有的点
@@ -323,10 +323,10 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
     }else{
         //封闭的图形
         //n个点--  n直线 -- n圆弧
-        for(int i=0;i<vec_p.count()-2;i++){
+        for(int i=0;i<vec_p.count()-1;i++){
             m_lstPoly.append(getLineCircle(vec_p.at(i),vec_p.at(i+1),length));
         }
-        m_lstPoly.append(getLineCircle(vec_p.at(vec_p.count()-2),vec_p.first(),length));
+        m_lstPoly.append(getLineCircle(vec_p.at(vec_p.count()-1),vec_p.first(),length));
     }
 
     poly.append(vecP);
