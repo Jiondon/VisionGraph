@@ -1331,7 +1331,8 @@ void VisionGraph_::slot_clear_action()
 //        m_curVisionItem->deleteLater();
         m_curVisionItem = nullptr;
     }
-    scene->clear();
+//    scene->clear();
+    //scene的部分item是不可以clear的，只需要clear掉绘制的item即可
     qDebug()<<scene->items().count();
 }
 

@@ -940,14 +940,12 @@ void VisionGraphView::detailPressEvent(QMouseEvent *event)
     if(event->button() == Qt::RightButton){
         //多边形和折线右击结束绘制
         if(m_itemType == ItemType::Paint_Poly){
-            m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
             emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_Poly);
         }else if(m_itemType == ItemType::Paint_polyLine){
-            m_vecPoint_Poly.append(this->mapToScene(m_releasePointF.toPoint()));
             emit signal_Item_poly(m_vecPoint_Poly,ItemType::Paint_polyLine);
         }
         m_bPress = false;  //绘制结束
-
+        qDebug()<<"poly polyLine draw is finished!"<<m_vecPoint_Poly.count();
         //绘制结束
         QPainterPath path;
         m_path = path;

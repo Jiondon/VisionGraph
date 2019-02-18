@@ -315,17 +315,11 @@ QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p
         }else if(m_lstLineStruct.count() == 1){
 
         }else{
-            int j=0;
-            while ( j>= (m_lstLineStruct.count()-2)) {
-                struct1 = m_lstLineStruct.at(j);
-                struct2 = m_lstLineStruct.at(j+1);
-                //结构体中的line夹角<180 1,3是交点  >180 2,4是交点，=180 部分区别
-
-
-
-                j++;
+            for(int i=0;i<m_lstLineStruct.count()-1;i++){
+                m_lstLineStruct[i] = detailLine(m_lstLineStruct[i],m_lstLineStruct[i+1]);
             }
         }
+
     }else{
         //封闭的图形
         //n个点--  n直线 -- n圆弧
@@ -368,11 +362,121 @@ QPolygonF VisionPolygonItemFitting::getLineCircle(QPointF p1, QPointF p2, qreal 
     m_lstPointF.append({tempP1,tempP3});
     m_lstPointF1.append({tempP2,tempP4});
     Line_Struct lineStruct;
-    lineStruct.line1 = QLine(tempP1,tempP3);
-    lineStruct.line2 = QLine(tempP2,tempP4);
-    lineStruct.line = QLine(p1,p2);
+    lineStruct.line1 = QLineF(tempP1,tempP3);
+    lineStruct.line2 = QLineF(tempP2,tempP4);
+
+    QLineF line = QLineF(p1,p2);
+    lineStruct.line = line;
+    m_lstLineStruct.append(lineStruct);
+
 
     return QPolygonF({tempP1,tempP2,tempP4,tempP3});
+}
+
+Line_Struct VisionPolygonItemFitting::detailLine(Line_Struct lineStruct1, Line_Struct lineStruct2)
+{
+    //lineStruct1相对lineStruct2；
+    //获取line的x，y范围
+    QLineF line = lineStruct2.line;
+    qreal minX,maxX,minY,maxY;
+    if(line.p1().x() < line.p2().x()){
+        minX = line.p1().x();
+        maxX = line.p2().x();
+    }
+    if(line.p1().y() < line.p2().y()){
+        minY = line.p1().y();
+        maxY = line.p2().y();
+    }
+
+    //line1和line的交点
+    QPointF p1 = getLineCrossP(lineStruct1.line1.p1(),lineStruct1.line1.p2(),lineStruct2.line.p1(),lineStruct2.line.p2());
+    //line2和line的交点
+    QPointF p2 = getLineCrossP(lineStruct1.line2.p1(),lineStruct1.line2.p2(),lineStruct2.line.p1(),lineStruct2.line.p2());
+
+    Line_Struct lineStu1;
+    if((p1.x() <= maxX && p1.x() >= minX) && (p1.y() <= maxY && p1.y() >= minY)){
+        //lineStruct1的line1与lineStruct2的line相交在线上
+        lineStu1.line1 = lineStruct1.line2;
+        lineStu1.line2 = lineStruct1.line1;
+    }else if((p2.x() <= maxX && p2.x() >= minX) && (p2.y() <= maxY && p2.y() >= minY)){
+        //lineStruct1的line2与lineStruct2的line相交在线上
+        lineStu1.line1 = lineStruct1.line1;
+        lineStu1.line2 = lineStruct1.line2;
+    }else{
+        lineStu1.line1 = lineStruct1.line1;
+        lineStu1.line2 = lineStruct1.line2;
+    }
+
+    //lineStruct2相对lineStruct1；
+    //line1和line的交点
+//    QPointF p_1 = getLineCrossP(lineStruct2.line1.p1(),lineStruct2.line1.p2(),lineStruct1.line.p1(),lineStruct1.line.p2());
+//    //line2和line的交点
+//    QPointF p_2 = getLineCrossP(lineStruct2.line2.p1(),lineStruct2.line2.p2(),lineStruct1.line.p1(),lineStruct1.line.p2());
+
+//    Line_Struct lineStu2;
+//    if((p_1.x() <= maxX && p_1.x() >= minX) && (p_1.y() <= maxY && p_1.y() >= minY)){
+//        //lineStruct1的line1与lineStruct2的line相交在线上
+//        lineStu2.line1 = lineStruct2.line2;
+//        lineStu2.line2 = lineStruct2.line1;
+//    }else if((p_2.x() <= maxX && p_2.x() >= minX) && (p_2.y() <= maxY && p_2.y() >= minY)){
+//        //lineStruct1的line2与lineStruct2的line相交在线上
+//        lineStu2.line1 = lineStruct2.line1;
+//        lineStu2.line2 = lineStruct2.line2;
+//    }else{
+//        lineStu2.line1 = lineStruct2.line1;
+//        lineStu2.line2 = lineStruct2.line2;
+//    }
+
+    return lineStu1;
+}
+
+QPolygonF VisionPolygonItemFitting::drawArc(QPointF sP, QPointF fP, QPointF center, qreal r)
+{
+    //三点确定一个圆,硬解，可得到表达式（三点一线的时候，则无法形成圆）
+    double x1 = sP.x(), x2 = fP.x();
+    double y1 = sP.y(), y2 = fP.y();
+
+
+    double x0 = center.x();
+    double y0 = center.y();
+
+    //计算每个点和圆心所形成的的角度
+    double angle1 = acos((x1-x0)/(hypot((x1-x0),(y1-y0))));
+    double angle2 = acos((x2-x0)/(hypot((x2-x0),(y2-y0))));
+    if(y1-y0 < 0){
+        angle1 = 2*Pi - angle1;
+    }else{
+        angle1 = angle1;
+    }
+
+    if(y2-y0 < 0){
+        angle2 = 2*Pi - angle2;
+    }else{
+        angle2 = angle2;
+    }
+
+    //上面计算的角度是基于QGraphicsView中的坐标，需要进行转换为数学坐标中的角度
+    angle1 = 360-angle1*180/Pi;
+    angle2 = 360-angle2*180/Pi;
+
+    qDebug()<<angle1<<angle2;
+
+    qreal angle;
+    qreal spanAngle;
+
+    QPainterPath path;
+    if(angle1 < angle2){
+        //1是起点，2是终点
+        angle = angle1;
+        spanAngle = angle2 - angle1;
+    }else{
+        //2是起点，1是终点
+        angle = angle2;
+        spanAngle = angle1 - angle2;
+    }
+    path.arcTo(center.x()-r,center.y()-r,2*r,2*r,angle,spanAngle);
+
+    return path.toFillPolygon();
 }
 
 QPointF VisionPolygonItemFitting::getLineCrossP(QPointF p1, QPointF p2, QPointF p3, QPointF p4)
