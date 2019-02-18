@@ -131,11 +131,13 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         painter->setPen(QPen(QBrush(m_selectedColor),0));
 
         //编辑模式下的小矩形框
-        for(int i=0;i<m_lstRect.count();i++){
-            if(i%2 == 0){
-                m_lstRect[i]->setVisible(false);
-            }else{
-                m_lstRect[i]->setVisible(true);
+        if(m_bEdit){
+            for(int i=0;i<m_lstRect.count();i++){
+                if(i%2 == 0){
+                    m_lstRect[i]->setVisible(false);
+                }else{
+                    m_lstRect[i]->setVisible(true);
+                }
             }
         }
 
@@ -486,6 +488,8 @@ void VisionEllipseItem::initItem()
     miniRect8->setIndex(7);
     QObject::connect(miniRect8,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
+    miniRect1->hide();miniRect2->hide();miniRect3->hide();miniRect4->hide();
+    miniRect5->hide();miniRect6->hide();miniRect7->hide();miniRect8->hide();
 
     m_lstRect.append(miniRect1);
     m_lstRect.append(miniRect2);

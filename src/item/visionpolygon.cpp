@@ -72,8 +72,10 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
         painter->setPen(QPen(QBrush(m_selectedColor),0));
 
-        for(int i=0;i<m_lstRect.count();i++){
-            m_lstRect[i]->show();
+        if(m_bEdit){
+            for(int i=0;i<m_lstRect.count();i++){
+                m_lstRect[i]->show();
+            }
         }
 
         emit selectedChanged(true,this,ItemType::Paint_Poly,m_vecPointFs);
@@ -204,6 +206,7 @@ void VisionPolygon::initMiniRect()
         MiniRect* miniRect = new MiniRect(m_vecPointFs_temp.at(i).x()-5,m_vecPointFs_temp.at(i).y()-5,10,10,QColor(255,0,0),this);
         miniRect->setIndex(i);
         connect(miniRect,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
+        miniRect->hide();
         m_lstRect.append(miniRect);
     }
 

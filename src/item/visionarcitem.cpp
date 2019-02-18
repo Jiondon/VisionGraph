@@ -91,6 +91,9 @@ void VisionArcItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->drawArc(QRectF(0,0,2*m_r,2*m_r),m_angle*16,m_spanAngle*16);
 
+    if(!m_bEdit)
+        return;
+
     if(option->state & QStyle::State_Selected){
         m_sMiniRect->show();
         m_mMiniRect->show();

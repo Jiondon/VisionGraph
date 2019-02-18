@@ -72,6 +72,10 @@ void VisionArcItemFitting::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     painter->drawPolygon(m_polygonF);
 
+
+    if(!m_bEdit)
+        return;
+
     if(option->state & QStyle::State_Selected){
         m_sMiniRect->show();
         m_mMiniRect->show();

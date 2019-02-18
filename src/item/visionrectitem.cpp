@@ -175,9 +175,11 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     //item pos ()
     if(option->state & QStyle::State_Selected){
 
-        //编辑模式下的小矩形框
-        for(int i=0;i<m_lstRect.count();i++){
-            m_lstRect[i]->setVisible(true);
+        if(m_bEdit){
+            //编辑模式下的小矩形框
+            for(int i=0;i<m_lstRect.count();i++){
+                m_lstRect[i]->setVisible(true);
+            }
         }
 
         emit selectedChanged(true,this,ItemType::Paint_Rect,QRectF(m_x,m_y,m_width,m_height),m_pointF1,m_angle);
@@ -572,6 +574,9 @@ void VisionRectItem::initItem()
     MiniRect* miniRect8 = new MiniRect(-5,-5+m_height/2,10,10,QColor(255,0,0),this);
     miniRect8->setIndex(7);
     connect(miniRect8,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
+
+    miniRect1->hide();miniRect2->hide();miniRect3->hide();miniRect4->hide();
+    miniRect5->hide();miniRect6->hide();miniRect7->hide();miniRect8->hide();
 
     m_lstRect.append(miniRect1);
     m_lstRect.append(miniRect2);
