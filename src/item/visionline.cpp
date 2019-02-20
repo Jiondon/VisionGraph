@@ -3,9 +3,10 @@
 
 VisionLine::VisionLine(QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
-    m_brushColor = brushColor;
-    m_selectedColor = selectedColor;
+    m_borderColor = color;
+//    m_borderColor = borderColor;
+//    m_brushColor = brushColor;
+//    m_selectedColor = selectedColor;
 }
 
 void VisionLine::setLine(QLineF lineF)
@@ -55,7 +56,7 @@ void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     QPen pen = QPen(m_borderColor,0);
     painter->setPen(pen);
-    painter->setBrush(Qt::red);
+//    painter->setBrush(Qt::red);
     if(m_style == SINGLE){
         painter->drawLine(m_lineF);
     }else{
