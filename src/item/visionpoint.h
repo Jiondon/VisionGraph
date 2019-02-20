@@ -14,6 +14,11 @@
 #include <QPainter>
 #include "../control/visionitem.h"
 
+enum Style{
+    SINGLE,
+    MULTI
+};
+
 class VISIONGRAPHSHARED_EXPORT VisionPoint : public VisionItem
 {
     Q_OBJECT
@@ -21,6 +26,7 @@ public:
     explicit VisionPoint(QColor color = QColor(255,0,0),VisionItem *parent = 0);
 
     void setPointF(QPointF pointF);
+    void setPointFs(QList<QPointF> lstP);
 
     QPointF getP(){
         return m_pointF;
@@ -42,6 +48,8 @@ signals:
 
 private:
     QPointF m_pointF;
+    QList<QPointF> m_lstPointF;
+    Style m_style = SINGLE;
 
     QColor m_borderColor;
     QColor m_brushColor;
