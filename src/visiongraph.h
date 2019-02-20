@@ -89,16 +89,16 @@ public:
 
     /**
      * @brief       添加线
-     * @param       具体方法未实现
+     * @param
      */
     VisionLineItem* addLine(QLine line, bool bEdit = true, QColor color = QColor(255,0,0));
 
 
     /**
      * @brief       添加线
-     * @param       具体方法未实现
+     * @param       不可编辑，可实现大数量线的绘制，只支持程序调用
      */
-    void addLines(QList<QLine> lstLine,QColor color = QColor(255,0,0));
+    VisionLine* addLines(QList<QLineF> lstLineF, QColor color = QColor(255,0,0));
 
 
     /**
@@ -109,9 +109,15 @@ public:
 
     /**
      * @brief       添加一个点
-     * @param       具体方法未实现
+     * @param
      */
     VisionCrossPointItem* addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,0,0));
+
+    /**
+     * @brief       添加一个点 -- 不限数量
+     * @param
+     */
+    VisionPoint *addPointFs(QList<QPointF> lstP, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个链

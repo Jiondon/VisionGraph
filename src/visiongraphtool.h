@@ -27,6 +27,8 @@
 #include "./item/visionchainitem.h"
 #include "./item/visionarrow.h"
 #include "./item/visionarcitem.h"
+#include "./item/visionline.h"
+#include "./item/visionpoint.h"
 
 #include "./item/visionlineitemfitting.h"
 #include "./item/visionarcitemfitting.h"

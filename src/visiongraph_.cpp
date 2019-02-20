@@ -689,9 +689,13 @@ VisionLineItem *VisionGraph_::addLine(QLine line,bool bEdit, QColor color)
     }
 }
 
-void VisionGraph_::addLines(QList<QLine> lstLine, QColor color)
+VisionLine *VisionGraph_::addLines(QList<QLineF> lstLineF, QColor color)
 {
-
+    //特殊控件添加---只能通过程序添加
+    VisionLine *item = new VisionLine(color);
+    item->setLines(lstLineF);
+    scene->addItem(item);
+    return item;
 }
 
 VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF,bool bClose,bool bEdit, QColor color)
@@ -779,6 +783,14 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, QColor 
         emit signal_itemFinished(item);
         return item;
     }
+}
+
+VisionPoint *VisionGraph_::addPointFs(QList<QPointF> lstP, QColor color)
+{
+    VisionPoint *item = new VisionPoint(color);
+    item->setPointFs(lstP);
+    scene->addItem(item);
+    return item;
 }
 
 VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool edit, QColor color)

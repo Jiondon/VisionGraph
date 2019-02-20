@@ -14,10 +14,6 @@
 #include <QPainter>
 #include "../control/visionitem.h"
 
-enum Style{
-    SINGLE,
-    MULTI
-};
 
 class VISIONGRAPHSHARED_EXPORT VisionPoint : public VisionItem
 {
@@ -39,9 +35,16 @@ public:
     QVector<QPointF> getPoints();
 
 
+    bool getPosInArea(qreal x,qreal y);
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
+
+    enum Style{
+        SINGLE,
+        MULTI
+    };
 
 signals:
     void signalChanged(VisionItem* item);

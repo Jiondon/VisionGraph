@@ -5,16 +5,11 @@
 #include <QPainter>
 #include "../control/visionitem.h"
 
-enum Style{
-    SINGLE,
-    MULTI
-};
-
 class VISIONGRAPHSHARED_EXPORT VisionLine : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionLine(VisionItem *parent = 0);
+    explicit VisionLine(QColor color = QColor(255,0,0),VisionItem *parent = 0);
 
     void setLine(QLineF lineF);
     void setLines(QList<QLineF> lstLineF);
@@ -26,10 +21,16 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    bool getPosInArea(qreal x,qreal y);
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
 
+    enum Style{
+        SINGLE,
+        MULTI
+    };
 
 signals:
     void signalChanged(VisionItem* item);

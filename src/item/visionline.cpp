@@ -1,7 +1,7 @@
 ﻿#include "visionline.h"
 #include "../control/color.h"
 
-VisionLine::VisionLine(VisionItem *parent) : VisionItem(parent)
+VisionLine::VisionLine(QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
@@ -41,6 +41,11 @@ QVector<QPointF> VisionLine::getPoints()
     return vec_p;
 }
 
+bool VisionLine::getPosInArea(qreal x, qreal y)
+{
+    return true;
+}
+
 void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)
@@ -54,7 +59,7 @@ void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     if(m_style == SINGLE){
         painter->drawLine(m_lineF);
     }else{
-        painter->drawLines(m_lstLineF);
+        painter->drawLines(m_lstLineF.toVector());
     }
 }
 

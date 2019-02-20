@@ -43,6 +43,11 @@ QVector<QPointF> VisionPoint::getPoints(){
     return vec_p;
 }
 
+bool VisionPoint::getPosInArea(qreal x, qreal y)
+{
+    return true;
+}
+
 void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)

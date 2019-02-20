@@ -103,9 +103,9 @@ VisionLineItem *VisionGraph::addLine(QLine line,bool bEdit, QColor color)
     return m_graphWidget->addLine(line,bEdit,color);
 }
 
-void VisionGraph::addLines(QList<QLine> lstLine, QColor color)
+VisionLine *VisionGraph::addLines(QList<QLineF> lstLineF, QColor color)
 {
-    m_graphWidget->addLines(lstLine,color);
+    return m_graphWidget->addLines(lstLineF,color);
 }
 
 VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, bool bEdit, QColor color)
@@ -116,6 +116,11 @@ VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, b
 VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit, QColor color)
 {
     return m_graphWidget->addPoint(pointF,bEdit,color);
+}
+
+VisionPoint *VisionGraph::addPointFs(QList<QPointF> lstP, QColor color)
+{
+    return m_graphWidget->addPointFs(lstP,color);
 }
 
 VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close,bool edit, QColor color)
