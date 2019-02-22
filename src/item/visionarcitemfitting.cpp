@@ -115,6 +115,12 @@ void VisionArcItemFitting::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         m_p1 = m_p1 + disPoint;
         m_p2 = m_p2 + disPoint;
         m_p3 = m_p3 + disPoint;
+    }else if(m_iIndex == 5){
+        //边框拖动只改变m_length
+        float x = event->scenePos().x() - m_center.x();
+        float y = event->scenePos().y() - m_center.y();
+        qreal l = fabs(m_r - sqrt(x*x+y*y));
+        m_length = l;
     }else{
         //移动某一个点
         if(m_iIndex == 1){
@@ -209,7 +215,26 @@ void VisionArcItemFitting::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
         this->scene()->update();
     }else{
+
+        if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
+            return;
+        }
+
         //获取边框的状态；
+        float x = event->scenePos().x() - m_center.x();
+        float y = event->scenePos().y() - m_center.y();
+        qreal l = fabs(m_r - sqrt(x*x+y*y));
+
+        //同时要保证点在圆弧上， angle< <angle_spanAngle;
+
+        if(l<m_length+3 && l > m_length-3){
+            m_iIndex = 5;
+            this->scene()->views().at(0)->setCursor(Qt::SizeVerCursor);
+        }else{
+            //恢复正常
+            m_iIndex = -1;
+            this->scene()->views().at(0)->setCursor(viewCursor);
+        }
     }
 }
 
