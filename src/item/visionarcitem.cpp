@@ -8,7 +8,7 @@ VisionArcItem::VisionArcItem(bool bEdit, QColor color, VisionItem *parent) : Vis
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_bEdit = bEdit;
     if(m_bEdit){

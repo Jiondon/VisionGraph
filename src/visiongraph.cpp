@@ -47,6 +47,11 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
     m_graphWidget->setSceneWidgetSize(w,h);
 }
 
+void VisionGraph::setThemeColor(ThemeColor theme)
+{
+    m_graphWidget->setThemeColor(theme);
+}
+
 
 VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit,bool bRotation, QColor color)
 {
@@ -173,7 +178,7 @@ void VisionGraph::setBrushColor(QColor color)
 
 void VisionGraph::setRegionColor(QColor color)
 {
-    regionColor = color;
+//    regionColor = color;
 }
 
 

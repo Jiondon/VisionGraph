@@ -33,6 +33,12 @@ public:
     void setSceneWidgetSize(qreal w,qreal h);
 
     /**
+     * @brief       主题颜色设置
+     * @param
+     */
+    void setThemeColor(ThemeColor theme);
+
+    /**
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */

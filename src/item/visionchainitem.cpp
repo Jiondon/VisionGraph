@@ -10,7 +10,7 @@ VisionChainItem::VisionChainItem(bool bClosed, bool edit, QColor color, QObject 
 //    setAcceptHoverEvents(true);
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_pointFColor = borderColor;
     m_lstChainPoint.clear();

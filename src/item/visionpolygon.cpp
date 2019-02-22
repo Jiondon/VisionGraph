@@ -6,7 +6,7 @@ VisionPolygon::VisionPolygon(bool close, bool edit, QColor color, VisionItem *pa
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);

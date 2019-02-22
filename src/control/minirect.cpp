@@ -9,7 +9,7 @@ MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphic
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_x = x;m_y = y;m_width = w;m_height = h;
     m_penColor = penColor;

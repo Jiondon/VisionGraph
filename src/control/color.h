@@ -30,6 +30,14 @@ enum GraphType{
     graphItem_Fitting
 };
 
+/**
+ * @brief       枚举颜色主题
+ * @note        red_black_white 默认
+ */
+enum ThemeColor{
+    lightBlue,
+    dark
+};
 
 extern QColor selectedColor;  //item在选中或者编辑状态下的小矩形和边框的颜色
 extern QColor borderColor;   //绘制的item的边框颜色  未选中或者非编辑的颜色

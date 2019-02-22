@@ -13,7 +13,7 @@ VisionRectItem::VisionRectItem(bool edit, bool rotation, QColor color, VisionIte
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     penColor = QColor(0,0,0);//black
     penWidth = 1;

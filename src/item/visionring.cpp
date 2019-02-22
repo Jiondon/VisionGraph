@@ -9,7 +9,7 @@ VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bE
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable,true);

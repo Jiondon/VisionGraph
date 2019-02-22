@@ -1,4 +1,12 @@
-﻿#ifndef VISIONLINE_H
+﻿/****************************************************************************
+** @brief       基于VisionItem类封装的直线--大数量直线的控件
+** @note        该类主要是用于绘制大数量的直线的控件，只作为显示，主要是为了解决大数量直线单独绘制的耗时问题
+** @author      xiaodongLi
+** @date        create:2019-02-20
+** @example     /as VisionPoint
+****************************************************************************/
+
+#ifndef VISIONLINE_H
 #define VISIONLINE_H
 
 #include <QObject>

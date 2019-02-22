@@ -10,7 +10,7 @@ VisionArcItemFitting::VisionArcItemFitting(bool bEdit, qreal length, QColor colo
 
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_bFitting = true;
     m_length = length;

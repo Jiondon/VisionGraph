@@ -38,6 +38,26 @@ void VisionGraph_::setSceneWidgetSize(qreal w, qreal h)
     sceneWidget->resize(w,h);
 }
 
+void VisionGraph_::setThemeColor(ThemeColor theme)
+{
+    if(theme == ThemeColor::dark){
+        selectedColor = QColor(255,0,0);
+        borderColor = QColor(255,0,0);
+        brushColor = QColor(255,0,0,50);
+//        regionColor = QColor(255,0,0);
+    }else if(theme == ThemeColor::lightBlue){
+        selectedColor = QColor(0,0,0);
+        borderColor = QColor(100,149,237);
+        brushColor = QColor(50,75,119,70);
+//        regionColor = QColor(255,0,0);
+    }else{
+        selectedColor = QColor(255,0,0);
+        borderColor = QColor(255,0,0);
+        brushColor = QColor(255,0,0,50);
+//        regionColor = QColor(255,0,0);
+    }
+}
+
 
 void VisionGraph_::initScene()
 {

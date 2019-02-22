@@ -4,9 +4,9 @@
 VisionLine::VisionLine(QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = color;
-//    m_borderColor = borderColor;
-//    m_brushColor = brushColor;
-//    m_selectedColor = selectedColor;
+    m_borderColor = borderColor;
+    m_brushColor = brushColor;
+    m_selectedColor = selectedColor;
 }
 
 void VisionLine::setLine(QLineF lineF)

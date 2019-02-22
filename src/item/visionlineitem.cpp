@@ -8,7 +8,7 @@ VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidt
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_pointF1 = p1;m_pointF2 = p2;
     m_penColor = penColor;

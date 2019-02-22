@@ -10,7 +10,7 @@ VisionCrossPointItem::VisionCrossPointItem(bool edit, QColor color, VisionItem *
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
     m_bEdit = edit;
     if(m_bEdit){
         setSelectedStatus(true);

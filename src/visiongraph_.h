@@ -50,6 +50,12 @@ public:
     void setSceneWidgetSize(qreal w,qreal h);
 
     /**
+     * @brief       主题颜色设置
+     * @param
+     */
+    void setThemeColor(ThemeColor theme);
+
+    /**
      * @brief       带下划线的表示通过程序调用非编辑模式的，不带下划线的，通过绘制操作调用api
      */
     QGraphicsRectItem* _addRect(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());

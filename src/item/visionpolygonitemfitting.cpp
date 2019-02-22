@@ -9,7 +9,7 @@ VisionPolygonItemFitting::VisionPolygonItemFitting(bool close, bool edit, qreal 
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
-    m_selectedColor = m_selectedColor;
+    m_selectedColor = selectedColor;
 
     m_bFitting = true;
     m_length = length;
