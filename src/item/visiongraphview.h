@@ -296,6 +296,7 @@ private:
     bool m_bFrameVisible = true;  //算法区域是否显示出来
     QColor m_FrameColor = Qt::lightGray;   //算法区域的颜色
 
+    bool m_bPress_Drag = false;  //提供给拖动进行控制，只有在按下的状态，拖动才有效
 protected:
 
 public slots:
@@ -373,6 +374,8 @@ private:
     void detailPressEvent(QMouseEvent *event);
 
     QList<qreal> getArc(QPointF sP, QPointF mP, QPointF fP);
+
+    QRectF detail_ellipse_InRectToOutRect(QRectF rf);
 };
 
 #endif // VISIONGRAPHVIEW_H

@@ -61,9 +61,10 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     }
 
     //拖动
-    if(m_bPress && m_itemType == ItemType::Drag){
+    if(m_bPress_Drag && m_itemType == ItemType::Drag){
         QPointF disPointF = scenePos - (this->mapToScene(m_lastPointF.toPoint()));
         m_lastPointF = viewPos;
+        qDebug()<<disPointF;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
         return;
@@ -95,8 +96,10 @@ void VisionGraphView::mousePressEvent(QMouseEvent *event)
     m_pressPointF = viewPos;
     m_pressPointF_scene = scenePos;
 
-    if(m_itemType == ItemType::Drag)
+    if(m_itemType == ItemType::Drag){
+        m_bPress_Drag = true;
         return;
+    }
 
     QGraphicsView::mousePressEvent(event);
 
@@ -118,8 +121,10 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
     m_releasePointF = viewPos;
 
-    if(m_itemType == ItemType::Drag)
+    if(m_itemType == ItemType::Drag){
+        m_bPress_Drag = false;
         return;
+    }
 
     QGraphicsView::mouseReleaseEvent(event);
 
@@ -210,7 +215,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 
     painter.setPen(QPen(brushColor,m_scale));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
+//    painter.scale(m_scale,m_scale);
+//    qDebug()<<m_vecLines.count()<<"          0000000000000000000000000";
     for(int i=0;i<m_vecLines.size();i++){
+//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
     }
@@ -786,7 +794,10 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
     }else if(m_itemType == ItemType::Paint_EllipseItem){
         //绘制椭圆
         QPainterPath path;
-        path.addEllipse(QRectF(m_pressPointF,viewPos));
+        QRectF rf = detail_ellipse_InRectToOutRect(QRectF(m_pressPointF,viewPos));
+        path.addEllipse(rf);
+
+//        path.addEllipse(QRectF(m_pressPointF,viewPos));
         m_path = path;
     }else if(m_itemType == ItemType::Paint_Arc){
         //释放，记录坐标，有一个点，跟随鼠标绘制直线，有两个点，跟随鼠标绘制圆弧
@@ -1007,7 +1018,10 @@ void VisionGraphView::detailPressEvent(QMouseEvent *event)
                     bottomRightPoint.setY(m_vecPoint_Poly[0].y());
                 }
 
-                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                //点转化，绘制的事内接矩形的点，转化为外接的矩形的点
+                QRectF rf = detail_ellipse_InRectToOutRect(QRectF(topLeftPoint,bottomRightPoint));
+//                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                emit signal_Item(m_itemType,rf);
                 m_bPress = false;  //绘制结束
 
                 QPainterPath path;
@@ -1167,6 +1181,70 @@ QList<qreal> VisionGraphView::getArc(QPointF sP, QPointF mP, QPointF fP)
 //    qDebug()<<angle<<spanAngle;
     return lstData;
 
+}
+
+QRectF VisionGraphView::detail_ellipse_InRectToOutRect(QRectF rf)
+{
+    //rf是外接矩形。对角线与椭圆相交的点即为内接矩形
+    //椭圆方程已知，直线已知
+
+    //   x^2/(w/2)^2+y^2/(h/2)^2=1;  由于w和h本身包含了长短，故，可以作为一般方程式，
+    //   直线方程，Ax+By+C=0;   两点 topLeft，bottomRight
+
+    return rf;
+    float A = rf.bottomRight().y() - rf.topLeft().y();
+    float B = rf.topLeft().x() - rf.bottomRight().x();
+    float C = rf.bottomRight().x()*rf.topLeft().y() - rf.topLeft().x()*rf.bottomRight().y();
+
+    float a=rf.width()/2;
+    float b=rf.height()/2;
+
+    float m=B*B*(b*b)+(A*A*a*a);
+    float n=2*B*C*b*b;
+    float p=b*b*C*C-A*A*a*a*b*b;
+
+    float m1=A*A*a*a+(B*B*b*b);
+    float n1=2*A*C*a*a;
+    float p1=C*C*a*a-B*B*b*b*a*a;
+
+    qDebug()<<n*n-4*m*p<<p;
+    if(n*n-4*m*p < 0 || n1*n1-4*m1*p1 < 0)
+        return rf;
+    float y1=(-n-sqrt(n*n-4*m*p))/(2*m);
+    float y2=(-n+sqrt(n*n-4*m*p))/(2*m);
+    float x1=(-n1-sqrt(n1*n1-4*m1*p1))/(2*m1);
+    float x2=(-n1+sqrt(n1*n1-4*m1*p1))/(2*m1);
+    return QRectF(QPointF(x1,y2),QPointF(x2,y1));
+    /*
+    float a=0,b=0,c=0; //a-x轴，b-y轴
+    float x=0,y=0;
+    x=fabs(rf.topLeft().x()-rf.bottomRight().x())/2;
+    y=fabs(rf.topLeft().y()-rf.bottomRight().y())/2;
+    float ftan = x/y;
+    QPointF disP;
+    if(x>y){
+        //椭圆的焦点在x轴上
+        c=x;
+        a=(x*x)/sqrt(x*x-y*y);
+        b=(x*y)/sqrt(x*x-y*y);
+        disP = QPointF(a-x,(b-y)/ftan);
+
+    }else if(x<y){
+        //椭圆的焦点在y轴上
+        c=y;
+        a=(x*y)/sqrt(y*y-x*x);
+        b=(y*y)/sqrt(y*y-x*x);
+        disP = QPointF((a-x)*ftan,(b-y));
+    }else{
+        //圆
+        c=x;
+        a=2*x;
+        b=2*x;
+        disP = QPointF(a-x,(b-y));
+    }
+    QRectF rf1 = QRectF(rf.topLeft()-disP,rf.bottomRight()+disP);
+    return rf;
+    */
 }
 
 void VisionGraphView::slotUpdateViewInfo_Pos()
