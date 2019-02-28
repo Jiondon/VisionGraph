@@ -87,6 +87,8 @@ private:
     void updateData();  //数据刷新---当某些数据变化的时候，对应的rect，等其他属性刷新
 
     void updateMiniRect();
+    qreal getMinDistance(QVector<QPointF> vec_p, bool close, QPointF p);
+    qreal getDistance(QPointF p1, QPointF p2, QPointF p);
 
 private:
     QLineF m_lineF;

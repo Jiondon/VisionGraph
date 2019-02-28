@@ -120,11 +120,38 @@ QVector<QPointF> VisionChainItem::getPoints()
 }
 
 bool VisionChainItem::getPosInArea(qreal x, qreal y){
-    if(m_polygonF->containsPoint(QPointF(x,y),Qt::OddEvenFill)){
-        return true;
+    if(m_lstChainPoint.count() == 2){
+        //单条链
+        qreal A = m_lstChainPoint.last().y() - m_lstChainPoint.first().y();
+        qreal B = m_lstChainPoint.first().x() - m_lstChainPoint.last().x();
+        qreal C = m_lstChainPoint.last().x()*m_lstChainPoint.first().y() - m_lstChainPoint.first().x()*m_lstChainPoint.last().y();
+
+        qreal l = fabs(A*x + B*y + C)/sqrt(A*A+B*B);
+        if( l < 5 || this->cursor().shape() == Qt::SizeAllCursor){
+            return true;
+        }else{
+            return false;
+        }
     }else{
-        return false;
+        //多条链
+        if(m_bClosed){
+            //封闭
+            if(m_polygonF->containsPoint(QPointF(x,y),Qt::OddEvenFill)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            //开放
+            qreal minL = getMinDistance(m_lstChainPoint.toVector(),false,QPointF(x,y));
+            if( minL < 5 ){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
+
 }
 
 
@@ -266,7 +293,7 @@ void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(!m_bEdit)
         return;
 
-    if(!m_polygonF->containsPoint(event->scenePos(),Qt::OddEvenFill)){
+    if(!getPosInArea(event->pos().x(),event->pos().y())){
         emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
         return;
     }
@@ -282,7 +309,7 @@ void VisionChainItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(!m_bEdit)
         return;
 
-    if(m_polygonF->containsPoint(event->pos(),Qt::OddEvenFill)){
+    if(getPosInArea(event->pos().x(),event->pos().y())){
         setSelectedStatus(true);
     }else{
         setSelectedStatus(false);
@@ -303,6 +330,33 @@ void VisionChainItem::updateData()
     qSort(m_lst_x.begin(), m_lst_x.end());
     qSort(m_lst_y.begin(), m_lst_y.end());
     m_x1 = m_lst_x[0];m_x2 = m_lst_x[m_lst_x.count()-1];m_y1 = m_lst_y[0];m_y2 = m_lst_y[m_lst_y.count()-1];
+}
+
+qreal VisionChainItem::getMinDistance(QVector<QPointF> vec_p, bool close, QPointF p)
+{
+    qreal l = 1000000;
+    for(int i=0;i<vec_p.count()-1;i++){
+        qreal l1 = getDistance(vec_p[i],vec_p[i+1],p);
+        if(l1 < l){
+            l = l1;
+        }
+    }
+    if(close){
+        qreal l1 = getDistance(vec_p.last(),vec_p.first(),p);
+        if(l1 < l){
+            l = l1;
+        }
+    }
+    return l;
+}
+
+qreal VisionChainItem::getDistance(QPointF p1, QPointF p2, QPointF p)
+{
+    qreal A = p2.y() - p1.y();
+    qreal B = p1.x() - p2.x();
+    qreal C = p2.x()*p1.y() - p1.x()*p2.y();
+    qreal l = fabs(A*p.x() + B*p.y() + C)/sqrt(A*A+B*B);
+    return l;
 }
 
 void VisionChainItem::slotMiniRectIndex(int index)
