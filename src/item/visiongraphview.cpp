@@ -1191,7 +1191,7 @@ QRectF VisionGraphView::detail_ellipse_InRectToOutRect(QRectF rf)
     //   x^2/(w/2)^2+y^2/(h/2)^2=1;  由于w和h本身包含了长短，故，可以作为一般方程式，
     //   直线方程，Ax+By+C=0;   两点 topLeft，bottomRight
 
-//    return rf;
+    return rf;
     float A = rf.bottomRight().y() - rf.topLeft().y();
     float B = rf.topLeft().x() - rf.bottomRight().x();
     float C = rf.bottomRight().x()*rf.topLeft().y() - rf.topLeft().x()*rf.bottomRight().y();
