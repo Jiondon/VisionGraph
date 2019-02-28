@@ -16,17 +16,9 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     m_graphWidget = new VisionGraph_(g_graphType,toolButtonDirect);
 
     if(type == GraphType::graphRegion){
-//        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
-    }else if(type == GraphType::graphItem_self){
-//        m_graphWidget = new VisionGraph_Item(GraphType::self,toolButtonDirect);
-        brushColor = Qt::transparent;
-    }else if(type == GraphType::graphItem_unSelf){
-//        m_graphWidget = new VisionGraph_Item(ItemModel::un_self,toolButtonDirect);
-        brushColor = Qt::transparent;
-    }else if(type == GraphType::graphRegion){
-        brushColor = Qt::transparent;
+
     }else{
-        qDebug()<<"VisionGraph is Error";
+        brushColor = Qt::transparent;
     }
     mainLayout->addWidget(m_graphWidget);
     m_graphWidget->layout()->setMargin(0);

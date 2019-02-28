@@ -109,7 +109,7 @@ void VisionChainItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
 }
 
 const QMetaObject VisionChainItem::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_VisionChainItem.data,
+    { &VisionItem::staticMetaObject, qt_meta_stringdata_VisionChainItem.data,
       qt_meta_data_VisionChainItem,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -124,14 +124,12 @@ void *VisionChainItem::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_VisionChainItem.stringdata0))
         return static_cast<void*>(const_cast< VisionChainItem*>(this));
-    if (!strcmp(_clname, "VisionItem"))
-        return static_cast< VisionItem*>(const_cast< VisionChainItem*>(this));
-    return QObject::qt_metacast(_clname);
+    return VisionItem::qt_metacast(_clname);
 }
 
 int VisionChainItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = VisionItem::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

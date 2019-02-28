@@ -5,7 +5,7 @@
 
 #include "../control/color.h"
 
-VisionChainItem::VisionChainItem(bool bClosed, bool edit, QColor color, QObject *parent) : QObject(parent)
+VisionChainItem::VisionChainItem(bool bClosed, bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
 {
 //    setAcceptHoverEvents(true);
     m_borderColor = borderColor;
