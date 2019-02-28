@@ -64,7 +64,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     if(m_bPress_Drag && m_itemType == ItemType::Drag){
         QPointF disPointF = scenePos - (this->mapToScene(m_lastPointF.toPoint()));
         m_lastPointF = viewPos;
-        qDebug()<<disPointF;
+//        qDebug()<<disPointF;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
         return;
@@ -1191,7 +1191,7 @@ QRectF VisionGraphView::detail_ellipse_InRectToOutRect(QRectF rf)
     //   x^2/(w/2)^2+y^2/(h/2)^2=1;  由于w和h本身包含了长短，故，可以作为一般方程式，
     //   直线方程，Ax+By+C=0;   两点 topLeft，bottomRight
 
-    return rf;
+//    return rf;
     float A = rf.bottomRight().y() - rf.topLeft().y();
     float B = rf.topLeft().x() - rf.bottomRight().x();
     float C = rf.bottomRight().x()*rf.topLeft().y() - rf.topLeft().x()*rf.bottomRight().y();
@@ -1214,7 +1214,7 @@ QRectF VisionGraphView::detail_ellipse_InRectToOutRect(QRectF rf)
     float y2=(-n+sqrt(n*n-4*m*p))/(2*m);
     float x1=(-n1-sqrt(n1*n1-4*m1*p1))/(2*m1);
     float x2=(-n1+sqrt(n1*n1-4*m1*p1))/(2*m1);
-    return QRectF(QPointF(x1,y2),QPointF(x2,y1));
+    return QRectF(QPointF(x1,y1),QPointF(x2,y2));
     /*
     float a=0,b=0,c=0; //a-x轴，b-y轴
     float x=0,y=0;

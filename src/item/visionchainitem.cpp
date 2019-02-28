@@ -21,6 +21,8 @@ VisionChainItem::VisionChainItem(bool bClosed, bool edit, QColor color, QObject 
         setSelectedStatus(false);
     }
     m_bClosed = bClosed;
+
+    m_polygonF = new QPolygonF;;
 }
 
 
@@ -40,6 +42,8 @@ void VisionChainItem::setChainPos(QList<qreal> lst_x, QList<qreal> lst_y)
         rectItem->hide();
         m_lstMiniRect.append(rectItem);
     }
+    m_polygonF->clear();
+    m_polygonF->append(m_lstChainPoint.toVector());
 
     m_lst_x = lst_x;m_lst_y = lst_y;
     //获取链表的最大最小值--排序
@@ -58,11 +62,16 @@ void VisionChainItem::setChainPos(QList<QPointF> lst_p)
     }
 
     m_lstChainPoint = lst_p;
+
+    m_polygonF->clear();
+    m_polygonF->append(m_lstChainPoint.toVector());
+
     for(int i=0;i<lst_p.count();i++){
         m_lst_x.append(lst_p[i].x());
         m_lst_y.append(lst_p[i].y());
         MiniRect* rectItem = new MiniRect(lst_p[i].x()-2.5,lst_p[i].y()-2.5,5,5,QColor(255,0,0),this);
         rectItem->setIndex(i);
+//        rectItem->setBrushEnable(false);
         QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         rectItem->hide();
         m_lstMiniRect.append(rectItem);
@@ -111,9 +120,7 @@ QVector<QPointF> VisionChainItem::getPoints()
 }
 
 bool VisionChainItem::getPosInArea(qreal x, qreal y){
-    QPolygonF polygonF;
-    polygonF.append(m_lstChainPoint.toVector());
-    if(polygonF.containsPoint(QPointF(x,y),Qt::OddEvenFill)){
+    if(m_polygonF->containsPoint(QPointF(x,y),Qt::OddEvenFill)){
         return true;
     }else{
         return false;
@@ -136,7 +143,7 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     // 绘制直线
     QPointF p1,p2;
-    qreal d = 1.5;
+    qreal d = 2; //箭头方向的大小基数
     if(m_bClosed){
         //是封闭图形
         for(int i =0;i<m_lstChainPoint.count();i++){
@@ -244,6 +251,10 @@ void VisionChainItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             m_lstChainPoint[m_iIndex] = event->scenePos();
             m_lstMiniRect[m_iIndex]->setRect(event->scenePos().x()-2.5,event->scenePos().y()-2.5,5,5);
         }
+
+        m_polygonF->clear();
+        m_polygonF->append(m_lstChainPoint.toVector());
+
         updateData();
     }
     m_lastPointF = event->scenePos();
@@ -255,9 +266,7 @@ void VisionChainItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(!m_bEdit)
         return;
 
-    QPolygonF polygonF;
-    polygonF.append(m_lstChainPoint.toVector());
-    if(!polygonF.containsPoint(event->scenePos(),Qt::OddEvenFill)){
+    if(!m_polygonF->containsPoint(event->scenePos(),Qt::OddEvenFill)){
         emit signal_clicked(this,true,false,event->scenePos().x(),event->scenePos().y());
         return;
     }
@@ -273,9 +282,11 @@ void VisionChainItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(!m_bEdit)
         return;
 
-    m_bSelected = true;
-    setSelectedStatus(true);
-
+    if(m_polygonF->containsPoint(event->pos(),Qt::OddEvenFill)){
+        setSelectedStatus(true);
+    }else{
+        setSelectedStatus(false);
+    }
 
     m_lastPointF = event->scenePos();
     this->scene()->update();

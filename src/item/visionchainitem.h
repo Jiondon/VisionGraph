@@ -117,6 +117,8 @@ private:
     QColor m_pointFColor;  //链上的点的颜色
     ItemType m_type;
 
+    QPolygonF *m_polygonF = nullptr;
+
 private slots:
     /**
      * @brief       控制miniRect的下标

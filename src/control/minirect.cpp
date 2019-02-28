@@ -18,6 +18,11 @@ MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphic
     setTransformOriginPoint(m_width/2,m_height/2);  //设置旋转的原点为中心点
 }
 
+void MiniRect::setBrushEnable(bool brushEnable)
+{
+    m_bBrushEnable = brushEnable;
+}
+
 void MiniRect::setRect(qreal x, qreal y, qreal w, qreal h)
 {
     m_x = x;m_y = y;m_width = w;m_height = h;
@@ -35,7 +40,9 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(option)
 
     painter->setPen(QPen(m_selectedColor,0));
-    painter->setBrush(QBrush(m_selectedColor));  //此处填充和边框保持一致，原因自己想
+    if(m_bBrushEnable){
+        painter->setBrush(QBrush(m_selectedColor));  //此处填充和边框保持一致，原因自己想
+    }
     painter->drawRect(QRectF(0,0,m_width,m_height));
 }
 

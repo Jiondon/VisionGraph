@@ -25,6 +25,11 @@ public:
     explicit MiniRect(qreal x,qreal y,qreal w,qreal h,QColor penColor = QColor(255,0,0),QGraphicsItem *parent = 0);
 
     /**
+     * @brief  小矩形填充颜色使能
+     */
+    void setBrushEnable(bool brushEnable = true);
+
+    /**
      * @brief  设置rectangle的x,y,w,h
      */
     void setRect(qreal x,qreal y,qreal w,qreal h);
@@ -57,6 +62,8 @@ private:
     QColor m_borderColor;
     QColor m_brushColor;
     QColor m_selectedColor;
+
+    bool m_bBrushEnable = true;
 
 public slots:
 };
