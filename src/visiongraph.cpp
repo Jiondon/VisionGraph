@@ -338,3 +338,8 @@ QColor VisionGraph::getPixel(qreal x, qreal y)
 {
     return m_graphWidget->getPixel(x,y);
 }
+
+void VisionGraph::setCoordinateVisible(bool bVisible)
+{
+    m_graphWidget->setCoordinateVisible(bVisible);
+}

@@ -364,6 +364,11 @@ public:
      */
     QColor getPixel(qreal x,qreal y);
 
+    /**
+     * @brief       控制view的坐标系的显示和隐藏
+     * @param
+     */
+    void setCoordinateVisible(bool bVisible);
 
 signals:
     void signal_PaintFinishedChanged(VisionItem*);

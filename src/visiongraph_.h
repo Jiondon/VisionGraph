@@ -369,6 +369,11 @@ public:
      */
     QColor getPixel(qreal x,qreal y);
 
+    /**
+     * @brief       控制view的坐标系的显示和隐藏
+     * @param
+     */
+    void setCoordinateVisible(bool bVisible);
 
 signals:
     void signal_itemFinished(VisionItem* item);
@@ -401,6 +406,9 @@ private:
 
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
+
+    //坐标系
+    VisionCoordinateItem *viewCoordinateItem = nullptr;
 
 private:
 
