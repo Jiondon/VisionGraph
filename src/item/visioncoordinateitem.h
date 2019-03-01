@@ -14,6 +14,7 @@ public:
 
     void setPointF(QPointF pointF)
     {
+        this->setPos(pointF);
         m_pointF = pointF;
     }
 

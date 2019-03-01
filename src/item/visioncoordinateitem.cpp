@@ -15,21 +15,20 @@ void VisionCoordinateItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     QPen pen = QPen(m_borderColor,0);
     painter->setPen(pen);
 
-    painter->translate(m_pointF);
     painter->rotate(m_angle);
 
     //绘制交叉的坐标系
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()),QPointF(m_pointF.x()+m_iLength,m_pointF.y()));
-    painter->drawLine(QPointF(m_pointF.x()+m_iLength,m_pointF.y()),QPointF(m_pointF.x()+m_iLength-3,m_pointF.y()-2));
-    painter->drawLine(QPointF(m_pointF.x()+m_iLength,m_pointF.y()),QPointF(m_pointF.x()+m_iLength-3,m_pointF.y()+2));
+    painter->drawLine(QPointF(0,0),QPointF(0+m_iLength,0));
+    painter->drawLine(QPointF(0+m_iLength,0),QPointF(0+m_iLength-3,0-2));
+    painter->drawLine(QPointF(0+m_iLength,0),QPointF(0+m_iLength-3,0+2));
 //    painter->drawLine(QPointF(m_width-10,0),QPointF(m_width-10,m_height));
 
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()),QPointF(m_pointF.x(),m_pointF.y()+m_iLength));
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()+m_iLength),QPointF(m_pointF.x()-2,m_pointF.y()+m_iLength+3));
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()+m_iLength),QPointF(m_pointF.x()+2,m_pointF.y()+m_iLength+3));
+    painter->drawLine(QPointF(0,0),QPointF(0,0+m_iLength));
+    painter->drawLine(QPointF(0,0+m_iLength),QPointF(0-2,0+m_iLength-3));
+    painter->drawLine(QPointF(0,0+m_iLength),QPointF(0+2,0+m_iLength-3));
 }
 
 QRectF VisionCoordinateItem::boundingRect() const
 {
-    return QRectF(m_pointF-QPointF(m_iLength,m_iLength),m_pointF+QPointF(m_iLength,m_iLength));
+    return QRectF(-1,-1,m_iLength+4,m_iLength+4);
 }
