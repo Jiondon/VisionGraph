@@ -350,6 +350,13 @@ public:
      */
     void setViewType(ViewType type = ViewType::freeItem);
 
+    /**
+     * @brief       获取某一点的像素值
+     * @param
+     */
+    QColor getPixel(qreal x,qreal y);
+
+
 signals:
     void signal_PaintFinishedChanged(VisionItem*);
 

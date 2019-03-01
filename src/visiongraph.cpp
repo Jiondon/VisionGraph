@@ -16,10 +16,11 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     m_graphWidget = new VisionGraph_(g_graphType,toolButtonDirect);
 
     if(type == GraphType::graphRegion){
-
+//        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
     }else{
         brushColor = Qt::transparent;
     }
+//    qDebug()<<"brush color : "<<brushColor;
     mainLayout->addWidget(m_graphWidget);
     m_graphWidget->layout()->setMargin(0);
     connect(m_graphWidget,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
@@ -326,4 +327,9 @@ void VisionGraph::setView_Zoom(qreal qZoom)
 void VisionGraph::setViewType(ViewType type)
 {
     m_graphWidget->setViewType(type);
+}
+
+QColor VisionGraph::getPixel(qreal x, qreal y)
+{
+    return m_graphWidget->getPixel(x,y);
 }

@@ -85,7 +85,8 @@ SOURCES += src/visiongraph.cpp \
     src/item/visionarcitemfitting.cpp \
     src/item/visioncircle.cpp \
     src/item/visionpolygonitemfitting.cpp \
-    src/item/visionline.cpp
+    src/item/visionline.cpp \
+    src/item/visioncoordinateitem.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
@@ -116,7 +117,8 @@ HEADERS += src/visiongraph.h \
     src/item/visionarcitemfitting.h \
     src/item/visioncircle.h \
     src/item/visionpolygonitemfitting.h \
-    src/item/visionline.h
+    src/item/visionline.h \
+    src/item/visioncoordinateitem.h
 
 unix {
     target.path = /usr/lib

@@ -213,10 +213,10 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         m_clearAll = false;
     }
 
-    painter.setPen(QPen(brushColor,m_scale));  //区域采用填充的颜色，原因自己想
+    painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
 //    painter.scale(m_scale,m_scale);
-//    qDebug()<<m_vecLines.count()<<"          0000000000000000000000000";
+//    qDebug()<<brushColor<<"          0000000000000000000000000";
     for(int i=0;i<m_vecLines.size();i++){
 //        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
@@ -527,6 +527,24 @@ qreal VisionGraphView::adjustSize(qreal w, qreal h)
     m_frameRect.setHeight(h);
     viewRegion_OriginPos();
     return q;
+}
+
+QColor VisionGraphView::getPixel(qreal x, qreal y)
+{
+    QPixmap pixmap = this->grab(QRect(QPointF(x,y).toPoint(),QSize(-1,-1)));
+    QColor color = QColor(0,0,0,0);
+    if (!pixmap.isNull())
+    {
+        QImage image = pixmap.toImage();//将像素图转换为QImage
+        if (!image.isNull()) //如果image不为空
+        {
+            if (image.valid(0, 0)) //坐标位置有效
+            {
+                color = image.pixel(0, 0);
+            }
+        }
+    }
+    return color;
 }
 
 

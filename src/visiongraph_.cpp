@@ -1346,6 +1346,11 @@ void VisionGraph_::setViewType(ViewType type)
     m_viewType = type;
 }
 
+QColor VisionGraph_::getPixel(qreal x, qreal y)
+{
+    return view->getPixel(x,y);
+}
+
 void VisionGraph_::slot_selected_action()
 {
     view->setItemType(ItemType::No);
@@ -1541,6 +1546,8 @@ void VisionGraph_::slot_removeItem_action()
         }
     }
     scene->removeItem(m_curVisionItem);  //不会delete
+    //m_curVisionItem只是个指针，不需要delete
+    //m_curVisionItem中的数据在m_lstItem中，前面已经释放
     m_curVisionItem = nullptr;
 }
 
