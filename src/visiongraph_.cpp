@@ -953,6 +953,18 @@ VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPo
     return item;
 }
 
+VisionCoordinateItem *VisionGraph_::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, QColor color)
+{
+    //绘制坐标系，目前的坐标系都是不可编辑的
+    VisionCoordinateItem* item = new VisionCoordinateItem(bEdit,color);
+    item->setPointF(p);
+    item->setColor(color);
+    item->setAngle(angle);
+    item->setCoordinateLength(length);
+    scene->addItem(item);
+    return item;
+}
+
 
 int VisionGraph_::setBkImg(QImage image)
 {

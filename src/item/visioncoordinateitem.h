@@ -4,6 +4,8 @@
 #include <QObject>
 #include "../control/visionitem.h"
 
+#include <QPainter>
+
 class VisionCoordinateItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -15,9 +17,14 @@ public:
         m_pointF = pointF;
     }
 
-    void setArrowLength(int iLength = 10)
+    void setCoordinateLength(int iLength = 50)
     {
         m_iLength = iLength;
+    }
+
+    void setAngle(qreal angle){
+        m_angle = angle;
+//        this->setRotation(angle);
     }
 
     void setColor(QColor color)
@@ -38,7 +45,8 @@ signals:
 
 private:
     QPointF m_pointF;
-    int m_iLength = 10;
+    int m_iLength = 50;
+    qreal m_angle = 0;  //旋转角度--坐标系
 
     QColor m_borderColor;
     QColor m_brushColor;

@@ -34,6 +34,8 @@
 #include "./item/visionarcitemfitting.h"
 #include "./item/visionpolygonitemfitting.h"
 
+#include "./item/visioncoordinateitem.h"
+
 #include "./control/color.h"
 
 /**

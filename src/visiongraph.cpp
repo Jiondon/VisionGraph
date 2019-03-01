@@ -141,7 +141,12 @@ QList<VisionItem *> VisionGraph::getItems()
 
         lstItem = m_graphWidget->getItems();
 
-    return lstItem;
+        return lstItem;
+}
+
+VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, QColor color)
+{
+    return m_graphWidget->addCoordinate(p,angle,length,bEdit,color);
 }
 
 void VisionGraph::setBkImg(QImage image)

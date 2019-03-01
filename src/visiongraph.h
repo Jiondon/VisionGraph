@@ -143,6 +143,14 @@ public:
      */
     QList<VisionItem*> getItems();
 
+
+    /**
+     * @brief       添加坐标系
+     * @param       默认是不可编辑.当前不支持编辑坐标系（拖动，旋转等操作）
+     */
+    VisionCoordinateItem *addCoordinate(QPointF p,qreal angle = 0,qreal length = 50,bool bEdit = true, QColor color = QColor(255,0,0));
+
+
     /**
      * @brief       设置VisionGraph的背景，区分版本
      */
