@@ -1365,14 +1365,7 @@ QColor VisionGraph_::getPixel(qreal x, qreal y)
 
 void VisionGraph_::setCoordinateVisible(bool bVisible)
 {
-    if(viewCoordinateItem == nullptr){
-        viewCoordinateItem = addCoordinate(QPointF(0,0));
-    }else{
-        qDebug()<<"view corrdinate is null";
-        return;
-    }
-
-    viewCoordinateItem->setVisible(bVisible);
+    view->setCoordinateVisible(bVisible);
 }
 
 void VisionGraph_::slot_selected_action()

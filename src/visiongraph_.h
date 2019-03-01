@@ -407,9 +407,6 @@ private:
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
 
-    //坐标系
-    VisionCoordinateItem *viewCoordinateItem = nullptr;
-
 private:
 
     //左侧工具栏 -- 绘制类（操作类）

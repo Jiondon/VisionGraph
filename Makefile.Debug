@@ -5787,6 +5787,14 @@ tmp\debug\moc_visioncoordinateitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCor
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		src\visiongraph_global.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
 		src\item\visioncoordinateitem.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -11677,7 +11685,15 @@ tmp\debug\visioncoordinateitem.obj: src\item\visioncoordinateitem.cpp src/item/v
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		src/visiongraph_global.h
+		src/visiongraph_global.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtextoption.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpen.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h
 
 tmp\debug\qrc_image.obj: tmp\debug\qrc_image.cpp 
 

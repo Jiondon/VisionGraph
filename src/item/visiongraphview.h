@@ -236,6 +236,12 @@ public:
      */
     QColor getPixel(qreal x,qreal y);
 
+    /**
+     * @brief       控制view的坐标系的显示和隐藏
+     * @param
+     */
+    void setCoordinateVisible(bool bVisible);
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal delta);
@@ -302,6 +308,9 @@ private:
     QColor m_FrameColor = Qt::lightGray;   //算法区域的颜色
 
     bool m_bPress_Drag = false;  //提供给拖动进行控制，只有在按下的状态，拖动才有效
+
+    bool isCoordinate = true;
+
 protected:
 
 public slots:

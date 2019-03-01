@@ -205,13 +205,26 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         painter.setPen(QPen(m_FrameColor,0));
         painter.drawPolygon(this->mapFromScene(m_frameRect));
     }
-    painter.setPen(QPen(borderColor,0));  //区域采用填充的颜色，原因自己想
-    painter.setBrush(brushColor);
-    painter.drawPath(m_path);
+
+    if(isCoordinate){
+        //绘制交叉的坐标系
+        int m_iLength = 50;
+        painter.drawLine(this->mapFromScene(QPointF(0,0)),this->mapFromScene(QPointF(0+m_iLength,0)));
+        painter.drawLine(this->mapFromScene(QPointF(0+m_iLength,0)),this->mapFromScene(QPointF(0+m_iLength-3,0-2)));
+        painter.drawLine(this->mapFromScene(QPointF(0+m_iLength,0)),this->mapFromScene(QPointF(0+m_iLength-3,0+2)));
+
+        painter.drawLine(this->mapFromScene(QPointF(0,0)),this->mapFromScene(QPointF(0,0+m_iLength)));
+        painter.drawLine(this->mapFromScene(QPointF(0,0+m_iLength)),this->mapFromScene(QPointF(0-2,0+m_iLength-3)));
+        painter.drawLine(this->mapFromScene(QPointF(0,0+m_iLength)),this->mapFromScene(QPointF(0+2,0+m_iLength-3)));
+    }
 
     if(m_clearAll){
         m_clearAll = false;
     }
+
+    painter.setPen(QPen(borderColor,0));  //区域采用填充的颜色，原因自己想
+    painter.setBrush(brushColor);
+    painter.drawPath(m_path);
 
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
@@ -545,6 +558,11 @@ QColor VisionGraphView::getPixel(qreal x, qreal y)
         }
     }
     return color;
+}
+
+void VisionGraphView::setCoordinateVisible(bool bVisible)
+{
+    isCoordinate = bVisible;
 }
 
 
