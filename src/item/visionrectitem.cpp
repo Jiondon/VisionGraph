@@ -672,7 +672,7 @@ void VisionRectItem::updateBoundingRect()
     m_width = w;
     m_height = h;
 
-    //在此处将QRectF rf = QRectF(m_x,m_y,m_width,m_height)绘制出来，会发现，和旋转后的反旋转是一直的，我对旋转的角度是有记录的，所以在此时，直接绘制rf在旋转角度，会得到
+    //在此处将QRectF rf = QRectF(m_x,m_y,m_width,m_height)绘制出来，会发现，和旋转后的反旋转是一致的，我对旋转的角度是有记录的，所以在此时，直接绘制rf在旋转角度，会得到
     //直接绘制四个点连线的矩形是一样的---（用途，绘制矩形的内切圆的时候需要在旋转的情况下，转换成未旋转的数据，绘制出来后，在进行对应角度的进行旋转）
 }
 

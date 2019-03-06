@@ -648,8 +648,8 @@ XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2,
 {
     XVCombineRegionsIn xvCombineRegionsIn;
     xvCombineRegionsIn.inCombineRegionsType = combineType;
-    xvCombineRegionsIn.inRegion1 = &region1;
-    xvCombineRegionsIn.inRegion2 = &region2;
+    xvCombineRegionsIn.inRegion1 = region1;
+    xvCombineRegionsIn.inRegion2 = region2;
 
     XVCombineRegionsOut xvCombineRegionsOut;
 
@@ -693,11 +693,12 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
         vec_point2D.push_back(point2D);
     }
     xvPath.arrayPoint2D = vec_point2D;
+    xvPath.closed = true;
 
     regionIn.inType = XVCreateRegionType::Polygon;
     regionIn.inFrameWidth = m_frameRect.width();
     regionIn.inFrameHeight = m_frameRect.height();
-    regionIn.inPolygon = xvPath;
+    regionIn.inPath = xvPath;
 
     XVCreateRegion(regionIn,regionOut);
 
@@ -729,14 +730,14 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         regionIn.inFrameHeight = m_frameRect.height();
         regionIn.inCircle2D = xvCircle;
 
-        XVBox xvBox;
+        XVRectangle2D xvBox;
         XVPoint2D left;
         left.x = (float)leftTop.x();
         left.y = (float)leftTop.y();
         xvBox.origin = left;
         xvBox.width = (float)rf.width();
         xvBox.height = (float)rf.height();
-        regionIn.inBox = xvBox;
+        regionIn.inRectangle2D = xvBox;
     }else{
         XVRectangle2D xvRect;
         XVPoint2D leftPoint;
@@ -750,13 +751,13 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         regionIn.inType = XVCreateRegionType::Ellipse;
         regionIn.inFrameWidth = m_frameRect.width();
         regionIn.inFrameHeight = m_frameRect.height();
-        regionIn.inRectangle =xvRect;
+        regionIn.inRectangle2D =xvRect;
 
-        XVBox xvBox;
+        XVRectangle2D xvBox;
         xvBox.origin = leftPoint;
         xvBox.width = (float)rf.width();
         xvBox.height = (float)rf.height();
-        regionIn.inBox = xvBox;
+        regionIn.inRectangle2D = xvBox;
     }
 
 
@@ -786,13 +787,13 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
     regionIn.inType = XVCreateRegionType::Rectangle;
     regionIn.inFrameWidth = m_frameRect.width();
     regionIn.inFrameHeight = m_frameRect.height();
-    regionIn.inRectangle =xvRect;
+    regionIn.inRectangle2D =xvRect;
 
-    XVBox xvBox;
+    XVRectangle2D xvBox;
     xvBox.origin = leftPoint;
     xvBox.width = (float)rf.width();
     xvBox.height = (float)rf.height();
-    regionIn.inBox = xvBox;
+    regionIn.inRectangle2D = xvBox;
 
 
     XVCreateRegion(regionIn,regionOut);

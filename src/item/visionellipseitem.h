@@ -102,6 +102,25 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    XVRectangle2D getData(){
+
+        //此处的椭圆数据是和矩形框数据是一样的，需要对此进行甄别，未体现的XVBase文件中
+        XVRectangle2D xvRect2D;
+        xvRect2D.optional = ENABLE;
+
+        XVPoint2D xvPoint;
+        xvPoint.optional = ENABLE;
+        xvPoint.x = m_x;
+        xvPoint.y = m_y;
+        xvRect2D.origin = xvPoint;   //左上角顶点坐标
+
+        xvRect2D.width = m_width;
+        xvRect2D.height = m_height;
+
+        xvRect2D.angle = m_angle;
+
+        return xvRect2D;
+    }
 
 signals:
     void signalChanged(VisionItem* item);

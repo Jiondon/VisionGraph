@@ -19,6 +19,24 @@ public:
     QVector<QPointF> getPoints();
     bool getPosInArea(qreal x, qreal y);
 
+    XVArcFittingField getData(){
+        XVArcFittingField xvArcFitting;
+
+        XVArc2D xvArc;
+        XVPoint2D centerXvPoint;
+        centerXvPoint.x = m_center.x();
+        centerXvPoint.y = m_center.y();
+
+        xvArc.center = centerXvPoint;
+        xvArc.radius = m_r;
+        xvArc.startAngle = m_angle;
+        xvArc.sweepAngle = m_spanAngle;
+
+        xvArcFitting.axis = xvArc;
+        xvArcFitting.width = m_length;
+
+        return xvArcFitting;
+    }
 
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

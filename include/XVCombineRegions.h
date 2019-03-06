@@ -1,36 +1,43 @@
-//¹¤¾ßµÄÍ·ÎÄ¼þ
-//ÇøÓò½áºÏ
+#ifndef XVCOMBINEREGIONS_H
+#define XVCOMBINEREGIONS_H
+
+#ifdef XVCOMBINEREGIONS_LIBRARY
+#define MAKEDLL_API extern "C" __declspec(dllexport)
+#else
+#define MAKEDLL_API extern "C" __declspec(dllimport)
+#endif
 
 #include "XVBase.h"
-#include "AVL.h"
-
 
 enum XVCombineRegionsType
 {
-	Difference,            //region1-region2
-	Symmetricdiffence,     //²¢¼¯-½»¼¯
-	Intersection,          //½»¼¯
-	Union,                 //²¢¼¯
-	Intersection_ofArray,  //Êý×é°æ½»¼¯
-	Union_ofArray          //Êý×é°æ²¢¼¯
+    Difference,                     //region1-region2
+    //    Symmetricdiffence,
+    SymmetricDifference,            //å¹¶é›†-äº¤é›†
+    Intersection,                   //äº¤é›†
+    Union,                          //å¹¶é›†
+    SymmetricDifference_ofArray,    //æ•°ç»„ç‰ˆ å¹¶é›†-äº¤é›†
+    Intersection_ofArray,           //æ•°ç»„ç‰ˆäº¤é›†
+    Union_ofArray                   //æ•°ç»„ç‰ˆå¹¶é›†
 };
 
 
 typedef struct XVCombineRegionsIn
 {
-	XVCombineRegionsType   inCombineRegionsType;
-	XVRegion*               inRegion1;
-	XVRegion*               inRegion2;
+    XVCombineRegionsType   inCombineRegionsType;
+    XVRegion               inRegion1; //Difference / SymmetricDifference / Intersection / Union
+    XVRegion               inRegion2; //Difference / SymmetricDifference / Intersection / Union
 
-	//combine Region of Array
-	XVRegion* inInitialRegion;
-	vector<XVRegion*> inRegionArray;
-
+    //combine Region of Array
+    XVRegion         inInitialRegion;//Intersection_ofArray
+    vector<XVRegion> inRegionArray;  //Intersection_ofArray / SymmetricDifference_ofArray / Union_ofArray
 }XVCombineRegionsIn;
 
 typedef struct XVCombineRegionsOut
 {
-	XVRegion RegionOut;
+    XVRegion RegionOut;
 }XVCombineRegionsOut;
 
-void XVCombineRegions(XVCombineRegionsIn& CombineRegionsIn, XVCombineRegionsOut& CombineRegionOut);
+MAKEDLL_API void XVCombineRegions(XVCombineRegionsIn& in, XVCombineRegionsOut& out);
+
+#endif // XVCOMBINEREGIONS_H

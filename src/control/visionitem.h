@@ -13,6 +13,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QVector>
+#include "XVBase.h"
 #include "../visiongraph_global.h"
 
 /**

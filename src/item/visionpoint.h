@@ -28,6 +28,14 @@ public:
         return m_pointF;
     }
 
+    XVPoint2D getData(){
+        XVPoint2D point2D;
+        point2D.optional = ENABLE;
+        point2D.x = m_pointF.x();
+        point2D.y = m_pointF.y();
+        return point2D;
+    }
+
     /**
      * @brief       获取每个顶点
      * @param       point vec

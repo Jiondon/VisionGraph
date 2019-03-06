@@ -71,6 +71,22 @@ public:
      */
     bool getPosInArea(qreal x,qreal y);
 
+    XVPath getData(){
+        XVPath xvPath;
+
+        vector<XVPoint2D> vec_p;
+        vec_p.clear();
+        for(int i=0;i<m_lstChainPoint.count();i++){
+            XVPoint2D point2D;
+            point2D.x = m_lstChainPoint.at(i).x();
+            point2D.y = m_lstChainPoint.at(i).y();
+            vec_p.push_back(point2D);
+        }
+        xvPath.arrayPoint2D = vec_p;
+        xvPath.closed = m_bClosed;
+        return xvPath;
+    }
+
 signals:
     void signalChanged(VisionItem* item);
 

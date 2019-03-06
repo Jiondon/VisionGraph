@@ -17,8 +17,6 @@
 #include "visiongraph_item.h"
 #include "visiongraph_.h"
 
-
-
 class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 {
     Q_OBJECT

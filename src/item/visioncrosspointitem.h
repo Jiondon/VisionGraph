@@ -51,6 +51,13 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    XVPoint2D getData(){
+        XVPoint2D point2D;
+        point2D.optional = ENABLE;
+        point2D.x = m_pointF.x();
+        point2D.y = m_pointF.y();
+        return point2D;
+    }
 
 protected:
     QRectF boundingRect() const;

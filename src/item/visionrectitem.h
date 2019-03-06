@@ -93,6 +93,25 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    XVRectangle2D getData(){
+        XVRectangle2D xvRect2D;
+        xvRect2D.optional = ENABLE;
+
+        XVPoint2D xvPoint;
+        xvPoint.optional = ENABLE;
+        xvPoint.x = m_x;
+        xvPoint.y = m_y;
+        xvRect2D.origin = xvPoint;   //左上角顶点坐标
+
+        xvRect2D.width = m_width;
+        xvRect2D.height = m_height;
+
+        xvRect2D.angle = m_angle;
+
+        return xvRect2D;
+    }
+
+
 signals:
     void signal_RectSizeChanged();
     void signalChanged(VisionItem* item);

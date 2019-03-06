@@ -37,6 +37,18 @@ public:
         return m_pointF;
     }
 
+    XVCoordinateSystem2D getData(){
+        XVCoordinateSystem2D xvCoordinate;
+        xvCoordinate.optional = ENABLE;
+        XVPoint2D xvPoint;
+        xvPoint.x = m_pointF.x();
+        xvPoint.y = m_pointF.y();
+        xvCoordinate.origin = xvPoint;
+        xvCoordinate.angle = m_angle;
+        xvCoordinate.scale = 1;  //缩放系数，默认缩放系数就是所要显示的一个单位，待定
+        return xvCoordinate;
+    }
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;

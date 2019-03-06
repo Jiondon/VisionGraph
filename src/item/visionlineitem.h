@@ -72,6 +72,19 @@ public:
      */
     QVector<QPointF> getPoints();
 
+    XVSegment2D getData(){
+        XVSegment2D segment2D;
+        segment2D.optional = ENABLE;
+        XVPoint2D p1,p2;
+        p1.x = m_pointF1.x();
+        p1.y = m_pointF1.y();
+        p2.x = m_pointF2.x();
+        p2.y = m_pointF2.y();
+        segment2D.point1 = p1;
+        segment2D.point2 = p2;
+        return segment2D;
+    }
+
 protected:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

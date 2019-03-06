@@ -1,232 +1,798 @@
-#ifndef XVBASE_H
+ï»¿#ifndef XVBASE_H
 #define XVBASE_H
 
 #include <vector>
 using namespace std;
 
 typedef unsigned char BYTE;
-typedef int			  BOOL;
+typedef int           BOOL;
 #define TRUE	1
 #define FALSE	0
 
-//±íÊ¾Í¼ÏñµÄÏñËØµã»òÕß¶şÎ¬¾ØÕóµÄÔªËØµÈ
-struct XVLocation
+namespace XVPolarSpaceType
 {
-	int x;
-	int y;
+///<summary>Decides which formula use to transform image. Parameters \(m\) and \(k\) are set to values which allow to fit source image in output image.</summary>
+enum Type
+{
+    ///<summary>Polar space</summary>
+    Polar,
+    ///<summary>Log-Polar space</summary>
+    LogPolar
+};
+}
+
+namespace XVResizeMethod {
+enum Type
+{
+    NearestNeighbour,
+    Bilinear,
+    Area
+};
+}
+
+namespace XVCropScaleMode {
+enum Type{
+    InputScale,
+    AlignedScale
+};
+}
+namespace XVAxis {
+enum Type
+{
+    X,
+    Y
+};
+}
+namespace XVMirrorDirection {
+enum Type
+{
+    Horizontal,
+    Vertical,
+    Both
+};
+}
+
+namespace XVRotationSizeMode {
+enum Type
+{
+    Fit,
+    Preserve
+};
+}
+
+namespace XVMagnitudeMeasure {
+enum Type
+{
+    ///<summary>Horizontal estimation</summary>
+    Horizontal,
+    ///<summary>Vertical estimation</summary>
+    Vertical,
+    ///<summary>Average estimation</summary>
+    Average,
+    ///<summary>Sum estimation</summary>
+    Sum,
+    ///<summary>Maximum estimation</summary>
+    Maximum,
+    ///<summary>Hypot estimation</summary>
+    Hypot
+};
+}
+
+namespace XVThresholdSelectionMethod {
+enum Type
+{
+    ClusteringKittler,
+    ///<summary>KMeans clustering</summary>
+    ClusteringKMeans,
+    ///<summary>Otsu clustering</summary>
+    ClusteringOtsu,
+    Entropy,
+    HistogramIntermodes
 };
 
-//¶şÎ¬µã
-struct XVPoint2DInt
+}
+
+namespace XVThresholdDynamicReferenceMethod
 {
-	int x;
-	int y;
+enum Type
+{
+    Mean,
+    Median,
+    Middle
 };
+}
+
+namespace XVSmoothImageMedianKernel
+{
+enum Type
+{
+    Box
+};
+}
+namespace XVMeanKernel
+{
+///<summary>Describes shape and size of structuring element used during smoothing.</summary>
+enum Type
+{
+    Box3x3,
+    Box5x5
+};
+}
+
+namespace XVGaussKernel
+{
+///<summary>Possible dimensions of gaussian kernel used to smooth image.</summary>
+enum Type
+{
+    _3x3,
+    _5x5,
+    _7x7,
+    _9x9,
+    _11x11
+};
+}
+
+enum XVMorphologyKernelType
+{
+    Box3x3,
+    Box5x5,
+    Cross3x3,
+    Cross5x5,
+    Disc5x5,
+    Disc7x7,
+    Disc9x9
+};
+
+namespace XVKernelShape {
+enum Type
+{
+    Box,
+    Ellipse,
+    Cross
+};
+}
+
+
+enum XVGradientMaskOperatorType
+{
+    ///<summary>Sobel operator</summary>
+    Sobel,
+    ///<summary>Prewitt operator</summary>
+    Prewitt,
+    Central,
+    Forward
+};
+enum XVGradientAngleRangeType
+{
+    _0_90,
+    _0_180
+};
+enum XVGradientOperatorType
+{
+    Gauss,
+    Deriche,
+    Lanser
+};
+
+enum XVBayerTypeType
+{
+    GR,
+    RG,
+    GB,
+    BG
+};
+
+///<summary>Ways of computing image compare.</summary>
+enum XVCompareMeasureType
+{
+    Value,
+    NCC,
+    DSSIM
+};
+enum XVCorrelationMeasureType
+{
+    NormalizedCrossCorrelation,
+    CrossCorrelation
+};
+
+enum XVDistanceMeasureType
+{
+    MeanError,
+    MeanSquaredError
+};
+enum XVHSxColorModel
+{
+    HSV,
+    HSL,
+    HSI
+};
+
+enum XVProjectionDirection
+{
+    Horizontal,
+    Vertical
+};
+
+namespace XVProjectionMode {
+enum type
+{
+    Average,
+    Maximum,
+    Minimum,
+    Sum
+};
+}
+
+//è¡¨ç¤ºå›¾åƒçš„åƒç´ ç‚¹æˆ–è€…äºŒç»´çŸ©é˜µçš„å…ƒç´ ç­‰
+
+enum XVOptionalType
+{
+    NUL,
+    ENABLE
+};
+
+enum XVSelectionType //æ£€æµ‹åˆ°å¤šä¸ªè¾¹ç¼˜ç‚¹æ—¶å¯¹è¾¹ç¼˜ç‚¹çš„é€‰æ‹©æ–¹å¼
+{
+    Best,   //æœ€ä¼˜
+    First,  //ç¬¬ä¸€ä¸ªè¾¹ç¼˜ç‚¹
+    Last    //æœ€åä¸€ä¸ªè¾¹ç¼˜ç‚¹
+};
+
+enum XVRidgeOperatorType
+{
+    Minimum,
+    GeometricMean,
+    ArithmeticMean,
+    HarmonicMean
+};
+
+enum XVInterpolationMethodType
+{
+    NearestNeighbour, //æœ€é‚»è¿‘
+    Bilinear          //åŒçº¿æ€§(äºŒç»´çº¿æ€§æ’å€¼)
+};
+
+enum XVProfileInterpolationMethod //ç”¨äºæå–äºšåƒç´ 
+{
+    Linear,   					// çº¿æ€§ Linear interpolation between consecutive points of the profile. (ä¸€ç»´çº¿æ€§æ’å€¼ï¼Œæ˜¯ä¸‰ä¸ªç‚¹çš„ï¼ˆä½ç½®*åƒç´ å€¼ï¼‰/(åƒç´ å€¼æ±‚å’Œ)ï¼Ÿ)
+    Quadratic3,   				// ä¸‰æ¬¡ Interpolation that fits a parabola to 3 consecutive points.ï¼ˆæ‹ŸåˆæŠ›ç‰©çº¿ æ±‚æŠ›ç‰©çº¿çš„æœ€é«˜ç‚¹ï¼Ÿï¼‰
+    Quadratic4					// å››æ¬¡ Interpolation that fits a parabola to 4 consecutive points.ï¼ˆå“ª4ä¸ªç‚¹å‚ä¸è¿ç®—ï¼Ÿï¼‰
+};
+
+//è¾¹ç¼˜è·³å˜ç±»å‹
+enum XVEdgeTransitionType
+{
+    BrightToDark, // ç”±ç™½åˆ°é»‘
+    DarkToBright, // ç”±é»‘åˆ°ç™½
+    Any           // ä»»æ„
+};
+
+
+typedef struct XVInt
+{
+    XVOptionalType  optional = ENABLE;
+    int             value;
+
+    XVInt(int _value = 0, XVOptionalType _optional = ENABLE){
+        optional = _optional;
+        value = _value;
+    }
+}XVInt;
+
+typedef struct XVFloat
+{
+    XVOptionalType  optional = ENABLE;
+    float           value;
+
+    XVFloat(float _value = 0, XVOptionalType _optional = ENABLE){
+        optional = _optional;
+        value = _value;
+    }
+}XVFloat;
+
+//åƒç´ 
+struct XVPixel
+{
+    XVOptionalType  optional = ENABLE;
+    float           x;
+    float           y;
+    float           z;
+    float           w;
+
+    XVPixel(float x_ = 0, float y_ = 0, float z_ = 0, float w_ = 0, XVOptionalType _optional = ENABLE){
+        optional = _optional;
+        x = x_;
+        y = y_;
+        z = z_;
+        w = w_;
+    }
+};
+
+
+//äºŒç»´ç‚¹
+typedef struct XVPoint2DInt
+{
+    XVOptionalType  optional = ENABLE;
+    int x;
+    int y;
+
+    XVPoint2DInt(int x_=0, int y_=0,XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = x_;
+        y = y_;
+    }
+}XVLocation;
+
 
 struct XVPoint2D
 {
-	float x;
-	float y;
+    XVOptionalType optional = ENABLE;
+    float x;
+    float y;
+
+    XVPoint2D(float x_ = 0, float y_ = 0, XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = x_;
+        y = y_;
+    }
+    XVPoint2D(int x_, int y_, XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = (float)x_;
+        y = (float)y_;
+    }
+    XVPoint2D(int x_, float y_, XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = (float)x_;
+        y = y_;
+    }
+    XVPoint2D(float x_, int y_, XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = x_;
+        y = (float)y_;
+    }
+
 };
-//ÈıÎ¬µã
+//struct XVPoint2D_Opt : public XVPoint2D
+//{
+//    XVOptionalType optional = ENABLE;
+//};
+
+
+//ä¸‰ç»´ç‚¹
 struct XVPoint3D
 {
-	float x;
-	float y;
-	float z;
+    XVOptionalType optional = ENABLE;
+    float x;
+    float y;
+    float z;
+
+    XVPoint3D(float x_=0, float y_=0, float z_=0, XVOptionalType optional_ = ENABLE){
+        optional = optional_;
+        x = x_;
+        y = y_;
+        z = z_;
+    }
 };
 
-//Ô²
+//åœ†
 struct XVCircle2D
 {
-	XVPoint2D center;//ÖĞĞÄ
-	float radius;    //°ë¾¶
+    XVOptionalType  optional = ENABLE;
+    XVPoint2D       center;     //ä¸­å¿ƒ
+    float           radius;     //åŠå¾„
+
+    XVCircle2D(XVPoint2D center_=XVPoint2D(), float radius_=0,  XVOptionalType opt_=ENABLE){
+        optional = opt_;
+        center = center_;
+        radius = radius_;
+    }
 };
 
-//Ô²»·Óò
+//åœ†ç¯åŸŸ
 struct XVCircleFittingField
 {
-	XVCircle2D	axis;  //É¨ÃèÖĞĞÄÖá
-	float		width; //É¨Ãè¿í¶È
+    XVCircle2D	axis;  //æ‰«æä¸­å¿ƒè½´
+    float	width; //æ‰«æå®½åº¦
+
+    XVCircleFittingField(XVCircle2D axis_=XVCircle2D() , float w_=0){
+        axis = axis_;
+        width = w_;
+    }
 };
 
-//Ô²»¡
+//åœ†å¼§
 struct XVArc2D
 {
-	XVPoint2D center; //ÖĞĞÄ
-	float radius;     //°ë¾¶
-	float startAngle; //ÆğÊ¼½Ç¶È
-	float sweepAngle; //É¨Ãè½Ç¶È
+    XVPoint2D   center;     //ä¸­å¿ƒ
+    float       radius;     //åŠå¾„
+    float       startAngle; //èµ·å§‹è§’åº¦
+    float       sweepAngle; //æ‰«æè§’åº¦
+
+
+    XVArc2D(XVPoint2D   center_ = XVPoint2D(),
+            float       radius_ = 0,
+            float       startAngle_ = 0,
+            float       sweepAngle_ = 0){
+        center     = center_;
+        radius     = radius_;
+        startAngle = startAngle_;
+        sweepAngle = sweepAngle_;
+    }
 };
 
-//Ô²»¡Óò
+//åœ†å¼§åŸŸ
 struct XVArcFittingField
 {
-	XVArc2D	axis;
-	float	width; 
+    XVArc2D	axis;
+    float	width;
+
+    XVArcFittingField(XVArc2D axis_=XVArc2D() , float w_=0){
+        axis = axis_;
+        width = w_;
+    }
 };
 
-//¾ØĞÎ¼°ÆäĞı×ª½Ç¶È
+//çŸ©å½¢åŠå…¶æ—‹è½¬è§’åº¦
 typedef struct XVRectangle2D
 {
-	XVPoint2D origin; //¶¥µã(×óÉÏµã£¬²»ÊÇÖĞĞÄ)
-	float angle;      //Ğı×ª½Ç¶È£¨ÈÆÖĞĞÄĞı×ª½Ç¶È£©
-	float width;      //¿í¶È
-	float height;     //¸ß¶È
+    XVOptionalType optional = ENABLE;
+    XVPoint2D   origin; //é¡¶ç‚¹(å·¦ä¸Šç‚¹ï¼Œä¸æ˜¯ä¸­å¿ƒ)
+    float       angle;  //æ—‹è½¬è§’åº¦ï¼ˆç»•ä¸­å¿ƒæ—‹è½¬è§’åº¦ï¼‰
+    float       width;  //å®½åº¦
+    float       height; //é«˜åº¦
+
+    XVRectangle2D(XVPoint2D origin_ = XVPoint2D(),
+                  float     angle_  = 0,
+                  float     width_  = 0,
+                  float     height_ = 0,
+                  XVOptionalType optional_ = ENABLE){
+        origin = origin_;
+        angle  = angle_ ;
+        width  = width_ ;
+        height = height_;
+        optional = optional_;
+    }
 }XVRectangle2D;
 
 //Box
 typedef struct XVBox
 {
-	XVPoint2D origin; //¶¥µã(×óÉÏµã£¬²»ÊÇÖĞĞÄ)
-	float width;      //¿í¶È
-	float height;     //¸ß¶È
+    XVOptionalType  optional = ENABLE;
+    XVPoint2DInt    origin; //é¡¶ç‚¹(å·¦ä¸Šç‚¹ï¼Œä¸æ˜¯ä¸­å¿ƒ)
+    int             width;  //å®½åº¦
+    int             height; //é«˜åº¦
+
+    XVBox(XVPoint2DInt origin_=XVPoint2DInt(), int width_=0, int height_=0, XVOptionalType opt_=ENABLE){
+        optional =  opt_   ;
+        origin   =  origin_;
+        width    =  width_ ;
+        height   =  height_;
+    }
 }XVBox;
 
-enum XVOptionalType
-{
-	NUL,
-	ENABLE
-};
+//Box
+//typedef struct XVBox
+//{
+//    XVOptionalType  optional = ENABLE;
+//    XVPoint2D    origin = XVPoint2D(0,0); //é¡¶ç‚¹(å·¦ä¸Šç‚¹ï¼Œä¸æ˜¯ä¸­å¿ƒ)
+//    float             width = 0;  //å®½åº¦
+//    float             height = 0; //é«˜åº¦
+//}XVBox;
 
-//±ßÔµÌø±äÀàĞÍ
-enum XVEdgeTransitionType
-{
-	BrightToDark, // ÓÉ°×µ½ºÚ
-	DarkToBright, // ÓÉºÚµ½°×
-	Any           // ÈÎÒâ
-};
-
-//±íÊ¾Ò»¸ö±ßÔµµã
+//è¡¨ç¤ºä¸€ä¸ªè¾¹ç¼˜ç‚¹
 struct XVEdge1D
 {
-	XVPoint2D			    point;      //×ø±ê
-	float			        magnitude;  //Ìİ¶È·ùÖµ
-	XVEdgeTransitionType	transition; //·½Ïò
+    XVPoint2D               point;      //åæ ‡
+    float                   magnitude;  //æ¢¯åº¦å¹…å€¼
+    XVEdgeTransitionType    transition; //æ–¹å‘
+
+    XVEdge1D(XVPoint2D point_=XVPoint2D(), float magnitude_=0, XVEdgeTransitionType transition_= Any){
+        point      = point_      ;
+        magnitude  = magnitude_  ;
+        transition = transition_ ;
+    }
 };
 
-//±íÊ¾±ßÔµµãÖ®¼äµÄ¾àÀë
+//è¡¨ç¤ºè¾¹ç¼˜ç‚¹ä¹‹é—´çš„è·ç¦»
 struct XVGap1D
 {
-	XVPoint2D	point1;
-	XVPoint2D	point2;
-	float	width;
+    XVPoint2D	point1;
+    XVPoint2D	point2;
+    float	width;
+
+    XVGap1D(XVPoint2D point1_=XVPoint2D(), XVPoint2D point2_=XVPoint2D(), float width_=0){
+        point1 = point1_;
+        point2 = point2_;
+        width  = width_ ;
+    }
 };
 
 enum XVPlainType
 {
-	Int8,
-	UInt8,
-	Int16,
-	UInt16,
-	Int32,
-	Real
+    Int8,
+    UInt8,
+    Int16,
+    UInt16,
+    Int32,
+    Real
 };
 typedef struct XVImage
 {
-	int				width;			// number of pixel columns
-	int				height;			// number of pixel rows
-	XVPlainType	    type;	        // type of channels (Ä¬ÈÏUInt8)
-	int				depth;			// number of channels(»Ò¶ÈÍ¼1)
-	BYTE*           data;
-
+    int             width   ;			// number of pixel columns
+    int             height  ;			// number of pixel rows
+    XVPlainType	    type    ;                   // type of channels (é»˜è®¤UInt8)
+    int             depth   ;			// number of channels(ç°åº¦å›¾1)
+    BYTE*           data    ;
 }XVImage;
 
-//Ö±Ïßax + by + c = 0
+//ç›´çº¿ax + by + c = 0
 struct XVLine2D
 {
-	float a;
-	float b;
-	float c;
+    XVOptionalType      optional = ENABLE;
+    float a;
+    float b;
+    float c;
+
+    XVLine2D(float a_=0, float b_=0, float c_=0, XVOptionalType optional_ = ENABLE)
+    {
+        optional = optional_;
+        a = a_;
+        b = b_;
+        c = c_;
+    }
 };
-//ĞĞ³Ì
+//è¡Œç¨‹
 struct XVPointRun
 {
-	int    x;
-	int    y;  // PointRun begin location ÆğÊ¼µãµÄx,yÏñËØÎ»ÖÃ
-	int    length;//ĞĞ³Ì
+    int    x;
+    int    y;  // PointRun begin location èµ·å§‹ç‚¹çš„x,yåƒç´ ä½ç½®
+    int    length;//è¡Œç¨‹
+
+    XVPointRun(int x_=0, int y_=0, int length_=0){
+        x = x_;
+        y = y_;
+        length = length_;
+    }
 };
 
 typedef struct XVRegion
 {
-	XVOptionalType  optional; //ROIÊÇ·ñÆğ×÷ÓÃ
-	int frameWidth;
-	int frameHeight;
-	vector<XVPointRun> arrayPointRun;
+    XVOptionalType      optional = ENABLE; //ROIæ˜¯å¦èµ·ä½œç”¨
+    int                 frameWidth;
+    int                 frameHeight;
+    vector<XVPointRun>  arrayPointRun;
+
+    XVRegion(){
+        optional      = ENABLE;
+        frameWidth    = 0;
+        frameHeight   = 0;
+        arrayPointRun.clear();
+    }
+
+    XVRegion(int frameWidth_, int frameHeight_, const vector<XVPointRun> &arrayPointRun_, XVOptionalType optional_ = ENABLE){
+        optional      = optional_     ;
+        frameWidth    = frameWidth_   ;
+        frameHeight   = frameHeight_  ;
+        arrayPointRun = arrayPointRun_;
+    }
 }XVRegion;
 
-//Â·¾¶»òÕßÁ´Ìõ
+//è·¯å¾„æˆ–è€…é“¾æ¡
 struct XVPath
 {
-	vector< XVPoint2D > arrayPoint2D;
+    vector< XVPoint2D > arrayPoint2D;
+    bool                closed;
+
+    XVPath(){
+        arrayPoint2D.clear();
+        closed = false;
+    }
+    XVPath(const vector<XVPoint2D>& arrayPoint2D_, bool closed_){
+        arrayPoint2D = arrayPoint2D_;
+        closed = closed_;
+    }
 };
 
 struct XVPathFittingField
 {
-	XVPath	axis;
-	float	width;
+    XVPath	axis;
+    float	width;
 };
 
 enum XVPolarityType
 {
-	Bright,
-	Dark,
-	ANY
+    Bright,
+    Dark,
+    ANY
 };
 //Represents ridges found by 1D Edge Detection functions
 struct XVRidge1D
 {
-	XVPoint2D		point;
-	float		    magnitude;
-	XVPolarityType	polarity;
+    XVPoint2D		point;
+    float		magnitude;
+    XVPolarityType	polarity;
 };
 //Represents stripes found by 1D Edge Detection functions
 struct XVStripe1D
 {
-	XVPoint2D		point1;
-	XVPoint2D	    point2;
-	float			width;
-	float			magnitude;
-	XVPolarityType	polarity;
+    XVPoint2D		point1;
+    XVPoint2D           point2;
+    float               width;
+    float               magnitude;
+    XVPolarityType	polarity;
 };
 
-//Í¨¹ıÆğµãºÍÖÕµãÀ´±íÊ¾Ò»ÌõÓĞÏòÏß¶Î
+//é€šè¿‡èµ·ç‚¹å’Œç»ˆç‚¹æ¥è¡¨ç¤ºä¸€æ¡æœ‰å‘çº¿æ®µ
 struct XVSegment2D
 {
-	XVPoint2D point1; //Æğµã
-	XVPoint2D point2; //ÖÕµã
+    XVOptionalType optional = ENABLE;
+    XVPoint2D point1; //èµ·ç‚¹
+    XVPoint2D point2; //ç»ˆç‚¹
+
+    XVSegment2D(XVPoint2D p1=XVPoint2D(0,0), XVPoint2D p2=XVPoint2D(0,0), XVOptionalType opt=ENABLE){
+        point1 = p1;
+        point2 = p2;
+        optional = opt;
+    }
 };
 
 struct XVSegmentFittingField
 {
-	XVSegment2D	axis;
-	float		width;
+    XVSegment2D	axis;
+    float       width = 20.0f;
 };
 
-struct XVSegmentScanField
+struct XVSegmentScanField //ä¸XVSegmentFittingFieldå–æ‰«æçº¿çš„æ–¹å¼ä¸åŒ
 {
-	XVSegment2D	axis;
-	float		width;
+    XVOptionalType optional = ENABLE;
+    XVSegment2D	axis;
+    float	width;
+
+    XVSegmentScanField(XVSegment2D axis_=XVSegment2D(), float width_=0, XVOptionalType opt_ = ENABLE){
+        axis     = axis_;
+        width    = width_;
+        optional = opt_;
+    }
 };
 
-//±íÊ¾Ò»¸ö¾Ö²¿×ø±êÏµ£¬°üÀ¨²Î¿¼µã¡¢Ğı×ª½Ç¶È¼°Ëõ·ÅÏµÊı£¨Ò»¸öÆ¥Åä½á¹û£¬ÓÃÓÚ¶ÔÄ£°å½øĞĞ±ä»»£©
+//è¡¨ç¤ºä¸€ä¸ªå±€éƒ¨åæ ‡ç³»ï¼ŒåŒ…æ‹¬å‚è€ƒç‚¹ã€æ—‹è½¬è§’åº¦åŠç¼©æ”¾ç³»æ•°ï¼ˆä¸€ä¸ªåŒ¹é…ç»“æœï¼Œç”¨äºå¯¹æ¨¡æ¿è¿›è¡Œå˜æ¢ï¼‰
 typedef struct XVCoordinateSystem2D
 {
-	XVOptionalType  optional; 
-	XVPoint2D       origin;
-	float angle;
-	float scale;
+    XVOptionalType  optional = ENABLE;
+    XVPoint2D       origin;
+    float           angle;
+    float           scale;
+
+    XVCoordinateSystem2D(XVPoint2D origin_=XVPoint2D(0,0), float angle_=0, float scale_=1, XVOptionalType  optional_=ENABLE){
+        optional = optional_;
+        origin   = origin_  ;
+        angle    = angle_   ;
+        scale    = scale_   ;
+    }
 }XVCoordinateSystem2D;
 
 struct XVObject2D
 {
-	XVRectangle2D			match;     //Ò»¸ö¾ØĞÎ¿ò
-	XVCoordinateSystem2D	alignment; //£¨¼´¶¨ÒåÒ»¸ö¾Ö²¿µÄ²Î¿¼×ø±êÏµ£¬ÔÚÄ£°åÆ¥ÅäÖĞÊÇÄ£°åÖ®¼äµÄÏà»¥±ä»»£© 
-	XVPoint2D				point;     //Ä¿±êÔÚÍ¼ÏñÖĞµÄÎ»ÖÃ
-	float				    angle;     //angleºÍscale¸úalignmentÖĞµÄÖµÏàÍ¬
-	float				    scale;
-	float				    score;
+    XVOptionalType          optional = ENABLE;
+    XVRectangle2D           match;     //ä¸€ä¸ªçŸ©å½¢æ¡†
+    XVCoordinateSystem2D    alignment; //ï¼ˆå³å®šä¹‰ä¸€ä¸ªå±€éƒ¨çš„å‚è€ƒåæ ‡ç³»ï¼Œåœ¨æ¨¡æ¿åŒ¹é…ä¸­æ˜¯æ¨¡æ¿ä¹‹é—´çš„ç›¸äº’å˜æ¢ï¼‰
+    XVPoint2D               point;     //ç›®æ ‡åœ¨å›¾åƒä¸­çš„ä½ç½®
+    float                   angle;     //angleå’Œscaleè·Ÿalignmentä¸­çš„å€¼ç›¸åŒ
+    float                   scale;
+    float                   score;
 
-	vector<XVPath>	        objectEdges;
+    vector<XVPath>	    objectEdges;
 };
+
+struct XVProfile
+{
+    vector<XVPoint2D> dataArray;
+};
+
+struct XVColor
+{
+    int red;            //çº¢
+    int green;          //ç»¿
+    int blue;           //è“
+    int alpha = 255;    //è‰²å½©ç©ºé—´
+
+    XVColor(int red_ = 255, int green_ = 0, int blue_ = 0, int alpha_ = 255):red(red_),green(green_),blue(blue_),alpha(alpha_){ }
+};
+
+struct XVChartItem
+{
+    string name;
+    XVColor color;
+    XVProfile itemdata;
+};
+
+struct XVChart
+{
+    string chart_Name;
+    string x_Name;
+    string y_Name;
+    vector<XVChartItem> items;
+};
+
+struct XVLocalBlindness//è¿™ä¸ªå‚æ•°æ˜¯å¼±è¾¹ç¼˜ç‚¹ä¸å¼ºè¾¹ç¼˜ç‚¹ä¹‹é—´çš„ä½ç½®å…³ç³»
+{
+    XVOptionalType  optional = ENABLE;               //è¯¥ç»“æ„ä½“æœ¬èº«æ˜¯å¦æœ‰æ•ˆ
+    XVOptionalType  radiusOptional = ENABLE;         //åŠå¾„æ˜¯å¦æœ‰æ•ˆ
+    float           radius;                 //åŠå¾„
+    float           threshold;              //é˜ˆå€¼
+    float           fuzziness;              //é¢œè‰²å®¹å·®
+
+    XVLocalBlindness(){
+        optional = ENABLE;
+        radiusOptional = ENABLE;
+        radius = 0;
+        threshold=0.5f;
+        fuzziness=0.0f;
+    }
+};
+
+struct XVImageLocalExtremaVerification
+{
+    XVOptionalType  optional = ENABLE;
+    int             pointCount;
+    float           radius;
+    float           minDifference;
+};
+
+struct XVExtremum2D
+{
+    XVPoint2D       point;
+    float           value;
+    XVPolarityType  polarity;
+};
+
+struct XVImageFormat
+{
+    int             width; // Image width in pixels
+    int             height; // Image height in pixels
+    XVPlainType     type; // Type of pixel components
+    int             depth; // Number of pixel components
+    int             pitchAlignment;
+};
+struct XVSpatialMapImpl
+{
+    //TODO
+};
+struct XVSpatialMap
+{
+    XVSpatialMapImpl* pImpl;
+};
+
+/////////////////////////////////////   ScanParams  /////////////////////////////////////////
+typedef struct XVEdgeScanParams
+{
+    XVProfileInterpolationMethod    profileInterpolation; //(æ’å€¼æ–¹æ³•)Selects the method of sub-pixel precise edge detection     (Quadratic4)
+    float                           smoothingStdDev;      //(æ»¤æ³¢å‚æ•°)Parameter for gaussian smoothing of the brightness profile (0.6)ï¼ˆStdDevå†³å®šå½¢çŠ¶ æ»¤æ³¢å™¨çš„å¤§å°ï¼Ÿï¼‰
+    float                           minMagnitude;         //(æ¢¯åº¦é˜ˆå€¼)Minimum acceptable edge strength                           (5)
+    XVEdgeTransitionType            edgeTransition;       //(è¾¹ç¼˜ç±»å‹)Specifies the type of edges to be detected.                (BrightToDark)
+}XVEdgeScanParams;
+
+typedef struct XVRidgeScanParams
+{
+    XVProfileInterpolationMethod    profileInterpolation; //Quadratic4 Selects the method of sub-pixel precise ridge detection
+    float                           smoothingStdDev;      //0.6f       Parameter for gaussian smoothing of the brightness profile
+    int                             ridgeWidth;           //5	       Expected thickness of the ridge in pixels ridgeçš„å®½åº¦
+    int                             ridgeMargin;          //2          Number of pixels that are sampled outside of the ridge, on both of its sides???
+    XVRidgeOperatorType             ridgeOperator;        //Minimum    Selects the function used to combine the brightness on the left and on the right side of the ridge???
+    float                           minMagnitude;         //5.0f       Minimum acceptable ridge strength æœ€å°é˜ˆå€¼
+    XVPolarityType                  ridgePolarity;        //(Bright, Dark or Any) Specifies the type of ridges to be detected
+}XVRidgeScanParams;
+
+typedef struct XVStripeScanParams
+{
+    XVProfileInterpolationMethod    profileInterpolation;  //Quadratic4 Selects the method of sub-pixel precise ridge detection
+    float			    smoothingStdDev;       //0.6f	Parameter for gaussian smoothing of the brightness profile
+    float			    minMagnitude;          //5.0f	Minimum acceptable edge strength æ³¨æ„è¿™é‡Œè¿˜æ˜¯è¾¹ç¼˜ï¼ï¼
+    XVFloat			    maxInnerEdgeMagnitude; //           Maximum strength of edges appearing between the two ends of a stripe(æ¡å†…éƒ¨æœ€å¤§æ¢¯åº¦ä¸è¶…è¿‡è¯¥å€¼ é»˜è®¤å€¼0æ—¶è¯¥å‚æ•°ä¸èµ·ä½œç”¨)ï¼ï¼ï¼ï¼
+    XVPolarityType                  stripePolarity;        //           Specifies the type of stripes to be detected (Bright, Dark or Any)
+    float                           minStripeWidth;        //           Minimum acceptable stripe width in pixels ï¼ˆ0ï¼‰æœ€å°å¸¦å®½
+    XVFloat                         maxStripeWidth;        //           Maximum acceptable stripe width in pixels
+}XVStripeScanParams;
+
+
 #endif // XVBASE_H
