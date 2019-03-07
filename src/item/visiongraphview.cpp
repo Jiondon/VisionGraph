@@ -597,7 +597,7 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
             QPainterPath path;
             m_path = path;
 
-        }else if(type == ItemType::Paint_EllipseItem){
+        }else if(type == ItemType::Paint_EllipseItem || type == ItemType::Paint_CirCle){
             XVRegion region = createEllipse(rf,leftTop,angle);
 
             m_region = slot_CombineRegion(m_region,region,Union);
@@ -836,6 +836,17 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
 
 //        path.addEllipse(QRectF(m_pressPointF,viewPos));
         m_path = path;
+    }else if(m_itemType == ItemType::Paint_CirCle){
+        //绘制圆
+        QPainterPath path;
+        QRectF rf = detail_ellipse_InRectToOutRect(QRectF(m_pressPointF,viewPos));
+        if(rf.width() < rf.height()){
+            rf.setRect(rf.x(),rf.y(),rf.height(),rf.height());
+        }else{
+            rf.setRect(rf.x(),rf.y(),rf.width(),rf.width());
+        }
+        path.addEllipse(rf);
+        m_path = path;
     }else if(m_itemType == ItemType::Paint_Arc){
         //释放，记录坐标，有一个点，跟随鼠标绘制直线，有两个点，跟随鼠标绘制圆弧
         QPainterPath path;
@@ -1058,6 +1069,45 @@ void VisionGraphView::detailPressEvent(QMouseEvent *event)
                 //点转化，绘制的事内接矩形的点，转化为外接的矩形的点
                 QRectF rf = detail_ellipse_InRectToOutRect(QRectF(topLeftPoint,bottomRightPoint));
 //                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                emit signal_Item(m_itemType,rf);
+                m_bPress = false;  //绘制结束
+
+                QPainterPath path;
+                m_path = path;
+                m_vecPoint_Poly.clear();
+                setItemType(ItemType::No);
+            }
+        }else if(m_itemType == ItemType::Paint_CirCle){
+            m_vecPoint_Poly.append(scenePos);
+            if(m_vecPoint_Poly.count() >= 2){
+                //绘制结束
+                QPointF topLeftPoint;
+                QPointF bottomRightPoint;
+                if(m_vecPoint_Poly[0].x() < m_vecPoint_Poly[1].x()){
+                    topLeftPoint.setX(m_vecPoint_Poly[0].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[1].x());
+                }else{
+                    topLeftPoint.setX(m_vecPoint_Poly[1].x());
+                    bottomRightPoint.setX(m_vecPoint_Poly[0].x());
+                }
+
+                if(m_vecPoint_Poly[0].y() < m_vecPoint_Poly[1].y()){
+                    topLeftPoint.setY(m_vecPoint_Poly[0].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[1].y());
+                }else{
+                    topLeftPoint.setY(m_vecPoint_Poly[1].y());
+                    bottomRightPoint.setY(m_vecPoint_Poly[0].y());
+                }
+
+                //点转化，绘制的事内接矩形的点，转化为外接的矩形的点
+                QRectF rf = detail_ellipse_InRectToOutRect(QRectF(topLeftPoint,bottomRightPoint));
+//                emit signal_Item(m_itemType,QRectF(topLeftPoint,bottomRightPoint));
+                if(rf.width() < rf.height()){
+                    rf.setRect(rf.x(),rf.y(),rf.height(),rf.height());
+                }else{
+                    rf.setRect(rf.x(),rf.y(),rf.width(),rf.width());
+                }
+
                 emit signal_Item(m_itemType,rf);
                 m_bPress = false;  //绘制结束
 

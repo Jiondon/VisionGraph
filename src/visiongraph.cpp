@@ -91,6 +91,11 @@ VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation
     return m_graphWidget->addEllipse(rf,bEdit,bRotation,color);
 }
 
+VisionCircleItem *VisionGraph::addCircle(QRectF rf, bool bEdit, QColor color)
+{
+    return m_graphWidget->addCircle(rf,bEdit,color);
+}
+
 VisionArcItem *VisionGraph::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, QColor color)
 {
     return m_graphWidget->addArc(sP,mP,fP,bEdit,color);

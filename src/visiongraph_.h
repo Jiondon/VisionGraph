@@ -85,6 +85,12 @@ public:
     VisionEllipseItem* addEllipse(QRectF rf, bool bEdit = true, bool bRotation = true, QColor color = QColor(255,0,0));
 
     /**
+     * @brief       添加圆
+     * @param       默认是可编辑的，未添加不可编辑的圆
+     */
+    VisionCircleItem* addCircle(QRectF rf, bool bEdit = true, QColor color = QColor(255,0,0));
+
+    /**
      * @brief       添加圆弧
      * @param       默认是可编辑的，未添加不可编辑的圆弧
      */
@@ -141,6 +147,13 @@ public:
      * @param       默认是可编辑的，未添加不可编辑
      */
     VisionArcItemFitting *addArcFitting(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true, qreal length = 0,QColor color = QColor(255,0,0));
+
+    /**
+     * @brief       添加圆Fitting
+     * @param       默认是可编辑的，未添加不可编辑
+     */
+    VisionCircleItemFitting *addCircleFitting(QRectF rf = QRectF(0,0,0,0), bool bEdit = true, qreal length = 0, QColor color = QColor(255,0,0));
+
 
     /**
      * @brief       添加折线Fitting
@@ -423,6 +436,7 @@ private:
 
     QToolButton *sys_rect_button;
     QToolButton *sys_ellipse_button;
+    QToolButton *sys_circle_button;
     QToolButton *sys_arc_button;
     QToolButton *sys_poly_button;
     QToolButton *sys_poly_elli_button;
@@ -492,6 +506,7 @@ private slots:
 
     void slot_rect_action();
     void slot_ellipse_action();
+    void slot_circle_action();
     void slot_arc_action();
     void slot_poly_action();
     void slot_poly_elli_action();

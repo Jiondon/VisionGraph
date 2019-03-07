@@ -201,6 +201,13 @@ void VisionGraph_::initTool_operation()
     connect(sys_ellipse_action,SIGNAL(triggered(bool)),this,SLOT(slot_ellipse_action()));
     sys_ellipse_button = new QToolButton;
     sys_ellipse_button->setDefaultAction(sys_ellipse_action);
+    //圆
+    QAction* sys_circle_action = new QAction(QIcon(iconPath+"circle.png"),QStringLiteral("新建一个圆区域"));
+    sys_circle_action->setIconText(QStringLiteral("圆"));
+    sys_circle_action->setText("circle");
+    connect(sys_circle_action,SIGNAL(triggered(bool)),this,SLOT(slot_circle_action()));
+    sys_circle_button = new QToolButton;
+    sys_circle_button->setDefaultAction(sys_circle_action);
     //圆弧
     QAction* sys_arc_action = new QAction(QIcon(iconPath+"arc.png"),QStringLiteral("新建一个圆弧"));
     sys_arc_action->setIconText(QStringLiteral("圆弧"));
@@ -274,6 +281,7 @@ void VisionGraph_::initTool_operation()
     m_lstToolBtn.append(sys_mousePainter_button);
     m_lstToolBtn.append(sys_rect_button);
     m_lstToolBtn.append(sys_ellipse_button);
+    m_lstToolBtn.append(sys_circle_button);
     m_lstToolBtn.append(sys_arc_button);
     m_lstToolBtn.append(sys_poly_button);
     m_lstToolBtn.append(sys_poly_elli_button);
@@ -634,6 +642,43 @@ VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf,bool bEdit,bool bRotation,
     }
 }
 
+VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    if(bEdit){
+        VisionCircleItem *item = new VisionCircleItem(bEdit,color);
+        QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+        QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+        QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,&QObject::destroyed,[=](){
+            m_lstItem.removeOne(item);
+            m_curVisionItem = nullptr;
+
+        });
+        item->setCircle(rf);
+        scene->addItem(item);
+        m_curVisionItem = item;
+        m_lstItem.push_back(item);
+        emit signal_itemFinished(item);
+        return item;
+    }else{
+        VisionCircleItem* item = new VisionCircleItem(bEdit,color);
+        QObject::connect(item,&QObject::destroyed,[=](){
+            m_lstItem.removeOne(item);
+            m_curVisionItem = nullptr;
+
+        });
+        item->setCircle(rf);
+        scene->addItem(item);
+        m_curVisionItem = item;
+        m_lstItem.push_back(item);
+        emit signal_itemFinished(item);
+        return item;
+    }
+}
+
 
 VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, QColor color)
 {
@@ -926,6 +971,45 @@ VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPoint
     }
 }
 
+VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, qreal length, QColor color)
+{
+    if(!checkoutItem())
+        return NULL;
+
+    if(bEdit){
+        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color);
+
+        QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
+        QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
+        QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,&QObject::destroyed,[=](){
+            m_lstItem.removeOne(item);
+            m_curVisionItem = nullptr;
+
+        });
+        item->setCircle(rf);
+        scene->addItem(item);
+        m_curVisionItem = item;
+        m_lstItem.push_back(item);
+        emit signal_itemFinished(item);
+        return item;
+    }else{
+        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color);
+
+        QObject::connect(item,&QObject::destroyed,[=](){
+            m_lstItem.removeOne(item);
+            m_curVisionItem = nullptr;
+
+        });
+        item->setCircle(rf);
+        scene->addItem(item);
+        m_curVisionItem = item;
+        m_lstItem.push_back(item);
+        emit signal_itemFinished(item);
+        return item;
+    }
+}
+
 VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPointF, bool bClose, bool bEdit, qreal length, QColor color)
 {
     if(!checkoutItem())
@@ -1124,6 +1208,8 @@ QToolButton *VisionGraph_::getToolButton(ToolButtonType type)
         return sys_rect_button;
     case ToolButtonType::ToolButtonSys_ellipse:
         return sys_ellipse_button;
+    case ToolButtonType::ToolButtonSys_circle:
+        return sys_circle_button;
     case ToolButtonType::ToolButtonSys_Arc:
         return sys_arc_button;
     case ToolButtonType::ToolButtonSys_poly:
@@ -1182,6 +1268,9 @@ bool VisionGraph_::removeToolButton(ToolButtonType type)
         break;
     case ToolButtonType::ToolButtonSys_ellipse:
         toolButton = sys_ellipse_button;
+        break;
+    case ToolButtonType::ToolButtonSys_circle:
+        toolButton = sys_circle_button;
         break;
     case ToolButtonType::ToolButtonSys_Arc:
         toolButton = sys_arc_button;
@@ -1449,7 +1538,12 @@ void VisionGraph_::slot_ellipse_action()
     view->setItemType(ItemType::Paint_EllipseItem);
     m_itemType = ItemType::Paint_EllipseItem;
 //    label_Operation->setText(QStringLiteral("拖动到开始创建一个新区域 Ellipse"));
+}
 
+void VisionGraph_::slot_circle_action()
+{
+    view->setItemType(ItemType::Paint_CirCle);
+    m_itemType = ItemType::Paint_CirCle;
 }
 
 void VisionGraph_::slot_arc_action()
@@ -1577,17 +1671,23 @@ void VisionGraph_::slot_addItem(ItemType type, QRectF rf)
         if(type == ItemType::Paint_Rect){
             lstP.append({rf.topLeft(),rf.topRight(),rf.bottomRight(),rf.bottomLeft()});
             addChain(lstP,true);
-        }else if(type == ItemType::Paint_EllipseItem){
+        }else if(type == ItemType::Paint_EllipseItem || type == ItemType::Paint_CirCle){
             QPainterPath path;
             path.addEllipse(rf);
             lstP = path.toFillPolygon().toList();
             addChain(lstP,true);
+        }
+    }else if(m_graphType == GraphType::graphItem_Fitting){
+        if(type == ItemType::Paint_CirCle){
+            addCircleFitting(rf);
         }
     }else{
         if(type == ItemType::Paint_Rect){
             addRect(rf);
         }else if(type == ItemType::Paint_EllipseItem){
             addEllipse(rf);
+        }else if(type == ItemType::Paint_CirCle){
+            addCircle(rf);
         }
     }
 }
@@ -1832,6 +1932,7 @@ void VisionGraph_::init_graphRegion()
 
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_elli_button));
     m_insertAction = tool_Widget->addSeparator();
@@ -1882,6 +1983,7 @@ void VisionGraph_::init_graphItem_unSelf()
 
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
     m_lstAction.append(tool_Widget->addWidget(sys_arc_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
@@ -1911,6 +2013,7 @@ void VisionGraph_::init_graphChain()
 
     m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
     m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_line_button));
@@ -1936,7 +2039,7 @@ void VisionGraph_::init_graphFitting()
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_ellipse_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
     m_lstAction.append(tool_Widget->addWidget(sys_arc_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));

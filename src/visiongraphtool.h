@@ -29,11 +29,11 @@
 #include "./item/visionarcitem.h"
 #include "./item/visionline.h"
 #include "./item/visionpoint.h"
-
+#include "./item/visioncircleitem.h"
 #include "./item/visionlineitemfitting.h"
 #include "./item/visionarcitemfitting.h"
 #include "./item/visionpolygonitemfitting.h"
-
+#include "./item/visioncircleitemfitting.h"
 #include "./item/visioncoordinateitem.h"
 
 #include "./control/color.h"
@@ -83,6 +83,7 @@ enum ToolButtonType
 
     ToolButtonSys_rect, //绘制矩形
     ToolButtonSys_ellipse, //绘制椭圆或者圆
+    ToolButtonSys_circle, //绘制椭圆或者圆
     ToolButtonSys_Arc,//绘制圆弧
     ToolButtonSys_poly, //绘制多边形
     ToolButtonSys_poly_elli, //绘制任意区域
