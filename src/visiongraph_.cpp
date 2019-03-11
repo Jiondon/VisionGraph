@@ -505,6 +505,27 @@ bool VisionGraph_::checkoutItem()
     }
 }
 
+XVPath VisionGraph_::getpath()
+{
+    XVPath path;
+    if(m_curVisionItem == NULL)
+        return path;
+
+    if(m_curVisionItem->getType() == ItemType::Paint_CrossPoint){
+        qDebug()<<"1111 point";
+        VisionCrossPointItem* item = (VisionCrossPointItem*)m_curVisionItem;
+        path = item->getData();
+
+    }else if(m_curVisionItem->getType() == ItemType::Paint_Poly){
+        qDebug()<<"2222 poly";
+        VisionPolygon* item = (VisionPolygon*)m_curVisionItem;
+        path = item->getData();
+
+    }
+    qDebug()<<path.closed<<path.arrayPoint2D.size();
+    return path;
+}
+
 QGraphicsRectItem *VisionGraph_::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
     return scene->addRect(rect,pen,brush);
@@ -525,9 +546,9 @@ QGraphicsEllipseItem *VisionGraph_::_addEllipse(const QRectF &rect, const QPen &
     return scene->addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph_::_addPoint(QPointF pointF, bool edit, QColor color)
+VisionCrossPointItem *VisionGraph_::_addPoint(QPointF pointF, bool edit,qreal length, QColor color)
 {
-    VisionCrossPointItem *item = new VisionCrossPointItem(edit,color);
+    VisionCrossPointItem *item = new VisionCrossPointItem(edit,length,color);
     item->setPoint(pointF);
     scene->addItem(item);
     return item;
@@ -813,13 +834,13 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF,bool bClose,b
     }
 }
 
-VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, QColor color)
+VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit,qreal length, QColor color)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,color);
+        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -835,7 +856,7 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, QColor 
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,color);
+        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -1903,6 +1924,8 @@ void VisionGraph_::slot_GraphTypeChanged(GraphType type)
         break;
     case GraphType::graphItem_Fitting:
         init_graphFitting();
+    case GraphType::graph_Path:
+        init_graph_path();
     default:
         break;
     }
@@ -2044,6 +2067,27 @@ void VisionGraph_::init_graphFitting()
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     m_lstAction.append(tool_Widget->addWidget(sys_line_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::init_graph_path()
+{
+    m_lstAction.clear();
+    tool_Widget->clear();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
+    tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
+    m_insertAction = tool_Widget->addSeparator();
+
+    m_lstAction.append(tool_Widget->addWidget(sys_point_button));
+    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_insertAction = tool_Widget->addSeparator();
 
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);

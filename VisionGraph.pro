@@ -41,16 +41,16 @@ Debug:DESTDIR= ../bin/debug
 Release:DESTDIR = ../bin/release
 
 #LIBS += ./lib
-Debug:LIBS += ./lib/debug/XVCreateRegion.lib
-Debug:LIBS += ./lib/debug/XVCombineRegions.lib
+Debug:LIBS += ../bin/debug/XVCreateRegion.lib
+Debug:LIBS += ../bin/debug/XVCombineRegions.lib
 
-Release:LIBS += ./lib/release/XVCreateRegion.lib
-Release:LIBS += ./lib/release/XVCombineRegions.lib
+Release:LIBS += ../bin/release/XVCreateRegion.lib
+Release:LIBS += ../bin/release/XVCombineRegions.lib
 
-INCLUDEPATH += ./include
-INCLUDEPATH += ./include/XVBase.h
-INCLUDEPATH += ./include/XVCreateRegion.h
-INCLUDEPATH += ./include/XVCombineRegions.h
+INCLUDEPATH += ./include/tools
+INCLUDEPATH += ./include/tools/XVBase.h
+INCLUDEPATH += ./include/tools/XVCreateRegion.h
+INCLUDEPATH += ./include/tools/XVCombineRegions.h
 
 
 SOURCES += src/visiongraph.cpp \

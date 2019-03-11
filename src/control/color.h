@@ -27,7 +27,8 @@ enum GraphType{
     graphItem_self,
     graphItem_unSelf,
     graphChain,
-    graphItem_Fitting
+    graphItem_Fitting,
+    graph_Path
 };
 
 /**

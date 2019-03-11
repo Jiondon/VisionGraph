@@ -66,7 +66,7 @@ public:
     /**
      * @brief       在scene中添加CrossPoint  不可编辑
      */
-    VisionCrossPointItem* _addPoint(QPointF pointF,bool edit = false,QColor color = QColor(255,0,0));
+    VisionCrossPointItem* _addPoint(QPointF pointF, bool edit = false, qreal length = 5, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个arrow
@@ -121,7 +121,7 @@ public:
      * @brief       添加一个点
      * @param
      */
-    VisionCrossPointItem* addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,0,0));
+    VisionCrossPointItem* addPoint(QPointF pointF, bool bEdit = false, qreal length = 5, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个点 -- 不限数量
@@ -373,6 +373,12 @@ public:
      * @param
      */
     void setCoordinateVisible(bool bVisible);
+
+    /**
+     * @brief       获取view中的item数据
+     * @param
+     */
+    XVPath getpath();
 
 signals:
     void signal_PaintFinishedChanged(VisionItem*);

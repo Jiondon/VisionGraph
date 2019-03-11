@@ -71,9 +71,9 @@ QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &p
     return m_graphWidget->_addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, bool edit, QColor color)
+VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, bool edit, qreal length,QColor color)
 {
-    return m_graphWidget->_addPoint(pointF,edit,color);
+    return m_graphWidget->_addPoint(pointF,edit,length,color);
 }
 
 VisionArrow *VisionGraph::_addArrow(QPointF pointF,bool bEdit, QColor color)
@@ -116,9 +116,9 @@ VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, b
     return m_graphWidget->addPolygon(vecPointF,bClose,bEdit,color);
 }
 
-VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit, QColor color)
+VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit,qreal length, QColor color)
 {
-    return m_graphWidget->addPoint(pointF,bEdit,color);
+    return m_graphWidget->addPoint(pointF,bEdit,length,color);
 }
 
 VisionPoint *VisionGraph::addPointFs(QList<QPointF> lstP, QColor color)
@@ -347,4 +347,9 @@ QColor VisionGraph::getPixel(qreal x, qreal y)
 void VisionGraph::setCoordinateVisible(bool bVisible)
 {
     m_graphWidget->setCoordinateVisible(bVisible);
+}
+
+XVPath VisionGraph::getpath()
+{
+    return m_graphWidget->getpath();
 }

@@ -62,7 +62,7 @@ public:
     QGraphicsPolygonItem* _addPolygon(const QPolygonF &polygon, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     QGraphicsLineItem* _addLine(const QLineF &line, const QPen &pen = QPen());
     QGraphicsEllipseItem* _addEllipse(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
-    VisionCrossPointItem* _addPoint(QPointF pointF,bool edit = false,QColor color = QColor(255,0,0));
+    VisionCrossPointItem* _addPoint(QPointF pointF, bool edit = false, qreal length = 5, QColor color = QColor(255,0,0));
     VisionChainItem* _addChain(QList<QPointF> lstP, bool bClosed = false, bool bEdit = false, QColor color = QColor(255,0,0));
     VisionArrow *_addArrow(QPointF pointF,bool bEdit = false,QColor color = QColor(255,0,0));
 
@@ -120,7 +120,7 @@ public:
      * @brief       添加一个点
      * @param
      */
-    VisionCrossPointItem *addPoint(QPointF pointF, bool bEdit = false, QColor color = QColor(255,0,0));
+    VisionCrossPointItem *addPoint(QPointF pointF, bool bEdit = false, qreal length = 5, QColor color = QColor(255,0,0));
 
     /**
      * @brief       添加一个点 -- 不限数量
@@ -388,6 +388,12 @@ public:
      */
     void setCoordinateVisible(bool bVisible);
 
+    /**
+     * @brief       获取view中的item数据
+     * @param
+     */
+    XVPath getpath();
+
 signals:
     void signal_itemFinished(VisionItem* item);
 
@@ -419,6 +425,7 @@ private:
 
     ToolButtonDirection  m_toolButtonDirection = ToolButtonDirection::topDirection;  //tool按钮的位置
     QToolBar *tool_Widget = NULL;
+
 
 private:
 
@@ -554,6 +561,7 @@ private:
     void init_graphItem_unSelf();
     void init_graphChain();
     void init_graphFitting();
+    void init_graph_path();
 };
 
 #endif // VISIONGRAPH__H

@@ -6,12 +6,13 @@
 
 #include "../control/color.h"
 
-VisionCrossPointItem::VisionCrossPointItem(bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionCrossPointItem::VisionCrossPointItem(bool edit, qreal length, QColor color, VisionItem *parent) : VisionItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
     m_bEdit = edit;
+    m_length = length;
     if(m_bEdit){
         setSelectedStatus(true);
     }else{
@@ -68,7 +69,7 @@ QVector<QPointF> VisionCrossPointItem::getPoints()
 
 QRectF VisionCrossPointItem::boundingRect() const
 {
-    QRectF rf = QRectF(m_pointF.x()-2,m_pointF.y()-2,4,4);
+    QRectF rf = QRectF(m_pointF.x()-m_length,m_pointF.y()-m_length,2*m_length,2*m_length);
     return rf;
 }
 
@@ -88,8 +89,8 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     }
 
 //    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()-2),QPointF(m_pointF.x(),m_pointF.y()+2));
-    painter->drawLine(QPointF(m_pointF.x()-2,m_pointF.y()),QPointF(m_pointF.x()+2,m_pointF.y()));
+    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()-m_length),QPointF(m_pointF.x(),m_pointF.y()+m_length));
+    painter->drawLine(QPointF(m_pointF.x()-m_length,m_pointF.y()),QPointF(m_pointF.x()+m_length,m_pointF.y()));
 
 }
 
