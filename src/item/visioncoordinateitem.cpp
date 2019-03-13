@@ -1,8 +1,13 @@
 ﻿#include "visioncoordinateitem.h"
+#include "../control/color.h"
 
-VisionCoordinateItem::VisionCoordinateItem(bool bEdit, QColor color, QGraphicsItem *parent) : QGraphicsItem(parent)
+VisionCoordinateItem::VisionCoordinateItem(bool bEdit, bool color_enable,QColor color, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
 }
 
 void VisionCoordinateItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

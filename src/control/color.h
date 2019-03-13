@@ -23,6 +23,7 @@
 
  */
 enum GraphType{
+    graph_Info,  //单纯显示
     graphRegion,
     graphItem_self,
     graphItem_unSelf,

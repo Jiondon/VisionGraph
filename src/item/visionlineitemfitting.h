@@ -16,8 +16,8 @@ public:
      * @param       对line的一些属性进行设置
      * @param       p1 p2 起点和终点 bEdit控制该line是否是可编辑的（起点终点可更改），penWidth penColor画笔的属性
      */
-    explicit VisionLineItemFitting(bool bEdit = true,QPointF p1 = QPointF(0,0),QPointF p2 = QPointF(0,0),qreal length=0,
-                                   qreal penWidth = 0,QColor penColor = QColor(0,0,0),VisionItem *parent = 0);
+    explicit VisionLineItemFitting(bool bEdit = true, QPointF p1 = QPointF(0,0), QPointF p2 = QPointF(0,0), qreal length=0,
+                                   qreal penWidth = 0, bool color_enable = false, QColor penColor = QColor(0,0,0), VisionItem *parent = 0);
 
     /**
      * @brief       设置线的起点和终点

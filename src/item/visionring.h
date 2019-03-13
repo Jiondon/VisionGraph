@@ -25,7 +25,8 @@ class VISIONGRAPHSHARED_EXPORT VisionRing : public VisionItem
     Q_OBJECT
 public:
     //圆心，两个半径的方法处理
-    explicit VisionRing(qreal centerX=0,qreal centerY=0,qreal r1=0,qreal r2=0,bool bEdit = false,qreal penWidth=0,QColor penColor=QColor(255,0,0),VisionItem *parent = 0);
+    explicit VisionRing(qreal centerX=0, qreal centerY=0, qreal r1=0, qreal r2=0, bool bEdit = false,
+                        qreal penWidth=0, bool color_enable = false, QColor penColor=QColor(255,0,0), VisionItem *parent = 0);
     //矩形框的内切圆
     VisionRing(QRectF rf1,QRectF rf2,bool bEdit = false,qreal penWidth=0,QColor penColor=QColor(255,0,0),QGraphicsItem *parent = 0);
 

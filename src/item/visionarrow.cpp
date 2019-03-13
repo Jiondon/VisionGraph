@@ -1,9 +1,13 @@
 ﻿#include "visionarrow.h"
 #include "../control/color.h"
 
-VisionArrow::VisionArrow(bool bEdit, QColor color, QObject *parent) : QObject(parent)
+VisionArrow::VisionArrow(bool bEdit,bool color_enable, QColor color, QObject *parent) : QObject(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
     m_bEdit = bEdit;

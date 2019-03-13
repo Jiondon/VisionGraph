@@ -5,9 +5,9 @@
 VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : QWidget(parent)
 {
     if(toolButtonDirect == ToolButtonDirection::leftDirection || toolButtonDirect == ToolButtonDirection::rightDirection){
-        setMinimumSize(450,650);
+        setMinimumSize(150,210);
     }else{
-        setMinimumSize(650,450);
+        setMinimumSize(210,150);
     }
     g_graphType = type;
 
@@ -40,15 +40,20 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
     m_graphWidget->setSceneWidgetSize(w,h);
 }
 
+void VisionGraph::setGraphType(GraphType type)
+{
+    m_graphWidget->setGraphType(type);
+}
+
 void VisionGraph::setThemeColor(ThemeColor theme)
 {
     m_graphWidget->setThemeColor(theme);
 }
 
 
-VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit,bool bRotation, QColor color)
+VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
-    return m_graphWidget->addRect(rf,bEdit,bRotation,color);
+    return m_graphWidget->addRect(rf,bEdit,bRotation,color_enable,color);
 }
 
 QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
@@ -71,64 +76,69 @@ QGraphicsEllipseItem *VisionGraph::_addEllipse(const QRectF &rect, const QPen &p
     return m_graphWidget->_addEllipse(rect,pen,brush);
 }
 
-VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, bool edit, qreal length,QColor color)
+VisionCrossPointItem *VisionGraph::_addPoint(QPointF pointF, bool edit, qreal length, bool color_enable, QColor color)
 {
-    return m_graphWidget->_addPoint(pointF,edit,length,color);
+    return m_graphWidget->_addPoint(pointF,edit,length,color_enable,color);
 }
 
-VisionArrow *VisionGraph::_addArrow(QPointF pointF,bool bEdit, QColor color)
+VisionArrow *VisionGraph::_addArrow(QPointF pointF, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->_addArrow(pointF,bEdit,color);
+    return m_graphWidget->_addArrow(pointF,bEdit,color_enable,color);
 }
 
-VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, bool bClosed, bool bEdit, QColor color)
+VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, bool bClosed, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->_addChain(lstP,bClosed,bEdit,color);
+    return m_graphWidget->_addChain(lstP,bClosed,bEdit,color_enable,color);
 }
 
-VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, QColor color)
+VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
-    return m_graphWidget->addEllipse(rf,bEdit,bRotation,color);
+    return m_graphWidget->addEllipse(rf,bEdit,bRotation,color_enable,color);
 }
 
-VisionCircleItem *VisionGraph::addCircle(QRectF rf, bool bEdit, QColor color)
+VisionCircleItem *VisionGraph::addCircle(QRectF rf, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addCircle(rf,bEdit,color);
+    return m_graphWidget->addCircle(rf,bEdit,color_enable,color);
 }
 
-VisionArcItem *VisionGraph::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, QColor color)
+VisionArcItem *VisionGraph::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addArc(sP,mP,fP,bEdit,color);
+    return m_graphWidget->addArc(sP,mP,fP,bEdit,color_enable,color);
 }
 
-VisionLineItem *VisionGraph::addLine(QLine line,bool bEdit, QColor color)
+VisionArcItem *VisionGraph::addArc(QPointF center, qreal r, qreal angle, qreal spanAngle, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addLine(line,bEdit,color);
+    return m_graphWidget->addArc(center,r,angle,spanAngle, bEdit, color_enable,color);
 }
 
-VisionLine *VisionGraph::addLines(QList<QLineF> lstLineF, QColor color)
+VisionLineItem *VisionGraph::addLine(QLine line, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addLines(lstLineF,color);
+    return m_graphWidget->addLine(line,bEdit,color_enable,color);
 }
 
-VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF,bool bClose, bool bEdit, QColor color)
+VisionLine *VisionGraph::addLines(QList<QLineF> lstLineF, bool color_enable, QColor color)
 {
-    return m_graphWidget->addPolygon(vecPointF,bClose,bEdit,color);
+    return m_graphWidget->addLines(lstLineF,color_enable,color);
 }
 
-VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF,bool bEdit,qreal length, QColor color)
+VisionPolygon *VisionGraph::addPolygon(QVector<QPointF> vecPointF, bool bClose, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addPoint(pointF,bEdit,length,color);
+    return m_graphWidget->addPolygon(vecPointF,bClose,bEdit,color_enable,color);
 }
 
-VisionPoint *VisionGraph::addPointFs(QList<QPointF> lstP, QColor color)
+VisionCrossPointItem *VisionGraph::addPoint(QPointF pointF, bool bEdit, qreal length, bool color_enable, QColor color)
 {
-    return m_graphWidget->addPointFs(lstP,color);
+    return m_graphWidget->addPoint(pointF,bEdit,length,color_enable,color);
 }
 
-VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close,bool edit, QColor color)
+VisionPoint *VisionGraph::addPointFs(QList<QPointF> lstP, bool color_enable, QColor color)
 {
-    return m_graphWidget->addChain(lstP,close,edit,color);
+    return m_graphWidget->addPointFs(lstP,color_enable,color);
+}
+
+VisionChainItem *VisionGraph::addChain(QList<QPointF> lstP, bool close, bool edit, bool color_enable, QColor color)
+{
+    return m_graphWidget->addChain(lstP,close,edit,color_enable,color);
 }
 
 XVRegion* VisionGraph::getRegion()
@@ -149,9 +159,9 @@ QList<VisionItem *> VisionGraph::getItems()
         return lstItem;
 }
 
-VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, QColor color)
+VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)
 {
-    return m_graphWidget->addCoordinate(p,angle,length,bEdit,color);
+    return m_graphWidget->addCoordinate(p,angle,length,bEdit,color_enable,color);
 }
 
 void VisionGraph::setBkImg(QImage image)

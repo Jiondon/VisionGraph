@@ -10,7 +10,7 @@ class VisionCoordinateItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit VisionCoordinateItem(bool bEdit = false,QColor color = QColor(255,0,0),QGraphicsItem *parent = 0);
+    explicit VisionCoordinateItem(bool bEdit = false, bool color_enable = false, QColor color = QColor(255,0,0), QGraphicsItem *parent = 0);
 
     void setPointF(QPointF pointF)
     {

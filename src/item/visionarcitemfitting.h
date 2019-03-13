@@ -12,7 +12,7 @@ class VisionArcItemFitting : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionArcItemFitting(bool bEdit = false,qreal length = 0,QColor color = QColor(255,0,0),VisionItem *parent = 0);
+    explicit VisionArcItemFitting(bool bEdit = false, qreal length = 0, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
 
     void setPointFs(QPointF sP = QPointF(0,0),QPointF mP = QPointF(0,0),QPointF fP = QPointF(0,0));
 

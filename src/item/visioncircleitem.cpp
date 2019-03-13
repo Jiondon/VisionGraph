@@ -2,9 +2,13 @@
 #include "../control/color.h"
 #include <QDebug>
 
-VisionCircleItem::VisionCircleItem(bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionCircleItem::VisionCircleItem(bool edit,bool color_enable, QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

@@ -24,7 +24,7 @@ class VISIONGRAPHSHARED_EXPORT VisionRectItem : public VisionItem
     Q_OBJECT
 public:
 
-    VisionRectItem(bool edit = false,bool rotation = false,QColor color = QColor(255,0,0),VisionItem *parent = 0);
+    VisionRectItem(bool edit = false, bool rotation = false, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
     /**
      * @brief       设置矩形
      */

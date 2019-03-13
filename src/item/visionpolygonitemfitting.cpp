@@ -5,9 +5,13 @@
 #define Pi 3.1415926
 
 
-VisionPolygonItemFitting::VisionPolygonItemFitting(bool close, bool edit, qreal length, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionPolygonItemFitting::VisionPolygonItemFitting(bool close, bool edit, qreal length, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

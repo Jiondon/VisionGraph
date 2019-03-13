@@ -1,13 +1,14 @@
 ﻿#include "visionpoint.h"
 #include "../control/color.h"
 
-VisionPoint::VisionPoint(QColor color, VisionItem *parent) : VisionItem(parent)
+VisionPoint::VisionPoint(bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = color;
-
     m_type = ItemType::Paint_Point;
-
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 }

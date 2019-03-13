@@ -6,10 +6,14 @@
 #include "../control/color.h"
 
 VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QPointF p1, QPointF p2, qreal length,
-                                             qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
+                                             qreal penWidth,bool color_enable, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
     this->setAcceptHoverEvents(true);
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = penColor;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

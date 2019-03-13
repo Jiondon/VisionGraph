@@ -4,9 +4,13 @@
 
 #include "../control/color.h"
 
-VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
+VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidth,bool color_enable, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = penColor;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

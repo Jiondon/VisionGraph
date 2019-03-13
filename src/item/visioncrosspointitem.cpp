@@ -6,9 +6,13 @@
 
 #include "../control/color.h"
 
-VisionCrossPointItem::VisionCrossPointItem(bool edit, qreal length, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionCrossPointItem::VisionCrossPointItem(bool edit, qreal length,bool color_enable, QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
     m_bEdit = edit;

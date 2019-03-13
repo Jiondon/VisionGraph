@@ -25,7 +25,8 @@ class VisionPolygonItemFitting : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionPolygonItemFitting(bool close = true,bool edit = true,qreal length = 0,QColor color = QColor(255,0,0),VisionItem *parent = 0);
+    explicit VisionPolygonItemFitting(bool close = true, bool edit = true, qreal length = 0, bool color_enable = false,
+                                      QColor color = QColor(255,0,0), VisionItem *parent = 0);
     ~VisionPolygonItemFitting();
 
     /**

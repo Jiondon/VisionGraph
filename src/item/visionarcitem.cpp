@@ -4,9 +4,13 @@
 #define Pi 3.1415926
 
 
-VisionArcItem::VisionArcItem(bool bEdit, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionArcItem::VisionArcItem(bool bEdit,bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 
@@ -25,6 +29,24 @@ void VisionArcItem::setPointFs(QPointF sP, QPointF mP, QPointF fP)
     m_p3 = fP;
     //生成对应的boundingRect范围
     detailData(sP,mP,fP);
+    m_x = m_center.x() - m_r;
+    m_y = m_center.y() - m_r;
+    this->setPos(m_x,m_y);
+    initMiniRect();
+}
+
+void VisionArcItem::setArc(QPointF center, qreal r, qreal angle, qreal spanAngle)
+{
+    m_center = center;
+    m_r = r;
+    m_angle = angle;
+    m_spanAngle = spanAngle;
+
+    m_p1 = center+QPointF(cos((angle/180)*Pi)*r,sin((angle/180)*Pi)*r);
+    m_p2 = center+QPointF(cos(((angle+spanAngle/2)/180)*Pi)*r,sin(((angle+spanAngle/2)/180)*Pi)*r);
+    m_p3 = center+QPointF(cos(((angle+spanAngle)/180)*Pi)*r,sin(((angle+spanAngle)/180)*Pi)*r);
+
+    qDebug()<<m_p1<<m_p2<<m_p3;
     m_x = m_center.x() - m_r;
     m_y = m_center.y() - m_r;
     this->setPos(m_x,m_y);

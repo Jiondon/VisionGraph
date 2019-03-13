@@ -18,7 +18,7 @@ class VISIONGRAPHSHARED_EXPORT VisionChainItem : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionChainItem(bool bClosed = false,bool edit = true,QColor color = QColor(255,0,0),VisionItem *parent = 0);
+    explicit VisionChainItem(bool bClosed = false, bool edit = true, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
 
     /**
      * @brief       设置链的绘制的所有的点

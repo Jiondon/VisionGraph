@@ -4,11 +4,15 @@
 #define Pi 3.1415926
 
 
-VisionArcItemFitting::VisionArcItemFitting(bool bEdit, qreal length, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionArcItemFitting::VisionArcItemFitting(bool bEdit, qreal length, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
     this->setAcceptHoverEvents(true);
 
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

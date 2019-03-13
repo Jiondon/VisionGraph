@@ -2,9 +2,13 @@
 #include <QDebug>
 #include "../control/color.h"
 
-VisionPolygon::VisionPolygon(bool close, bool edit, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionPolygon::VisionPolygon(bool close, bool edit, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 

@@ -1,9 +1,13 @@
 ﻿#include "visionline.h"
 #include "../control/color.h"
 
-VisionLine::VisionLine(QColor color, VisionItem *parent) : VisionItem(parent)
+VisionLine::VisionLine(bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = color;
+    if(color_enable){
+        m_borderColor = color;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_borderColor = borderColor;
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;

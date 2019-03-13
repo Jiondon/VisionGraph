@@ -5,9 +5,14 @@
 #include <QDebug>
 #include "../control/color.h"
 
-VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bEdit, qreal penWidth, QColor penColor, VisionItem *parent) : VisionItem(parent)
+VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bEdit, qreal penWidth,
+                       bool color_enable, QColor penColor, VisionItem *parent) : VisionItem(parent)
 {
-    m_borderColor = borderColor;
+    if(color_enable){
+        m_borderColor = penColor;
+    }else{
+        m_borderColor = borderColor;
+    }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 
