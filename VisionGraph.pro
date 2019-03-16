@@ -47,6 +47,7 @@ Debug:LIBS += ../bin/debug/XVCombineRegions.lib
 Release:LIBS += ../bin/release/XVCreateRegion.lib
 Release:LIBS += ../bin/release/XVCombineRegions.lib
 
+INCLUDEPATH += ./include/
 INCLUDEPATH += ./include/tools
 INCLUDEPATH += ./include/tools/XVBase.h
 INCLUDEPATH += ./include/tools/XVCreateRegion.h

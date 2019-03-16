@@ -93,22 +93,22 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    XVRectangle2D getData(){
-        XVRectangle2D xvRect2D;
-        xvRect2D.optional = ENABLE;
+    VGRectangle2D getData(){
+        VGRectangle2D vgRect2D;
+        vgRect2D.optional = VG_ENABLE;
 
-        XVPoint2D xvPoint;
-        xvPoint.optional = ENABLE;
-        xvPoint.x = m_x;
-        xvPoint.y = m_y;
-        xvRect2D.origin = xvPoint;   //左上角顶点坐标
+        VGPoint2D vgPoint;
+        vgPoint.optional = VG_ENABLE;
+        vgPoint.x = m_x;
+        vgPoint.y = m_y;
+        vgRect2D.origin = vgPoint;   //左上角顶点坐标
 
-        xvRect2D.width = m_width;
-        xvRect2D.height = m_height;
+        vgRect2D.width = m_width;
+        vgRect2D.height = m_height;
 
-        xvRect2D.angle = m_angle;
+        vgRect2D.angle = m_angle;
 
-        return xvRect2D;
+        return vgRect2D;
     }
 
 

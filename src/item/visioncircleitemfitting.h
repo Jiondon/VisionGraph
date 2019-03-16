@@ -77,24 +77,24 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    XVRectangle2D getData(){
+    VGRectangle2D getData(){
 
-        //此处的椭圆数据是和矩形框数据是一样的，需要对此进行甄别，未体现的XVBase文件中
-        XVRectangle2D xvRect2D;
-        xvRect2D.optional = ENABLE;
+        //此处的椭圆数据是和矩形框数据是一样的，需要对此进行甄别，未体现的vgBase文件中
+        VGRectangle2D vgRect2D;
+        vgRect2D.optional = VG_ENABLE;
 
-        XVPoint2D xvPoint;
-        xvPoint.optional = ENABLE;
-        xvPoint.x = m_x;
-        xvPoint.y = m_y;
-        xvRect2D.origin = xvPoint;   //左上角顶点坐标
+        VGPoint2D vgPoint;
+        vgPoint.optional = VG_ENABLE;
+        vgPoint.x = m_x;
+        vgPoint.y = m_y;
+        vgRect2D.origin = vgPoint;   //左上角顶点坐标
 
-        xvRect2D.width = m_width;
-        xvRect2D.height = m_height;
+        vgRect2D.width = m_width;
+        vgRect2D.height = m_height;
 
-        xvRect2D.angle = 0;
+        vgRect2D.angle = 0;
 
-        return xvRect2D;
+        return vgRect2D;
     }
 
 signals:

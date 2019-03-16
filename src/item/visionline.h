@@ -31,27 +31,27 @@ public:
 
     bool getPosInArea(qreal x,qreal y);
 
-    vector<XVLine2D> getData(){
-        vector<XVLine2D> vec_xvLine;
-        vec_xvLine.clear();
+    vector<VGLine2D> getData(){
+        vector<VGLine2D> vec_vgLine;
+        vec_vgLine.clear();
         if(m_style == SINGLE){
-            XVLine2D line2D;
-//            line2D.optional = ENABLE;
+            VGLine2D line2D;
+//            line2D.optional = VG_ENABLE;
             line2D.a = m_lineF.p2().y() - m_lineF.p1().y();
             line2D.b = m_lineF.p1().x() - m_lineF.p2().x();
             line2D.c = m_lineF.p2().x()*m_lineF.p1().y() - m_lineF.p1().x()*m_lineF.p2().y();
-            vec_xvLine.push_back(line2D);
-            return vec_xvLine;
+            vec_vgLine.push_back(line2D);
+            return vec_vgLine;
         }else{
             for(int i=0;i<m_lstLineF.count();i++){
-                XVLine2D line2D;
-//                line2D.optional = ENABLE;
+                VGLine2D line2D;
+//                line2D.optional = VG_ENABLE;
                 line2D.a = m_lstLineF.at(i).p2().y() - m_lstLineF.at(i).p1().y();
                 line2D.b = m_lstLineF.at(i).p1().x() - m_lstLineF.at(i).p2().x();
                 line2D.c = m_lstLineF.at(i).p2().x()*m_lstLineF.at(i).p1().y() - m_lstLineF.at(i).p1().x()*m_lstLineF.at(i).p2().y();
-                vec_xvLine.push_back(line2D);
+                vec_vgLine.push_back(line2D);
             }
-            return vec_xvLine;
+            return vec_vgLine;
         }
     }
 

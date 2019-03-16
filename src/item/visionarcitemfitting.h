@@ -19,23 +19,23 @@ public:
     QVector<QPointF> getPoints();
     bool getPosInArea(qreal x, qreal y);
 
-    XVArcFittingField getData(){
-        XVArcFittingField xvArcFitting;
+    VGArcFittingField getData(){
+        VGArcFittingField vgArcFitting;
 
-        XVArc2D xvArc;
-        XVPoint2D centerXvPoint;
-        centerXvPoint.x = m_center.x();
-        centerXvPoint.y = m_center.y();
+        VGArc2D vgArc;
+        VGPoint2D centervgPoint;
+        centervgPoint.x = m_center.x();
+        centervgPoint.y = m_center.y();
 
-        xvArc.center = centerXvPoint;
-        xvArc.radius = m_r;
-        xvArc.startAngle = m_angle;
-        xvArc.sweepAngle = m_spanAngle;
+        vgArc.center = centervgPoint;
+        vgArc.radius = m_r;
+        vgArc.startAngle = m_angle;
+        vgArc.sweepAngle = m_spanAngle;
 
-        xvArcFitting.axis = xvArc;
-        xvArcFitting.width = m_length;
+        vgArcFitting.axis = vgArc;
+        vgArcFitting.width = m_length;
 
-        return xvArcFitting;
+        return vgArcFitting;
     }
 
 public:

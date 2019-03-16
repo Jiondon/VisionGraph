@@ -481,6 +481,11 @@ void VisionGraphView::itemCursorToViewCursor()
     viewCursor = this->cursor();
 }
 
+void VisionGraphView::initRegion(XVRegion region)
+{
+    m_region = region;
+}
+
 void VisionGraphView::addRegion(XVRegionPair regionPair)
 {
     m_lstRegion.append(regionPair);

@@ -13,7 +13,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QVector>
-#include "XVBase.h"
+#include "VGBase.h"
 #include "../visiongraph_global.h"
 
 /**
@@ -148,6 +148,13 @@ public:
      * @param       QVector<QPointF>
      */
     virtual QVector<QPointF> getPoints() = 0;
+
+
+//    /**
+//     * @brief       获取数据
+//     * @param       XVGlobal
+//     */
+//    virtual XVGlobal getData() = 0;
 
 signals:
     void signal_clicked(VisionItem* item,bool selected,bool bIn = true,qreal x=0,qreal y=0);

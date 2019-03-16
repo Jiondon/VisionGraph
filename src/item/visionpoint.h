@@ -28,9 +28,9 @@ public:
         return m_pointF;
     }
 
-    XVPoint2D getData(){
-        XVPoint2D point2D;
-        point2D.optional = ENABLE;
+    VGPoint2D getData(){
+        VGPoint2D point2D;
+        point2D.optional = VG_ENABLE;
         point2D.x = m_pointF.x();
         point2D.y = m_pointF.y();
         return point2D;

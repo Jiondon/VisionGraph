@@ -195,6 +195,12 @@ public:
     void itemCursorToViewCursor();
 
     /**
+     * @brief       region的初始化---region的初始赋值
+     */
+    void initRegion(XVRegion region);
+
+
+    /**
      * @brief       多region的添加
      */
     void addRegion(XVRegionPair regionPair);

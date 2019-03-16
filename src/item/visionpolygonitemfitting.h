@@ -59,24 +59,24 @@ public:
         return m_vecPointFs;
     }
 
-    XVPathFittingField getData(){
-        XVPathFittingField xvPathFitting;
+    VGPathFittingField getData(){
+        VGPathFittingField vgPathFitting;
 
-        XVPath xvPath;
-        vector<XVPoint2D> vec_p;
+        VGPath vgPath;
+        vector<VGPoint2D> vec_p;
         vec_p.clear();
         for(int i=0;i<m_vecPointFs.count();i++){
-            XVPoint2D point2D;
+            VGPoint2D point2D;
             point2D.x = m_vecPointFs.at(i).x();
             point2D.y = m_vecPointFs.at(i).y();
             vec_p.push_back(point2D);
         }
-        xvPath.arrayPoint2D = vec_p;
-        xvPath.closed = m_bClose;
+        vgPath.arrayPoint2D = vec_p;
+        vgPath.closed = m_bClose;
 
-        xvPathFitting.axis = xvPath;
-        xvPathFitting.width = m_length;
-        return xvPathFitting;
+        vgPathFitting.axis = vgPath;
+        vgPathFitting.width = m_length;
+        return vgPathFitting;
     }
 
 protected:

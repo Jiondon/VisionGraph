@@ -486,6 +486,8 @@ bool VisionGraph_::checkoutItem()
         return true;
 
     this->scene->update();
+
+
     //在进行交互的时候进行check   程序调用addItem是否有效？
     if(m_viewType == ViewType::singleItem){
         //当view要求单一item的时候，执行函数体
@@ -497,7 +499,13 @@ bool VisionGraph_::checkoutItem()
         }
     }else if(m_viewType == ViewType::_singleItem){
         if(m_lstItem.count() >= 1){
-            clearPainter();
+//            slot_removeItem_action();
+            view->clearPainter();
+            if(m_curVisionItem != nullptr){
+                m_curVisionItem->hide();
+                m_curVisionItem = nullptr;
+            }
+            //m_lstItem存在内存泄漏的可能
         }
         return true;
     }else{
@@ -505,25 +513,18 @@ bool VisionGraph_::checkoutItem()
     }
 }
 
-XVPath VisionGraph_::getpath()
+vector<VisionItem*> VisionGraph_::getData()
 {
-    XVPath path;
+    return m_lstItem.toVector().toStdVector();
+}
+
+VisionItem *VisionGraph_::getCurData()
+{
+    qDebug()<<m_curVisionItem->getType();
     if(m_curVisionItem == NULL)
-        return path;
+        return NULL;
 
-    if(m_curVisionItem->getType() == ItemType::Paint_CrossPoint){
-        qDebug()<<"1111 point";
-        VisionCrossPointItem* item = (VisionCrossPointItem*)m_curVisionItem;
-        path = item->getData();
-
-    }else if(m_curVisionItem->getType() == ItemType::Paint_Poly){
-        qDebug()<<"2222 poly";
-        VisionPolygon* item = (VisionPolygon*)m_curVisionItem;
-        path = item->getData();
-
-    }
-    qDebug()<<path.closed<<path.arrayPoint2D.size();
-    return path;
+    return m_curVisionItem;
 }
 
 QGraphicsRectItem *VisionGraph_::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
@@ -581,6 +582,8 @@ VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, boo
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -636,6 +639,8 @@ VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, bool bEdit, bool bRotatio
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -673,6 +678,8 @@ VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, bool color_enab
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -711,6 +718,8 @@ VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEd
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -748,6 +757,8 @@ VisionArcItem *VisionGraph_::addArc(QPointF center, qreal r, qreal angle, qreal 
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -786,6 +797,8 @@ VisionLineItem *VisionGraph_::addLine(QLine line, bool bEdit, bool color_enable,
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -834,6 +847,8 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose,
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType, QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType, QVector<QPointF>)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -881,6 +896,8 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, qreal l
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -926,6 +943,8 @@ VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool ed
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -964,6 +983,8 @@ VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qrea
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -1001,6 +1022,8 @@ VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPoint
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -1040,6 +1063,8 @@ VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, q
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+        QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -1078,6 +1103,8 @@ VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPo
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
     QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
+    QObject::connect(item,SIGNAL(signalChanged(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
     QObject::connect(item,&QObject::destroyed,[=](){
         m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
@@ -1118,7 +1145,7 @@ int VisionGraph_::setBkImg(QImage image)
         scene->addItem(m_bkPixmapItem);
     }
     m_bkPixmapItem->setPixmap(QPixmap::fromImage(image));
-    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
+//    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     return 0;
 }
 
@@ -1537,11 +1564,13 @@ void VisionGraph_::slot_zoom_action()
 
 void VisionGraph_::slot_fit_action()
 {
+    qDebug()<<"111111111111::"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
     if(!m_bkPixmapItem->pixmap().isNull()){
         this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     }else{
         qDebug()<<"m_bkPixmapItem is NULL";
     }
+    qDebug()<<"222222222222"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
 }
 
 void VisionGraph_::slot_mousePainter_action()
@@ -1674,6 +1703,12 @@ void VisionGraph_::slot_clear_action()
     //清除当前的item
     view->clearPainter();
 
+    if(m_curVisionItem != nullptr){
+        m_curVisionItem->hide();
+//        m_curVisionItem->deleteLater();
+        m_curVisionItem = nullptr;
+    }
+
     if(m_lstItem.count() > 0){
         for(int i=0;i<m_lstItem.count();i++){
             if(m_lstItem[i] != nullptr){
@@ -1686,11 +1721,7 @@ void VisionGraph_::slot_clear_action()
     }
 
     //清除当前的item
-    if(m_curVisionItem != nullptr){
-        m_curVisionItem->hide();
-//        m_curVisionItem->deleteLater();
-        m_curVisionItem = nullptr;
-    }
+
 //    scene->clear();
     //scene的部分item是不可以clear的，只需要clear掉绘制的item即可
     qDebug()<<scene->items().count();
@@ -1897,6 +1928,7 @@ void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
     qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
+    slot_fit_action();
 }
 
 void VisionGraph_::slot_valueChanged(int qR)
@@ -1962,11 +1994,23 @@ void VisionGraph_::slot_GraphTypeChanged(GraphType type)
     case GraphType::graphItem_Fitting:
         init_graphFitting();
         break;
-    case GraphType::graph_Path:
-        init_graph_path();
-        break;
     case GraphType::graph_Info:
         init_graph_info();
+        break;
+    case GraphType::graph_Path:
+        init_graph_Item(graph_Path);
+        break;
+    case GraphType::graph_Location:
+        init_graph_Item(graph_Location);
+        break;
+    case GraphType::graph_Rectangle:
+        init_graph_Item(graph_Rectangle);
+        break;
+    case GraphType::graph_Arc:
+        init_graph_Item(graph_Arc);
+        break;
+    case GraphType::graph_Circle:
+        init_graph_Item(graph_Circle);
         break;
     default:
         break;
@@ -2126,7 +2170,7 @@ void VisionGraph_::init_graphFitting()
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
 }
 
-void VisionGraph_::init_graph_path()
+void VisionGraph_::init_graph_Item(GraphType type)
 {
     m_lstAction.clear();
     tool_Widget->clear();
@@ -2141,8 +2185,18 @@ void VisionGraph_::init_graph_path()
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_point_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+    if(type == GraphType::graph_Path) {
+        m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
+        m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
+    }else if(type == GraphType::graph_Location){
+        m_lstAction.append(tool_Widget->addWidget(sys_point_button));
+    }else if(type == GraphType::graph_Rectangle){
+        m_lstAction.append(tool_Widget->addWidget(sys_rect_button));
+    }else if(type == GraphType::graph_Arc){
+        m_lstAction.append(tool_Widget->addWidget(sys_arc_button));
+    }else if(type == GraphType::graph_Circle){
+        m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
+    }
     m_insertAction = tool_Widget->addSeparator();
 
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);

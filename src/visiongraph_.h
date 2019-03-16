@@ -398,10 +398,17 @@ public:
      * @brief       获取view中的item数据
      * @param
      */
-    XVPath getpath();
+    vector<VisionItem*> getData();
+
+    /**
+     * @brief       获取view中的选中的item数据（当有且仅有一个的时候，默认其为当前）
+     * @param
+     */
+    VisionItem *getCurData();
 
 signals:
     void signal_itemFinished(VisionItem* item);
+    void signal_Changed(VisionItem* item);
 
 private:
     void initScene();
@@ -568,7 +575,7 @@ private:
     void init_graphItem_unSelf();
     void init_graphChain();
     void init_graphFitting();
-    void init_graph_path();
+    void init_graph_Item(GraphType type);
 };
 
 #endif // VISIONGRAPH__H

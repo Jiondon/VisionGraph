@@ -77,24 +77,20 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    XVRectangle2D getData(){
+    VGCircle2D getData(){
 
-        //此处的椭圆数据是和矩形框数据是一样的，需要对此进行甄别，未体现的XVBase文件中
-        XVRectangle2D xvRect2D;
-        xvRect2D.optional = ENABLE;
+        VGCircle2D vgCircle2D;
+        vgCircle2D.optional = VG_ENABLE;
 
-        XVPoint2D xvPoint;
-        xvPoint.optional = ENABLE;
-        xvPoint.x = m_x;
-        xvPoint.y = m_y;
-        xvRect2D.origin = xvPoint;   //左上角顶点坐标
+        VGPoint2D vgPoint;
+        vgPoint.optional = VG_ENABLE;
+        vgPoint.x = m_x;
+        vgPoint.y = m_y;
+        vgCircle2D.center = vgPoint;   //
 
-        xvRect2D.width = m_width;
-        xvRect2D.height = m_height;
+        vgCircle2D.radius = m_width/2;
 
-        xvRect2D.angle = 0;
-
-        return xvRect2D;
+        return vgCircle2D;
     }
 
 signals:

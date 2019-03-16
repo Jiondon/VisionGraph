@@ -14,6 +14,8 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
     m_graphWidget = new VisionGraph_(g_graphType,toolButtonDirect);
+    QObject::connect(m_graphWidget,SIGNAL(signal_Changed(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+
 
     if(type == GraphType::graphRegion){
 //        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
@@ -359,7 +361,12 @@ void VisionGraph::setCoordinateVisible(bool bVisible)
     m_graphWidget->setCoordinateVisible(bVisible);
 }
 
-XVPath VisionGraph::getpath()
+vector<VisionItem*> VisionGraph::getData()
 {
-    return m_graphWidget->getpath();
+    return m_graphWidget->getData();
+}
+
+VisionItem *VisionGraph::getCurData()
+{
+    return m_graphWidget->getCurData();
 }

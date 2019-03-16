@@ -395,10 +395,17 @@ public:
      * @brief       获取view中的item数据
      * @param
      */
-    XVPath getpath();
+    vector<VisionItem*> getData();
+
+    /**
+     * @brief       获取view中的选中的item数据（当有且仅有一个的时候，默认其为当前）
+     * @param
+     */
+    VisionItem *getCurData();
 
 signals:
     void signal_PaintFinishedChanged(VisionItem*);
+    void signal_Changed(VisionItem* item);
 
 protected:
 

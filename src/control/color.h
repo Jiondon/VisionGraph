@@ -29,7 +29,11 @@ enum GraphType{
     graphItem_unSelf,
     graphChain,
     graphItem_Fitting,
-    graph_Path
+    graph_Path,
+    graph_Location,
+    graph_Rectangle,
+    graph_Arc,
+    graph_Circle
 };
 
 /**

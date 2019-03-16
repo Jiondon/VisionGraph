@@ -27,17 +27,17 @@ public:
     QVector<QPointF> getPoints();
     bool getPosInArea(qreal x, qreal y);
 
-    XVArc2D getData(){
-        XVArc2D xvArc;
-        XVPoint2D centerXvPoint;
-        centerXvPoint.x = m_center.x();
-        centerXvPoint.y = m_center.y();
+    VGArc2D getData(){
+        VGArc2D vgArc;
+        VGPoint2D centervgPoint;
+        centervgPoint.x = m_center.x();
+        centervgPoint.y = m_center.y();
 
-        xvArc.center = centerXvPoint;
-        xvArc.radius = m_r;
-        xvArc.startAngle = m_angle;
-        xvArc.sweepAngle = m_spanAngle;
-        return xvArc;
+        vgArc.center = centervgPoint;
+        vgArc.radius = m_r;
+        vgArc.startAngle = m_angle;
+        vgArc.sweepAngle = m_spanAngle;
+        return vgArc;
     }
 
 public:

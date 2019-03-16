@@ -51,23 +51,12 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    XVPath getData(){
-//        XVPoint2D point2D;
-//        point2D.optional = ENABLE;
-//        point2D.x = m_pointF.x();
-//        point2D.y = m_pointF.y();
-//        return point2D;
-        XVPath xvPath;
-
-        vector<XVPoint2D> vec_p;
-        vec_p.clear();
-        XVPoint2D point2D;
+    VGPoint2D getData(){
+        VGPoint2D point2D;
+        point2D.optional = VG_ENABLE;
         point2D.x = m_pointF.x();
         point2D.y = m_pointF.y();
-        vec_p.push_back(point2D);
-        xvPath.arrayPoint2D = vec_p;
-        xvPath.closed = false;
-        return xvPath;
+        return point2D;
     }
 
 protected:

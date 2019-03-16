@@ -11,6 +11,7 @@ VisionArrow::VisionArrow(bool bEdit,bool color_enable, QColor color, QObject *pa
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
     m_bEdit = bEdit;
+    m_type = ItemType::Paint_Arrow;
 }
 
 void VisionArrow::setPointF(QPointF pointF)

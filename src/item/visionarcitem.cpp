@@ -20,6 +20,8 @@ VisionArcItem::VisionArcItem(bool bEdit,bool color_enable,QColor color, VisionIt
     }else{
         setSelectedStatus(false);
     }
+    m_type = ItemType::Paint_Arc;
+
 }
 
 void VisionArcItem::setPointFs(QPointF sP, QPointF mP, QPointF fP)

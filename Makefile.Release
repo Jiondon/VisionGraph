@@ -14,7 +14,7 @@ CXX           = cl
 DEFINES       = -DUNICODE -DWIN32 -DVISIONGRAPH_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL
 CFLAGS        = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -W3 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -GR -W3 -w34100 -w34189 -w44996 -EHsc $(DEFINES)
-INCPATH       = -I. -Iinclude\tools -Iinclude\tools\XVBase.h -Iinclude\tools\XVCreateRegion.h -Iinclude\tools\XVCombineRegions.h -ID:\Qt\Qt5.8.0\5.8\msvc2013\include -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtANGLE -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore -Itmp\release -ID:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013 
+INCPATH       = -I. -Iinclude -Iinclude\tools -Iinclude\tools\XVBase.h -Iinclude\tools\XVCreateRegion.h -Iinclude\tools\XVCombineRegions.h -ID:\Qt\Qt5.8.0\5.8\msvc2013\include -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtANGLE -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore -Itmp\release -ID:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /DLL /SUBSYSTEM:WINDOWS
 LIBS          = ..\bin\release\XVCreateRegion.lib ..\bin\release\XVCombineRegions.lib /LIBPATH:D:\Qt\Qt5.8.0\5.8\msvc2013\lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgets.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Gui.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Core.lib 
@@ -559,6 +559,7 @@ tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QW
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -638,7 +639,7 @@ tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QW
 		src\visiongraph.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph.h -o tmp\release\moc_visiongraph.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph.h -o tmp\release\moc_visiongraph.cpp
 
 tmp\release\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
@@ -770,6 +771,7 @@ tmp\release\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidge
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -838,7 +840,7 @@ tmp\release\moc_visiongraph_item.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidge
 		src\visiongraph_item.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_item.h -o tmp\release\moc_visiongraph_item.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_item.h -o tmp\release\moc_visiongraph_item.cpp
 
 tmp\release\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
@@ -998,6 +1000,7 @@ tmp\release\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWid
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -1035,7 +1038,7 @@ tmp\release\moc_visiongraph_region.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWid
 		src\visiongraph_region.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_region.h -o tmp\release\moc_visiongraph_region.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_region.h -o tmp\release\moc_visiongraph_region.cpp
 
 tmp\release\moc_visioncrosspointitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -1158,12 +1161,12 @@ tmp\release\moc_visioncrosspointitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtC
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\item\visioncrosspointitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncrosspointitem.h -o tmp\release\moc_visioncrosspointitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncrosspointitem.h -o tmp\release\moc_visioncrosspointitem.cpp
 
 tmp\release\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
@@ -1299,7 +1302,7 @@ tmp\release\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidg
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -1307,7 +1310,7 @@ tmp\release\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidg
 		src\item\visionellipseitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionellipseitem.h -o tmp\release\moc_visionellipseitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionellipseitem.h -o tmp\release\moc_visionellipseitem.cpp
 
 tmp\release\moc_visiongraphscene.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -1423,7 +1426,7 @@ tmp\release\moc_visiongraphscene.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidge
 		src\item\visiongraphscene.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visiongraphscene.h -o tmp\release\moc_visiongraphscene.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visiongraphscene.h -o tmp\release\moc_visiongraphscene.cpp
 
 tmp\release\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
@@ -1543,8 +1546,9 @@ tmp\release\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidget
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
+		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -1556,7 +1560,7 @@ tmp\release\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidget
 		src\item\visiongraphview.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visiongraphview.h -o tmp\release\moc_visiongraphview.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visiongraphview.h -o tmp\release\moc_visiongraphview.cpp
 
 tmp\release\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -1657,7 +1661,7 @@ tmp\release\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -1696,7 +1700,7 @@ tmp\release\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		src\item\visionlineitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionlineitem.h -o tmp\release\moc_visionlineitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionlineitem.h -o tmp\release\moc_visionlineitem.cpp
 
 tmp\release\moc_visionpathitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -1755,7 +1759,7 @@ tmp\release\moc_visionpathitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		src\item\visionpathitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpathitem.h -o tmp\release\moc_visionpathitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpathitem.h -o tmp\release\moc_visionpathitem.cpp
 
 tmp\release\moc_visionpoint.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -1856,12 +1860,12 @@ tmp\release\moc_visionpoint.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObje
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\item\visionpoint.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpoint.h -o tmp\release\moc_visionpoint.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpoint.h -o tmp\release\moc_visionpoint.cpp
 
 tmp\release\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -1955,7 +1959,7 @@ tmp\release\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QOb
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -2001,7 +2005,7 @@ tmp\release\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QOb
 		src\item\visionpolygon.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpolygon.h -o tmp\release\moc_visionpolygon.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpolygon.h -o tmp\release\moc_visionpolygon.cpp
 
 tmp\release\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2135,7 +2139,7 @@ tmp\release\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -2144,7 +2148,7 @@ tmp\release\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		src\item\visionrectitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionrectitem.h -o tmp\release\moc_visionrectitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionrectitem.h -o tmp\release\moc_visionrectitem.cpp
 
 tmp\release\moc_visionring.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2278,13 +2282,13 @@ tmp\release\moc_visionring.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObjec
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		src\item\visionring.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionring.h -o tmp\release\moc_visionring.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionring.h -o tmp\release\moc_visionring.cpp
 
 tmp\release\moc_minirect.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2416,7 +2420,7 @@ tmp\release\moc_minirect.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject 
 		src\control\minirect.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\minirect.h -o tmp\release\moc_minirect.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\minirect.h -o tmp\release\moc_minirect.cpp
 
 tmp\release\moc_visionarrows_rotate.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2549,7 +2553,7 @@ tmp\release\moc_visionarrows_rotate.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCo
 		src\control\visionarrows_rotate.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\visionarrows_rotate.h -o tmp\release\moc_visionarrows_rotate.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\visionarrows_rotate.h -o tmp\release\moc_visionarrows_rotate.cpp
 
 tmp\release\moc_visionitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2641,12 +2645,12 @@ tmp\release\moc_visionitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObjec
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\visionitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\visionitem.h -o tmp\release\moc_visionitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\control\visionitem.h -o tmp\release\moc_visionitem.cpp
 
 tmp\release\moc_visiongraphwidget.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2754,7 +2758,7 @@ tmp\release\moc_visiongraphwidget.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore
 		src\visiongraphwidget.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraphwidget.h -o tmp\release\moc_visiongraphwidget.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraphwidget.h -o tmp\release\moc_visiongraphwidget.cpp
 
 tmp\release\moc_visionchainitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2847,7 +2851,7 @@ tmp\release\moc_visionchainitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\Q
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -2894,7 +2898,7 @@ tmp\release\moc_visionchainitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\Q
 		src\item\visionchainitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionchainitem.h -o tmp\release\moc_visionchainitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionchainitem.h -o tmp\release\moc_visionchainitem.cpp
 
 tmp\release\moc_visionarrow.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -2995,12 +2999,12 @@ tmp\release\moc_visionarrow.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObje
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\item\visionarrow.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarrow.h -o tmp\release\moc_visionarrow.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarrow.h -o tmp\release\moc_visionarrow.cpp
 
 tmp\release\moc_visiongraph_base.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -3130,6 +3134,7 @@ tmp\release\moc_visiongraph_base.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -3180,7 +3185,7 @@ tmp\release\moc_visiongraph_base.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\
 		src\visiongraph_base.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_base.h -o tmp\release\moc_visiongraph_base.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_base.h -o tmp\release\moc_visiongraph_base.cpp
 
 tmp\release\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFrame \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
@@ -3346,6 +3351,7 @@ tmp\release\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\Q
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -3380,7 +3386,7 @@ tmp\release\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\Q
 		src\visiongraph_.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_.h -o tmp\release\moc_visiongraph_.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\visiongraph_.h -o tmp\release\moc_visiongraph_.cpp
 
 tmp\release\moc_visionlineitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -3481,7 +3487,7 @@ tmp\release\moc_visionlineitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\Qt
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -3520,7 +3526,7 @@ tmp\release\moc_visionlineitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\Qt
 		src\item\visionlineitemfitting.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionlineitemfitting.h -o tmp\release\moc_visionlineitemfitting.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionlineitemfitting.h -o tmp\release\moc_visionlineitemfitting.cpp
 
 tmp\release\moc_visionarcitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -3625,7 +3631,7 @@ tmp\release\moc_visionarcitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QOb
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -3662,7 +3668,7 @@ tmp\release\moc_visionarcitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QOb
 		src\item\visionarcitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarcitem.h -o tmp\release\moc_visionarcitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarcitem.h -o tmp\release\moc_visionarcitem.cpp
 
 tmp\release\moc_visionarcitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -3767,7 +3773,7 @@ tmp\release\moc_visionarcitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtC
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -3804,7 +3810,7 @@ tmp\release\moc_visionarcitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtC
 		src\item\visionarcitemfitting.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarcitemfitting.h -o tmp\release\moc_visionarcitemfitting.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionarcitemfitting.h -o tmp\release\moc_visionarcitemfitting.cpp
 
 tmp\release\moc_visionpolygonitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -3898,7 +3904,7 @@ tmp\release\moc_visionpolygonitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -3944,7 +3950,7 @@ tmp\release\moc_visionpolygonitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include
 		src\item\visionpolygonitemfitting.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpolygonitemfitting.h -o tmp\release\moc_visionpolygonitemfitting.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionpolygonitemfitting.h -o tmp\release\moc_visionpolygonitemfitting.cpp
 
 tmp\release\moc_visionline.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -4045,12 +4051,12 @@ tmp\release\moc_visionline.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObjec
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\item\visionline.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionline.h -o tmp\release\moc_visionline.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visionline.h -o tmp\release\moc_visionline.cpp
 
 tmp\release\moc_visioncoordinateitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -4143,7 +4149,7 @@ tmp\release\moc_visioncoordinateitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtC
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
@@ -4156,7 +4162,7 @@ tmp\release\moc_visioncoordinateitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtC
 		src\item\visioncoordinateitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncoordinateitem.h -o tmp\release\moc_visioncoordinateitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncoordinateitem.h -o tmp\release\moc_visioncoordinateitem.cpp
 
 tmp\release\moc_visioncircleitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -4291,14 +4297,14 @@ tmp\release\moc_visioncircleitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visioncircleitem.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncircleitem.h -o tmp\release\moc_visioncircleitem.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncircleitem.h -o tmp\release\moc_visioncircleitem.cpp
 
 tmp\release\moc_visioncircleitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qobject.h \
@@ -4433,14 +4439,14 @@ tmp\release\moc_visioncircleitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src\control\visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		src\item\visioncircleitemfitting.h \
 		tmp\release\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
-	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncircleitemfitting.h -o tmp\release\moc_visioncircleitemfitting.cpp
+	D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include ./tmp/release/moc_predefs.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/mkspecs/win32-msvc2013 -IE:/workplace/createLib/VisionGraph/VisionGraph -IE:/workplace/createLib/VisionGraph/VisionGraph/include -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVBase.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCreateRegion.h -IE:/workplace/createLib/VisionGraph/VisionGraph/include/tools/XVCombineRegions.h -ID:/Qt/Qt5.8.0/5.8/msvc2013/include -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtWidgets -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtGui -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtANGLE -ID:/Qt/Qt5.8.0/5.8/msvc2013/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\8.1\include\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\winrt" src\item\visioncircleitemfitting.h -o tmp\release\moc_visioncircleitemfitting.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -4582,6 +4588,7 @@ tmp\release\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -4790,6 +4797,7 @@ tmp\release\visiongraph_item.obj: src\visiongraph_item.cpp src/visiongraph_item.
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -5024,6 +5032,7 @@ tmp\release\visiongraph_region.obj: src\visiongraph_region.cpp src/visiongraph_r
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -5192,6 +5201,7 @@ tmp\release\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -5364,7 +5374,7 @@ tmp\release\visioncrosspointitem.obj: src\item\visioncrosspointitem.cpp src/item
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
@@ -5516,7 +5526,7 @@ tmp\release\visionellipseitem.obj: src\item\visionellipseitem.cpp src/item/visio
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -5761,8 +5771,9 @@ tmp\release\visiongraphview.obj: src\item\visiongraphview.cpp src/item/visiongra
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
+		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -5876,7 +5887,7 @@ tmp\release\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlinei
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -6073,7 +6084,7 @@ tmp\release\visionpoint.obj: src\item\visionpoint.cpp src/item/visionpoint.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -6173,7 +6184,7 @@ tmp\release\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -6353,7 +6364,7 @@ tmp\release\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrecti
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -6500,7 +6511,7 @@ tmp\release\visionring.obj: src\item\visionring.cpp src/item/visionring.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
@@ -6865,7 +6876,7 @@ tmp\release\visionitem.obj: src\control\visionitem.cpp src/control/visionitem.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
@@ -7120,7 +7131,7 @@ tmp\release\visionchainitem.obj: src\item\visionchainitem.cpp src/item/visioncha
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -7269,7 +7280,7 @@ tmp\release\visionarrow.obj: src\item\visionarrow.cpp src/item/visionarrow.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -7405,6 +7416,7 @@ tmp\release\visiongraph_base.obj: src\visiongraph_base.cpp src/visiongraph_base.
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -7618,6 +7630,7 @@ tmp\release\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
@@ -7759,7 +7772,7 @@ tmp\release\visionlineitemfitting.obj: src\item\visionlineitemfitting.cpp src/it
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -7904,7 +7917,7 @@ tmp\release\visionarcitem.obj: src\item\visionarcitem.cpp src/item/visionarcitem
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -8044,7 +8057,7 @@ tmp\release\visionarcitemfitting.obj: src\item\visionarcitemfitting.cpp src/item
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -8173,7 +8186,7 @@ tmp\release\visionpolygonitemfitting.obj: src\item\visionpolygonitemfitting.cpp 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
@@ -8320,7 +8333,7 @@ tmp\release\visionline.obj: src\item\visionline.cpp src/item/visionline.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -8419,7 +8432,7 @@ tmp\release\visioncoordinateitem.obj: src\item\visioncoordinateitem.cpp src/item
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpainter.h \
@@ -8568,7 +8581,7 @@ tmp\release\visioncircleitem.obj: src\item\visioncircleitem.cpp src/item/visionc
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
@@ -8710,7 +8723,7 @@ tmp\release\visioncircleitemfitting.obj: src\item\visioncircleitemfitting.cpp sr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/visionitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\tools\XVBase.h \
+		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \

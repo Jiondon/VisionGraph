@@ -73,10 +73,10 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    XVSegment2D getData(){
-        XVSegment2D segment2D;
-        segment2D.optional = ENABLE;
-        XVPoint2D p1,p2;
+    VGSegment2D getData(){
+        VGSegment2D segment2D;
+        segment2D.optional = VG_ENABLE;
+        VGPoint2D p1,p2;
         p1.x = m_pointF1.x();
         p1.y = m_pointF1.y();
         p2.x = m_pointF2.x();
