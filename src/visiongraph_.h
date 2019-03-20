@@ -568,6 +568,8 @@ private slots:
     //当GraphType变化的时候，调用该函数刷新
     void slot_GraphTypeChanged(GraphType type);
 
+    void slotItemFinished(VisionItem* item);
+
 private:
     void init_graph_info();
     void init_graphRegion();

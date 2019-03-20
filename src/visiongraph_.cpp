@@ -19,6 +19,9 @@ VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect,
     initLayout(toolButtonDirect);
 
     setGraphType(type);
+
+    connect(this,SIGNAL(signal_itemFinished(VisionItem*)),this,SLOT(slotItemFinished(VisionItem*)));
+
 }
 
 void VisionGraph_::setGraphType(GraphType type)
@@ -1834,6 +1837,7 @@ void VisionGraph_::slot_mouseMove(QPointF pointF)
 
 void VisionGraph_::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,qreal y)
 {
+
     //修改，该函数的触发，改成有基类VisionItem进行触发，限制在点击item的时候触发
 
     //修改哪些item的zValue的值，需要根据点击的pos来定位在该pos的item有哪些
@@ -2015,6 +2019,18 @@ void VisionGraph_::slot_GraphTypeChanged(GraphType type)
     default:
         break;
     }
+
+
+    if(type == GraphType::graph_Info){
+        setItemType(ItemType::Drag);
+    }else{
+        setItemType(ItemType::No);
+    }
+}
+
+void VisionGraph_::slotItemFinished(VisionItem *item)
+{
+    item->setZValue(10);
 }
 
 void VisionGraph_::init_graph_info()

@@ -153,6 +153,7 @@ void VisionCircleItemFitting::paint(QPainter *painter, const QStyleOptionGraphic
 
     painter->setBrush(m_brushColor);
     pen.setStyle(Qt::SolidLine);
+    painter->setPen(pen);
     painter->drawPath(m_path);
 }
 

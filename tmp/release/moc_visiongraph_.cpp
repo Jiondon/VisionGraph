@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionGraph__t {
-    QByteArrayData data[59];
-    char stringdata0[804];
+    QByteArrayData data[60];
+    char stringdata0[821];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -90,7 +90,8 @@ QT_MOC_LITERAL(54, 728, 8), // "QAction*"
 QT_MOC_LITERAL(55, 737, 6), // "action"
 QT_MOC_LITERAL(56, 744, 27), // "slot_SpinBox_ViewRegionSize"
 QT_MOC_LITERAL(57, 772, 21), // "slot_GraphTypeChanged"
-QT_MOC_LITERAL(58, 794, 9) // "GraphType"
+QT_MOC_LITERAL(58, 794, 9), // "GraphType"
+QT_MOC_LITERAL(59, 804, 16) // "slotItemFinished"
 
     },
     "VisionGraph_\0signal_itemFinished\0\0"
@@ -114,7 +115,8 @@ QT_MOC_LITERAL(58, 794, 9) // "GraphType"
     "currentSize\0w\0h\0slot_valueChanged\0qR\0"
     "slot_SceneMouseMove\0slot_actionTriggered\0"
     "QAction*\0action\0slot_SpinBox_ViewRegionSize\0"
-    "slot_GraphTypeChanged\0GraphType"
+    "slot_GraphTypeChanged\0GraphType\0"
+    "slotItemFinished"
 };
 #undef QT_MOC_LITERAL
 
@@ -124,7 +126,7 @@ static const uint qt_meta_data_VisionGraph_[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      37,   14, // methods
+      38,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -132,45 +134,46 @@ static const uint qt_meta_data_VisionGraph_[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  199,    2, 0x06 /* Public */,
-       5,    1,  202,    2, 0x06 /* Public */,
+       1,    1,  204,    2, 0x06 /* Public */,
+       5,    1,  207,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,  205,    2, 0x08 /* Private */,
-       7,    0,  206,    2, 0x08 /* Private */,
-       8,    0,  207,    2, 0x08 /* Private */,
-       9,    0,  208,    2, 0x08 /* Private */,
-      10,    0,  209,    2, 0x08 /* Private */,
-      11,    0,  210,    2, 0x08 /* Private */,
-      12,    0,  211,    2, 0x08 /* Private */,
-      13,    0,  212,    2, 0x08 /* Private */,
-      14,    0,  213,    2, 0x08 /* Private */,
-      15,    0,  214,    2, 0x08 /* Private */,
-      16,    0,  215,    2, 0x08 /* Private */,
-      17,    0,  216,    2, 0x08 /* Private */,
-      18,    0,  217,    2, 0x08 /* Private */,
-      19,    0,  218,    2, 0x08 /* Private */,
-      20,    0,  219,    2, 0x08 /* Private */,
-      21,    0,  220,    2, 0x08 /* Private */,
-      22,    0,  221,    2, 0x08 /* Private */,
-      23,    0,  222,    2, 0x08 /* Private */,
-      24,    0,  223,    2, 0x08 /* Private */,
-      25,    0,  224,    2, 0x08 /* Private */,
-      26,    0,  225,    2, 0x08 /* Private */,
-      27,    2,  226,    2, 0x08 /* Private */,
-      31,    2,  231,    2, 0x08 /* Private */,
-      34,    1,  236,    2, 0x08 /* Private */,
-      36,    1,  239,    2, 0x08 /* Private */,
-      38,    1,  242,    2, 0x08 /* Private */,
-      39,    5,  245,    2, 0x08 /* Private */,
-      44,    1,  256,    2, 0x08 /* Private */,
-      46,    1,  259,    2, 0x08 /* Private */,
-      46,    2,  262,    2, 0x08 /* Private */,
-      50,    1,  267,    2, 0x08 /* Private */,
-      52,    2,  270,    2, 0x08 /* Private */,
-      53,    1,  275,    2, 0x08 /* Private */,
-      56,    1,  278,    2, 0x08 /* Private */,
-      57,    1,  281,    2, 0x08 /* Private */,
+       6,    0,  210,    2, 0x08 /* Private */,
+       7,    0,  211,    2, 0x08 /* Private */,
+       8,    0,  212,    2, 0x08 /* Private */,
+       9,    0,  213,    2, 0x08 /* Private */,
+      10,    0,  214,    2, 0x08 /* Private */,
+      11,    0,  215,    2, 0x08 /* Private */,
+      12,    0,  216,    2, 0x08 /* Private */,
+      13,    0,  217,    2, 0x08 /* Private */,
+      14,    0,  218,    2, 0x08 /* Private */,
+      15,    0,  219,    2, 0x08 /* Private */,
+      16,    0,  220,    2, 0x08 /* Private */,
+      17,    0,  221,    2, 0x08 /* Private */,
+      18,    0,  222,    2, 0x08 /* Private */,
+      19,    0,  223,    2, 0x08 /* Private */,
+      20,    0,  224,    2, 0x08 /* Private */,
+      21,    0,  225,    2, 0x08 /* Private */,
+      22,    0,  226,    2, 0x08 /* Private */,
+      23,    0,  227,    2, 0x08 /* Private */,
+      24,    0,  228,    2, 0x08 /* Private */,
+      25,    0,  229,    2, 0x08 /* Private */,
+      26,    0,  230,    2, 0x08 /* Private */,
+      27,    2,  231,    2, 0x08 /* Private */,
+      31,    2,  236,    2, 0x08 /* Private */,
+      34,    1,  241,    2, 0x08 /* Private */,
+      36,    1,  244,    2, 0x08 /* Private */,
+      38,    1,  247,    2, 0x08 /* Private */,
+      39,    5,  250,    2, 0x08 /* Private */,
+      44,    1,  261,    2, 0x08 /* Private */,
+      46,    1,  264,    2, 0x08 /* Private */,
+      46,    2,  267,    2, 0x08 /* Private */,
+      50,    1,  272,    2, 0x08 /* Private */,
+      52,    2,  275,    2, 0x08 /* Private */,
+      53,    1,  280,    2, 0x08 /* Private */,
+      56,    1,  283,    2, 0x08 /* Private */,
+      57,    1,  286,    2, 0x08 /* Private */,
+      59,    1,  289,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -212,6 +215,7 @@ static const uint qt_meta_data_VisionGraph_[] = {
     QMetaType::Void, 0x80000000 | 54,   55,
     QMetaType::Void, QMetaType::Int,   48,
     QMetaType::Void, 0x80000000 | 58,   29,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -259,6 +263,7 @@ void VisionGraph_::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 34: _t->slot_actionTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
         case 35: _t->slot_SpinBox_ViewRegionSize((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 36: _t->slot_GraphTypeChanged((*reinterpret_cast< GraphType(*)>(_a[1]))); break;
+        case 37: _t->slotItemFinished((*reinterpret_cast< VisionItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -297,6 +302,13 @@ void VisionGraph_::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAction* >(); break;
+            }
+            break;
+        case 37:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
             }
             break;
         }
@@ -345,13 +357,13 @@ int VisionGraph_::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 37)
+        if (_id < 38)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 37;
+        _id -= 38;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 37)
+        if (_id < 38)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 37;
+        _id -= 38;
     }
     return _id;
 }

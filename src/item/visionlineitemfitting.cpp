@@ -17,7 +17,6 @@ VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QPointF p1, QPointF p2,
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 
-    m_brushColor = QColor(255,0,0,125);
     m_pointF1 = p1;m_pointF2 = p2;
     m_penColor = penColor;
     m_penWidth = penWidth;

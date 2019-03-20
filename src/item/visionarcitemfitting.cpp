@@ -51,6 +51,8 @@ QVector<QPointF> VisionArcItemFitting::getPoints()
 
 bool VisionArcItemFitting::getPosInArea(qreal x, qreal y){
     //x,y是外部坐标，
+
+    //todo m_polygonF在m_length为0的时候，不好点击
     if(m_polygonF.containsPoint(this->mapFromScene(QPointF(x,y)),Qt::OddEvenFill)){
         return true;
     }else{
@@ -97,7 +99,7 @@ void VisionArcItemFitting::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
 QRectF VisionArcItemFitting::boundingRect() const
 {
-    QRectF rf = QRectF(-(m_length)-5,-(m_length)-5,2*(m_r+m_length)+10,2*(m_r+m_length)+10);
+    QRectF rf = QRectF(-(m_length)-10,-(m_length)-10,2*(m_r+m_length)+20,2*(m_r+m_length)+20);
     return rf;
 }
 
@@ -205,22 +207,36 @@ void VisionArcItemFitting::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         path2.moveTo(QPointF(m_r,m_r));
         path2.arcTo(-m_length,-m_length,2*r2,2*r2,m_angle,m_spanAngle);
 
-        m_polygonF1 = path1.toReversed().toFillPolygon();
-        m_polygonF1.removeLast();
-        m_polygonF1.removeLast();
+        if(m_length == 0){
+            QPainterPath pathArc;
+            pathArc.moveTo(QPointF(m_r,m_r));
+            pathArc.arcTo(0,0,2*m_r,2*m_r,m_angle,m_spanAngle);
 
-        m_polygonF2 = path2.toFillPolygon();
-        m_polygonF2.removeFirst();
-        m_polygonF2.removeLast();
+            m_polygonF.clear();
+            m_polygonF = pathArc.toFillPolygon();
+            m_polygonF.removeFirst();
+            m_polygonF.removeLast();
+        }else{
+            m_polygonF1 = path1.toReversed().toFillPolygon();
+            m_polygonF1.removeLast();
+            m_polygonF1.removeLast();
 
-        m_polygonF.clear();
-        m_polygonF.append(m_polygonF2);
-        m_polygonF.append(m_polygonF1);
+            m_polygonF2 = path2.toFillPolygon();
+            m_polygonF2.removeFirst();
+            m_polygonF2.removeLast();
+
+            m_polygonF.clear();
+            m_polygonF.append(m_polygonF2);
+            m_polygonF.append(m_polygonF1);
+        }
+
 
         this->scene()->update();
     }else{
 
         if(!getPosInArea(event->scenePos().x(),event->scenePos().y())){
+            m_iIndex = -1;
+            this->scene()->views().at(0)->setCursor(viewCursor);
             return;
         }
 

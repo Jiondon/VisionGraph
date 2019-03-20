@@ -7,20 +7,6 @@
 
 #include "../control/minirect.h"
 
-
-struct Line_Struct{
-    QLineF line1;  //外部
-    QLineF line2;  //内部
-    QLineF line;
-};
-
-struct Point_Struct{
-    QPointF p1;
-    QPointF p2;
-    QPointF p3;
-    QPointF p4;
-};
-
 class VisionPolygonItemFitting : public VisionItem
 {
     Q_OBJECT
@@ -119,10 +105,6 @@ private:
 
     QList<QPolygonF> m_lstPoly;
 
-    QPolygonF m_poly;
-    QVector<QPointF> m_lstPointF;
-    QVector<QPointF> m_lstPointF1;
-    QList<Line_Struct> m_lstLineStruct;
     QList<QLineF> m_lstLine;
 
 private:
@@ -134,25 +116,13 @@ private:
     qreal getDistance(QPointF p1,QPointF p2,QPointF p);
 
     //获取两点之间线段的距离length的区域
-    QPolygonF getPolygonLineFitting(QVector<QPointF> vec_p,bool close, qreal length);
+    QList<QPolygonF> getPolygonLineFitting(QVector<QPointF> vec_p,bool close, qreal length);
 
-    //获取顶点p1出的半圆，和p1p2直线
-    QPolygonF getLineCircle(QPointF p1,QPointF p2,qreal length);
+    //获取p1p2直线的Fitting，length为Fitting的长度；
+    QPolygonF getLineFitting(QPointF p1,QPointF p2,qreal length);
 
-
-    //对lineStruct进行处理，保证lineStruct中line1和line相交的交点不在line上，line2与line相交的交点在line上
-    //如果line1 line2和line平行，则不处理
-    Line_Struct detailLine(Line_Struct lineStruct1, Line_Struct lineStruct2);
-
-    //获取两点之间的圆弧
-    QPolygonF drawArc(QPointF sP, QPointF fP, QPointF center, qreal r);
-
-    //点集合，两两组合成线，两两线的交点返回  close，即点的集合是否首尾相连
-    QVector<QPointF> getCrossP(QVector<QPointF> vec_p,bool close);
-
-    //两条线的交点
-    QPointF getLineCrossP(QPointF p1,QPointF p2,QPointF p3,QPointF p4);
-
+    //获取圆
+    QPolygonF getCircle(QPointF p,qreal r);
 
     void updateData();
 
@@ -161,4 +131,5 @@ private slots:
 
 public slots:
 };
+
 #endif // VISIONPOLYGONITEMFITTING_H
