@@ -120,9 +120,10 @@ void VisionPolygonItemFitting::paint(QPainter *painter, const QStyleOptionGraphi
 
     painter->setBrush(m_brushColor);
 
-    for(int i=0;i<m_lstPoly.count();i++){
-        painter->drawPolygon(m_lstPoly[i]);
-    }
+//    for(int i=0;i<m_lstPoly.count();i++){
+//        painter->drawPolygon(m_lstPoly[i]);
+//    }
+    painter->drawPolygon(m_polygonF_Fitting);
 
     if(m_bSelected){
         QPainterPath path;
@@ -223,8 +224,8 @@ void VisionPolygonItemFitting::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         m_length = getMinDistance(m_vecPointFs,m_bClose,event->scenePos());
         qDebug()<<m_length;
 
-        m_lstPoly.clear();
-        m_lstPoly = getPolygonLineFitting(m_vecPointFs_temp,m_bClose,m_length);
+        m_polygonF_Fitting.clear();
+        m_polygonF_Fitting = getPolygonLineFitting(m_vecPointFs_temp,m_bClose,m_length);
         this->scene()->update();
     }
 }
@@ -275,15 +276,20 @@ qreal VisionPolygonItemFitting::getDistance(QPointF p1, QPointF p2, QPointF p)
     return l;
 }
 
-QList<QPolygonF> VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p, bool close, qreal length)
+QPolygonF VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF> vec_p, bool close, qreal length)
 {
     QVector<QPointF> vecP;
     vecP.clear();
     QList<QPolygonF> lstPoly;
     lstPoly.clear();
 
+    QPolygonF poly;
+    poly.clear();
+
+    //todo  绘制一个点的时候，该类没有任何意义----一个圆
     if(vec_p.count() <= 1)
-        return lstPoly;
+        return poly;
+
 
     if(!close){
         //非封闭的图形
@@ -307,7 +313,11 @@ QList<QPolygonF> VisionPolygonItemFitting::getPolygonLineFitting(QVector<QPointF
         lstPoly.append(getCircle(vec_p.last(),length));
     }
 
-    return lstPoly;
+    for(int i=0;i<lstPoly.count();i++){
+        poly = poly.united(lstPoly.at(i));
+    }
+
+    return poly;
 }
 
 QPolygonF VisionPolygonItemFitting::getLineFitting(QPointF p1, QPointF p2, qreal length)
@@ -332,7 +342,7 @@ QPolygonF VisionPolygonItemFitting::getLineFitting(QPointF p1, QPointF p2, qreal
     qreal C2 = A*p2.y()-B*p2.x();
     QPointF tempP3 = QPointF(-(A*C21+B*C2)/(A*A+B*B),-(B*C21-A*C2)/(A*A+B*B));
     QPointF tempP4 = QPointF(-(A*C22+B*C2)/(A*A+B*B),-(B*C22-A*C2)/(A*A+B*B));
-    qDebug()<<QPolygonF({tempP1,tempP2,tempP4,tempP3});
+//    qDebug()<<QPolygonF({tempP1,tempP2,tempP4,tempP3});
 
     //定位p1,p2和p3,p4分别的对应的点
     //2-3和1-4两条线相交的话，则 1,3;2,4;  -- 此处已经确认分组是没问题的，
@@ -351,8 +361,8 @@ QPolygonF VisionPolygonItemFitting::getCircle(QPointF p, qreal r)
 
 void VisionPolygonItemFitting::updateData()
 {
-    m_lstPoly.clear();
-    m_lstPoly = getPolygonLineFitting(m_vecPointFs_temp,m_bClose,m_length);
+    m_polygonF_Fitting.clear();
+    m_polygonF_Fitting = getPolygonLineFitting(m_vecPointFs_temp,m_bClose,m_length);
 }
 
 void VisionPolygonItemFitting::slotIndex(int index)

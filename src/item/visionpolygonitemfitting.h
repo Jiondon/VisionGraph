@@ -103,9 +103,8 @@ private:
     qreal m_length = 0;
     QPainterPath m_path;
 
-    QList<QPolygonF> m_lstPoly;
-
-    QList<QLineF> m_lstLine;
+//    QList<QPolygonF> m_lstPoly;
+    QPolygonF m_polygonF_Fitting;
 
 private:
     void initMiniRect();
@@ -116,7 +115,7 @@ private:
     qreal getDistance(QPointF p1,QPointF p2,QPointF p);
 
     //获取两点之间线段的距离length的区域
-    QList<QPolygonF> getPolygonLineFitting(QVector<QPointF> vec_p,bool close, qreal length);
+    QPolygonF getPolygonLineFitting(QVector<QPointF> vec_p,bool close, qreal length);
 
     //获取p1p2直线的Fitting，length为Fitting的长度；
     QPolygonF getLineFitting(QPointF p1,QPointF p2,qreal length);
