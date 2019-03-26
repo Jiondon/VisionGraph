@@ -14,8 +14,8 @@
 //VisionGraph 的控件的头文件
 #include "visiongraph_global.h"
 
-#include "./item/visiongraphscene.h"
-#include "./item/visiongraphview.h"
+#include "visiongraphscene.h"
+#include "visiongraphview.h"
 #include "visiongraphwidget.h"
 #include "./item/visionrectitem.h"
 #include "./item/visionellipseitem.h"

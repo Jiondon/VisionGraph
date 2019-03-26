@@ -1567,13 +1567,13 @@ void VisionGraph_::slot_zoom_action()
 
 void VisionGraph_::slot_fit_action()
 {
-    qDebug()<<"111111111111::"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
+//    qDebug()<<"111111111111::"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
     if(!m_bkPixmapItem->pixmap().isNull()){
         this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     }else{
         qDebug()<<"m_bkPixmapItem is NULL";
     }
-    qDebug()<<"222222222222"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
+//    qDebug()<<"222222222222"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
 }
 
 void VisionGraph_::slot_mousePainter_action()
@@ -1897,8 +1897,8 @@ void VisionGraph_::slot_wheel(qreal delta)
 {
     if(delta > 0){
         //放大
-        if(m_zoom >= 5){
-            m_zoom  = 5;
+        if(m_zoom >= 10){
+            m_zoom  = 10;
         }else{
             m_zoom = m_zoom + 0.1;
         }
@@ -1929,7 +1929,7 @@ void VisionGraph_::slot_SizeChanged(QString currentSize)
 
 void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
 {
-    qDebug()<<"sceneWidget size is changed"<<w<<h;
+//    qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
     slot_fit_action();

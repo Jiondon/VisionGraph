@@ -12,9 +12,6 @@
 #include <QWidget>
 #include "visiongraph_global.h"
 #include "visiongraphtool.h"
-#include "visiongraph_base.h"
-#include "visiongraph_region.h"
-#include "visiongraph_item.h"
 #include "visiongraph_.h"
 
 class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget

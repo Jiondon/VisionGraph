@@ -55,13 +55,11 @@ INCLUDEPATH += ./include/tools/XVCombineRegions.h
 
 
 SOURCES += src/visiongraph.cpp \
-    src/visiongraph_item.cpp \
-    src/visiongraph_region.cpp \
     src/visiongraphtool.cpp \
     src/item/visioncrosspointitem.cpp \
     src/item/visionellipseitem.cpp \
-    src/item/visiongraphscene.cpp \
-    src/item/visiongraphview.cpp \
+    src/visiongraphscene.cpp \
+    src/visiongraphview.cpp \
     src/item/visionlineitem.cpp \
     src/item/visionpathitem.cpp \
     src/item/visionpoint.cpp \
@@ -75,7 +73,6 @@ SOURCES += src/visiongraph.cpp \
     src/visiongraphwidget.cpp \
     src/item/visionchainitem.cpp \
     src/item/visionarrow.cpp \
-    src/visiongraph_base.cpp \
     src/visiongraph_.cpp \
     src/item/visionlineitemfitting.cpp \
     src/item/visionarcitem.cpp \
@@ -88,13 +85,11 @@ SOURCES += src/visiongraph.cpp \
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
-    src/visiongraph_item.h \
-    src/visiongraph_region.h \
     src/visiongraphtool.h \
     src/item/visioncrosspointitem.h \
     src/item/visionellipseitem.h \
-    src/item/visiongraphscene.h \
-    src/item/visiongraphview.h \
+    src/visiongraphscene.h \
+    src/visiongraphview.h \
     src/item/visionlineitem.h \
     src/item/visionpathitem.h \
     src/item/visionpoint.h \
@@ -108,7 +103,6 @@ HEADERS += src/visiongraph.h \
     src/visiongraphwidget.h \
     src/item/visionchainitem.h \
     src/item/visionarrow.h \
-    src/visiongraph_base.h \
     src/visiongraph_.h \
     src/item/visionlineitemfitting.h \
     src/item/visionarcitem.h \

@@ -13,7 +13,7 @@
 #include <QGraphicsView>
 #include <QMouseEvent>
 #include <QFocusEvent>
-#include "../control/visionitem.h"
+#include "./control/visionitem.h"
 
 #include "XVBase.h"
 #include "XVCreateRegion.h"
@@ -21,8 +21,8 @@
 #include <QDebug>
 #include <QLabel>
 
-#include "../visiongraph_global.h"
-#include "../control/color.h"
+#include "visiongraph_global.h"
+#include "./control/color.h"
 
 using namespace XVCreateR;
 enum Corner{

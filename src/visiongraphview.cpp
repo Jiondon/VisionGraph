@@ -2,7 +2,7 @@
 #include <QScrollBar>
 #include "qdebug.h"
 #include "visiongraphscene.h"
-#include "../control/color.h"
+#include "./control/color.h"
 
 #define Pi 3.1415926
 
@@ -228,20 +228,21 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
-//    painter.scale(m_scale,m_scale);
-//    qDebug()<<brushColor<<"          0000000000000000000000000";
+//    QVector<QPointF> vec_p;
+//    QVector<QPointF> vec_p_temp;
     for(int i=0;i<m_vecLines.size();i++){
-//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
+        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
+//        vec_p.append(this->mapFromScene(m_vecLines.at(i).p1()));
+//        vec_p_temp.append(this->mapFromScene(m_vecLines.at(i).p2()));
     }
     painter.drawLines(vecLines);
-
-
-    //绘制画布的坐标系
-//    painter.setPen(QPen(Qt::red,0));
-//    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(500,0)));
-//    painter.drawLine(this->mapFromScene(QPoint(0,0)),this->mapFromScene(QPoint(0,500)));
+//    while (!(vec_p_temp.count() <= 0)) {
+//        vec_p.append(vec_p_temp.last());
+//        vec_p_temp.removeLast();
+//    }
+//    painter.drawPolygon(QPolygonF(vec_p));
 
     //绘制list region
     vector<XVPointRun> vec_point;
