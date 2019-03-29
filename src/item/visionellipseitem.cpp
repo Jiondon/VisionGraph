@@ -132,7 +132,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     //保证在非编辑模式下，不会执行该语句---构造函数中做了setSelected(false)处理
     if(option->state & QStyle::State_Selected){
 
-        painter->setPen(QPen(QBrush(m_selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
 
         //编辑模式下的小矩形框
         if(m_bEdit){
@@ -152,7 +152,7 @@ void VisionEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         setSelectedStatus(m_bSelected);
     }else{
 
-        painter->setPen(QPen(QBrush(m_borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
 
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->setVisible(false);

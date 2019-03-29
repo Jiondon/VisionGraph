@@ -536,18 +536,24 @@ tmp\debug\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWid
 		src\visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src\control\visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src\visiongraphwidget.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
 		src\item\visionrectitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
@@ -564,11 +570,8 @@ tmp\debug\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWid
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
-		src\control\visionitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\VGBase.h \
 		src\control\minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -581,8 +584,6 @@ tmp\debug\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWid
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src\item\visionline.h \
 		src\item\visioncircleitem.h \
 		src\item\visionlineitemfitting.h \
@@ -886,6 +887,7 @@ tmp\debug\moc_visionellipseitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidget
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\control\visionarrows_rotate.h \
 		src\item\visionellipseitem.h \
 		tmp\debug\moc_predefs.h \
@@ -1120,12 +1122,24 @@ tmp\debug\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src\control\visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
+		src\visiongraph_global.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src\visiongraphview.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -1266,6 +1280,7 @@ tmp\debug\moc_visionlineitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObj
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionlineitem.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -1571,6 +1586,7 @@ tmp\debug\moc_visionpolygon.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObje
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionpolygon.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -1712,6 +1728,7 @@ tmp\debug\moc_visionrectitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObj
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionrectitem.h \
@@ -1854,6 +1871,7 @@ tmp\debug\moc_visionring.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject 
 		include\VGBase.h \
 		src\visiongraph_global.h \
 		src\control\minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionring.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -1986,6 +2004,8 @@ tmp\debug\moc_minirect.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		src\control\minirect.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -2463,6 +2483,7 @@ tmp\debug\moc_visionchainitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QOb
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionchainitem.h \
 		tmp\debug\moc_predefs.h \
@@ -2736,21 +2757,24 @@ tmp\debug\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src\visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src\control\visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		src\control\color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src\item\visionrectitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
-		src\control\visionitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\VGBase.h \
 		src\control\minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\control\visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src\item\visionellipseitem.h \
@@ -2763,8 +2787,6 @@ tmp\debug\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		src\item\visionchainitem.h \
 		src\item\visionarrow.h \
 		src\item\visionarcitem.h \
-		src\control\color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src\item\visionline.h \
 		src\item\visioncircleitem.h \
 		src\item\visionlineitemfitting.h \
@@ -2912,6 +2934,7 @@ tmp\debug\moc_visionlineitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCo
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionlineitemfitting.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3054,6 +3077,7 @@ tmp\debug\moc_visionarcitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObje
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionarcitem.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3196,6 +3220,7 @@ tmp\debug\moc_visionarcitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCor
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionarcitemfitting.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3336,6 +3361,7 @@ tmp\debug\moc_visionpolygonitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\Q
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visionpolygonitemfitting.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3690,6 +3716,7 @@ tmp\debug\moc_visioncircleitem.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QO
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visioncircleitem.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3832,6 +3859,7 @@ tmp\debug\moc_visioncircleitemfitting.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\Qt
 		src\visiongraph_global.h \
 		src\control\minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src\item\visioncircleitemfitting.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3973,18 +4001,24 @@ tmp\debug\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src/control/visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/visiongraphwidget.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
 		src/item/visionrectitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
@@ -4001,11 +4035,8 @@ tmp\debug\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
-		src/control/visionitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\VGBase.h \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4018,8 +4049,6 @@ tmp\debug\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/item/visionline.h \
 		src/item/visioncircleitem.h \
 		src/item/visionlineitemfitting.h \
@@ -4171,19 +4200,25 @@ tmp\debug\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src/control/visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/visiongraphwidget.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
 		src/item/visionrectitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qstyleoption.h \
@@ -4200,11 +4235,8 @@ tmp\debug\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
-		src/control/visionitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\VGBase.h \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -4217,8 +4249,6 @@ tmp\debug\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/item/visionline.h \
 		src/item/visioncircleitem.h \
 		src/item/visionlineitemfitting.h \
@@ -4505,6 +4535,7 @@ tmp\debug\visionellipseitem.obj: src\item\visionellipseitem.cpp src/item/visione
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
@@ -4740,18 +4771,28 @@ tmp\debug\visiongraphview.obj: src\visiongraphview.cpp src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src/control/visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
+		src/visiongraph_global.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QScrollBar \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollbar.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
 		src/visiongraphscene.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent
 
 tmp\debug\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
@@ -4890,6 +4931,7 @@ tmp\debug\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineite
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/color.h \
@@ -5194,6 +5236,7 @@ tmp\debug\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor
@@ -5335,6 +5378,7 @@ tmp\debug\visionrectitem.obj: src\item\visionrectitem.cpp src/item/visionrectite
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -5481,6 +5525,7 @@ tmp\debug\visionring.obj: src\item\visionring.cpp src/item/visionring.h \
 		include\VGBase.h \
 		src/visiongraph_global.h \
 		src/control/minirect.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -5614,6 +5659,8 @@ tmp\debug\minirect.obj: src\control\minirect.cpp src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QBrush \
@@ -6141,6 +6188,7 @@ tmp\debug\visionchainitem.obj: src\item\visionchainitem.cpp src/item/visionchain
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
@@ -6416,21 +6464,24 @@ tmp\debug\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
+		src/control/visionitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
+		include\VGBase.h \
 		include\tools\XVBase.h \
 		include\tools\XVCreateRegion.h \
 		include\tools\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		src/control/color.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/item/visionrectitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsItem \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
-		src/control/visionitem.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
-		include\VGBase.h \
 		src/control/minirect.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/visionarrows_rotate.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainter \
 		src/item/visionellipseitem.h \
@@ -6443,8 +6494,6 @@ tmp\debug\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		src/item/visionchainitem.h \
 		src/item/visionarrow.h \
 		src/item/visionarcitem.h \
-		src/control/color.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		src/item/visionline.h \
 		src/item/visioncircleitem.h \
 		src/item/visionlineitemfitting.h \
@@ -6598,6 +6647,7 @@ tmp\debug\visionlineitemfitting.obj: src\item\visionlineitemfitting.cpp src/item
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPainterPath \
 		src/control/color.h \
@@ -6741,6 +6791,7 @@ tmp\debug\visionarcitem.obj: src\item\visionarcitem.cpp src/item/visionarcitem.h
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
 tmp\debug\visionarcitemfitting.obj: src\item\visionarcitemfitting.cpp src/item/visionarcitemfitting.h \
@@ -6881,6 +6932,7 @@ tmp\debug\visionarcitemfitting.obj: src\item\visionarcitemfitting.cpp src/item/v
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
 tmp\debug\visionpolygonitemfitting.obj: src\item\visionpolygonitemfitting.cpp src/item/visionpolygonitemfitting.h \
@@ -7019,6 +7071,7 @@ tmp\debug\visionpolygonitemfitting.obj: src\item\visionpolygonitemfitting.cpp sr
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qtabwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qrubberband.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor
@@ -7375,6 +7428,7 @@ tmp\debug\visioncircleitem.obj: src\item\visioncircleitem.cpp src/item/visioncir
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
@@ -7517,6 +7571,7 @@ tmp\debug\visioncircleitemfitting.obj: src\item\visioncircleitemfitting.cpp src/
 		src/visiongraph_global.h \
 		src/control/minirect.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneHoverEvent \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug

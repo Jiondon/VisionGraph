@@ -59,4 +59,7 @@ extern QCursor viewCursor; //view中的鼠标样式，方便在item中变化了�
 
 extern GraphType g_graphType;
 
+extern qreal g_scale;
+extern qreal g_penWidth;
+
 #endif // COLOR_H

@@ -60,7 +60,7 @@ void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-    QPen pen = QPen(m_borderColor,0);
+    QPen pen = QPen(m_borderColor,g_penWidth*(1/g_scale));
     painter->setPen(pen);
 //    painter->setBrush(Qt::red);
 //    painter->drawEllipse(m_pointF,1,1);

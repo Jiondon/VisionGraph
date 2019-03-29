@@ -17,6 +17,7 @@
 #include <QGraphicsScene>
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
+#include <QGraphicsSceneHoverEvent>
 
 class MiniRect : public QObject,public QGraphicsItem
 {

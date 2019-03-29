@@ -58,7 +58,7 @@ void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-    QPen pen = QPen(m_borderColor,0);
+    QPen pen = QPen(m_borderColor,g_penWidth*(1/g_scale));
     painter->setPen(pen);
 //    painter->setBrush(Qt::red);
     if(m_style == SINGLE){

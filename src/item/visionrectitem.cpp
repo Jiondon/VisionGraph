@@ -150,9 +150,9 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
     }
 
     painter->setBrush(m_brushColor);

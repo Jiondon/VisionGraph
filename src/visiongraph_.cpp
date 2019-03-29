@@ -377,14 +377,17 @@ void VisionGraph_::initTool_operation()
 
     comboBox = new QComboBox;
     comboBox->setEditable(true);
-    comboBox->lineEdit()->setValidator(new QIntValidator(0, 100,comboBox->lineEdit())); //0, 100为输入的数字值范围
-    comboBox->addItem("10%");
-    comboBox->addItem("25%");
-    comboBox->addItem("50%");
-    comboBox->addItem("100%");
-    comboBox->addItem("200%");
-    comboBox->addItem("500%");
-    comboBox->setCurrentText("100%");
+    comboBox->lineEdit()->setValidator(new QIntValidator(0,10,comboBox->lineEdit())); //0, 100为输入的数字值范围
+    comboBox->addItem("0.10");
+    comboBox->addItem("0.25");
+    comboBox->addItem("0.50");
+    comboBox->addItem("1.00");
+    comboBox->addItem("2.00");
+    comboBox->addItem("5.00");
+    comboBox->setCurrentText("1.00");
+    comboBox->lineEdit()->setAlignment(Qt::AlignLeft);
+    QLineEdit* lineEdit = comboBox->lineEdit();
+//    connect(lineEdit,SIGNAL(returnPressed()),this,SLOT(slot_SizeChanged()));
     connect(comboBox,SIGNAL(currentTextChanged(QString)),this,SLOT(slot_SizeChanged(QString)));
 
     if(m_toolButtonDirection == ToolButtonDirection::leftDirection ||
@@ -1433,7 +1436,7 @@ qreal VisionGraph_::adjustSize(qreal w, qreal h)
     qreal q = view->adjustSize(w,h);
     pSpinBox_w->setValue(w);
     pSpinBox_h->setValue(h);
-    comboBox->setEditText(QString::number((int)(q*100))+"%");
+    comboBox->setEditText(QString::number((float)((int)(q*100))/100));
     return q;
 }
 
@@ -1527,7 +1530,7 @@ void VisionGraph_::setMousePaintSize(qreal qi)
 void VisionGraph_::setView_Zoom(qreal qZoom)
 {
     view->zoom(qZoom);
-    comboBox->setEditText(QString::number(qZoom*100)+"%");
+    comboBox->setEditText(QString::number((float)((int)(qZoom*100))/100));
 }
 
 void VisionGraph_::setViewType(ViewType type)
@@ -1895,36 +1898,26 @@ void VisionGraph_::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,
 
 void VisionGraph_::slot_wheel(qreal delta)
 {
-    if(delta > 0){
-        //放大
-        if(m_zoom >= 10){
-            m_zoom  = 10;
-        }else{
-            m_zoom = m_zoom + 0.1;
-        }
-    }else{
-        if(m_zoom <= 0.25){
-            m_zoom  = 0.25;
-        }else{
-            m_zoom = m_zoom - 0.1;
-        }
-    }
-    comboBox->setCurrentText(QString::number(m_zoom*100)+"%");
+    m_bWheel = true;
+    m_zoom = delta;
+    comboBox->setCurrentText(QString::number((float)((int)(m_zoom*100))/100));
+    g_scale = m_zoom;
 }
 
 void VisionGraph_::slot_SizeChanged(QString currentSize)
 {
-    QString str = currentSize.mid(0,currentSize.indexOf("%"));
-    if(!currentSize.contains("%") && currentSize != ""){
-        comboBox->setEditText(currentSize+"%");
-        return;
+    if(m_bWheel){
+        m_bWheel = false;
+        return ;
     }
+    QString str = currentSize;
     bool ok;
     float scale = str.toFloat(&ok);
     if(ok){
-        m_zoom = scale/100;
-        view->zoom(scale/100);
+        m_zoom = scale;
+        view->zoom(scale);
     }
+    g_scale = m_zoom;
 }
 
 void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
@@ -2152,7 +2145,6 @@ void VisionGraph_::init_graphChain()
     m_lstAction.append(tool_Widget->addWidget(sys_circle_button));
     m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
     m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_line_button));
     m_insertAction = tool_Widget->addSeparator();
 
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
@@ -2205,6 +2197,7 @@ void VisionGraph_::init_graph_Item(GraphType type)
         m_lstAction.append(tool_Widget->addWidget(sys_poly_button));
         m_lstAction.append(tool_Widget->addWidget(sys_polyLine_button));
     }else if(type == GraphType::graph_Location){
+        m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
         m_lstAction.append(tool_Widget->addWidget(sys_point_button));
     }else if(type == GraphType::graph_Rectangle){
         m_lstAction.append(tool_Widget->addWidget(sys_rect_button));

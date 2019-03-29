@@ -81,7 +81,11 @@ QVector<QPointF> VisionLineItem::getPoints(){
 
 QRectF VisionLineItem::boundingRect() const
 {
-    return QRectF(m_x-5,m_y-5,m_width+10,m_height+10);
+    if(g_scale > 1){
+        return QRectF(m_x-5*(1/g_scale),m_y-5*(1/g_scale),m_width+10*(1/g_scale),m_height+10*(1/g_scale));
+    }else{
+        return QRectF(m_x-5*(1/g_scale),m_y-5*(1/g_scale),m_width+10*(1/g_scale),m_height+10*(1/g_scale));
+    }
 }
 
 void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -92,10 +96,10 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),0));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
 
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),0));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
 
     }
 
@@ -107,10 +111,11 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->translate(m_pointF2);
 
     qreal angle = (alph*180)/3.14159;
+    qreal len = 5*(1/g_scale);
 //    qDebug()<<angle;
     painter->rotate(angle);
-    painter->drawLine(QPointF(-10,-5),QPointF(0,0));
-    painter->drawLine(QPointF(-10,+5),QPointF(0,0));
+    painter->drawLine(QPointF(-(2*len),-len),QPointF(0,0));
+    painter->drawLine(QPointF(-(2*len),+len),QPointF(0,0));
 
     if(!m_bEdit)
         return;

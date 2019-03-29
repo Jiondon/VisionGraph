@@ -15,3 +15,7 @@ QString iconPath = "./icon/";
 QCursor viewCursor;
 
 GraphType g_graphType = GraphType::graphItem_unSelf;
+
+qreal g_scale = 1;
+
+qreal g_penWidth = 2;

@@ -155,10 +155,8 @@ QList<VisionItem *> VisionGraph::getItems()
 {
     QList<VisionItem *> lstItem;
     lstItem.clear();
-
-        lstItem = m_graphWidget->getItems();
-
-        return lstItem;
+    lstItem = m_graphWidget->getItems();
+    return lstItem;
 }
 
 VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)

@@ -250,7 +250,9 @@ public:
 
 signals:
     void signal_Move(QPointF pointF);
-    void signal_wheel(qreal delta);
+    void signal_wheel(qreal scale);  //通知外部缩放比例，外部进行数据更新
+    void signal_wheelEevent(QWheelEvent *event);
+
     void signal_Item(ItemType type,QRectF rf);  //rect ellipse
     void signal_Item_poly(QVector<QPointF> vecPoint,ItemType type=ItemType::Paint_Poly);  //
     void signal_Item_point(QPointF pointF);
@@ -272,6 +274,7 @@ private:
 
     QPointF m_releasePointF;   //在按下和松开的整体流程中，松开鼠标的坐标的点的位置
 
+    QPointF m_movePointF;   //move事件的鼠标位置 view中的位置
 
     QList<QPointF> m_lstPoint;  //存放单次的连续的点的集合--一个区域
 
@@ -396,6 +399,10 @@ private:
     QList<qreal> getArc(QPointF sP, QPointF mP, QPointF fP);
 
     QRectF detail_ellipse_InRectToOutRect(QRectF rf);
+
+private slots:
+    void slot_wheelEvent(QWheelEvent* event);
+
 };
 
 #endif // VISIONGRAPHVIEW_H

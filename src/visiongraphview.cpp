@@ -27,6 +27,8 @@ VisionGraphView::VisionGraphView(QWidget *parent):
 
     setItemType(ItemType::No);
 
+    connect(this,SIGNAL(signal_wheelEevent(QWheelEvent*)),this,SLOT(slot_wheelEvent(QWheelEvent*)));
+
 }
 
 void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
@@ -35,12 +37,15 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
     QPointF scenePos = this->mapToScene(viewPos);//将视口坐标转换为场景坐标
 
     emit signal_Move(viewPos);
+    m_movePointF = viewPos;
+
     //show mouse info
     if(!m_pLabelInfo->isHidden()){
         QString text_pos="";
         QString text_rgb="";
         QString text_gray="";
-        text_pos = (QStringLiteral("坐标:(")+QString::number(scenePos.x())+","+QString::number(scenePos.y())+")");
+        text_pos = (QStringLiteral("Scene坐标:(")+QString::number(scenePos.x())+","+QString::number(scenePos.y())+")\n");
+        text_pos += (QStringLiteral("View坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
         //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
         QPixmap pixmap = this->grab(QRect(QPoint(viewPos),QSize(-1,-1)));
         if (!pixmap.isNull())
@@ -67,6 +72,8 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 //        qDebug()<<disPointF;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+        qDebug()<<this->scene()->sceneRect();
+        this->scene()->update();
         return;
     }
 
@@ -150,11 +157,12 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
 
 void VisionGraphView::wheelEvent(QWheelEvent *event)
 {
-    emit signal_wheel(event->delta());
+    emit signal_wheelEevent(event);
 }
 
 void VisionGraphView::enterEvent(QEvent *event)
 {
+
     if(m_itemType == ItemType::Drag)
         return;
 
@@ -228,21 +236,12 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
 
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
-//    QVector<QPointF> vec_p;
-//    QVector<QPointF> vec_p_temp;
     for(int i=0;i<m_vecLines.size();i++){
         qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
-//        vec_p.append(this->mapFromScene(m_vecLines.at(i).p1()));
-//        vec_p_temp.append(this->mapFromScene(m_vecLines.at(i).p2()));
     }
     painter.drawLines(vecLines);
-//    while (!(vec_p_temp.count() <= 0)) {
-//        vec_p.append(vec_p_temp.last());
-//        vec_p_temp.removeLast();
-//    }
-//    painter.drawPolygon(QPolygonF(vec_p));
 
     //绘制list region
     vector<XVPointRun> vec_point;
@@ -308,7 +307,12 @@ void VisionGraphView::zoom(float scaleFactor)
 {
     qreal scaleTemp = scaleFactor/m_scale;  //获取本次缩放相对于上次缩放的比例
     m_scale = scaleFactor;
+
     scale(scaleTemp, scaleTemp);
+    //解决放大和缩小后，将scene的画布区域设置为view的区域，（view的区域转换为scene区域）
+     //缩放后会自动调整scene的区域和view区域一致大小，使得scene不会由于缩放导致出现scroll
+    this->scene()->setSceneRect(this->mapToScene(this->rect()).boundingRect());
+
 
     if(m_itemType == ItemType::Paint_Point || m_itemType == ItemType::Paint_NoPoint){
         //修改鼠标为绘图样式
@@ -317,12 +321,10 @@ void VisionGraphView::zoom(float scaleFactor)
         this->setCursor(cursor);
         viewCursor = this->cursor();
     }
-//    qDebug()<<this->width()<<m_scale<<this->mapToScene(this->rect()).boundingRect();
-    //解决放大和缩小后，将scene的画布区域设置为view的区域，（view的区域转换为scene区域）
-    this->scene()->setSceneRect(this->mapToScene(this->rect()).boundingRect());
+
+
     this->scene()->update();
     return;
-
 }
 
 void VisionGraphView::back_region()
@@ -1338,6 +1340,52 @@ QRectF VisionGraphView::detail_ellipse_InRectToOutRect(QRectF rf)
     QRectF rf1 = QRectF(rf.topLeft()-disP,rf.bottomRight()+disP);
     return rf;
     */
+}
+
+void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
+{
+    // 获取当前的鼠标所在的view坐标;
+    QPointF prev_viewPos = event->pos();
+    // 获取当前鼠标相对于scene的位置;
+     QPointF prev_scenePos = this->mapToScene(prev_viewPos.toPoint());
+
+     qreal zoom = m_scale;
+     if(event->delta() > 0){
+         //放大
+         zoom = zoom + 0.2;
+     }else{
+         if(zoom <= 0.5){
+             zoom = 0.5;
+         }else if(zoom <= 1){
+             zoom = zoom - 0.1;
+         }else{
+             zoom = zoom - 0.2;
+         }
+     }
+
+     qreal scaleTemp = zoom/m_scale;  //获取本次缩放相对于上次缩放的比例
+     m_scale = zoom;
+    scale(scaleTemp, scaleTemp);
+
+    this->scene()->setSceneRect(this->mapToScene(this->rect()).boundingRect());
+
+    //获取缩放后的scene坐标
+    QPointF scenePos = this->mapToScene(prev_viewPos.toPoint());
+
+    //获取缩放前后的坐标差值，即为需要进行move的位移
+    QPointF disPointF = scenePos - prev_scenePos;
+
+//    qDebug()<<prev_scenePos<<" ::: "<<scenePos<<disPointF;
+
+    qDebug()<<this->scene()->sceneRect();
+    this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
+                                this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
+//    emit signal_wheel(m_scale);
+    qDebug()<<this->scene()->sceneRect();
+    this->scene()->update();
+
+    emit signal_wheel(m_scale);   //将缩放的比例通知外部
+
 }
 
 void VisionGraphView::slotUpdateViewInfo_Pos()

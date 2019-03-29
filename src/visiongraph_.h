@@ -38,7 +38,7 @@ public:
 public:
     /**
      * @brief       设置GraphType
-     * @param       此接口作废---使用此接口和设置工具栏Direction，会导致工具栏出问题（内部调用）
+     * @param       //此接口作废---使用此接口和设置工具栏Direction，会导致工具栏出问题（内部调用）
      * @param       此接口在构造VisionGraph后不可更改
      */
     void setGraphType(GraphType type);
@@ -511,6 +511,8 @@ private:
 
     GraphType m_graphType = GraphType::graphItem_unSelf;   //item的模式，用户交互绘制item？
     ViewType m_viewType = ViewType::freeItem;
+
+    bool m_bWheel = false;   //comboBox值变化的 是否触发对应的槽函数，true，不触发，false 触发（wheel事件导致的缩放，均不触发）
 
 private slots:
     //对应Action的槽函数
