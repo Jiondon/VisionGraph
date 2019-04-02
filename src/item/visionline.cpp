@@ -48,7 +48,7 @@ QVector<QPointF> VisionLine::getPoints()
 
 bool VisionLine::getPosInArea(qreal x, qreal y)
 {
-    return true;
+    return false;
 }
 
 void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -75,4 +75,19 @@ QRectF VisionLine::boundingRect() const
     }else{
         return QRectF(m_lstLineF.first().p1(),m_lstLineF.last().p2());
     }
+}
+
+void VisionLine::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    return;
+}
+
+void VisionLine::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    return;
+}
+
+void VisionLine::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    return;
 }

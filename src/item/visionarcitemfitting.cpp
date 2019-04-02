@@ -301,11 +301,16 @@ bool VisionArcItemFitting::detailData(QPointF sP, QPointF mP, QPointF fP)
     double f = ((x1 * x1 - x3 * x3) + (y1 * y1 - y3 * y3)) / 2.0;
     double det = b * c - a * d;
 
+    //三点一线或者三点在同一点
     if((x1 == x2 && x1 == x3) || (y1 == y2 && y1 == y3))
     {
         //三点一线,
         return false;
     }
+
+    //det为0的时候，除了上面的三点一线或者三点在同一点的情况之外，还存在三点中有任意两点存在重合情况
+    if(det == 0)
+        return false;
 
     double x0 = -(d * e - b * f) / det;
     double y0 = -(a * f - c * e) / det;

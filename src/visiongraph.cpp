@@ -93,6 +93,11 @@ VisionChainItem *VisionGraph::_addChain(QList<QPointF> lstP, bool bClosed, bool 
     return m_graphWidget->_addChain(lstP,bClosed,bEdit,color_enable,color);
 }
 
+VisionCoordinateItem *VisionGraph::_addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)
+{
+    return m_graphWidget->_addCoordinate(p,angle,length,bEdit,color_enable,color);
+}
+
 VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
     return m_graphWidget->addEllipse(rf,bEdit,bRotation,color_enable,color);

@@ -99,7 +99,7 @@ void VisionCoordinateItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
 }
 
 const QMetaObject VisionCoordinateItem::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_VisionCoordinateItem.data,
+    { &VisionItem::staticMetaObject, qt_meta_stringdata_VisionCoordinateItem.data,
       qt_meta_data_VisionCoordinateItem,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -114,14 +114,12 @@ void *VisionCoordinateItem::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_VisionCoordinateItem.stringdata0))
         return static_cast<void*>(const_cast< VisionCoordinateItem*>(this));
-    if (!strcmp(_clname, "QGraphicsItem"))
-        return static_cast< QGraphicsItem*>(const_cast< VisionCoordinateItem*>(this));
-    return QObject::qt_metacast(_clname);
+    return VisionItem::qt_metacast(_clname);
 }
 
 int VisionCoordinateItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = VisionItem::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

@@ -1,13 +1,15 @@
 ﻿#include "visioncoordinateitem.h"
 #include "../control/color.h"
 
-VisionCoordinateItem::VisionCoordinateItem(bool bEdit, bool color_enable,QColor color, QGraphicsItem *parent) : QGraphicsItem(parent)
+VisionCoordinateItem::VisionCoordinateItem(bool bEdit, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
         m_borderColor = color;
     }else{
         m_borderColor = borderColor;
     }
+
+    m_bEdit = false;
 }
 
 void VisionCoordinateItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -35,5 +37,32 @@ void VisionCoordinateItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
 QRectF VisionCoordinateItem::boundingRect() const
 {
-    return QRectF(-1,-1,m_iLength+4,m_iLength+4);
+    return QRectF(-m_iLength-2,-m_iLength-2,2*m_iLength+4,2*m_iLength+4);
+}
+
+void VisionCoordinateItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(m_bEdit){
+        QGraphicsItem::mouseMoveEvent(event);
+    }else{
+        return;
+    }
+}
+
+void VisionCoordinateItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(m_bEdit){
+        QGraphicsItem::mousePressEvent(event);
+    }else{
+        return;
+    }
+}
+
+void VisionCoordinateItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(m_bEdit){
+        QGraphicsItem::mouseReleaseEvent(event);
+    }else{
+        return;
+    }
 }

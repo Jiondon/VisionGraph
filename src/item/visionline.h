@@ -64,6 +64,10 @@ public:
         MULTI
     };
 
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
 signals:
     void signalChanged(VisionItem* item);
 

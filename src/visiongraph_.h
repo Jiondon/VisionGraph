@@ -57,7 +57,8 @@ public:
     void setThemeColor(ThemeColor theme);
 
     /**
-     * @brief       带下划线的表示通过程序调用非编辑模式的，不带下划线的，通过绘制操作调用api
+     * @brief       带下划线的表示通过程序调用非编辑模式的，不带下划线的，通过绘制操作调用api,
+     * @note        带下划线的均无法通过clearPainter()函数进行清除，只能通过scene的clear进行清空，
      */
     QGraphicsRectItem* _addRect(const QRectF &rect, const QPen &pen = QPen(), const QBrush &brush = QBrush());
     QGraphicsPolygonItem* _addPolygon(const QPolygonF &polygon, const QPen &pen = QPen(), const QBrush &brush = QBrush());
@@ -66,7 +67,8 @@ public:
     VisionCrossPointItem* _addPoint(QPointF pointF, bool edit = false, qreal length = 5,bool color_enable = false, QColor color = QColor(255,0,0));
     VisionChainItem* _addChain(QList<QPointF> lstP, bool bClosed = false, bool bEdit = false, bool color_enable = false,QColor color = QColor(255,0,0));
     VisionArrow *_addArrow(QPointF pointF,bool bEdit = false,bool color_enable = false,QColor color = QColor(255,0,0));
-
+    VisionCoordinateItem *_addCoordinate(QPointF p,qreal angle = 0,qreal length = 50,bool bEdit = true,
+                                        bool color_enable = false,QColor color = QColor(255,0,0));
     /**
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑

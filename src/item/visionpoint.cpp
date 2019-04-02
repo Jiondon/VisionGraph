@@ -11,6 +11,7 @@ VisionPoint::VisionPoint(bool color_enable,QColor color, VisionItem *parent) : V
     }
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
+    setEnabled(false);
 }
 
 void VisionPoint::setPointF(QPointF pointF)
@@ -50,7 +51,7 @@ QVector<QPointF> VisionPoint::getPoints(){
 
 bool VisionPoint::getPosInArea(qreal x, qreal y)
 {
-    return true;
+    return false;
 }
 
 void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -79,4 +80,19 @@ QRectF VisionPoint::boundingRect() const
     }else{
         return QRectF(m_lstPointF.first()-QPointF(1,1),m_lstPointF.last()+QPointF(1,1));
     }
+}
+
+void VisionPoint::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    return;
+}
+
+void VisionPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+   return;
+}
+
+void VisionPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    return;
 }

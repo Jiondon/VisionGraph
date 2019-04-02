@@ -44,8 +44,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         QString text_pos="";
         QString text_rgb="";
         QString text_gray="";
-        text_pos = (QStringLiteral("Scene坐标:(")+QString::number(scenePos.x())+","+QString::number(scenePos.y())+")\n");
-        text_pos += (QStringLiteral("View坐标:(")+QString::number(viewPos.x())+","+QString::number(viewPos.y())+")");
+        text_pos = (QStringLiteral("坐标:(")+QString::number(scenePos.x())+","+QString::number(scenePos.y())+")\n");
         //todo 采用截图的方式，获取坐标点的图片，然后获取rgb值（可优化?）
         QPixmap pixmap = this->grab(QRect(QPoint(viewPos),QSize(-1,-1)));
         if (!pixmap.isNull())
@@ -1349,13 +1348,14 @@ void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
     // 获取当前鼠标相对于scene的位置;
      QPointF prev_scenePos = this->mapToScene(prev_viewPos.toPoint());
 
+     qDebug()<<prev_viewPos;
      qreal zoom = m_scale;
      if(event->delta() > 0){
          //放大
          zoom = zoom + 0.2;
      }else{
-         if(zoom <= 0.5){
-             zoom = 0.5;
+         if(zoom <= 0.3){
+             zoom = 0.3;
          }else if(zoom <= 1){
              zoom = zoom - 0.1;
          }else{
@@ -1375,14 +1375,9 @@ void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
     //获取缩放前后的坐标差值，即为需要进行move的位移
     QPointF disPointF = scenePos - prev_scenePos;
 
-//    qDebug()<<prev_scenePos<<" ::: "<<scenePos<<disPointF;
-
-    qDebug()<<this->scene()->sceneRect();
     this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                 this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-//    emit signal_wheel(m_scale);
-    qDebug()<<this->scene()->sceneRect();
-    this->scene()->update();
+//    this->scene()->update();
 
     emit signal_wheel(m_scale);   //将缩放的比例通知外部
 

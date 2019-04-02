@@ -6,11 +6,11 @@
 
 #include <QPainter>
 
-class VisionCoordinateItem : public QObject, public QGraphicsItem
+class VisionCoordinateItem : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionCoordinateItem(bool bEdit = false, bool color_enable = false, QColor color = QColor(255,0,0), QGraphicsItem *parent = 0);
+    explicit VisionCoordinateItem(bool bEdit = false, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
 
     void setPointF(QPointF pointF)
     {
@@ -49,9 +49,31 @@ public:
         return vgCoordinate;
     }
 
+        /**
+     * @brief       判断点（x,y）是否在该item内
+     * @param       bool
+     */
+    bool getPosInArea(qreal x,qreal y){
+        return false;
+    }
+
+    /**
+     * @brief       获取item的顶点--（圆（椭圆）的顶点为外切矩形）
+     * @param       QVector<QPointF>
+     */
+    QVector<QPointF> getPoints(){
+        QVector<QPointF> vec;
+        vec.append(m_pointF);
+        return vec;
+    }
+
 public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
+
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
     void signalChanged(VisionItem* item);
@@ -60,6 +82,8 @@ private:
     QPointF m_pointF;
     int m_iLength = 50;
     qreal m_angle = 0;  //旋转角度--坐标系
+
+    bool m_bEdit = false;
 
     QColor m_borderColor;
     QColor m_brushColor;

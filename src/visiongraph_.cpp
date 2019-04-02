@@ -578,6 +578,18 @@ VisionArrow *VisionGraph_::_addArrow(QPointF pointF, bool bEdit, bool color_enab
     return item;
 }
 
+VisionCoordinateItem *VisionGraph_::_addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)
+{
+    //绘制坐标系，目前的坐标系都是不可编辑的
+    VisionCoordinateItem* item = new VisionCoordinateItem(bEdit,color_enable,color);
+    item->setPointF(p);
+    item->setColor(color);
+    item->setAngle(angle);
+    item->setCoordinateLength(length);
+    scene->addItem(item);
+    return item;
+}
+
 VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
     if(!checkoutItem())
@@ -837,6 +849,9 @@ VisionLine *VisionGraph_::addLines(QList<QLineF> lstLineF, bool color_enable, QC
     VisionLine *item = new VisionLine(color_enable,color);
     item->setLines(lstLineF);
     scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
     return item;
 }
 
@@ -936,6 +951,9 @@ VisionPoint *VisionGraph_::addPointFs(QList<QPointF> lstP, bool color_enable, QC
     VisionPoint *item = new VisionPoint(color_enable,color);
     item->setPointFs(lstP);
     scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
+    emit signal_itemFinished(item);
     return item;
 }
 
@@ -1130,13 +1148,15 @@ VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPo
 
 VisionCoordinateItem *VisionGraph_::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)
 {
-    //绘制坐标系，目前的坐标系都是不可编辑的
+    //绘制坐标系，目前的坐标系都是不可编辑的   调用clear是可以删除的控件
     VisionCoordinateItem* item = new VisionCoordinateItem(bEdit,color_enable,color);
     item->setPointF(p);
     item->setColor(color);
     item->setAngle(angle);
     item->setCoordinateLength(length);
     scene->addItem(item);
+    m_curVisionItem = item;
+    m_lstItem.push_back(item);
     return item;
 }
 
