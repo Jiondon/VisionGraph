@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="enum" name="XVInterpolationMethodType">
+	<object type="int" name="0" memo="NearestNeighbour" desc="最邻近"/>
+	<object type="int" name="1" value="1" memo="Bilinear" desc="双线性（二维线性插值）"/>
+</object>

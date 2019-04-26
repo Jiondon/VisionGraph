@@ -90,8 +90,8 @@ public:
      * @param       bool
      */
     void setSelectedStatus(bool bSelected){
-        setSelected(bSelected);
         m_bSelected = bSelected;
+        setSelected(bSelected);
     }
 
 

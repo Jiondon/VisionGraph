@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVSelectionType" type="enum">
+	<object name="0" memo="Best" type="int" value="1" desc="最优"/>
+	<object name="1" memo="First" type="int" desc="第一个边缘点"/>
+	<object name="2" memo="Last" type="int" desc="最后一个边缘点"/>
+</object>
+

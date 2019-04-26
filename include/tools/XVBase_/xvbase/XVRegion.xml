@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVRectangularRoiMask::Type" type="enum" desc="">
+	<object name="0" memo="Rectangle" type="int" value="1" desc="矩形"/>
+	<object name="1" memo="Ellipse" type="int" desc="椭圆"/>
+</object>
+
+<object type="struct" name="XVPointRun" desc="行程">
+	<object type="int" name="x" desc="起始点x"/>
+	<object type="int" name="y" desc="起始点y"/>
+	<object type="int" name="length" desc="行程"/>
+</object>
+
+<object type="struct" name="XVRegion" desc="区域">
+	<object type="XVOptionalType" name="optional" desc="ROI是否有效"/>
+	<object type="int" name="frameWidth" desc="frameWidth"/>
+	<object type="int" name="frameHeight" desc="frameHeight"/>
+	<object type="array" name="arrayPointRun" link="array" desc="行程组">
+		<object type="XVPointRun"/>
+	</object>
+</object>
+
+<object type="struct" name="XVShapeRegion" desc="行程">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+    <object type="XVRectangle2D" name="frame"/>
+    <object type="XVRectangularRoiMask::Type" name="mask"/>
+</object>

@@ -46,7 +46,7 @@ void VisionGraph_::setThemeColor(ThemeColor theme)
     if(theme == ThemeColor::dark){
         selectedColor = QColor(255,0,0);
         borderColor = QColor(255,0,0);
-        brushColor = QColor(255,0,0,50);
+        brushColor = QColor(255,0,0,160);
 //        regionColor = QColor(255,0,0);
     }else if(theme == ThemeColor::lightBlue){
         selectedColor = QColor(0,0,0);
@@ -56,7 +56,7 @@ void VisionGraph_::setThemeColor(ThemeColor theme)
     }else{
         selectedColor = QColor(255,0,0);
         borderColor = QColor(255,0,0);
-        brushColor = QColor(255,0,0,50);
+        brushColor = QColor(255,0,0,160);
 //        regionColor = QColor(255,0,0);
     }
 }
@@ -491,7 +491,7 @@ bool VisionGraph_::checkoutItem()
     if(m_graphType == GraphType::graphRegion || m_graphType == GraphType::graph_Info)
         return true;
 
-    this->scene->update();
+//    this->scene->update();
 
 
     //在进行交互的时候进行check   程序调用addItem是否有效？
@@ -526,7 +526,7 @@ vector<VisionItem*> VisionGraph_::getData()
 
 VisionItem *VisionGraph_::getCurData()
 {
-    qDebug()<<m_curVisionItem->getType();
+//    qDebug()<<m_curVisionItem->getType();
     if(m_curVisionItem == NULL)
         return NULL;
 

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVCircleFittingMethodType" type="enum">
+	<object name="0" memo="AlgebraicKasa" type="int" value="1"/>
+	<object name="1" memo="AlgebraicPratt" type="int"/>
+	<object name="2" memo="AlgebraicTaubin" type="int"/>
+	<object name="3" memo="GeometricLandau" type="int"/>
+</object>
+
+<object name="XVPolarSpaceType::Type" type="enum">
+	<object name="0" memo="Polar" type="int" value="1"/>
+	<object name="1" memo="LogPolar" type="int"/>
+</object>
+
+<object name="XVResizeMethod::Type" type="enum">
+	<object name="0" memo="NearestNeighbour" type="int" value="1"/>
+	<object name="1" memo="Bilinear" type="int"/>
+	<object name="2" memo="Area" type="int"/>
+</object>
+
+<object name="XVCropScaleMode::Type" type="enum">
+	<object name="0" memo="InputScale" type="int" value="1"/>
+	<object name="1" memo="AlignedScale" type="int"/>
+</object>
+
+<object name="XVAxis::Type" type="enum">
+	<object name="0" memo="X" type="int" value="1"/>
+	<object name="1" memo="Y" type="int"/>
+</object>
+
+<object name="XVMirrorDirection::Type" type="enum">
+	<object name="0" memo="Horizontal" type="int" value="1"/>
+	<object name="1" memo="Vertical" type="int"/>
+	<object name="2" memo="Both" type="int"/>
+</object>
+
+<object name="XVRotationSizeMode::Type" type="enum">
+	<object name="0" memo="Fit" type="int" value="1"/>
+	<object name="1" memo="Preserve" type="int"/>
+</object>
+
+<object name="XVMagnitudeMeasure::Type" type="enum">
+	<object name="0" memo="Horizontal" type="int"/>
+	<object name="1" memo="Vertical" type="int"/>
+	<object name="2" memo="Average" type="int"/>
+	<object name="3" memo="Sum" type="int" value="1"/>
+	<object name="4" memo="Maximum" type="int"/>
+	<object name="5" memo="Hypot" type="int"/>
+</object>
+
+<object name="XVThresholdSelectionMethod::Type" type="enum">
+	<object name="0" memo="ClusteringKittler" type="int"/>
+	<object name="1" memo="ClusteringKMeans" type="int"/>
+	<object name="2" memo="ClusteringOtsu" type="int"/>
+	<object name="3" memo="Entropy" type="int" value="1"/>
+	<object name="4" memo="HistogramIntermodes" type="int"/>
+</object>
+
+<object name="XVThresholdDynamicReferenceMethod::Type" type="enum">
+	<object name="0" memo="Mean" type="int" value="1"/>
+	<object name="1" memo="Median" type="int"/>
+	<object name="2" memo="Middle" type="int"/>
+</object>
+
+<object name="XVSmoothImageMedianKernel::Type" type="enum">
+	<object name="0" memo="Box" type="int" value="1"/>
+</object>
+
+<object name="XVMeanKernel::Type" type="enum">
+	<object name="0" memo="Box3x3" type="int" value="1"/>
+	<object name="1" memo="Box5x5" type="int"/>
+</object>
+
+<object name="XVGaussKernel::Type" type="enum">
+	<object name="0" memo="_3x3" type="int" value="1"/>
+	<object name="1" memo="_5x5" type="int"/>
+	<object name="2" memo="_7x7" type="int"/>
+	<object name="3" memo="_9x9" type="int"/>
+	<object name="4" memo="_11x11" type="int"/>
+</object>
+
+<object name="XVMorphologyKernelType" type="enum">
+	<object name="0" memo="Box3x3" type="int"/>
+	<object name="1" memo="Box5x5" type="int"/>
+	<object name="2" memo="Cross3x3" type="int"/>
+	<object name="3" memo="Cross5x5" type="int" value="1"/>
+	<object name="4" memo="Disc5x5" type="int"/>
+	<object name="5" memo="Disc7x7" type="int"/>
+	<object name="6" memo="Disc9x9" type="int"/>
+</object>
+
+<object name="XVKernelShape::Type" type="enum">
+	<object name="0" memo="Box" type="int" value="1"/>
+	<object name="1" memo="Ellipse" type="int"/>
+	<object name="2" memo="Cross" type="int"/>
+</object>
+
+<object name="XVGradientMaskOperatorType" type="enum">
+	<object name="0" memo="Sobel" type="int" value="1"/>
+	<object name="1" memo="Prewitt" type="int"/>
+	<object name="2" memo="Central" type="int"/>
+	<object name="3" memo="Forward" type="int"/>
+</object>
+
+<object name="XVGradientAngleRangeType" type="enum">
+	<object name="0" memo="_0_90" type="int" value="1"/>
+	<object name="1" memo="_0_180" type="int"/>	
+</object>
+
+<object name="XVGradientOperatorType" type="enum">
+	<object name="0" memo="Gauss" type="int" value="1"/>
+	<object name="1" memo="Deriche" type="int"/>
+	<object name="2" memo="Lanser" type="int"/>
+</object>
+
+<object name="XVBayerTypeType" type="enum">
+	<object name="0" memo="GR" type="int" value="1"/>
+	<object name="1" memo="RG" type="int"/>
+	<object name="2" memo="GB" type="int"/>
+	<object name="3" memo="BG" type="int"/>
+</object>
+
+<object name="XVCompareMeasureType" type="enum" desc="计算图像比较的方法">
+	<object name="0" memo="Value" type="int" value="1"/>
+	<object name="1" memo="NCC" type="int"/>
+	<object name="2" memo="DSSIM" type="int"/>
+</object>
+
+<object name="XVCorrelationMeasureType" type="enum">
+	<object name="0" memo="NormalizedCrossCorrelation" type="int" value="1"/>
+	<object name="1" memo="CrossCorrelation" type="int"/>	
+</object>
+
+<object name="XVDistanceMeasureType" type="enum">
+	<object name="0" memo="MeanError" type="int" value="1"/>
+	<object name="1" memo="MeanSquaredError" type="int"/>	
+</object>
+
+<object name="XVHSxColorModel" type="enum">
+	<object name="0" memo="HSV" type="int" value="1"/>
+	<object name="1" memo="HSL" type="int"/>
+	<object name="2" memo="HSI" type="int"/>
+</object>
+
+<object name="XVProjectionDirection" type="enum">
+	<object name="0" memo="Horizontal" type="int" value="1"/>
+	<object name="1" memo="Vertical" type="int"/>	
+</object>
+
+<object name="XVProjectionMode::Type" type="enum">
+	<object name="0" memo="Average" type="int" value="1"/>
+	<object name="1" memo="Maximum" type="int"/>
+	<object name="2" memo="Minimum" type="int"/>
+	<object name="3" memo="Sum" type="int"/>
+</object>

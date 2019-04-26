@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVInt" desc="整形">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="int" name="value" desc="整形值"/>
+</object>
+
+<object type="struct" name="XVFloat" desc="浮点">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="float" name="value" desc="浮点值"/>
+</object>
+
+<object type="struct" name="XVPoint2D" desc="二维点浮点">
+	<object type="XVOptionalType" name="optional" desc="有效型" value="{0;1}"/>
+	<object type="float" name="x" desc="X"/>
+	<object type="float" name="y" desc="Y"/>
+</object>
+
+
+

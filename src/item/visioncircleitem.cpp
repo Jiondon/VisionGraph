@@ -174,7 +174,7 @@ void VisionCircleItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     m_bSelected = true;
 
     lastPoint = event->scenePos();
-    this->scene()->update();
+//    this->scene()->update();
 }
 
 void VisionCircleItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -225,7 +225,7 @@ void VisionCircleItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     updateItem();
 
     emit signalChanged(this);
-    this->scene()->update();
+//    this->scene()->update();
 }
 
 void VisionCircleItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)

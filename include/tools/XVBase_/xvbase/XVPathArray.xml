@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVArray_XVPath" desc="二维点浮点数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="二维点值">
+		<object type="XVPath"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArrayArray_XVPath" desc="二维点浮点二维数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="值">
+		<object type="XVArray_XVPath"/>
+	</object>
+</object>
+

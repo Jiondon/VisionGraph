@@ -10,6 +10,8 @@
 #define VISIONGRAPH_H
 
 #include <QWidget>
+#include <QWheelEvent>
+
 #include "visiongraph_global.h"
 #include "visiongraphtool.h"
 #include "visiongraph_.h"
@@ -420,12 +422,18 @@ public:
      */
     VisionItem *getCurData();
 
+    /**
+     * @brief       获取VisionGraph的样式表
+     * @param
+     */
+    void setGraphStyleSheet(QString strStyleSheet);
+
 signals:
     void signal_PaintFinishedChanged(VisionItem*);
     void signal_Changed(VisionItem* item);
 
 protected:
-
+    void wheelEvent(QWheelEvent *event);
 
 private:
     VisionGraph_ *m_graphWidget = nullptr;

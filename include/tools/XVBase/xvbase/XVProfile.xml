@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVProfileProcessingMode::Type" type="enum" desc="配置文件处理方式">
+	<object name="0" memo="Bounded" type="int" value="1" desc="有界限的"/>
+	<object name="1" memo="Cyclic" type="int" desc="循环的"/>
+</object>
+
+<object type="struct" name="XVProfile" memo="图像数据统计">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="dataArray" link="array" desc="数据">
+		<object type="XVPoint2D"/>
+	</object>
+</object>
+
+<object type="struct" name="XVColor" memo="颜色">
+	<object type="int" name="red" desc="红"/>
+    <object type="int" name="green" desc="绿"/>
+    <object type="int" name="blue" desc="蓝"/>
+    <object type="int" name="alpha" desc="色彩空间" value ="255"/>
+</object>
+
+<object type="struct" name="XVChartItem" memo="图表项">
+   	<object type="string" name="name" desc="项目名"/>
+    <object type="XVColor" name="color" desc="颜色"/>
+    <object type="XVProfile" name="itemdata" desc="数据"/>
+</object>
+
+<object type="struct" name="XVChart" memo="图表">
+  	<object type="string" name="chart_Name" desc="图标名"/>
+    <object type="string" name="x_Name" desc="X轴文本"/>
+    <object type="string" name="y_Name" desc="Y轴文本"/>
+    <object type="array" name="items" link="array" desc="图表项">
+		<object type="XVChartItem"/>
+	</object>
+</object>

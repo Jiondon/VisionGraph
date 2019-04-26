@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<object name="Array_int" type="array" link="array" desc="浮点数组">
+	<object type="int"/>
+</object>
+
+<object name="Array_float" type="array" link="array" desc="浮点数组">
+	<object type="float"/>
+</object>
+
+<object name="Array_XVPoint2D" type="array" link="array" desc="二维点浮点数组">
+	<object type="XVPoint2D"/>
+</object>
+
+<object type="struct" name="XVArray_XVInt" desc="整形数组">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="整形值">
+		<object type="int"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArray_XVFloat" desc="浮点数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="浮点值">
+		<object type="float"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArray_XVPoint2D" desc="二维点浮点数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="二维点值">
+		<object type="XVPoint2D"/>
+	</object>
+</object>

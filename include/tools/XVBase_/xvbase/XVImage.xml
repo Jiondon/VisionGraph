@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="enum" name="XVPlainType" desc="格式类型">
+	<object desc="Int8" type="int" name="0"/>
+	<object desc="UInt8" type="int" name="1" value="1"/>
+	<object desc="Int16" type="int" name="2"/>
+	<object desc="UInt16" type="int" name="3"/>
+	<object desc="Int32" type="int" name="4"/>
+	<object desc="Real" type="int" name="5"/>
+</object>
+
+<object type="struct" name="XVImage" desc="图像">
+	<object type="int" name="width" desc="图像宽度" canlink="false" provisible="false"/>
+	<object type="int" name="height" desc="图像高度" canlink="false" provisible="false"/>
+	<object type="XVPlainType" name="type" desc="通道类别" canlink="false" provisible="false"/>
+	<object type="int" name="depth" desc="通道数目" canlink="false" provisible="false"/>
+	<object type="string" name="data" desc="图像数据" canlink="false" provisible="false"/>
+</object>
+
+<object type="struct" name="XVImageFormat" desc="图像格式">
+	<object type="int" name="width" desc="图像宽度" />
+	<object type="int" name="height" desc="图像高度" />
+	<object type="XVPlainType" name="type" desc="通道类别" />
+	<object type="int" name="depth" desc="通道数目" />
+	<object type="int" name="pitchAlignment" desc="格式对齐" />
+</object>
+
+<object type="struct" name="XVExtremum2D" desc="XVExtremum2D">
+    <object type="XVPoint2D" name="point" desc="点" />
+    <object type="float" name="value" desc="值" />
+    <object type="XVPolarityType" name="polarity" desc="极性" />
+</object>
+
+<object type="struct" name="XVImageLocalExtremaVerification" desc="XVImageLocalExtremaVerification">
+    <object type="XVOptionalType" name="optional" desc="有效型" value="{0;1}" protype="enum"/>
+    <object type="int" name="pointCount" value="8" desc="" />
+    <object type="float" name="radius" value="3.0" desc="" />
+    <object type="float" name="minDifference" value="0.0" desc="" />
+</object>

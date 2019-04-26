@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVObject2D" desc="二维模板对象">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVRectangle2D" name="match" desc="一个矩形框"/>
+    <object type="XVCoordinateSystem2D" name="alignment" desc="坐标系" memo="即定义一个局部的参考坐标系，在模板匹配中是模板之间的相互变换"/>
+    <object type="XVPoint2D" name="point" desc="位置" memo="目标在图像中的位置"/>
+    <object type="float" name="angle" desc="角度" memo="angle和scale跟alignment中的值相同"/>
+    <object type="float" name="scale" desc="比例"/>
+    <object type="float" name="score" desc="得分"/>
+</object>

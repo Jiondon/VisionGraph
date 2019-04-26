@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVAdjustmentMetricType" type="enum">
+	<object name="0" memo="PointDistance_LSE" type="int" value="1" desc="PointDistance_LSE"/>
+	<object name="1" memo="PointDistance_Median" type="int" desc="PointDistance_Median"/>
+	<object name="2" memo="SegmentDistance" type="int" desc="SegmentDistance"/>
+</object>

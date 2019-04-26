@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVShape2DType::Type" type="enum" desc="二维形状类型">
+	<object name="0" memo="Circle" type="int" desc="圆" value="1"/>
+	<object name="0" memo="Ellipse" type="int" desc="椭圆"/>
+	<object name="0" memo="Line" type="int" desc="线"/>
+	<object name="0" memo="Polygon" type="int" desc="多边形"/>
+	<object name="0" memo="Rect" type="int" desc="矩形"/>
+	<object name="0" memo="Ring" type="int" desc="环"/>
+	<object name="0" memo="PointArray" type="int" desc="点集"/>
+	<object name="0" memo="LineArray" type="int" desc="线集"/>
+	<object name="0" memo="BrokenLine" type="int" desc="折线"/>
+</object>
+
+<object type="struct" name="XVLine2D" desc="直线ax + by + c = 0">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="float" name="a" desc="a"/>
+	<object type="float" name="b" desc="b"/>
+	<object type="float" name="c" desc="c"/>
+</object>
+
+<object type="struct" name="XVSegment2D" desc="有向线段" memo="通过起点和终点来表示一条有向线段">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVPoint2D" name="point1" desc="起点"/>
+	<object type="XVPoint2D" name="point2" desc="终点"/>
+</object>
+
+<object type="struct" name="XVCircle2D" desc="圆">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVPoint2D" name="center" desc="中心"/>
+	<object type="float" name="radius" desc="半径"/>
+</object>
+
+<object type="struct" name="XVArc2D" desc="圆弧">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVPoint2D" name="center" desc="中心"/>
+	<object type="float" name="radius" desc="半径"/>
+	<object type="float" name="startAngle" desc="起始角度"/>
+	<object type="float" name="sweepAngle" desc="扫描角度"/>
+</object>
+
+<object type="struct" name="XVRectangle2D" desc="矩形" memo="矩形及其旋转角度">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVPoint2D" name="origin" desc="顶点" memo="顶点(左上点，不是中心)"/>
+	<object type="float" name="angle" desc="旋转角度" memo="（绕中心旋转角度）"/>
+	<object type="float" name="width" desc="宽度"/>
+	<object type="float" name="height" desc="高度"/>
+</object>
+
+<object type="struct" name="XVCoordinateSystem2D" desc="坐标系" memo="表示一个局部坐标系，包括参考点、旋转角度及缩放系数（一个匹配结果，用于对模板进行变换）">
+	<object type="XVOptionalType" name="optional" desc="是否有效"/>
+	<object type="XVPoint2D" name="origin" desc="中心点"/>
+	<object type="float" name="angle" desc="角度"/>
+	<object type="float" name="scale" desc="缩放"/>
+</object>
+
+<object type="struct" name="XVStringLabel" desc="字符串标签">
+    <object type="stringe" name="text" desc="文本"/>
+    <object type="XVPoint2De" name="position" desc="位置"/>
+</object>
+
+<object type="struct" name="XVGlobal" desc="所有图形总成" memo="所有的二维图形均可转换为此类型">
+	<object type="XVOptionalType" name="optional" desc="是否有效"/>
+	<object type="XVShape2DType::Type" name="shape2D" desc="是否有效"/>
+	<object type="array" name="arrayPoint2D" link="array" desc="像素值">
+		<object type="XVPoint2D"/>
+	</object>
+</object>

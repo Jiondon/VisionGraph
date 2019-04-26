@@ -38,20 +38,19 @@ Release:UI_DIR = ./tmp/release
 Release:OBJECTS_DIR = ./tmp/release
 
 Debug:DESTDIR= ../bin/debug
+#Debug:DESTDIR = C:\Users\Administrator\Desktop\debug121212\debug
 Release:DESTDIR = ../bin/release
 
-#LIBS += ./lib
-Debug:LIBS += ../bin/debug/XVCreateRegion.lib
-Debug:LIBS += ../bin/debug/XVCombineRegions.lib
+Debug:LIBS += ./lib/debug/XVRegionAnalysis.lib
 
-Release:LIBS += ../bin/release/XVCreateRegion.lib
-Release:LIBS += ../bin/release/XVCombineRegions.lib
+Release:LIBS += ./lib/release/XVRegionAnalysis.lib
+
+
 
 INCLUDEPATH += ./include/
 INCLUDEPATH += ./include/tools
-INCLUDEPATH += ./include/tools/XVBase.h
-INCLUDEPATH += ./include/tools/XVCreateRegion.h
-INCLUDEPATH += ./include/tools/XVCombineRegions.h
+INCLUDEPATH += ./include/tools/XVBase
+INCLUDEPATH += ./include/tools/XVRegionAnalysis
 
 
 SOURCES += src/visiongraph.cpp \
@@ -81,7 +80,8 @@ SOURCES += src/visiongraph.cpp \
     src/item/visionline.cpp \
     src/item/visioncoordinateitem.cpp \
     src/item/visioncircleitem.cpp \
-    src/item/visioncircleitemfitting.cpp
+    src/item/visioncircleitemfitting.cpp \
+    src/item/visiontextitem.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
@@ -111,7 +111,8 @@ HEADERS += src/visiongraph.h \
     src/item/visionline.h \
     src/item/visioncoordinateitem.h \
     src/item/visioncircleitem.h \
-    src/item/visioncircleitemfitting.h
+    src/item/visioncircleitemfitting.h \
+    src/item/visiontextitem.h
 
 unix {
     target.path = /usr/lib

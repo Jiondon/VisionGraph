@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<object type="struct" name="XVSegmentScanField" memo="与XVSegmentFittingField取扫描线的方式不同">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVSegment2D" name="axis" desc=""/>
+	<object type="float" name="width" value="20.0" desc="宽度"/>
+</object>
+
+<object type="struct" name="XVCircleFittingField" desc="圆环域">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVCircle2D" name="axis" desc="扫描中心轴"/>
+	<object type="float" name="width" value="20.0" desc="扫描宽度"/>
+</object>
+
+<object type="struct" name="XVArcFittingField" desc="圆弧域">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVArc2D" name="axis" desc="扫描中心轴"/>
+	<object type="float" name="width" value="20.0" desc="扫描宽度"/>
+</object>
+
+<object type="struct" name="XVSegmentFittingField">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVSegment2D" name="axis" desc=""/>
+	<object type="float" name="width" value="20.0" desc="宽度"/>
+</object>
+
+<object type="struct" name="XVPathFittingField">
+	<object type="XVOptionalType" name="optional" value="0" desc="有效型"/>
+	<object type="XVPath" name="axis" desc=""/>
+	<object type="float" name="width" value="20.0" desc="宽度"/>
+</object>

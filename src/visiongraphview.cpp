@@ -4,6 +4,8 @@
 #include "visiongraphscene.h"
 #include "./control/color.h"
 
+#include <QTime>
+
 #define Pi 3.1415926
 
 VisionGraphView::VisionGraphView(QWidget *parent):
@@ -72,7 +74,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
         qDebug()<<this->scene()->sceneRect();
-        this->scene()->update();
+//        this->scene()->update();
         return;
     }
 
@@ -236,7 +238,7 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
     for(int i=0;i<m_vecLines.size();i++){
-        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
+//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
     }
@@ -486,6 +488,9 @@ void VisionGraphView::itemCursorToViewCursor()
 void VisionGraphView::initRegion(XVRegion region)
 {
     m_region = region;
+    push_region(m_region);
+    analysis_region(m_region);
+    this->scene()->update();
 }
 
 void VisionGraphView::addRegion(XVRegionPair regionPair)
@@ -575,6 +580,7 @@ void VisionGraphView::setCoordinateVisible(bool bVisible)
 
 void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
 {
+    return;
     if(g_graphType != GraphType::graphRegion)
         return;
     //编辑的控件在未确定之前，不调用算法生成点集合，临时绘制    item版本中作废
@@ -590,7 +596,7 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
         qDebug()<<"create region";
         //编辑完成，获取已经确定的区域的点集合，同时将对应的临时path清空
         rf =  QRectF((rf.topLeft()),(rf.bottomRight()));
-        XVCreateRegionOut regionOut;
+//        XVCreateRegionOut regionOut;
         if(type == ItemType::Paint_Rect){
 
 
@@ -619,8 +625,8 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
         if(item != NULL){
             item->hide();item->deleteLater();item = NULL;
         }
+        this->scene()->update();
     }
-    this->scene()->update();
     return m_region;
 }
 
@@ -653,17 +659,24 @@ XVRegion VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, I
 
 XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2, XVCombineRegionsType combineType)
 {
-    XVCombineRegionsIn xvCombineRegionsIn;
-    xvCombineRegionsIn.inCombineRegionsType = combineType;
-    xvCombineRegionsIn.inRegion1 = region1;
-    xvCombineRegionsIn.inRegion2 = region2;
+    QTime time;
+   time.start(); //开始计时，以ms为单位
 
-    XVCombineRegionsOut xvCombineRegionsOut;
+    TwoRegionIn unionIn;
+    unionIn.inRegion1 = region1;
+    unionIn.inRegion2 = region2;
+    unionIn.inRegion1.optional = ENABLE;
+    unionIn.inRegion2.optional = ENABLE;
 
-
-    XVCombineRegions(xvCombineRegionsIn,xvCombineRegionsOut);
-
-    return xvCombineRegionsOut.RegionOut;
+    RegionOut unionOut;
+    if(combineType == XVCombineRegionsType::Union){
+        XVRegionUnion(unionIn,unionOut);
+    }else if(combineType == XVCombineRegionsType::Difference){
+        XVRegionDifference(unionIn,unionOut);
+    }
+    int time_Diff = time.elapsed(); //返回从上次start()或restart()开始以来的时间差，单位ms
+    qDebug()<<" Time : "<<time_Diff;
+    return unionOut.outRegion;
 
 }
 
@@ -688,7 +701,9 @@ QVector<QLineF> VisionGraphView::analysis_region(XVRegion region)
 
 XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
 {
-    XVCreateRegionOut regionOut;
+    XVCreatePolygonRegionOut regionOut;
+//    XVCreateRegionOut regionOut;
+    XVCreatePolygonRegionIn regionIn;
 
     XVPath xvPath;
     vector<XVPoint2D> vec_point2D;
@@ -702,16 +717,16 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     xvPath.arrayPoint2D = vec_point2D;
     xvPath.closed = true;
 
-    regionIn.inType = XVCreateRegionType::Polygon;
     regionIn.inFrameWidth = m_frameRect.width();
     regionIn.inFrameHeight = m_frameRect.height();
-    regionIn.inPath = xvPath;
+    regionIn.inPolygon = xvPath;
+    regionIn.inPolygon.optional = ENABLE;
 
-    XVCreateRegion(regionIn,regionOut);
+    XVCreatePolygonRegion(regionIn,regionOut);
 
     XVRegion region;
 
-    region = regionOut.outregion;
+    region = regionOut.outRegion;
 
     return region;
 }
@@ -720,9 +735,15 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
 XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 {
     rf =  QRectF((rf.topLeft()),(rf.bottomRight()));
-    XVCreateRegionOut regionOut;
+
+    XVRegion region;
+
 
     if(rf.width() == rf.height()){
+        XVCreateCircleRegionOut regionOut;
+
+        XVCreateCircleRegionIn regionIn;
+
         XVCircle2D xvCircle;
         XVPoint2D centerPointF;
         centerPointF.x = (float)(rf.x()+rf.width()/2);
@@ -732,20 +753,20 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 
 
         //没有圆
-        regionIn.inType = XVCreateRegionType::Circle;
         regionIn.inFrameWidth = m_frameRect.width();
         regionIn.inFrameHeight = m_frameRect.height();
-        regionIn.inCircle2D = xvCircle;
+        regionIn.inCircle = xvCircle;
+        regionIn.inCircle.optional = ENABLE;
+        regionIn.inCircle.center.optional = ENABLE;
+        XVCreateCircleRegion(regionIn,regionOut);
+        region = regionOut.outRegion;
 
-        XVRectangle2D xvBox;
-        XVPoint2D left;
-        left.x = (float)leftTop.x();
-        left.y = (float)leftTop.y();
-        xvBox.origin = left;
-        xvBox.width = (float)rf.width();
-        xvBox.height = (float)rf.height();
-        regionIn.inRectangle2D = xvBox;
     }else{
+
+        XVCreateEllipseRegionOut regionOut;
+
+        XVCreateEllipseRegionIn regionIn;
+
         XVRectangle2D xvRect;
         XVPoint2D leftPoint;
         leftPoint.x = (float)leftTop.x();
@@ -755,32 +776,24 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         xvRect.height = (float)rf.height();
         xvRect.width = (float)rf.width();
 
-        regionIn.inType = XVCreateRegionType::Ellipse;
         regionIn.inFrameWidth = m_frameRect.width();
         regionIn.inFrameHeight = m_frameRect.height();
-        regionIn.inRectangle2D =xvRect;
+        regionIn.inEllipse =xvRect;
+        regionIn.inEllipse.optional = ENABLE;
+        XVCreateEllipseRegion(regionIn,regionOut);
+        region = regionOut.outRegion;
 
-        XVRectangle2D xvBox;
-        xvBox.origin = leftPoint;
-        xvBox.width = (float)rf.width();
-        xvBox.height = (float)rf.height();
-        regionIn.inRectangle2D = xvBox;
     }
-
-
-    XVCreateRegion(regionIn,regionOut);
-
-    XVRegion region;
-
-    region = regionOut.outregion;
-
     return region;
 }
 
 XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle)
 {
+    QTime time;
+    time.start();
     rf =  QRectF((rf.topLeft()),(rf.bottomRight()));
-    XVCreateRegionOut regionOut;
+    XVCreateRectangleRegionOut regionOut;
+    XVCreateRectangleRegionIn  regionIn;
 
     XVRectangle2D xvRect;
     XVPoint2D leftPoint;
@@ -791,22 +804,17 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
     xvRect.height = (float)rf.height();
     xvRect.width = (float)rf.width();
 
-    regionIn.inType = XVCreateRegionType::Rectangle;
     regionIn.inFrameWidth = m_frameRect.width();
     regionIn.inFrameHeight = m_frameRect.height();
-    regionIn.inRectangle2D =xvRect;
-
-    XVRectangle2D xvBox;
-    xvBox.origin = leftPoint;
-    xvBox.width = (float)rf.width();
-    xvBox.height = (float)rf.height();
-    regionIn.inRectangle2D = xvBox;
+    regionIn.inRectangle =xvRect;
+    regionIn.inRectangle.optional = ENABLE;
+    XVCreateRectangleRegion(regionIn,regionOut);
 
 
-    XVCreateRegion(regionIn,regionOut);
+    XVRegion region = regionOut.outRegion;
 
-    XVRegion region = regionOut.outregion;
-
+    int iDiff = time.elapsed();
+    qDebug()<<"create rect time :"<<iDiff;
     return region;
 
 }

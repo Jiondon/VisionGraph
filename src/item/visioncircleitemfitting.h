@@ -77,24 +77,24 @@ public:
      */
     QVector<QPointF> getPoints();
 
-    VGRectangle2D getData(){
+    VGCircleFittingField getData(){
+        VGCircleFittingField vgCircleFitting;
 
-        //此处的椭圆数据是和矩形框数据是一样的，需要对此进行甄别，未体现的vgBase文件中
-        VGRectangle2D vgRect2D;
-        vgRect2D.optional = VG_ENABLE;
+        VGCircle2D vgCircle2D;
+        vgCircle2D.optional = VG_ENABLE;
 
         VGPoint2D vgPoint;
         vgPoint.optional = VG_ENABLE;
-        vgPoint.x = m_x;
-        vgPoint.y = m_y;
-        vgRect2D.origin = vgPoint;   //左上角顶点坐标
+        vgPoint.x = m_x+m_width/2;
+        vgPoint.y = m_y+m_width/2;
+        vgCircle2D.center = vgPoint;   //
 
-        vgRect2D.width = m_width;
-        vgRect2D.height = m_height;
+        vgCircle2D.radius = m_width/2;
 
-        vgRect2D.angle = 0;
+        vgCircleFitting.axis = vgCircle2D;
+        vgCircleFitting.width = m_length;
 
-        return vgRect2D;
+        return vgCircleFitting;
     }
 
 signals:

@@ -373,3 +373,15 @@ VisionItem *VisionGraph::getCurData()
 {
     return m_graphWidget->getCurData();
 }
+
+void VisionGraph::setGraphStyleSheet(QString strStyleSheet)
+{
+    this->setStyleSheet(strStyleSheet);
+    m_graphWidget->setStyleSheet(strStyleSheet);
+}
+
+void VisionGraph::wheelEvent(QWheelEvent *event)
+{
+    event->accept();
+    return;
+}

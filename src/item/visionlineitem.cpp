@@ -161,8 +161,6 @@ void VisionLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }else{
         qDebug()<<"out area";
         setSelectedStatus(false);
-        this->scene()->update();
-        return;
     }
     this->scene()->update();
 }

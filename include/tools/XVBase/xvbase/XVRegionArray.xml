@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVArray_XVRegion" desc="区域数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVRegion"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArrayArray_XVRegion" desc="区域数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVArray_XVRegion"/>
+	</object>
+</object>

@@ -430,7 +430,7 @@ private:
 
     QList<QPointF> m_lstPainterPointF;  //绘制算法提供的直线的点的集合（两两配对）
 
-    XVCreateRegionIn regionIn;
+//    XVCreateRegionIn regionIn;
 
 
     QGraphicsPixmapItem *m_bkPixmapItem = nullptr;  //背景图片

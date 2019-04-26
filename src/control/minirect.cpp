@@ -38,7 +38,10 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
-    setTransformOriginPoint((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale));  //设置旋转的原点为中心点
+
+    if(this->transformOriginPoint() != QPointF((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale))){
+        setTransformOriginPoint((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale));  //设置旋转的原点为中心点
+    }
 
     painter->setPen(QPen(m_selectedColor,1*(1/g_scale)));
     if(m_bBrushEnable){

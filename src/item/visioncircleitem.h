@@ -84,8 +84,8 @@ public:
 
         VGPoint2D vgPoint;
         vgPoint.optional = VG_ENABLE;
-        vgPoint.x = m_x;
-        vgPoint.y = m_y;
+        vgPoint.x = m_x+m_width/2;
+        vgPoint.y = m_y+m_width/2;
         vgCircle2D.center = vgPoint;   //
 
         vgCircle2D.radius = m_width/2;

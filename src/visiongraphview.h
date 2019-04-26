@@ -24,7 +24,7 @@
 #include "visiongraph_global.h"
 #include "./control/color.h"
 
-using namespace XVCreateR;
+//using namespace XVCreateR;
 enum Corner{
     topLeft,
     topRight,
@@ -42,6 +42,11 @@ enum ViewModel{
 struct XVRegionPair {
     XVRegion region;
     int value;
+};
+
+enum XVCombineRegionsType{
+    Union,
+    Difference
 };
 
 class VISIONGRAPHSHARED_EXPORT VisionGraphView : public QGraphicsView
@@ -134,6 +139,9 @@ public:
      * @param       XVRegion
      */
     XVRegion* getRegion(){
+        if(!m_region.optional){
+            return NULL;
+        }
         return &m_region;
     }
 
@@ -292,7 +300,23 @@ private:
     ItemType m_itemType = ItemType::Paint_Point;  //绘制的控件类型
 
 
-    XVCreateRegionIn regionIn;
+//    XVCreateRegionIn regionIn;
+    XVCreateRegionOfInterestRegionIn  createRegionOfInterestRegionIn;
+    XVCreateBoxRegionIn               createBoxRegionIn             ;
+    XVCreateBoxBorderRegionIn         createBoxBorderRegionIn       ;
+    XVCreateEllipseRegionIn           createEllipseRegionIn         ;
+    XVCreateRingRegionIn              createRingRegionIn            ;
+    XVCreateCrossRegionIn             createCrossRegionIn           ;
+    XVCreateGridRegionIn              createGridRegionIn            ;
+    XVCreateCircleRegionIn            createCircleRegionIn          ;
+    XVCreatePolygonRegionIn           createPolygonRegionIn         ;
+    XVCreatePathBorderRegionIn        createPathBorderRegionIn      ;
+    XVCreateRectangleRegionIn         createRectangleRegionIn       ;
+    XVCreateRectangleBorderRegionIn   createRectangleBorderRegionIn ;
+    XVCreateSegmentRegionIn           createSegmentRegionIn         ;
+    XVCreateLineRegionIn              createLineRegionIn            ;
+
+
     QVector<QLineF> m_vecLines;
     XVRegion  m_region;  //记录绘制的区域  每一次新操作生成的区域，将和该区域进行并集或者差集运算
     QList<XVRegionPair> m_lstRegion;  //记录区域链表（多个区域）

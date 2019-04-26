@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVPath" desc="路径或者链条">
+	<object type="XVOptionalType" name="optional" desc="有效型" value="{0;1}" protype="enum"/>
+	<object type="array" name="arrayPoint2D" link="array" desc="行程组">
+		<object type="XVPoint2D"/>
+	</object>
+	<object type="bool" name="closed" desc="关闭"/>
+</object>

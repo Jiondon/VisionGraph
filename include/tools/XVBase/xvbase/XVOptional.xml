@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="enum" name="XVOptionalType">
+	<object type="int" name="0" value="1" memo="NUL" desc="无效"/>
+	<object type="int" name="1" memo="ENABLE" desc="有效"/>
+</object>

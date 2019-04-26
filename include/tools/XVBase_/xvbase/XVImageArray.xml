@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object type="struct" name="XVArray_XVImage" desc="图像数组">
+	<object type="XVOptionalType" name="optional" desc="有效型" value="{0;1}" protype="enum"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVImage"/>
+	</object>
+</object>

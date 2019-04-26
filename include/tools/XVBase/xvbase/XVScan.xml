@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<object name="XVMatchNumber" type="enum" desc="执行个数">
+	<object name="0" memo="Single" type="int" value="1" desc="单个"/>
+	<object name="1" memo="Multiple" type="int" desc="多个"/>
+	<object name="2" memo="ExactlyN" type="int" desc="指定N个"/>
+</object>
+
+<object type="enum" name="XVEdgeTransitionType" desc="边缘跳变类型"><!--枚举型 value值记录选中了哪个值-->
+	<object name="0" memo="BrightToDark" desc="由白到黑"/>
+	<object name="1" memo="DarkToBright" value="1" desc="由黑到白"/>
+	<object name="2" memo="Any" desc="任意"/>
+</object>
+
+<object name="XVProfileInterpolationMethod" type="enum">
+	<object name="0" memo="Linear" type="int" desc="线性"/>
+	<object name="1" memo="Quadratic3" type="int" desc="三次"/>
+	<object name="2" memo="Quadratic4" type="int" value="1" desc="四次"/>
+</object>
+
+<object name="XVRidgeOperatorType" type="enum">
+	<object name="0" memo="Minimum" type="int" value="1" desc="最小值"/>
+	<object name="1" memo="GeometricMean" type="int" desc="几何平均数"/>
+	<object name="2" memo="ArithmeticMean" type="int" desc="算数平均数"/>
+	<object name="3" memo="HarmonicMean" type="int" desc="调和平均数"/>
+</object>
+
+<object type="struct" name="XVEdge1D" desc="边缘点">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="XVPoint2D" name="point" desc="坐标"/>
+	<object type="float" name="magnitude" desc="梯度幅值"/>
+	<object type="XVEdgeTransitionType" name="transition" desc="方向" value="{1;;}"/>
+</object>
+
+<object type="struct" name="XVRidge1D" desc="脊点" memo="表示一维边缘检测函数找到的脊线">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="XVPoint2D" name="point" desc=""/>
+	<object type="float" name="magnitude" desc=""/>
+	<object type="XVPolarityType" name="polarity" desc="极性类型"/>
+</object>
+
+<object type="struct" name="XVStripe1D" desc="条纹" memo="表示一维边缘检测函数找到的条纹">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="XVPoint2D" name="point1" desc=""/>
+	<object type="XVPoint2D" name="point2" desc=""/>
+	<object type="float" name="width" desc=""/>
+	<object type="float" name="magnitude" desc=""/>
+	<object type="XVPolarityType" name="polarity" desc="极性类型"/>
+</object>
+
+<object type="struct" name="XVGap1D" desc="边缘点之间的距离">
+	<object type="XVPoint2D" name="point1" desc="点1"/>
+	<object type="XVPoint2D" name="point2" desc="点2"/>
+	<object type="float" name="width" desc="宽度"/>
+</object>
+
+<object name="XVEdgeScanParams" type="struct">
+	<object name="profileInterpolation" type="XVProfileInterpolationMethod" value="0" desc="插值方法"/>
+	<object name="smoothingStdDev" type="float" desc="滤波参数" value="0.6"/>
+	<object name="minMagnitude" type="float" desc="梯度阈值" value="5.0"/>
+	<object name="edgeTransition" type="XVEdgeTransitionType" value="2" desc="边缘类型"/>
+</object>
+
+<object name="XVRidgeScanParams" type="struct">
+	<object name="profileInterpolation" type="XVProfileInterpolationMethod" value="0" desc="插值方法"/>
+	<object name="smoothingStdDev" type="float" desc="滤波参数"/>
+	<object name="ridgeWidth" type="int" value="5" desc="峰的像素宽度"/>
+	<object name="ridgeMargin" type="int" value="2" desc="峰两侧采样像素宽度"/>
+	<object name="ridgeOperator" type="XVRidgeOperatorType" desc="峰左侧和右侧亮度的计算方式"/>
+	<object name="minMagnitude" type="float" desc="梯度阈值"/>
+	<object name="ridgePolarity" type="XVPolarityType" desc="极性类型"/>
+</object>
+
+<object name="XVStripeScanParams" type="struct">
+	<object name="profileInterpolation" type="XVProfileInterpolationMethod" value="0" desc="插值方法"/>
+	<object name="smoothingStdDev" type="float" desc="滤波参数"/>
+	<object name="minMagnitude" type="float" desc="梯度阈值"/>
+	<object name="maxInnerEdgeMagnitude" type="float" desc="条纹两端出现的边缘的最大强度" help="条内部最大梯度不超过该值 默认值0时该参数不起作用！！！！"/>
+	<object name="stripePolarity" type="XVPolarityType" desc="极性类型"/>
+	<object name="minStripeWidth" type="float" desc="最小带宽"/>
+</object>
+
+<object name="XVLocalBlindness" type="struct" memo="这个参数是弱边缘点与强边缘点之间的位置关系">
+	<object name="optional" type="XVOptionalType" value="NUL" desc="有效性"/>
+	<object name="radius" type="XVFloat" desc="半径" value="NUL"/>
+	<object name="threshold" type="float" desc="阈值" value="0.5f"/>
+	<object name="fuzziness" type="float" value="0.0f" desc="颜色容差"/>
+</object>
+
+<object type="struct" name="XVArray_XVEdge1D" desc="边缘点数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVEdge1D"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArray_XVRidge1D" desc="脊数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVRidge1D"/>
+	</object>
+</object>
+
+<object type="struct" name="XVArray_XVStripe1D" desc="条纹数组">
+	<object type="XVOptionalType" name="optional" desc="有效型"/>
+	<object type="array" name="array" link="array" desc="">
+		<object type="XVStripe1D"/>
+	</object>
+</object>
