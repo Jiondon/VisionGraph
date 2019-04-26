@@ -14,16 +14,16 @@ enum Type
 //行程
 struct XVPointRun
 {
-    int    x;
-    int    y;  // PointRun begin location 起始点的x,y像素位置
-    int    length;//行程
+    int    x        = 0;
+    int    y        = 0;  // PointRun begin location 起始点的x,y像素位置
+    int    length   = 0;  //行程
 };
 
 struct XVRegion
 {
     XVOptionalType      optional = NUL; //ROI是否起作用
-    int                 frameWidth;
-    int                 frameHeight;
+    int                 frameWidth  = 0;
+    int                 frameHeight = 0;
     vector<XVPointRun>  arrayPointRun;
 };
 

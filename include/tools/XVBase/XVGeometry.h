@@ -23,9 +23,9 @@ enum Type
 struct XVLine2D
 {
     XVOptionalType optional = NUL;
-    float a;
-    float b;
-    float c;
+    float a = 0.0f;
+    float b = 0.0f;
+    float c = 0.0f;
 };
 
 //通过起点和终点来表示一条有向线段
@@ -41,7 +41,7 @@ struct XVCircle2D
 {
     XVOptionalType  optional = NUL;
     XVPoint2D       center;     //中心
-    float           radius;     //半径
+    float           radius = 0.0f;     //半径
 };
 
 
@@ -50,9 +50,9 @@ struct XVArc2D
 {
     XVOptionalType  optional = NUL;
     XVPoint2D   center;     //中心
-    float       radius;     //半径
-    float       startAngle; //起始角度
-    float       sweepAngle; //扫描角度
+    float       radius      = 0.0f; //半径
+    float       startAngle  = 0.0f; //起始角度
+    float       sweepAngle  = 0.0f; //扫描角度
 };
 
 
@@ -60,10 +60,10 @@ struct XVArc2D
 struct XVRectangle2D
 {
     XVOptionalType optional = NUL;
-    XVPoint2D   origin; //顶点(左上点，不是中心)
-    float       angle;  //旋转角度（绕中心旋转角度）
-    float       width;  //宽度
-    float       height; //高度
+    XVPoint2D   origin  = XVPoint2D();  //顶点(左上点，不是中心)
+    float       angle   = 0; //旋转角度（绕中心旋转角度）
+    float       width   = 0; //宽度
+    float       height  = 0; //高度
 };
 
 
@@ -72,15 +72,15 @@ struct XVCoordinateSystem2D
 {
     XVOptionalType  optional = NUL;
     XVPoint2D       origin;
-    float           angle;
-    float           scale;
+    float           angle = 0.0f;
+    float           scale = 1.0f;
 };
 
 struct XVVector2D
 {
     XVOptionalType  optional = NUL;
-    float           deltaX  ;
-    float           deltaY  ;
+    float           deltaX = 0.0f;
+    float           deltaY = 0.0f;
 };
 
 //文本

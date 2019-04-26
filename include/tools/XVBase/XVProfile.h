@@ -30,9 +30,9 @@ static void CopyXVProfile(const XVProfile& src, XVProfile& dest){
 //颜色
 struct XVColor
 {
-    int red;            //红
-    int green;          //绿
-    int blue;           //蓝
+    int red   = 0;      //红
+    int green = 0;      //绿
+    int blue  = 0;      //蓝
     int alpha = 255;    //色彩空间
 };
 

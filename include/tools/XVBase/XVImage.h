@@ -44,9 +44,9 @@ struct XVImageFormat
 struct XVExtremum2D
 {
     XVOptionalType  optional = NUL;
-    XVPoint2D       point;
-    float           value;
-    XVPolarityType  polarity;
+    XVPoint2D       point    ;
+    float           value    = 0.0f;
+    XVPolarityType  polarity = XVPolarityType::ANY;
 };
 
 struct XVImageLocalExtremaVerification

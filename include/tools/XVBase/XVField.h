@@ -17,8 +17,8 @@ struct XVSegmentScanField //与XVSegmentFittingField取扫描线的方式不同
 struct XVCircleFittingField             //圆环域
 {
     XVOptionalType  optional = NUL;
-    XVCircle2D      axis     ;        //扫描中心轴
-    float           width    = 20.0f; //扫描宽度
+    XVCircle2D      axis     ;          //扫描中心轴
+    float           width    = 20.0f;   //扫描宽度
 };
 
 struct XVArcFittingField                //圆弧域

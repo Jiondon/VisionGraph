@@ -2059,8 +2059,8 @@ void VisionGraph_::init_graphRegion()
     tool_Widget->clear();
     tool_Widget->show();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
     m_lstAction.append(tool_Widget->addWidget(sys_front_button));
     m_lstAction.append(tool_Widget->addWidget(sys_next_button));
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
@@ -2068,7 +2068,7 @@ void VisionGraph_::init_graphRegion()
 
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
@@ -2097,14 +2097,14 @@ void VisionGraph_::init_graphItem_self()
     tool_Widget->clear();
     tool_Widget->show();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
     tool_Widget->addSeparator();
 
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
@@ -2117,15 +2117,15 @@ void VisionGraph_::init_graphItem_unSelf()
     tool_Widget->clear();
     tool_Widget->show();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
     m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
     tool_Widget->addSeparator();
 
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
@@ -2148,15 +2148,15 @@ void VisionGraph_::init_graphChain()
     tool_Widget->clear();
     tool_Widget->show();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
     m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
     tool_Widget->addSeparator();
 
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
@@ -2176,15 +2176,15 @@ void VisionGraph_::init_graphFitting()
     tool_Widget->clear();
     tool_Widget->show();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_open_project_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_save_button));
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
     m_lstAction.append(tool_Widget->addWidget(sys_remove_item_button));
     tool_Widget->addSeparator();
 
     m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 
@@ -2207,9 +2207,9 @@ void VisionGraph_::init_graph_Item(GraphType type)
     m_lstAction.append(tool_Widget->addWidget(sys_clear_button));
     tool_Widget->addSeparator();
 
-    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_selected_button));
     m_lstAction.append(tool_Widget->addWidget(sys_drag_button));
-    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
+//    m_lstAction.append(tool_Widget->addWidget(sys_zoom_button));
     m_lstAction.append(tool_Widget->addWidget(sys_fit_button));
     m_insertAction = tool_Widget->addSeparator();
 

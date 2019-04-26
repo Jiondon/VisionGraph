@@ -12,7 +12,7 @@ enum XVRotationDirectionType
 struct XVRotationDirection
 {
     XVOptionalType          optional = NUL;
-    XVRotationDirectionType type;
+    XVRotationDirectionType type = XVRotationDirectionType::Clockwise;
 };
 
 #endif // XVROTATIONDIRECTION_H

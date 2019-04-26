@@ -44,9 +44,10 @@ void VisionArcItem::setArc(QPointF center, qreal r, qreal angle, qreal spanAngle
     m_angle = angle;
     m_spanAngle = spanAngle;
 
-    m_p1 = center+QPointF(cos((angle/180)*Pi)*r,sin((angle/180)*Pi)*r);
-    m_p2 = center+QPointF(cos(((angle+spanAngle/2)/180)*Pi)*r,sin(((angle+spanAngle/2)/180)*Pi)*r);
-    m_p3 = center+QPointF(cos(((angle+spanAngle)/180)*Pi)*r,sin(((angle+spanAngle)/180)*Pi)*r);
+    //实际的角度和本身绘制的角度是相反的
+    m_p1 = center+QPointF(cos(-(angle/180)*Pi)*r,sin(-(angle/180)*Pi)*r);
+    m_p2 = center+QPointF(cos(-((angle+spanAngle/2)/180)*Pi)*r,sin(-((angle+spanAngle/2)/180)*Pi)*r);
+    m_p3 = center+QPointF(cos(-((angle+spanAngle)/180)*Pi)*r,sin(-((angle+spanAngle)/180)*Pi)*r);
 
     qDebug()<<m_p1<<m_p2<<m_p3;
     m_x = m_center.x() - m_r;

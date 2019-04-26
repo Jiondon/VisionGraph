@@ -147,10 +147,14 @@ void VisionGraphView::mouseReleaseEvent(QMouseEvent *event)
             push_region(m_region);
             analysis_region(m_region);
 
+            m_bPress = false;  //绘制结束
+            setItemType(ItemType::No);
+
             QPainterPath path;
             m_path = path;
             m_vecPoint_Region.clear();
             this->scene()->update();
+
         }
     }
     m_lstPoint.clear();

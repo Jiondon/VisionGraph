@@ -6,26 +6,26 @@
 struct XVInt
 {
     XVOptionalType  optional = NUL;
-    int             value;
+    int             value = 0;
 };
 
 struct XVFloat
 {
     XVOptionalType  optional = NUL;
-    float           value;
+    float           value = 0.0f;
 };
 
 struct XVBool
 {
     XVOptionalType  optional = NUL;
-    bool            value;
+    bool            value = false;
 };
 
 struct XVPoint2D
 {
     XVOptionalType optional = NUL;
-    float x;
-    float y;
+    float x = 0.0f;
+    float y = 0.0f;
 };
 
 

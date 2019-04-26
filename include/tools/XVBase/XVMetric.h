@@ -14,7 +14,7 @@ enum XVMetricType   // Two-point distance calculation method
 struct XVMetric
 {
     XVOptionalType      optional = NUL;
-    XVMetricType        type;
+    XVMetricType        type = XVMetricType::Maximum;
 };
 
 #endif // XVMETRIC_H

@@ -10,7 +10,7 @@ QColor viewMouseInfo_TextColor = QColor(255,255,255);
 QColor viewMouseInfo_BackgroundColor = QColor(255,255,255);
 
 
-QString iconPath = "./icon/";
+QString iconPath = "./ico/graph/";
 
 QCursor viewCursor;
 
