@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QFileDialog>
 
+#include "visiongraph.h"
 VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : QFrame(parent)
 {
     mainLayout = new QVBoxLayout;
@@ -26,9 +27,9 @@ VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect,
 
 void VisionGraph_::setGraphType(GraphType type)
 {
-    g_graphType = type;
     m_graphType = type;
     slot_GraphTypeChanged(type);
+    view->setGraphType(type);
 }
 
 void VisionGraph_::setSceneWidgetSize(QSize size)
@@ -43,6 +44,7 @@ void VisionGraph_::setSceneWidgetSize(qreal w, qreal h)
 
 void VisionGraph_::setThemeColor(ThemeColor theme)
 {
+    QColor selectedColor,borderColor,brushColor;
     if(theme == ThemeColor::dark){
         selectedColor = QColor(255,0,0);
         borderColor = QColor(255,0,0);
@@ -59,6 +61,20 @@ void VisionGraph_::setThemeColor(ThemeColor theme)
         brushColor = QColor(255,0,0,160);
 //        regionColor = QColor(255,0,0);
     }
+
+    setRectColor(borderColor,selectedColor,brushColor);
+    setEllipseColor(borderColor,selectedColor,brushColor);
+    setCircleColor(borderColor,selectedColor,brushColor);
+    setPolyColor(borderColor,selectedColor,brushColor);
+    setPolyLineColor(borderColor,selectedColor,brushColor);
+    setArcColor(borderColor,selectedColor,brushColor);
+    setPointColor(borderColor,selectedColor,brushColor);
+    setLineColor(borderColor,selectedColor,brushColor);
+
+    setRegionColor(borderColor,selectedColor,brushColor);
+
+    setListRegionColor(borderColor,selectedColor,brushColor);
+
 }
 
 
@@ -533,6 +549,74 @@ VisionItem *VisionGraph_::getCurData()
     return m_curVisionItem;
 }
 
+void VisionGraph_::setRectColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Rect = borderColor;
+    selectedColor_Rect = selectColor;
+    brushColor_Rect = brushColor;
+}
+
+void VisionGraph_::setEllipseColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Ellipse = borderColor;
+    selectedColor_Ellipse = selectColor;
+    brushColor_Ellipse = brushColor;
+}
+
+void VisionGraph_::setCircleColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Circle = borderColor;
+    selectedColor_Circle = selectColor;
+    brushColor_Circle = brushColor;
+}
+
+void VisionGraph_::setPolyColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Poly = borderColor;
+    selectedColor_Poly = selectColor;
+    brushColor_Poly = brushColor;
+}
+
+void VisionGraph_::setPolyLineColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_PolyLine = borderColor;
+    selectedColor_PolyLine = selectColor;
+    brushColor_PolyLine = brushColor;
+}
+
+void VisionGraph_::setArcColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Arc = borderColor;
+    selectedColor_Arc = selectColor;
+    brushColor_Arc = brushColor;
+}
+
+void VisionGraph_::setPointColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Point = borderColor;
+    selectedColor_Point = selectColor;
+    brushColor_Point = brushColor;
+}
+
+void VisionGraph_::setLineColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Line = borderColor;
+    selectedColor_Line = selectColor;
+    brushColor_Line = brushColor;
+}
+
+void VisionGraph_::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    view->setRegionColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph_::setListRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    borderColor_Region = borderColor;
+    selectedColor_Region = selectColor;
+    brushColor_Region = brushColor;
+}
+
 QGraphicsRectItem *VisionGraph_::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
 {
     return scene->addRect(rect,pen,brush);
@@ -590,13 +674,13 @@ VisionCoordinateItem *VisionGraph_::_addCoordinate(QPointF p, qreal angle, qreal
     return item;
 }
 
-VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
+VisionRectItem *VisionGraph_::addRect(QRectF rf, qreal angle, bool bEdit, bool bRotation, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionRectItem* item = new VisionRectItem(bEdit,bRotation,color_enable,color);
+        VisionRectItem* item = new VisionRectItem(bEdit,bRotation,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -607,20 +691,20 @@ VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, boo
             m_curVisionItem = nullptr;
 
         });
-        item->setRect(rf);
+        item->setRect(rf,angle);
         scene->addItem(item);
         m_curVisionItem = item;
         m_lstItem.push_back(item);
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionRectItem* item = new VisionRectItem(bEdit,bRotation,color_enable,color);
+        VisionRectItem* item = new VisionRectItem(bEdit,bRotation,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
 
         });
-        item->setRect(rf);
+        item->setRect(rf,angle);
         scene->addItem(item);
         m_curVisionItem = item;
         m_lstItem.push_back(item);
@@ -630,30 +714,30 @@ VisionRectItem *VisionGraph_::addRect(QRectF rf, bool bEdit, bool bRotation, boo
     return NULL;
 }
 
-VisionArrow *VisionGraph_::addArrow(QPointF pointF, bool bEdit, bool color_enable, QColor color)
+VisionArrow *VisionGraph_::addArrow(QPointF pointF, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     //特殊的控件
-    VisionArrow* item = new VisionArrow(bEdit,color_enable,color);
+    VisionArrow* item = new VisionArrow(bEdit,color_enable,borderColor,selectedColor,brushColor);
     QObject::connect(item,&QObject::destroyed,[=](){
         m_lstItem.removeOne(item);
         m_curVisionItem = nullptr;
 
     });
     item->setPointF(pointF);
-    item->setColor(color);
+    item->setColor(borderColor);
     scene->addItem(item);
     m_curVisionItem = item;
     m_lstItem.push_back(item);
     return item;
 }
 
-VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
+VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, qreal angle, bool bEdit, bool bRotation, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionEllipseItem *item = new VisionEllipseItem(bEdit,bRotation,color_enable,color);
+        VisionEllipseItem *item = new VisionEllipseItem(bEdit,bRotation,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -664,20 +748,20 @@ VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, bool bEdit, bool bRotatio
             m_curVisionItem = nullptr;
 
         });
-        item->setRect(rf);
+        item->setRect(rf,angle);
         scene->addItem(item);
         m_curVisionItem = item;
         m_lstItem.push_back(item);
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionEllipseItem* item = new VisionEllipseItem(bEdit,bRotation,color_enable,color);
+        VisionEllipseItem* item = new VisionEllipseItem(bEdit,bRotation,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
 
         });
-        item->setRect(rf);
+        item->setRect(rf,angle);
         scene->addItem(item);
         m_curVisionItem = item;
         m_lstItem.push_back(item);
@@ -686,13 +770,13 @@ VisionEllipseItem *VisionGraph_::addEllipse(QRectF rf, bool bEdit, bool bRotatio
     }
 }
 
-VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, bool color_enable, QColor color)
+VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionCircleItem *item = new VisionCircleItem(bEdit,color_enable,color);
+        VisionCircleItem *item = new VisionCircleItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -710,7 +794,7 @@ VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, bool color_enab
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionCircleItem* item = new VisionCircleItem(bEdit,color_enable,color);
+        VisionCircleItem* item = new VisionCircleItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -726,13 +810,13 @@ VisionCircleItem *VisionGraph_::addCircle(QRectF rf, bool bEdit, bool color_enab
 }
 
 
-VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, bool color_enable, QColor color)
+VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,color);
+        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -750,7 +834,7 @@ VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEd
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,color);
+        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -765,13 +849,13 @@ VisionArcItem *VisionGraph_::addArc(QPointF sP, QPointF mP, QPointF fP, bool bEd
     }
 }
 
-VisionArcItem *VisionGraph_::addArc(QPointF center, qreal r, qreal angle, qreal spanAngle, bool bEdit, bool color_enable, QColor color)
+VisionArcItem *VisionGraph_::addArc(QPointF center, qreal r, qreal angle, qreal spanAngle, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,color);
+        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -789,7 +873,7 @@ VisionArcItem *VisionGraph_::addArc(QPointF center, qreal r, qreal angle, qreal 
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,color);
+        VisionArcItem *item = new VisionArcItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -804,13 +888,13 @@ VisionArcItem *VisionGraph_::addArc(QPointF center, qreal r, qreal angle, qreal 
     }
 }
 
-VisionLineItem *VisionGraph_::addLine(QLine line, bool bEdit, bool color_enable, QColor color)
+VisionLineItem *VisionGraph_::addLine(QLine line, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionLineItem *item = new VisionLineItem(bEdit,line.p1(),line.p2(),0,color_enable,color);
+        VisionLineItem *item = new VisionLineItem(bEdit,line.p1(),line.p2(),0,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -829,7 +913,7 @@ VisionLineItem *VisionGraph_::addLine(QLine line, bool bEdit, bool color_enable,
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionLineItem *item = new VisionLineItem(bEdit,line.p1(),line.p2(),0,color_enable,color);
+        VisionLineItem *item = new VisionLineItem(bEdit,line.p1(),line.p2(),0,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -843,10 +927,10 @@ VisionLineItem *VisionGraph_::addLine(QLine line, bool bEdit, bool color_enable,
     }
 }
 
-VisionLine *VisionGraph_::addLines(QList<QLineF> lstLineF, bool color_enable, QColor color)
+VisionLine *VisionGraph_::addLines(QList<QLineF> lstLineF, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     //特殊控件添加---只能通过程序添加
-    VisionLine *item = new VisionLine(color_enable,color);
+    VisionLine *item = new VisionLine(color_enable,borderColor,selectedColor,brushColor);
     item->setLines(lstLineF);
     scene->addItem(item);
     m_curVisionItem = item;
@@ -855,7 +939,7 @@ VisionLine *VisionGraph_::addLines(QList<QLineF> lstLineF, bool color_enable, QC
     return item;
 }
 
-VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose, bool bEdit, bool color_enable, QColor color)
+VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
@@ -864,7 +948,7 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose,
         if(vecPointF.count() <= 0)
             return NULL;
         qDebug()<<"add polygon";
-        VisionPolygon *item = new VisionPolygon(bClose,bEdit,color_enable,color);
+        VisionPolygon *item = new VisionPolygon(bClose,bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType, QVector<QPointF>)),view,SLOT(slot_CreatePolygonF(bool,VisionItem*,ItemType, QVector<QPointF>)));
@@ -888,7 +972,7 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose,
     }else{
         if(vecPointF.count() <= 0)
             return NULL;
-        VisionPolygon *item = new VisionPolygon(bClose,bEdit,color_enable,color);
+        VisionPolygon *item = new VisionPolygon(bClose,bEdit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -907,13 +991,13 @@ VisionPolygon *VisionGraph_::addPolygon(QVector<QPointF> vecPointF, bool bClose,
     }
 }
 
-VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, qreal length, bool color_enable, QColor color)
+VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color_enable,color);
+        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -931,7 +1015,7 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, qreal l
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color_enable,color);
+        VisionCrossPointItem *item = new VisionCrossPointItem(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -946,9 +1030,9 @@ VisionCrossPointItem* VisionGraph_::addPoint(QPointF pointF, bool bEdit, qreal l
     }
 }
 
-VisionPoint *VisionGraph_::addPointFs(QList<QPointF> lstP, bool color_enable, QColor color)
+VisionPoint *VisionGraph_::addPointFs(QList<QPointF> lstP, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
-    VisionPoint *item = new VisionPoint(color_enable,color);
+    VisionPoint *item = new VisionPoint(color_enable,borderColor,selectedColor,brushColor);
     item->setPointFs(lstP);
     scene->addItem(item);
     m_curVisionItem = item;
@@ -957,13 +1041,13 @@ VisionPoint *VisionGraph_::addPointFs(QList<QPointF> lstP, bool color_enable, QC
     return item;
 }
 
-VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool edit, bool color_enable, QColor color)
+VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool edit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(edit){
-        VisionChainItem *item = new VisionChainItem(close,edit,color_enable,color);
+        VisionChainItem *item = new VisionChainItem(close,edit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
         QObject::connect(item,SIGNAL(selectedChanged(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)),view,SLOT(slot_updatePath(bool,VisionItem*,ItemType,QRectF,QPointF,qreal)));
@@ -981,7 +1065,7 @@ VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool ed
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionChainItem* item = new VisionChainItem(close,edit,color_enable,color);
+        VisionChainItem* item = new VisionChainItem(close,edit,color_enable,borderColor,selectedColor,brushColor);
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
             m_curVisionItem = nullptr;
@@ -996,13 +1080,13 @@ VisionChainItem *VisionGraph_::addChain(QList<QPointF> lstP, bool close, bool ed
     }
 }
 
-VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qreal length, bool color_enable, QColor color)
+VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionLineItemFitting *item = new VisionLineItemFitting(bEdit,line.p1(),line.p2(),length,0,color_enable,color);
+        VisionLineItemFitting *item = new VisionLineItemFitting(bEdit,line.p1(),line.p2(),length,0,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -1020,7 +1104,7 @@ VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qrea
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionLineItemFitting *item = new VisionLineItemFitting(bEdit,line.p1(),line.p2(),length,0,color_enable,color);
+        VisionLineItemFitting *item = new VisionLineItemFitting(bEdit,line.p1(),line.p2(),length,0,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
@@ -1035,13 +1119,13 @@ VisionLineItemFitting *VisionGraph_::addLineFitting(QLine line, bool bEdit, qrea
     }
 }
 
-VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPointF fP, bool bEdit, qreal length, bool color_enable, QColor color)
+VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPointF fP, bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionArcItemFitting *item = new VisionArcItemFitting(bEdit,length,color_enable,color);
+        VisionArcItemFitting *item = new VisionArcItemFitting(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -1060,7 +1144,7 @@ VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPoint
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionArcItemFitting *item = new VisionArcItemFitting(bEdit,length,color_enable,color);
+        VisionArcItemFitting *item = new VisionArcItemFitting(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
@@ -1076,13 +1160,13 @@ VisionArcItemFitting *VisionGraph_::addArcFitting(QPointF sP, QPointF mP, QPoint
     }
 }
 
-VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, qreal length, bool color_enable, QColor color)
+VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
     if(bEdit){
-        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color_enable,color);
+        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
         QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -1101,7 +1185,7 @@ VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, q
         emit signal_itemFinished(item);
         return item;
     }else{
-        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color_enable,color);
+        VisionCircleItemFitting *item = new VisionCircleItemFitting(bEdit,length,color_enable,borderColor,selectedColor,brushColor);
 
         QObject::connect(item,&QObject::destroyed,[=](){
             m_lstItem.removeOne(item);
@@ -1117,12 +1201,12 @@ VisionCircleItemFitting *VisionGraph_::addCircleFitting(QRectF rf, bool bEdit, q
     }
 }
 
-VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPointF, bool bClose, bool bEdit, qreal length, bool color_enable, QColor color)
+VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPointF, bool bClose, bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     if(!checkoutItem())
         return NULL;
 
-    VisionPolygonItemFitting *item = new VisionPolygonItemFitting(bClose,bEdit,length,color_enable,color);
+    VisionPolygonItemFitting *item = new VisionPolygonItemFitting(bClose,bEdit,length,color_enable,borderColor,selectedColor,brushColor);
 
     QObject::connect(item,SIGNAL(signal_clicked(VisionItem*,bool,bool,qreal,qreal)),this,SLOT(slot_Press(VisionItem*,bool,bool,qreal,qreal)));
     QObject::connect(item,SIGNAL(signal_painterInfo(ItemType,QPainterPath)),view,SLOT(slot_updateItem(ItemType,QPainterPath)));
@@ -1146,12 +1230,12 @@ VisionPolygonItemFitting *VisionGraph_::addPolygonFitting(QVector<QPointF> vecPo
     return item;
 }
 
-VisionCoordinateItem *VisionGraph_::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor color)
+VisionCoordinateItem *VisionGraph_::addCoordinate(QPointF p, qreal angle, qreal length, bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
 {
     //绘制坐标系，目前的坐标系都是不可编辑的   调用clear是可以删除的控件
-    VisionCoordinateItem* item = new VisionCoordinateItem(bEdit,color_enable,color);
+    VisionCoordinateItem* item = new VisionCoordinateItem(bEdit,color_enable,borderColor,selectedColor,brushColor);
     item->setPointF(p);
-    item->setColor(color);
+    item->setColor(borderColor);
     item->setAngle(angle);
     item->setCoordinateLength(length);
     scene->addItem(item);
@@ -1785,24 +1869,24 @@ void VisionGraph_::slot_addItem(ItemType type, QRectF rf)
         lstP.clear();
         if(type == ItemType::Paint_Rect){
             lstP.append({rf.topLeft(),rf.topRight(),rf.bottomRight(),rf.bottomLeft()});
-            addChain(lstP,true);
+            addChain(lstP,true,true,false,borderColor_Rect,selectedColor_Rect,brushColor_Rect);
         }else if(type == ItemType::Paint_EllipseItem || type == ItemType::Paint_CirCle){
             QPainterPath path;
             path.addEllipse(rf);
             lstP = path.toFillPolygon().toList();
-            addChain(lstP,true);
+            addChain(lstP,true,true,false,borderColor_Ellipse,selectedColor_Ellipse,brushColor_Ellipse);
         }
     }else if(m_graphType == GraphType::graphItem_Fitting){
         if(type == ItemType::Paint_CirCle){
-            addCircleFitting(rf);
+            addCircleFitting(rf,true,0,false,borderColor_Circle,selectedColor_Circle,brushColor_Circle);
         }
     }else{
         if(type == ItemType::Paint_Rect){
-            addRect(rf);
+            addRect(rf,0,true,true,false,borderColor_Rect,selectedColor_Rect,brushColor_Rect);
         }else if(type == ItemType::Paint_EllipseItem){
-            addEllipse(rf);
+            addEllipse(rf,0,true,true,false,borderColor_Ellipse,selectedColor_Ellipse,brushColor_Ellipse);
         }else if(type == ItemType::Paint_CirCle){
-            addCircle(rf);
+            addCircle(rf,true,false,borderColor_Circle,selectedColor_Circle,brushColor_Circle);
         }
     }
 }
@@ -1811,45 +1895,45 @@ void VisionGraph_::slot_addPoly(QVector<QPointF> vecPointF,ItemType type)
 {
     if(m_graphType == GraphType::graphChain){
         if(type == ItemType::Paint_Poly){
-            addChain(vecPointF.toList(),true);
+            addChain(vecPointF.toList(),true,true,false,borderColor_Poly,selectedColor_Poly,brushColor_Poly);
         }else if(type == ItemType::Paint_polyLine){
-            addChain(vecPointF.toList(),false);
+            addChain(vecPointF.toList(),false,true,false,borderColor_PolyLine,selectedColor_PolyLine,brushColor_PolyLine);
         }else if(type == ItemType::Paint_Arc){
             //todo
-            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true);
+            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true,false,borderColor_Arc,selectedColor_Arc,brushColor_Arc);
         }
     }else if(m_graphType == GraphType::graphItem_Fitting){
         if(type == ItemType::Paint_Poly){
-            addPolygonFitting(vecPointF);
+            addPolygonFitting(vecPointF,true,true,0,false,borderColor_Poly,selectedColor_Poly,brushColor_Poly);
         }else if(type == ItemType::Paint_polyLine){
-            addPolygonFitting(vecPointF,false);
+            addPolygonFitting(vecPointF,false,true,0,false,borderColor_PolyLine,selectedColor_PolyLine,brushColor_PolyLine);
         }else if(type == ItemType::Paint_Arc){
-            addArcFitting(vecPointF[0],vecPointF[2],vecPointF[1],true);
+            addArcFitting(vecPointF[0],vecPointF[2],vecPointF[1],true,0,false,borderColor_Arc,selectedColor_Arc,brushColor_Arc);
         }
     }else{
         if(type == ItemType::Paint_Poly){
-            addPolygon(vecPointF);
+            addPolygon(vecPointF,true,true,false,borderColor_Poly,selectedColor_Poly,brushColor_Poly);
         }else if(type == ItemType::Paint_polyLine){
-            addPolygon(vecPointF,false);
+            addPolygon(vecPointF,false,true,false,borderColor_PolyLine,selectedColor_PolyLine,brushColor_PolyLine);
         }else if(type == ItemType::Paint_Arc){
-            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true);
+            addArc(vecPointF[0],vecPointF[2],vecPointF[1],true,false,borderColor_Arc,selectedColor_Arc,brushColor_Arc);
         }
     }
 }
 
 void VisionGraph_::slot_addPoint(QPointF pointF)
 {
-    addPoint(pointF);
+    addPoint(pointF,false,5,false,borderColor_Point,selectedColor_Point,brushColor_Point);
 }
 
 void VisionGraph_::slot_addLine(QLine line)
 {
     if(m_graphType == GraphType::graphChain){
-        addChain({line.p1(),line.p2()},true);
+        addChain({line.p1(),line.p2()},false,true,false,borderColor_Line,selectedColor_Line,brushColor_Line);
     }else if(m_graphType == GraphType::graphItem_Fitting){
-        addLineFitting(line,true);
+        addLineFitting(line,true,0,false,borderColor_Line,selectedColor_Line,brushColor_Line);
     }else{
-        addLine(line);
+        addLine(line,true,false,borderColor_Line,selectedColor_Line,brushColor_Line);
     }
 }
 
@@ -1938,6 +2022,7 @@ void VisionGraph_::slot_SizeChanged(QString currentSize)
         view->zoom(scale);
     }
     g_scale = m_zoom;
+//    qDebug()<<"textchange1111"<<g_scale;
 }
 
 void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
@@ -2229,4 +2314,11 @@ void VisionGraph_::init_graph_Item(GraphType type)
     m_insertAction = tool_Widget->addSeparator();
 
     infoWidget_Action = tool_Widget->addWidget(tool_infoWidget);
+}
+
+void VisionGraph_::paintEvent(QPaintEvent *event)
+{
+//    qDebug()<<view->matrix().m22()<<g_scale;
+    g_scale = view->matrix().m22();
+    QWidget::paintEvent(event);
 }

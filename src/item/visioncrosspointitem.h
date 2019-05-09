@@ -18,7 +18,9 @@ class VISIONGRAPHSHARED_EXPORT VisionCrossPointItem : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionCrossPointItem(bool edit = false, qreal length = 5, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
+    explicit VisionCrossPointItem(bool edit = false, qreal length = 5, bool color_enable = false,
+                                  QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                                  VisionItem *parent = 0);
 
     /**
      * @brief       构造的时候的参数为point

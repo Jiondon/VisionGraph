@@ -6,10 +6,10 @@
 #define Pi 3.1415926
 
 
-VisionPolygonItemFitting::VisionPolygonItemFitting(bool close, bool edit, qreal length, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
+VisionPolygonItemFitting::VisionPolygonItemFitting(bool close, bool edit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
-        m_borderColor = color;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -234,7 +234,8 @@ void VisionPolygonItemFitting::initMiniRect()
 {
     m_lstRect.clear();
     for(int i=0;i<m_vecPointFs_temp.count();i++){
-        MiniRect* miniRect = new MiniRect(m_vecPointFs_temp.at(i).x()-5,m_vecPointFs_temp.at(i).y()-5,10,10,QColor(255,0,0),this);
+        MiniRect* miniRect = new MiniRect(m_vecPointFs_temp.at(i).x()-5,m_vecPointFs_temp.at(i).y()-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
+        miniRect->setGlobleData(g_scale,g_penWidth);
         miniRect->setIndex(i);
         connect(miniRect,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
         miniRect->hide();

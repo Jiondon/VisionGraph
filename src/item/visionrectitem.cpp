@@ -9,10 +9,10 @@
 
 #define pi 3.1415926
 
-VisionRectItem::VisionRectItem(bool edit, bool rotation, bool color_enable,QColor color, VisionItem *parent):VisionItem(parent)
+VisionRectItem::VisionRectItem(bool edit, bool rotation, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent):VisionItem(parent)
 {
     if(color_enable){
-        m_borderColor = color;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -38,12 +38,13 @@ VisionRectItem::VisionRectItem(bool edit, bool rotation, bool color_enable,QColo
     }
 }
 
-void VisionRectItem::setRect(qreal x, qreal y, qreal width, qreal height)
+void VisionRectItem::setRect(qreal x, qreal y, qreal width, qreal height, qreal angle)
 {
     m_width = width;
     m_height = height;
     m_x = x;
     m_y = y;
+    m_angle = angle;
 
     m_pointF1 = QPointF(x,y);
     m_pointF2 = QPointF(x+width,y);
@@ -54,19 +55,26 @@ void VisionRectItem::setRect(qreal x, qreal y, qreal width, qreal height)
 
     initItem();
 
-    if(m_bRotation && m_bEdit){
+    if(m_bRotation){
         arrowsItem = new VisionArrows_Rotate(m_width/2,height/2,30,10,QColor(255,0,0),this);
         connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
+        if(!m_bEdit){
+            arrowsItem->setEnabled(false);
+        }
     }
+
+    updateItem();
+    updatePointF();
 }
 
-void VisionRectItem::setRect(QRectF rf)
+void VisionRectItem::setRect(QRectF rf, qreal angle)
 {
     m_width = rf.width();
     m_height = rf.height();
     m_x = rf.x();
     m_y = rf.y();
+    m_angle = angle;
 
     m_pointF1 = QPointF(rf.x(),rf.y());
     m_pointF2 = QPointF(rf.x()+rf.width(),rf.y());
@@ -77,11 +85,17 @@ void VisionRectItem::setRect(QRectF rf)
 
     initItem();
 
-    if(m_bRotation && m_bEdit){
+    if(m_bRotation){
         arrowsItem = new VisionArrows_Rotate(m_width/2,m_height/2,30,10,QColor(255,0,0),this);
         connect(arrowsItem,SIGNAL(signalHoverEnter()),this,SLOT(slotArrowsItem()));
         connect(arrowsItem,SIGNAL(signalHoverLeave()),this,SLOT(slotArrowsItem_leave()));
+        if(!m_bEdit){
+            arrowsItem->setEnabled(false);
+        }
     }
+
+    updateItem();
+    updatePointF();
 }
 
 QPainterPath VisionRectItem::getPainterPath()
@@ -155,6 +169,7 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
     }
 
+//    qDebug()<<"00000000000000000000000 ; ;"<<QString::number(*g_scale);
     painter->setBrush(m_brushColor);
 
     QPointF originPointF = QPointF(m_x,m_y);
@@ -545,38 +560,47 @@ void VisionRectItem::initItem()
     m_lstRect.clear();
 
     qDebug()<<m_x<<m_y<<m_width<<m_height;
-    MiniRect* miniRect1 = new MiniRect(-5,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect1 = new MiniRect(-5,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect1->setIndex(0);
     connect(miniRect1,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect2 = new MiniRect(-5+m_width/2,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect2 = new MiniRect(-5+m_width/2,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect2->setIndex(1);
     miniRect2->setParent(this);
     connect(miniRect2,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect3 = new MiniRect(-5+m_width,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect3 = new MiniRect(-5+m_width,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect3->setIndex(2);
     connect(miniRect3,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect4 = new MiniRect(-5+m_width,-5+m_height/2,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect4 = new MiniRect(-5+m_width,-5+m_height/2,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect4->setIndex(3);
     connect(miniRect4,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect5 = new MiniRect(-5+m_width,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect5 = new MiniRect(-5+m_width,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect5->setIndex(4);
     connect(miniRect5,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect6 = new MiniRect(-5+m_width/2,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect6 = new MiniRect(-5+m_width/2,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect6->setIndex(5);
     connect(miniRect6,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect7 = new MiniRect(-5,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect7 = new MiniRect(-5,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect7->setIndex(6);
     connect(miniRect7,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect8 = new MiniRect(-5,-5+m_height/2,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect8 = new MiniRect(-5,-5+m_height/2,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect8->setIndex(7);
     connect(miniRect8,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
+
+    miniRect1->setGlobleData(g_scale,g_penWidth);
+    miniRect2->setGlobleData(g_scale,g_penWidth);
+    miniRect3->setGlobleData(g_scale,g_penWidth);
+    miniRect4->setGlobleData(g_scale,g_penWidth);
+    miniRect5->setGlobleData(g_scale,g_penWidth);
+    miniRect6->setGlobleData(g_scale,g_penWidth);
+    miniRect7->setGlobleData(g_scale,g_penWidth);
+    miniRect8->setGlobleData(g_scale,g_penWidth);
 
     miniRect1->hide();miniRect2->hide();miniRect3->hide();miniRect4->hide();
     miniRect5->hide();miniRect6->hide();miniRect7->hide();miniRect8->hide();

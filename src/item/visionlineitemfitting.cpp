@@ -6,11 +6,11 @@
 #include "../control/color.h"
 
 VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QPointF p1, QPointF p2, qreal length,
-                                             qreal penWidth,bool color_enable, QColor penColor, VisionItem *parent) : VisionItem(parent)
+                                             qreal penWidth, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     this->setAcceptHoverEvents(true);
     if(color_enable){
-        m_borderColor = penColor;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -18,7 +18,7 @@ VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QPointF p1, QPointF p2,
     m_selectedColor = selectedColor;
 
     m_pointF1 = p1;m_pointF2 = p2;
-    m_penColor = penColor;
+    m_penColor = borderColor;
     m_penWidth = penWidth;
     m_bEdit = bEdit;
     m_type = ItemType::Paint_LineFitting;
@@ -35,11 +35,13 @@ VisionLineItemFitting::VisionLineItemFitting(bool bEdit, QPointF p1, QPointF p2,
 
     m_polygonF.clear();
 
-    m_miniRect1 = new MiniRect(m_pointF1.x()-5,m_pointF1.y()-5,10,10,QColor(255,0,0),this);
+    m_miniRect1 = new MiniRect(m_pointF1.x()-5,m_pointF1.y()-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
+    m_miniRect1->setGlobleData(g_scale,g_penWidth);
     m_miniRect1->setIndex(1);
     connect(m_miniRect1,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
     m_miniRect1->hide();
-    m_miniRect2 = new MiniRect(m_pointF2.x()-5,m_pointF2.y()-5,10,10,QColor(255,0,0),this);
+    m_miniRect2 = new MiniRect(m_pointF2.x()-5,m_pointF2.y()-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
+    m_miniRect2->setGlobleData(g_scale,g_penWidth);
     m_miniRect2->setIndex(2);
     connect(m_miniRect2,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
     m_miniRect2->hide();

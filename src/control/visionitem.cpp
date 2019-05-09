@@ -1,5 +1,6 @@
 ﻿#include "visionitem.h"
 #include <QDebug>
+//#include "../visiongraphview.h"
 
 VisionItem::VisionItem(QGraphicsItem *parent):QGraphicsItem(parent)
 {

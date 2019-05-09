@@ -27,7 +27,8 @@ public:
      */
     explicit VisionLineItem(bool bEdit = true, QPointF p1 = QPointF(0,0), QPointF p2 = QPointF(0,0), qreal penWidth = 0,
                             bool color_enable = false,
-                            QColor penColor = QColor(0,0,0), VisionItem *parent = 0);
+                            QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                            VisionItem *parent = 0);
 
     /**
      * @brief       设置线的起点和终点

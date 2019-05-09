@@ -6,10 +6,10 @@
 #include "../control/color.h"
 
 VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bEdit, qreal penWidth,
-                       bool color_enable, QColor penColor, VisionItem *parent) : VisionItem(parent)
+                       bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
-        m_borderColor = penColor;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -27,7 +27,7 @@ VisionRing::VisionRing(qreal centerX, qreal centerY, qreal r1, qreal r2, bool bE
     m_centerX = centerX;
     m_centerY = centerY;
 
-    m_penColor = penColor;
+    m_penColor = borderColor;
     m_penWidth = penWidth;
 
     m_bEdit = bEdit;
@@ -291,39 +291,48 @@ void VisionRing::initMiniRect()
     //list rectF
     m_lstRect.clear();
     qreal iTemp = 5;
-    MiniRect* rect11 = new MiniRect(m_width/2-iTemp,m_height/2-m_rf1.height()/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //top
+    MiniRect* rect11 = new MiniRect(m_width/2-iTemp,m_height/2-m_rf1.height()/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //top
     rect11->setIndex(0);
     connect(rect11,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect12 = new MiniRect(m_width/2+m_rf1.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //right
+    MiniRect* rect12 = new MiniRect(m_width/2+m_rf1.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //right
     rect12->setIndex(1);
     connect(rect12,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect13 = new MiniRect(m_width/2-iTemp,m_height/2+m_rf1.height()/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this);  //bottom
+    MiniRect* rect13 = new MiniRect(m_width/2-iTemp,m_height/2+m_rf1.height()/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this);  //bottom
     rect13->setIndex(2);
     connect(rect13,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect14 = new MiniRect(m_width/2-m_rf1.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //left
+    MiniRect* rect14 = new MiniRect(m_width/2-m_rf1.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //left
     rect14->setIndex(3);
     connect(rect14,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
     //显示圆2的编辑边框
 
-    MiniRect* rect21 = new MiniRect(m_width/2-iTemp,m_height/2-m_rf2.height()/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //top
+    MiniRect* rect21 = new MiniRect(m_width/2-iTemp,m_height/2-m_rf2.height()/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //top
     rect21->setIndex(4);
     connect(rect21,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect22 = new MiniRect(m_width/2+m_rf2.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //right
+    MiniRect* rect22 = new MiniRect(m_width/2+m_rf2.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //right
     rect22->setIndex(5);
     connect(rect22,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect23 = new MiniRect(m_width/2-iTemp,m_height/2+m_rf2.height()/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this);  //bottom
+    MiniRect* rect23 = new MiniRect(m_width/2-iTemp,m_height/2+m_rf2.height()/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this);  //bottom
     rect23->setIndex(6);
     connect(rect23,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
 
-    MiniRect* rect24 = new MiniRect(m_width/2-m_rf2.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,QColor(255,0,0),this); //left
+    MiniRect* rect24 = new MiniRect(m_width/2-m_rf2.width()/2-iTemp,m_height/2-iTemp,2*iTemp,2*iTemp,m_borderColor,m_selectedColor,m_brushColor,this); //left
     rect24->setIndex(7);
     connect(rect24,SIGNAL(signalIndex(int)),this,SLOT(slotIndex_MiniRect(int)));
+
+    rect11->setGlobleData(g_scale,g_penWidth);
+    rect12->setGlobleData(g_scale,g_penWidth);
+    rect13->setGlobleData(g_scale,g_penWidth);
+    rect14->setGlobleData(g_scale,g_penWidth);
+    rect21->setGlobleData(g_scale,g_penWidth);
+    rect22->setGlobleData(g_scale,g_penWidth);
+    rect23->setGlobleData(g_scale,g_penWidth);
+    rect24->setGlobleData(g_scale,g_penWidth);
 
     m_lstRect.append(rect11);
     m_lstRect.append(rect12);

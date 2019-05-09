@@ -4,8 +4,6 @@
 #include "visiongraphscene.h"
 #include "./control/color.h"
 
-#include <QTime>
-
 #define Pi 3.1415926
 
 VisionGraphView::VisionGraphView(QWidget *parent):
@@ -31,6 +29,11 @@ VisionGraphView::VisionGraphView(QWidget *parent):
 
     connect(this,SIGNAL(signal_wheelEevent(QWheelEvent*)),this,SLOT(slot_wheelEvent(QWheelEvent*)));
 
+}
+
+void VisionGraphView::setGraphType(GraphType type)
+{
+    m_graphType = type;
 }
 
 void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
@@ -235,11 +238,11 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         m_clearAll = false;
     }
 
-    painter.setPen(QPen(borderColor,0));  //区域采用填充的颜色，原因自己想
-    painter.setBrush(brushColor);
+    painter.setPen(QPen(m_borderColor,0));  //区域采用填充的颜色，原因自己想
+    painter.setBrush(m_brushColor);
     painter.drawPath(m_path);
 
-    painter.setPen(QPen(brushColor,0));  //区域采用填充的颜色，原因自己想
+    painter.setPen(QPen(m_brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
     for(int i=0;i<m_vecLines.size();i++){
 //        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
@@ -253,6 +256,7 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     for(int i=0;i<m_lstRegion.count();i++){
         vec_point.clear();
         vec_point = m_lstRegion[i].region.arrayPointRun;
+        painter.setPen(QPen(m_lstRegion[i].color,0));
         XVPointRun pointRun;
         for(int i=0;i<vec_point.size();i++){
             pointRun = vec_point.at(i);
@@ -327,6 +331,9 @@ void VisionGraphView::zoom(float scaleFactor)
         viewCursor = this->cursor();
     }
 
+
+//    qDebug()<<this->matrix().m11()<<this->matrix().m12()<<this->matrix().m21()<<this->matrix().m22();
+//    qDebug()<<"temp:"<<scaleTemp<<"m_scale:"<<m_scale<<"g_scale:"<<g_scale;
 
     this->scene()->update();
     return;
@@ -581,11 +588,19 @@ void VisionGraphView::setCoordinateVisible(bool bVisible)
     isCoordinate = bVisible;
 }
 
+void VisionGraphView::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_borderColor = borderColor;
+    m_selectedColor = selectColor;
+    m_brushColor = brushColor;
+    this->scene()->update();
+}
+
 
 void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
 {
     return;
-    if(g_graphType != GraphType::graphRegion)
+    if(m_graphType != GraphType::graphRegion)
         return;
     //编辑的控件在未确定之前，不调用算法生成点集合，临时绘制    item版本中作废
     m_path = this->mapFromScene(path);
@@ -593,7 +608,7 @@ void VisionGraphView::slot_updateItem(ItemType type, QPainterPath path)
 
 XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemType type,QRectF rf,QPointF leftTop,qreal angle)
 {
-    if(g_graphType != GraphType::graphRegion)
+    if(m_graphType != GraphType::graphRegion)
         return m_region;
 
     if(!selected){
@@ -636,7 +651,7 @@ XVRegion VisionGraphView::slot_updatePath(bool selected, VisionItem *item,ItemTy
 
 XVRegion VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, ItemType type, QVector<QPointF> vecPointF)
 {
-    if(g_graphType != GraphType::graphRegion)
+    if(m_graphType != GraphType::graphRegion)
         return m_region;
 
     if(selected)
@@ -663,9 +678,6 @@ XVRegion VisionGraphView::slot_CreatePolygonF(bool selected, VisionItem *item, I
 
 XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2, XVCombineRegionsType combineType)
 {
-    QTime time;
-   time.start(); //开始计时，以ms为单位
-
     TwoRegionIn unionIn;
     unionIn.inRegion1 = region1;
     unionIn.inRegion2 = region2;
@@ -678,8 +690,6 @@ XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2,
     }else if(combineType == XVCombineRegionsType::Difference){
         XVRegionDifference(unionIn,unionOut);
     }
-    int time_Diff = time.elapsed(); //返回从上次start()或restart()开始以来的时间差，单位ms
-    qDebug()<<" Time : "<<time_Diff;
     return unionOut.outRegion;
 
 }
@@ -793,8 +803,6 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
 
 XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle)
 {
-    QTime time;
-    time.start();
     rf =  QRectF((rf.topLeft()),(rf.bottomRight()));
     XVCreateRectangleRegionOut regionOut;
     XVCreateRectangleRegionIn  regionIn;
@@ -817,8 +825,6 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
 
     XVRegion region = regionOut.outRegion;
 
-    int iDiff = time.elapsed();
-    qDebug()<<"create rect time :"<<iDiff;
     return region;
 
 }
@@ -1393,6 +1399,9 @@ void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
 
     emit signal_wheel(m_scale);   //将缩放的比例通知外部
 
+//    qDebug()<<this->matrix().m11()<<this->matrix().m12()<<this->matrix().m21()<<this->matrix().m22();
+//    qDebug()<<"temp:"<<scaleTemp<<"m_scale:"<<m_scale<<"g_scale:"<<g_scale;
+    //TODO 可采用调用view的matrix来获取当前缩放比例，用于赋值g_scale，脱离全局变量,为了
 }
 
 void VisionGraphView::slotUpdateViewInfo_Pos()

@@ -45,7 +45,7 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    VisionRectItem *addRect(QRectF rf, bool bEdit = true,bool bRotation = true,
+    VisionRectItem *addRect(QRectF rf,qreal angle = 0, bool bEdit = true,bool bRotation = true,
                             bool color_enable = false,QColor color = QColor(255,0,0));
 
 
@@ -111,7 +111,7 @@ public:
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    VisionEllipseItem* addEllipse(QRectF rf,bool bEdit = true, bool bRotation = true,
+    VisionEllipseItem* addEllipse(QRectF rf,qreal angle = 0,bool bEdit = true, bool bRotation = true,
                                   bool color_enable = false,QColor color = QColor(255,0,0));
 
     /**
@@ -223,13 +223,6 @@ public:
      * @param
      */
     void setBrushColor(QColor color);
-
-
-    /**
-     * @brief      设置颜色(区域)
-     * @param
-     */
-    void setRegionColor(QColor color);
 
 
     /**
@@ -428,6 +421,18 @@ public:
      */
     void setGraphStyleSheet(QString strStyleSheet);
 
+    void setRectColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setEllipseColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setCircleColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPolyColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPolyLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setArcColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPointColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
+    //region主要是brushColor有效
+    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
 signals:
     void signal_PaintFinishedChanged(VisionItem*);
     void signal_Changed(VisionItem* item);
@@ -437,6 +442,22 @@ protected:
 
 private:
     VisionGraph_ *m_graphWidget = nullptr;
+    GraphType m_graphType = GraphType::graphItem_unSelf;
+
+
+    QColor selectedColor = QColor(255,0,0);
+    QColor borderColor = QColor(0,0,0);
+    QColor brushColor = QColor(255,0,0,50);
+    QColor regionColor = QColor(255,0,0);  //暂时和brushColor合并
+
+    //暂时未用，
+    QColor viewMouseInfo_TextColor = QColor(255,255,255);
+    QColor viewMouseInfo_BackgroundColor = QColor(255,255,255);
+
+
+    QString iconPath = "./ico/graph/";
+
+    QCursor viewCursor;
 };
 
 #endif // VISIONGRAPH_H

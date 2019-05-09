@@ -4,12 +4,12 @@
 #define Pi 3.1415926
 
 
-VisionArcItemFitting::VisionArcItemFitting(bool bEdit, qreal length, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
+VisionArcItemFitting::VisionArcItemFitting(bool bEdit, qreal length, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     this->setAcceptHoverEvents(true);
 
     if(color_enable){
-        m_borderColor = color;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -261,7 +261,8 @@ void VisionArcItemFitting::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VisionArcItemFitting::initMiniRect()
 {
     if(m_sMiniRect == NULL){
-        m_sMiniRect = new MiniRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_sMiniRect = new MiniRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
+        m_sMiniRect->setGlobleData(g_scale,g_penWidth);
         m_sMiniRect->setIndex(1);
         QObject::connect(m_sMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_sMiniRect->hide();
@@ -270,7 +271,8 @@ void VisionArcItemFitting::initMiniRect()
     }
 
     if(m_mMiniRect == NULL){
-        m_mMiniRect = new MiniRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_mMiniRect = new MiniRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
+        m_mMiniRect->setGlobleData(g_scale,g_penWidth);
         m_mMiniRect->setIndex(2);
         QObject::connect(m_mMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_mMiniRect->hide();
@@ -279,7 +281,8 @@ void VisionArcItemFitting::initMiniRect()
     }
 
     if(m_fMiniRect == NULL){
-        m_fMiniRect = new MiniRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5,QColor(255,0,0),this);
+        m_fMiniRect = new MiniRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
+        m_fMiniRect->setGlobleData(g_scale,g_penWidth);
         m_fMiniRect->setIndex(3);
         QObject::connect(m_fMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_fMiniRect->hide();

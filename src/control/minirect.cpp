@@ -5,14 +5,14 @@
 #include <QCursor>
 #include "color.h"
 
-MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor penColor, QGraphicsItem *parent) : QGraphicsItem(parent)
+MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor borderColor, QColor selectedColor, QColor brushColor, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
     m_borderColor = borderColor;
     m_brushColor = brushColor;
     m_selectedColor = selectedColor;
 
     m_x = x;m_y = y;m_width = w;m_height = h;
-    m_penColor = penColor;
+    m_penColor = borderColor;
     this->setPos(x,y);
     setAcceptHoverEvents(true);
     setTransformOriginPoint((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale));  //设置旋转的原点为中心点
@@ -39,8 +39,8 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    if(this->transformOriginPoint() != QPointF((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale))){
-        setTransformOriginPoint((m_width/2)*(1/g_scale),(m_height/2)*(1/g_scale));  //设置旋转的原点为中心点
+    if(this->transformOriginPoint() != QPointF(boundingRect().center())){
+        setTransformOriginPoint(QPointF(boundingRect().center()));  //设置旋转的原点为中心点
     }
 
     painter->setPen(QPen(m_selectedColor,1*(1/g_scale)));
@@ -51,6 +51,7 @@ void MiniRect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     qreal y = m_height/2-(m_height/2)*(1/g_scale);
     qreal w = m_width*(1/g_scale);
     qreal h = m_height*(1/g_scale);
+
     painter->drawRect(QRectF(x,y,w,h));
 }
 

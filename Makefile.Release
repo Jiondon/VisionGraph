@@ -524,6 +524,7 @@ tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QW
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src\visiongraph_global.h \
 		src\visiongraphtool.h \
 		src\visiongraphscene.h \
@@ -538,7 +539,6 @@ tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QW
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src\visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
@@ -549,35 +549,67 @@ tmp\release\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QW
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		include\VGBase.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
@@ -1166,35 +1198,67 @@ tmp\release\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidget
 		include\VGBase.h \
 		src\visiongraph_global.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
@@ -2825,35 +2889,67 @@ tmp\release\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\Q
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		include\VGBase.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src\control\color.h \
@@ -4175,6 +4271,7 @@ tmp\release\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src/visiongraph_global.h \
 		src/visiongraphtool.h \
 		src/visiongraphscene.h \
@@ -4189,7 +4286,6 @@ tmp\release\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsSceneMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicssceneevent.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QMouseEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QFocusEvent \
@@ -4200,35 +4296,67 @@ tmp\release\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		include\VGBase.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
@@ -4427,35 +4555,67 @@ tmp\release\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		include\VGBase.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
@@ -5029,35 +5189,67 @@ tmp\release\visiongraphview.obj: src\visiongraphview.cpp src/visiongraphview.h \
 		include\VGBase.h \
 		src/visiongraph_global.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
@@ -5069,9 +5261,7 @@ tmp\release\visiongraphview.obj: src\visiongraphview.cpp src/visiongraphview.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollbar.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
 		src/visiongraphscene.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QTime \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatetime.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent
 
 tmp\release\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -6748,35 +6938,67 @@ tmp\release\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QVector \
 		include\VGBase.h \
 		include\tools\XVBase\XVBase.h \
-		include\tools\XVBase\XVEnums\XVEnum.h \
-		include\tools\XVBase\XVEnums\XVPolarity.h \
 		include\tools\XVBase\XVEnums\XVAdjustmentMetric.h \
+		include\tools\XVBase\XVEnums\XVAnchor2D.h \
+		include\tools\XVBase\XVEnums\XVAngleRange.h \
+		include\tools\XVBase\XVEnums\XVAxis.h \
+		include\tools\XVBase\XVEnums\XVBoundingRectangleFeature.h \
+		include\tools\XVBase\XVEnums\XVCircleFittingMethod.h \
+		include\tools\XVBase\XVEnums\XVCircularityMeasure.h \
+		include\tools\XVBase\XVEnums\XVCropScaleMode.h \
+		include\tools\XVBase\XVEnums\XVDistanceMeasureType.h \
+		include\tools\XVBase\XVEnums\XVEnum.h \
+		include\tools\XVBase\XVEnums\XVHSxColorModel.h \
+		include\tools\XVBase\XVEnums\XVImageLocalTransformsEnums.h \
 		include\tools\XVBase\XVEnums\XVInterpolationMethod.h \
+		include\tools\XVBase\XVEnums\XVKernelShape.h \
+		include\tools\XVBase\XVEnums\XVMirrorDirection.h \
+		include\tools\XVBase\XVEnums\XVPolarity.h \
+		include\tools\XVBase\XVEnums\XVPolarSpaceType.h \
+		include\tools\XVBase\XVEnums\XVProjectionDirection.h \
+		include\tools\XVBase\XVEnums\XVProjectionMode.h \
+		include\tools\XVBase\XVEnums\XVRectangleOrientation.h \
+		include\tools\XVBase\XVEnums\XVRotationSizeMode.h \
 		include\tools\XVBase\XVEnums\XVSelection.h \
-		include\tools\XVBase\XVOptional.h \
-		include\tools\XVBase\XVGlobal.h \
-		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVEnums\XVSortingOrder.h \
+		include\tools\XVBase\XVEnums\XVSplitDirection.h \
+		include\tools\XVBase\XVEnums\XVTheilSenVariant.h \
+		include\tools\XVBase\XVEnums\XVThresholdMethod.h \
 		include\tools\XVBase\XVBaseType.h \
+		include\tools\XVBase\XVOptional.h \
 		include\tools\XVBase\XVBaseTypeArray.h \
+		include\tools\XVBase\XVGlobal.h \
 		include\tools\XVBase\XVBasic.h \
 		include\tools\XVBase\XVBasicArray.h \
-		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVCameraCalibrationStructs.h \
+		include\tools\XVBase\XVDataGlobal.h \
+		include\tools\XVBase\XVError.h \
+		include\tools\XVBase\XVField.h \
 		include\tools\XVBase\XVGeometry.h \
+		include\tools\XVBase\XVPath.h \
 		include\tools\XVBase\XVGeometryArray.h \
 		include\tools\XVBase\XVGeometry3D.h \
+		include\tools\XVBase\XVGeometry3DArray.h \
 		include\tools\XVBase\XVImage.h \
 		include\tools\XVBase\XVImageArray.h \
-		include\tools\XVBase\XVPath.h \
+		include\tools\XVBase\XVMEstimator.h \
+		include\tools\XVBase\XVMetric.h \
+		include\tools\XVBase\XVObject2D.h \
+		include\tools\XVBase\XVObject2DArray.h \
 		include\tools\XVBase\XVPathArray.h \
+		include\tools\XVBase\XVPImpl.h \
+		include\tools\XVBase\XVProfile.h \
 		include\tools\XVBase\XVRegion.h \
 		include\tools\XVBase\XVRegionArray.h \
-		include\tools\XVBase\XVField.h \
-		include\tools\XVBase\XVProfile.h \
+		include\tools\XVBase\XVRegionOfInterest.h \
+		include\tools\XVBase\XVRotationDirection.h \
 		include\tools\XVBase\XVScan.h \
+		include\tools\XVBase\XVString.h \
+		include\tools\XVBase\XVScanMap.h \
+		include\tools\XVBase\XVSpatialMap.h \
+		include\tools\XVBase\XVTemplate2D.h \
 		include\tools\XVRegionAnalysis\XVCreateRegion.h \
 		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVBase\XVRegionOfInterest.h \
-		include\tools\XVBase\XVEnums\XVAnchor2D.h \
 		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src/control/color.h \

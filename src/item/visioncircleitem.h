@@ -17,7 +17,9 @@ class VisionCircleItem : public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionCircleItem(bool edit = false, bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
+    explicit VisionCircleItem(bool edit = false, bool color_enable = false,
+                              QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                              VisionItem *parent = 0);
 
     /**
      * @brief       设置矩形

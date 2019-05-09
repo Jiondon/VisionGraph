@@ -42,6 +42,7 @@ enum ViewModel{
 struct XVRegionPair {
     XVRegion region;
     int value;
+    QColor color;
 };
 
 enum XVCombineRegionsType{
@@ -54,6 +55,8 @@ class VISIONGRAPHSHARED_EXPORT VisionGraphView : public QGraphicsView
     Q_OBJECT
 public:
     VisionGraphView(QWidget *parent =0);
+
+    void setGraphType(GraphType type);
 
     /**
      * @brief       当鼠标移动时候触发
@@ -256,6 +259,9 @@ public:
      */
     void setCoordinateVisible(bool bVisible);
 
+
+    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
 signals:
     void signal_Move(QPointF pointF);
     void signal_wheel(qreal scale);  //通知外部缩放比例，外部进行数据更新
@@ -267,6 +273,8 @@ signals:
     void signal_Item_Line(QLine line);
 
 private:
+
+    GraphType m_graphType = GraphType::graphItem_unSelf;
 
     QVector<QLineF> m_lstLines;
 
@@ -343,6 +351,10 @@ private:
     bool m_bPress_Drag = false;  //提供给拖动进行控制，只有在按下的状态，拖动才有效
 
     bool isCoordinate = true;
+
+    QColor m_borderColor;
+    QColor m_brushColor;
+    QColor m_selectedColor;
 
 protected:
 

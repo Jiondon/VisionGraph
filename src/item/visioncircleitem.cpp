@@ -2,10 +2,10 @@
 #include "../control/color.h"
 #include <QDebug>
 
-VisionCircleItem::VisionCircleItem(bool edit,bool color_enable, QColor color, VisionItem *parent) : VisionItem(parent)
+VisionCircleItem::VisionCircleItem(bool edit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
-        m_borderColor = color;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }
@@ -237,37 +237,46 @@ void VisionCircleItem::initItem()
 {
     m_lstRect.clear();
 
-    MiniRect* miniRect1 = new MiniRect(-5,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect1 = new MiniRect(-5,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect1->setIndex(0);
     QObject::connect(miniRect1,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect2 = new MiniRect(-5+m_width/2,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect2 = new MiniRect(-5+m_width/2,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect2->setIndex(1);
     QObject::connect(miniRect2,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect3 = new MiniRect(-5+m_width,-5,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect3 = new MiniRect(-5+m_width,-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect3->setIndex(2);
     QObject::connect(miniRect3,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect4 = new MiniRect(-5+m_width,-5+m_height/2,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect4 = new MiniRect(-5+m_width,-5+m_height/2,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect4->setIndex(3);
     QObject::connect(miniRect4,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect5 = new MiniRect(-5+m_width,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect5 = new MiniRect(-5+m_width,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect5->setIndex(4);
     QObject::connect(miniRect5,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect6 = new MiniRect(-5+m_width/2,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect6 = new MiniRect(-5+m_width/2,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect6->setIndex(5);
     QObject::connect(miniRect6,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect7 = new MiniRect(-5,-5+m_height,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect7 = new MiniRect(-5,-5+m_height,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect7->setIndex(6);
     QObject::connect(miniRect7,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
 
-    MiniRect* miniRect8 = new MiniRect(-5,-5+m_height/2,10,10,QColor(255,0,0),this);
+    MiniRect* miniRect8 = new MiniRect(-5,-5+m_height/2,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
     miniRect8->setIndex(7);
     QObject::connect(miniRect8,SIGNAL(signalIndex(int)),this,SLOT(slotIndex(int)));
+
+    miniRect1->setGlobleData(g_scale,g_penWidth);
+    miniRect2->setGlobleData(g_scale,g_penWidth);
+    miniRect3->setGlobleData(g_scale,g_penWidth);
+    miniRect4->setGlobleData(g_scale,g_penWidth);
+    miniRect5->setGlobleData(g_scale,g_penWidth);
+    miniRect6->setGlobleData(g_scale,g_penWidth);
+    miniRect7->setGlobleData(g_scale,g_penWidth);
+    miniRect8->setGlobleData(g_scale,g_penWidth);
 
     miniRect1->hide();miniRect2->hide();miniRect3->hide();miniRect4->hide();
     miniRect5->hide();miniRect6->hide();miniRect7->hide();miniRect8->hide();

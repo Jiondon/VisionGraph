@@ -1,7 +1,6 @@
 ﻿#include "visiongraph.h"
 #include <QDebug>
 
-
 VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, QWidget *parent) : QWidget(parent)
 {
     if(toolButtonDirect == ToolButtonDirection::leftDirection || toolButtonDirect == ToolButtonDirection::rightDirection){
@@ -9,13 +8,12 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }else{
         setMinimumSize(210,150);
     }
-    g_graphType = type;
+    m_graphType = type;
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    m_graphWidget = new VisionGraph_(g_graphType,toolButtonDirect);
+    m_graphWidget = new VisionGraph_(m_graphType,toolButtonDirect);
     QObject::connect(m_graphWidget,SIGNAL(signal_Changed(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
-
 
     if(type == GraphType::graphRegion){
 //        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
@@ -30,8 +28,6 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     this->setLayout(mainLayout);
 }
 
-
-
 void VisionGraph::setSceneWidgetSize(QSize size)
 {
     m_graphWidget->setSceneWidgetSize(size);
@@ -44,6 +40,7 @@ void VisionGraph::setSceneWidgetSize(qreal w, qreal h)
 
 void VisionGraph::setGraphType(GraphType type)
 {
+    m_graphType = type;
     m_graphWidget->setGraphType(type);
 }
 
@@ -53,9 +50,9 @@ void VisionGraph::setThemeColor(ThemeColor theme)
 }
 
 
-VisionRectItem* VisionGraph::addRect(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
+VisionRectItem* VisionGraph::addRect(QRectF rf, qreal angle, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
-    return m_graphWidget->addRect(rf,bEdit,bRotation,color_enable,color);
+    return m_graphWidget->addRect(rf,angle,bEdit,bRotation,color_enable,color);
 }
 
 QGraphicsRectItem *VisionGraph::_addRect(const QRectF &rect, const QPen &pen, const QBrush &brush)
@@ -98,9 +95,9 @@ VisionCoordinateItem *VisionGraph::_addCoordinate(QPointF p, qreal angle, qreal 
     return m_graphWidget->_addCoordinate(p,angle,length,bEdit,color_enable,color);
 }
 
-VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, bool bEdit, bool bRotation, bool color_enable, QColor color)
+VisionEllipseItem* VisionGraph::addEllipse(QRectF rf, qreal angle, bool bEdit, bool bRotation, bool color_enable, QColor color)
 {
-    return m_graphWidget->addEllipse(rf,bEdit,bRotation,color_enable,color);
+    return m_graphWidget->addEllipse(rf,angle,bEdit,bRotation,color_enable,color);
 }
 
 VisionCircleItem *VisionGraph::addCircle(QRectF rf, bool bEdit, bool color_enable, QColor color)
@@ -193,12 +190,6 @@ void VisionGraph::setBrushColor(QColor color)
 {
     brushColor = color;
 }
-
-void VisionGraph::setRegionColor(QColor color)
-{
-//    regionColor = color;
-}
-
 
 void VisionGraph::show()
 {
@@ -378,6 +369,51 @@ void VisionGraph::setGraphStyleSheet(QString strStyleSheet)
 {
     this->setStyleSheet(strStyleSheet);
     m_graphWidget->setStyleSheet(strStyleSheet);
+}
+
+void VisionGraph::setRectColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setRectColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setEllipseColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setEllipseColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setCircleColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setCircleColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setPolyColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setPolyColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setPolyLineColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setPolyLineColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setArcColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setArcColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setPointColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setPointColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setLineColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setLineColor(borderColor,selectColor,brushColor);
+}
+
+void VisionGraph::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+{
+    m_graphWidget->setRegionColor(borderColor,selectColor,brushColor);
 }
 
 void VisionGraph::wheelEvent(QWheelEvent *event)

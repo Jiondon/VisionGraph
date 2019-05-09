@@ -16,6 +16,7 @@
 #include "VGBase.h"
 #include "../visiongraph_global.h"
 
+
 /**
  * @brief       枚举类型，item类型或者鼠标控制的类型（鼠标事件执行的对应的类型）-- 主要是绘图的view的状态的标记，包含了鼠标事件和绘制的item的记录等
  * @param       鼠标触发事件的所要执行的操作
@@ -135,6 +136,11 @@ public:
         return this->isEnabled();
     }
 
+    void setGlobleData(qreal scale,qreal penWid){
+//        g_scale = scale;
+//        g_penWidth = penWid;
+    }
+
 public:
     //虚函数
     /**
@@ -150,11 +156,11 @@ public:
     virtual QVector<QPointF> getPoints() = 0;
 
 
-//    /**
-//     * @brief       获取数据
-//     * @param       XVGlobal
-//     */
-//    virtual XVGlobal getData() = 0;
+    /**
+     * @brief       颜色数据
+     * @param       //item在选中或者编辑状态下的小矩形和边框的颜色//绘制的item的边框颜色  未选中或者非编辑的颜色//填充的颜色
+     */
+//    virtual void setData() = 0;
 
 signals:
     void signal_clicked(VisionItem* item,bool selected,bool bIn = true,qreal x=0,qreal y=0);

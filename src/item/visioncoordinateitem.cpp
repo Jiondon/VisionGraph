@@ -1,10 +1,10 @@
 ﻿#include "visioncoordinateitem.h"
 #include "../control/color.h"
 
-VisionCoordinateItem::VisionCoordinateItem(bool bEdit, bool color_enable,QColor color, VisionItem *parent) : VisionItem(parent)
+VisionCoordinateItem::VisionCoordinateItem(bool bEdit, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
-        m_borderColor = color;
+        m_borderColor = borderColor;
     }else{
         m_borderColor = borderColor;
     }

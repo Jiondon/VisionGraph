@@ -73,70 +73,82 @@ public:
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
      */
-    VisionRectItem* addRect(QRectF rf,bool bEdit = true, bool bRotation = true,bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionRectItem* addRect(QRectF rf,qreal angle = 0,bool bEdit = true, bool bRotation = true,bool color_enable = false,
+                            QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加一个arrow
      * @param       不可编辑的坐标系
      */
-    VisionArrow *addArrow(QPointF pointF,bool bEdit = false,bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionArrow *addArrow(QPointF pointF,bool bEdit = false,bool color_enable = false,
+                          QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加椭圆
      * @param       默认是可编辑的，未添加不可编辑的椭圆
      */
-    VisionEllipseItem* addEllipse(QRectF rf, bool bEdit = true, bool bRotation = true,bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionEllipseItem* addEllipse(QRectF rf,qreal angle = 0, bool bEdit = true, bool bRotation = true,bool color_enable = false,
+                                  QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加圆
      * @param       默认是可编辑的，未添加不可编辑的圆
      */
-    VisionCircleItem* addCircle(QRectF rf, bool bEdit = true, bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionCircleItem* addCircle(QRectF rf, bool bEdit = true, bool color_enable = false,
+                                QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加圆弧
      * @param       默认是可编辑的，未添加不可编辑的圆弧
      */
-    VisionArcItem *addArc(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true,bool color_enable = false, QColor color = QColor(255,0,0));
-    VisionArcItem *addArc(QPointF center,qreal r,qreal angle,qreal spanAngle, bool bEdit = true, bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionArcItem *addArc(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true,bool color_enable = false,
+                          QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    VisionArcItem *addArc(QPointF center,qreal r,qreal angle,qreal spanAngle, bool bEdit = true, bool color_enable = false,
+                          QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加线
      * @param       具体方法未实现
      */
-    VisionLineItem* addLine(QLine line, bool bEdit = true,bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionLineItem* addLine(QLine line, bool bEdit = true,bool color_enable = false,
+                            QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 
     /**
      * @brief       添加线--不限数量
      * @param       具体方法未实现
      */
-    VisionLine* addLines(QList<QLineF> lstLineF, bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionLine* addLines(QList<QLineF> lstLineF, bool color_enable = false,
+                         QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 
     /**
      * @brief       添加多边形/close为false，为折线
      * @param       点的集合，点的集合一次连接
      */
-    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, bool bEdit = true,bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionPolygon* addPolygon(QVector<QPointF> vecPointF, bool bClose = true, bool bEdit = true,bool color_enable = false,
+                              QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加一个点
      * @param
      */
-    VisionCrossPointItem *addPoint(QPointF pointF, bool bEdit = false, qreal length = 5,bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionCrossPointItem *addPoint(QPointF pointF, bool bEdit = false, qreal length = 5,bool color_enable = false,
+                                   QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加一个点 -- 不限数量
      * @param
      */
-    VisionPoint *addPointFs(QList<QPointF> lstP, bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionPoint *addPointFs(QList<QPointF> lstP, bool color_enable = false,
+                            QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加一个链
      * @param
      */
-    VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,bool edit = true,bool color_enable = false,QColor color = QColor(255,0,0));
+    VisionChainItem *addChain(QList<QPointF> lstP,bool close = false,bool edit = true,bool color_enable = false,
+                              QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 
     // Fitting
@@ -144,21 +156,24 @@ public:
     /**
      * @brief       添加线Fitting
      */
-    VisionLineItemFitting* addLineFitting(QLine line, bool bEdit = true, qreal length = 0,bool color_enable = false, QColor color = QColor(255,0,0));
+    VisionLineItemFitting* addLineFitting(QLine line, bool bEdit = true, qreal length = 0,bool color_enable = false,
+                                          QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加圆弧Fitting
      * @param       默认是可编辑的，未添加不可编辑
      */
     VisionArcItemFitting *addArcFitting(QPointF sP,QPointF mP,QPointF fP, bool bEdit = true, qreal length = 0,
-                                        bool color_enable = false,QColor color = QColor(255,0,0));
+                                        bool color_enable = false,
+                                        QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       添加圆Fitting
      * @param       默认是可编辑的，未添加不可编辑
      */
     VisionCircleItemFitting *addCircleFitting(QRectF rf = QRectF(0,0,0,0), bool bEdit = true, qreal length = 0,
-                                              bool color_enable = false,QColor color = QColor(255,0,0));
+                                              bool color_enable = false,
+                                              QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 
     /**
@@ -166,7 +181,7 @@ public:
      * @param       默认是可编辑的，未添加不可编辑
      */
     VisionPolygonItemFitting *addPolygonFitting(QVector<QPointF> vecPointF, bool bClose = true,bool bEdit = true, qreal length = 0,
-                                                bool color_enable = false,QColor color = QColor(255,0,0));
+                                                bool color_enable = false,QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 
     /**
@@ -174,7 +189,8 @@ public:
      * @param       默认是不可编辑.当前不支持编辑坐标系（拖动，旋转等操作）
      */
     VisionCoordinateItem *addCoordinate(QPointF p,qreal angle = 0,qreal length = 50,bool bEdit = true,
-                                        bool color_enable = false,QColor color = QColor(255,0,0));
+                                        bool color_enable = false,
+                                        QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
      * @brief       设置view的背景图片
@@ -407,6 +423,22 @@ public:
      * @param
      */
     VisionItem *getCurData();
+//    Paint_Rect Paint_EllipseItem Paint_CirCle Paint_Poly Paint_polyLine Paint_Arc point line
+//    selectedColor = QColor(255,0,0);
+//    borderColor = QColor(255,0,0);
+//    brushColor = QColor(255,0,0,160);
+    void setRectColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setEllipseColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setCircleColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPolyColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPolyLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setArcColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setPointColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
+    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
+    void setListRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
 signals:
     void signal_itemFinished(VisionItem* item);
@@ -582,6 +614,25 @@ private:
     void init_graphChain();
     void init_graphFitting();
     void init_graph_Item(GraphType type);
+
+
+private:
+    //    Paint_Rect Paint_EllipseItem Paint_CirCle Paint_Poly Paint_polyLine Paint_Arc point line
+
+    QColor borderColor_Rect,selectedColor_Rect,brushColor_Rect;
+    QColor borderColor_Ellipse,selectedColor_Ellipse,brushColor_Ellipse;
+    QColor borderColor_Circle,selectedColor_Circle,brushColor_Circle;
+    QColor borderColor_Poly,selectedColor_Poly,brushColor_Poly;
+    QColor borderColor_PolyLine,selectedColor_PolyLine,brushColor_PolyLine;
+    QColor borderColor_Arc,selectedColor_Arc,brushColor_Arc;
+    QColor borderColor_Point,selectedColor_Point,brushColor_Point;
+    QColor borderColor_Line,selectedColor_Line,brushColor_Line;
+
+    QColor borderColor_Region,selectedColor_Region,brushColor_Region;
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
 };
 
 #endif // VISIONGRAPH__H

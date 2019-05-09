@@ -33,12 +33,14 @@ class VISIONGRAPHSHARED_EXPORT VisionEllipseItem : public VisionItem
 {
     Q_OBJECT
 public:
-    VisionEllipseItem(bool edit = false, bool rotation = false , bool color_enable = false, QColor color = QColor(255,0,0), VisionItem *parent = 0);
+    VisionEllipseItem(bool edit = false, bool rotation = false , bool color_enable = false,
+                      QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                      VisionItem *parent = 0);
     /**
      * @brief       设置矩形
      */
-    void setRect(qreal x,qreal y,qreal width,qreal height);
-    void setRect(QRectF rf);
+    void setRect(qreal x,qreal y,qreal width,qreal height,qreal angle = 0);
+    void setRect(QRectF rf,qreal angle = 0);
 
     /**
      * @brief       获得矩形框大小

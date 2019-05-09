@@ -10,7 +10,9 @@ class VISIONGRAPHSHARED_EXPORT VisionArrow : public QObject , public VisionItem
 {
     Q_OBJECT
 public:
-    explicit VisionArrow(bool bEdit = false, bool color_enable = false, QColor color = QColor(255,0,0), QObject *parent = 0);
+    explicit VisionArrow(bool bEdit = false, bool color_enable = false,
+                         QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160)
+            , QObject *parent = 0);
 
     void setPointF(QPointF pointF);
     void setArrowLength(int iLength = 10);

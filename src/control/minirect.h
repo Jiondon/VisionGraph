@@ -23,7 +23,9 @@ class MiniRect : public QObject,public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit MiniRect(qreal x,qreal y,qreal w,qreal h,QColor penColor = QColor(255,0,0),QGraphicsItem *parent = 0);
+    explicit MiniRect(qreal x,qreal y,qreal w,qreal h,
+                      QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                      QGraphicsItem *parent = 0);
 
     /**
      * @brief  小矩形填充颜色使能
@@ -39,6 +41,11 @@ public:
      * @brief   标记--在存在多个miniRect的时候，方便进行单独处理
      */
     void setIndex(int index);
+
+    void setGlobleData(qreal scale,qreal penWid){
+//        g_scale = scale;
+//        g_penWidth = penWid;
+    }
 
 signals:
     void signalIndex(int index);
