@@ -83,6 +83,8 @@ private:
     VGRegion m_vgRegion;  //文本的区域
     QString m_strText;  //显示的字的文本
 
+    QVector<QLineF> m_vecLines;
+
 public slots:
 };
 
