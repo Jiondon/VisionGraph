@@ -166,9 +166,19 @@ VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal l
     return m_graphWidget->addCoordinate(p,angle,length,bEdit,color_enable,color);
 }
 
+VisionTextItem *VisionGraph::addText(VGRegion region, QString name)
+{
+    return m_graphWidget->addText(region,name);
+}
+
 void VisionGraph::setBkImg(QImage image)
 {
     m_graphWidget->setBkImg(image);
+}
+
+void VisionGraph::removeBkImg()
+{
+    m_graphWidget->removeBkImg();
 }
 
 void VisionGraph::setToolButton_Direction(ToolButtonDirection direct)
@@ -411,9 +421,9 @@ void VisionGraph::setLineColor(QColor borderColor, QColor selectColor, QColor br
     m_graphWidget->setLineColor(borderColor,selectColor,brushColor);
 }
 
-void VisionGraph::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+void VisionGraph::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor, QColor brushColor_unEdit)
 {
-    m_graphWidget->setRegionColor(borderColor,selectColor,brushColor);
+    m_graphWidget->setRegionColor(borderColor,selectColor,brushColor,brushColor_unEdit);
 }
 
 void VisionGraph::wheelEvent(QWheelEvent *event)

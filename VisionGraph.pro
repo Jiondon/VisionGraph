@@ -81,7 +81,8 @@ SOURCES += src/visiongraph.cpp \
     src/item/visioncoordinateitem.cpp \
     src/item/visioncircleitem.cpp \
     src/item/visioncircleitemfitting.cpp \
-    src/item/visiontextitem.cpp
+    src/item/visiontextitem.cpp \
+    src/item/visionregion.cpp
 
 HEADERS += src/visiongraph.h \
     src/visiongraph_global.h \
@@ -112,7 +113,8 @@ HEADERS += src/visiongraph.h \
     src/item/visioncoordinateitem.h \
     src/item/visioncircleitem.h \
     src/item/visioncircleitemfitting.h \
-    src/item/visiontextitem.h
+    src/item/visiontextitem.h \
+    src/item/visionregion.h
 
 unix {
     target.path = /usr/lib

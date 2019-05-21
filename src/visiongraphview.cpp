@@ -211,9 +211,12 @@ void VisionGraphView::leaveEvent(QEvent *event)
     m_pMouseInfo_Label->hide();
 }
 
+#include <QTime>
 void VisionGraphView::paintEvent(QPaintEvent *event)
 {
     QGraphicsView::paintEvent(event);
+
+    QTime time;
 
     QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing,true);
@@ -221,6 +224,18 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         painter.setPen(QPen(m_FrameColor,0));
         painter.drawPolygon(this->mapFromScene(m_frameRect));
     }
+
+    QList<QLineF> lstLineF;
+    for(int i=0;i<200000;i++){
+//        VisionLine* item = new VisionLine();
+//        item->setLine(QLineF(50,50+i,150,50+i));
+//        mScene->addItem(item);
+
+        QLineF lineF = QLineF(50,50+i,150,50+i);
+        lstLineF.append(lineF);
+    }
+
+    return;
 
     if(isCoordinate){
         //绘制交叉的坐标系
@@ -242,12 +257,14 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.setBrush(m_brushColor);
     painter.drawPath(m_path);
 
+
     painter.setPen(QPen(m_brushColor,0));  //区域采用填充的颜色，原因自己想
     QVector<QLineF> vecLines;
     for(int i=0;i<m_vecLines.size();i++){
 //        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
         QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
         vecLines.append(lineF);
+        painter.drawLine(lineF);
     }
     painter.drawLines(vecLines);
 
@@ -264,6 +281,17 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
                              this->mapFromScene(QPointF(pointRun.x+pointRun.length,pointRun.y).toPoint()));
         }
     }
+
+
+    //绘制不可编辑的region
+    painter.setPen(QPen(m_brushColor_unEdit,0));  //非编辑区域有自己的颜色
+    QVector<QLineF> vecLines_unEdit;
+    for(int i=0;i<m_vecLines_unEdit.size();i++){
+//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
+        QLineF lineF = QLineF(this->mapFromScene(m_vecLines_unEdit.at(i).p1()),this->mapFromScene(m_vecLines_unEdit.at(i).p2()));
+        vecLines_unEdit.append(lineF);
+    }
+    painter.drawLines(vecLines_unEdit);
 }
 
 void VisionGraphView::setItemType(ItemType type){
@@ -371,6 +399,7 @@ void VisionGraphView::clearPainter()
     QPainterPath path;
     m_path = path;
     m_vecLines.clear();
+    m_vecLines_unEdit.clear();
 
     m_clearAll = true;
 
@@ -588,11 +617,28 @@ void VisionGraphView::setCoordinateVisible(bool bVisible)
     isCoordinate = bVisible;
 }
 
-void VisionGraphView::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+void VisionGraphView::updateRegion_UnEdit(XVRegion region){
+//    m_Region_UnEdit = region;
+    vector<XVPointRun> vec_point;
+    vec_point = region.arrayPointRun;
+
+    XVPointRun pointRun;
+    QLineF lineF;
+    m_vecLines_unEdit.clear();
+    for(int i=0;i<vec_point.size();i++){
+        pointRun = vec_point.at(i);
+        lineF.setPoints((QPointF(pointRun.x,pointRun.y)),
+                        (QPointF(pointRun.x+pointRun.length,pointRun.y)));
+        m_vecLines_unEdit.append(lineF);
+    }
+}
+
+void VisionGraphView::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor, QColor brushColor_unEdit)
 {
     m_borderColor = borderColor;
     m_selectedColor = selectColor;
     m_brushColor = brushColor;
+    m_brushColor_unEdit = brushColor_unEdit;
     this->scene()->update();
 }
 

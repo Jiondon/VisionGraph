@@ -193,11 +193,18 @@ public:
                                         QColor borderColor = QColor(255,0,0),QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     /**
+     * @brief       添加文本控件
+     * @param       默认是不可编辑.当前不支持编辑（拖动，旋转等操作）
+     */
+    VisionTextItem *addText(VGRegion region, QString name = "?");
+
+    /**
      * @brief       设置view的背景图片
      * @param
      */
     int setBkImg(QImage image);
 
+    void removeBkImg();
 
     /**
      * @brief       设置toolButton的布局
@@ -436,7 +443,8 @@ public:
     void setPointColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
     void setLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
-    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                        QColor brushColor_unEdit = QColor(255,0,0,200));
 
     void setListRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 

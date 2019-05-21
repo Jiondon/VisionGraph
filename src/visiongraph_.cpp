@@ -605,9 +605,9 @@ void VisionGraph_::setLineColor(QColor borderColor, QColor selectColor, QColor b
     brushColor_Line = brushColor;
 }
 
-void VisionGraph_::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
+void VisionGraph_::setRegionColor(QColor borderColor, QColor selectColor, QColor brushColor, QColor brushColor_unEdit)
 {
-    view->setRegionColor(borderColor,selectColor,brushColor);
+    view->setRegionColor(borderColor,selectColor,brushColor,brushColor_unEdit);
 }
 
 void VisionGraph_::setListRegionColor(QColor borderColor, QColor selectColor, QColor brushColor)
@@ -1244,6 +1244,14 @@ VisionCoordinateItem *VisionGraph_::addCoordinate(QPointF p, qreal angle, qreal 
     return item;
 }
 
+VisionTextItem *VisionGraph_::addText(VGRegion region, QString name)
+{
+    VisionTextItem* item = new VisionTextItem();
+    item->setData(region,name);
+    scene->addItem(item);
+    return item;
+}
+
 
 int VisionGraph_::setBkImg(QImage image)
 {
@@ -1255,8 +1263,15 @@ int VisionGraph_::setBkImg(QImage image)
         scene->addItem(m_bkPixmapItem);
     }
     m_bkPixmapItem->setPixmap(QPixmap::fromImage(image));
+    scene->addItem(m_bkPixmapItem);
 //    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     return 0;
+}
+
+void VisionGraph_::removeBkImg()
+{
+    if(m_bkPixmapItem != NULL)
+        scene->removeItem(m_bkPixmapItem);
 }
 
 void VisionGraph_::setToolButton_Direction(ToolButtonDirection direct){

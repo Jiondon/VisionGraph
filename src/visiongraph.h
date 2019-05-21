@@ -192,9 +192,17 @@ public:
 
 
     /**
+     * @brief       添加文本控件
+     * @param       默认是不可编辑.当前不支持编辑（拖动，旋转等操作）
+     */
+    VisionTextItem *addText(VGRegion region, QString name = "?");
+
+
+    /**
      * @brief       设置VisionGraph的背景，区分版本
      */
     void setBkImg(QImage image);
+    void removeBkImg();
 
 
     /**
@@ -431,7 +439,8 @@ public:
     void setLineColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
 
     //region主要是brushColor有效
-    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160),
+                        QColor brushColor_unEdit = QColor(255,0,0,200));
 
 signals:
     void signal_PaintFinishedChanged(VisionItem*);

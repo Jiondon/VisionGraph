@@ -259,8 +259,16 @@ public:
      */
     void setCoordinateVisible(bool bVisible);
 
+    /**
+     * @brief       添加不可编辑的region，此region可以通过清空进行删除
+     * @param
+     */
+    void updateRegion_UnEdit(XVRegion region);
 
-    void setRegionColor(QColor borderColor = QColor(255,0,0),QColor selectColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+    void setRegionColor(QColor borderColor = QColor(255,0,0),
+                        QColor selectColor = QColor(255,0,0),
+                        QColor brushColor = QColor(255,0,0,160),
+                        QColor brushColor_unEdit = QColor(255,0,0,200));
 
 signals:
     void signal_Move(QPointF pointF);
@@ -350,11 +358,15 @@ private:
 
     bool m_bPress_Drag = false;  //提供给拖动进行控制，只有在按下的状态，拖动才有效
 
+//    XVRegion m_Region_UnEdit;  //保存非编辑区域
+    QList<QLineF> m_vecLines_unEdit;  //保存非编辑区域的直线
+
     bool isCoordinate = true;
 
     QColor m_borderColor;
     QColor m_brushColor;
     QColor m_selectedColor;
+    QColor m_brushColor_unEdit;
 
 protected:
 

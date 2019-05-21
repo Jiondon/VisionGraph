@@ -35,6 +35,7 @@
 #include "./item/visionpolygonitemfitting.h"
 #include "./item/visioncircleitemfitting.h"
 #include "./item/visioncoordinateitem.h"
+#include "./item/visiontextitem.h"
 
 #include "./control/color.h"
 
