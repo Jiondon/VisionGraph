@@ -176,7 +176,7 @@ VisionTextItem *VisionGraph::addText(VGRegion region, QString name)
     return m_graphWidget->addText(region,name);
 }
 
-VisionRegion *VisionGraph::addRegion(VGRegion region, QColor color)
+VisionRegion *VisionGraph::addRegion(VGRegion *region, QColor color)
 {
     return m_graphWidget->addRegion(region,color);
 }

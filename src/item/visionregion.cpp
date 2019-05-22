@@ -1,14 +1,15 @@
 ﻿#include "visionregion.h"
+#include <QDebug>
 
 VisionRegion::VisionRegion(VisionItem *parent) : VisionItem(parent)
 {
 
 }
 
-void VisionRegion::setRegionData(VGRegion region, QColor color)
+void VisionRegion::setRegionData(VGRegion *region, QColor color)
 {
     vector<VGPointRun> vec_point;
-    vec_point = region.arrayPointRun;
+    vec_point = region->arrayPointRun;
 
     VGPointRun pointRun;
     QLineF lineF;
@@ -19,8 +20,8 @@ void VisionRegion::setRegionData(VGRegion region, QColor color)
                         (QPointF(pointRun.x+pointRun.length,pointRun.y)));
         m_vecLines.append(lineF);
     }
-    m_w = region.frameWidth;
-    m_h = region.frameHeight;
+    m_w = region->frameWidth;
+    m_h = region->frameHeight;
 
     m_regionColor = color;
     this->update();
@@ -28,11 +29,18 @@ void VisionRegion::setRegionData(VGRegion region, QColor color)
 
 void VisionRegion::setRegionData(vector<VGRegionPair> vec_regionPair)
 {
+    m_vecRegionPair.clear();
     m_vecRegionPair = vec_regionPair;
+
+    if(vec_regionPair.size() > 0){
+        m_w = vec_regionPair.at(0).region->frameWidth;
+        m_h = vec_regionPair.at(0).region->frameHeight;
+    }
+
     this->update();
 }
 
-void VisionRegion::addRegionData(VGRegion region, QColor color)
+void VisionRegion::addRegionData(VGRegion *region, QColor color)
 {
     VGRegionPair pair;
     pair.color = color;
@@ -70,7 +78,7 @@ void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     if(m_vecRegionPair.size() > 0){
         for(int i=0;i<m_vecRegionPair.size();i++){
             vec_point.clear();
-            vec_point = m_vecRegionPair.at(i).region.arrayPointRun;
+            vec_point = m_vecRegionPair.at(i).region->arrayPointRun;
             painter->setPen(QPen(m_vecRegionPair.at(i).color,0));
             VGPointRun pointRun;
             for(int i=0;i<vec_point.size();i++){
@@ -84,6 +92,9 @@ void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 QRectF VisionRegion::boundingRect() const
 {
-    return QRectF(0,0,m_w,m_h);
+    QRectF rf = QRectF(0,0,m_w,m_h);
+    return rf;
+    qDebug()<<this->mapFromScene(rf).boundingRect();
+    return this->mapFromScene(rf).boundingRect();
 }
 

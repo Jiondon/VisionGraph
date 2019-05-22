@@ -17,7 +17,7 @@
 #include <QPainter>
 
 struct VGRegionPair{
-    VGRegion region;
+    VGRegion *region;
     int value;
     QColor color;
 };
@@ -28,10 +28,10 @@ class VISIONGRAPHSHARED_EXPORT VisionRegion : public VisionItem
 public:
     explicit VisionRegion(VisionItem *parent = 0);
 
-    void setRegionData(VGRegion region,QColor color = QColor(255,0,0,160));
+    void setRegionData(VGRegion *region, QColor color = QColor(255,0,0,160));
 
     void setRegionData(vector<VGRegionPair> vec_regionPair);  //链表
-    void addRegionData(VGRegion region,QColor color);  //添加到链表
+    void addRegionData(VGRegion *region,QColor color);  //添加到链表
 
     void clearRegion();
 

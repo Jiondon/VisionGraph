@@ -1283,11 +1283,12 @@ VisionTextItem *VisionGraph_::addText(VGRegion region, QString name)
     return item;
 }
 
-VisionRegion *VisionGraph_::addRegion(VGRegion region, QColor color)
+VisionRegion *VisionGraph_::addRegion(VGRegion *region, QColor color)
 {
     VisionRegion *item  = new VisionRegion();
     item->setRegionData(region,color);
     scene->addItem(item);
+    m_lstItem.push_back(item);
     return item;
 }
 
@@ -1296,6 +1297,7 @@ VisionRegion *VisionGraph_::addRegion(vector<VGRegionPair> vec_regionPair)
     VisionRegion *item  = new VisionRegion();
     item->setRegionData(vec_regionPair);
     scene->addItem(item);
+    m_lstItem.push_back(item);
     return item;
 }
 

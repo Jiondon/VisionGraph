@@ -202,7 +202,7 @@ public:
      * @brief       添加区域
      * @param       默认是不可编辑.当前不支持编辑（拖动，旋转等操作）
      */
-    VisionRegion *addRegion(VGRegion region,QColor color = QColor(255,0,0,180));
+    VisionRegion *addRegion(VGRegion *region, QColor color = QColor(255,0,0,180));
     VisionRegion *addRegion(vector<VGRegionPair> vec_regionPair);
 
     /**
