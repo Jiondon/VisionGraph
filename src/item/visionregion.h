@@ -22,7 +22,7 @@ struct VGRegionPair{
     QColor color;
 };
 
-class VisionRegion : public VisionItem
+class VISIONGRAPHSHARED_EXPORT VisionRegion : public VisionItem
 {
     Q_OBJECT
 public:
@@ -32,6 +32,8 @@ public:
 
     void setRegionData(vector<VGRegionPair> vec_regionPair);  //链表
     void addRegionData(VGRegion region,QColor color);  //添加到链表
+
+    void clearRegion();
 
     QVector<QPointF> getPoints(){
         QVector<QPointF> vec_p;

@@ -42,6 +42,12 @@ void VisionRegion::addRegionData(VGRegion region, QColor color)
     this->update();
 }
 
+void VisionRegion::clearRegion()
+{
+    m_vecLines.clear();
+    m_vecRegionPair.clear();
+}
+
 void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)
