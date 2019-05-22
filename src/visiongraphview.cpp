@@ -214,9 +214,10 @@ void VisionGraphView::leaveEvent(QEvent *event)
 #include <QTime>
 void VisionGraphView::paintEvent(QPaintEvent *event)
 {
-    QGraphicsView::paintEvent(event);
-
     QTime time;
+//    time.start();
+
+    QGraphicsView::paintEvent(event);
 
     QPainter painter(this->viewport());
     painter.setRenderHint(QPainter::Antialiasing,true);
@@ -225,17 +226,19 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         painter.drawPolygon(this->mapFromScene(m_frameRect));
     }
 
-    QList<QLineF> lstLineF;
-    for(int i=0;i<200000;i++){
-//        VisionLine* item = new VisionLine();
-//        item->setLine(QLineF(50,50+i,150,50+i));
-//        mScene->addItem(item);
 
-        QLineF lineF = QLineF(50,50+i,150,50+i);
-        lstLineF.append(lineF);
-    }
+//    QList<QLineF> lstLineF;
+//    for(int i=0;i<200000;i++){
+////        VisionLine* item = new VisionLine();
+////        item->setLine(QLineF(50,50+i,150,50+i));
+////        mScene->addItem(item);
 
-    return;
+//        QLineF lineF = QLineF(50,50+i,150,50+i);
+//        lstLineF.append(lineF);
+//    }
+//    painter.drawLines(lstLineF.toVector());
+//    qDebug()<<"111111111111111: "<<time.elapsed();
+//    return;
 
     if(isCoordinate){
         //绘制交叉的坐标系
@@ -292,6 +295,9 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
         vecLines_unEdit.append(lineF);
     }
     painter.drawLines(vecLines_unEdit);
+
+//    qDebug()<<"111111111111111: "<<time.elapsed();
+
 }
 
 void VisionGraphView::setItemType(ItemType type){

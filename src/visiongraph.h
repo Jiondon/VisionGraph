@@ -22,6 +22,7 @@ class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 public:
     VisionGraph(GraphType type = GraphType::graph_Info, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
 
+    ~VisionGraph();
     /**
      * @brief       添加rectangle  可旋转的矩形
      * @param       bEdit 表示编辑
@@ -197,6 +198,12 @@ public:
      */
     VisionTextItem *addText(VGRegion region, QString name = "?");
 
+    /**
+     * @brief       添加区域
+     * @param       默认是不可编辑.当前不支持编辑（拖动，旋转等操作）
+     */
+    VisionRegion *addRegion(VGRegion region,QColor color = QColor(255,0,0,180));
+    VisionRegion *addRegion(vector<VGRegionPair> vec_regionPair);
 
     /**
      * @brief       设置VisionGraph的背景，区分版本

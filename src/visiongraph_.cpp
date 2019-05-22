@@ -25,6 +25,37 @@ VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect,
 
 }
 
+VisionGraph_::~VisionGraph_()
+{
+    delete sys_selected_button;
+    delete sys_drag_button;
+    delete sys_zoom_button;  //将拖动的恢复到当前窗口
+    delete sys_fit_button;  //调整比例，适应当前窗口
+    delete sys_mousePainter_button;
+    delete sys_mouseClear_button;
+    delete sys_save_button;
+    delete sys_rect_button;
+    delete sys_ellipse_button;
+    delete sys_circle_button;
+    delete sys_arc_button;
+    delete sys_poly_button;
+    delete sys_poly_elli_button;
+    delete sys_point_button;
+    delete sys_line_button;
+    delete sys_polyLine_button;
+
+    //右侧工具栏 -- 功能类
+    delete sys_open_project_button;  //打开工程
+    delete sys_front_button;  //撤销
+    delete sys_next_button;   //取消撤销
+    delete sys_clear_button;  //清空绘图区域
+    delete sys_remove_item_button;  //删除当前选中的item
+
+    delete tool_infoWidget;
+//    delete infoWidget;
+}
+
+
 void VisionGraph_::setGraphType(GraphType type)
 {
     m_graphType = type;
@@ -110,36 +141,36 @@ void VisionGraph_::initScene()
 
 void VisionGraph_::initTool_operation()
 {
-    QAction* sys_open_project = new QAction(QIcon(iconPath+"open.png"),QStringLiteral("打开"));
+    QAction* sys_open_project = new QAction(QIcon(iconPath+"open.png"),QStringLiteral("打开"),this);
     sys_open_project->setIconText(QStringLiteral("打开"));
     connect(sys_open_project,SIGNAL(triggered(bool)),this,SLOT(slot_open_project()));
     sys_open_project_button = new QToolButton;
     sys_open_project_button->setDefaultAction(sys_open_project);
 
-    QAction* sys_save_action = new QAction(QIcon(iconPath+"save.png"),QStringLiteral("保存"));
+    QAction* sys_save_action = new QAction(QIcon(iconPath+"save.png"),QStringLiteral("保存"),this);
     sys_save_action->setIconText(QStringLiteral("保存"));
     connect(sys_save_action,SIGNAL(triggered(bool)),this,SLOT(slot_save_action()));
     sys_save_button = new QToolButton;
     sys_save_button->setDefaultAction(sys_save_action);
     //撤销按钮（回滚）历史
-    QAction* sys_front_action = new QAction(QIcon(iconPath+"back.png"),QStringLiteral("撤销"));
+    QAction* sys_front_action = new QAction(QIcon(iconPath+"back.png"),QStringLiteral("撤销"),this);
     sys_front_action->setIconText(QStringLiteral("撤销"));
     connect(sys_front_action,SIGNAL(triggered(bool)),this,SLOT(slot_front_action()));
     sys_front_button = new QToolButton;
     sys_front_button->setDefaultAction(sys_front_action);
     //撤销按钮（后滚）未来
-    QAction* sys_next_action = new QAction(QIcon(iconPath+"front.png"),QStringLiteral("恢复"));
+    QAction* sys_next_action = new QAction(QIcon(iconPath+"front.png"),QStringLiteral("恢复"),this);
     sys_next_action->setIconText(QStringLiteral("恢复"));
     connect(sys_next_action,SIGNAL(triggered(bool)),this,SLOT(slot_next_action()));
     sys_next_button = new QToolButton;
     sys_next_button->setDefaultAction(sys_next_action);
     //清空绘图区域
-    QAction* sys_clear_action = new QAction(QIcon(iconPath+"delect.png"),QStringLiteral("清理"));
+    QAction* sys_clear_action = new QAction(QIcon(iconPath+"delect.png"),QStringLiteral("清理"),this);
     sys_clear_action->setIconText(QStringLiteral("清理"));
     connect(sys_clear_action,SIGNAL(triggered(bool)),this,SLOT(slot_clear_action()));
     sys_clear_button = new QToolButton;
     sys_clear_button->setDefaultAction(sys_clear_action);
-    QAction* sys_remove_item = new QAction(QIcon(iconPath+"remove.png"),QStringLiteral("删除当前选中的item"));
+    QAction* sys_remove_item = new QAction(QIcon(iconPath+"remove.png"),QStringLiteral("删除当前选中的item"),this);
     sys_remove_item->setShortcut(QKeySequence::Delete);
     sys_remove_item->setIconText(QStringLiteral("删除"));
     connect(sys_remove_item,SIGNAL(triggered(bool)),this,SLOT(slot_removeItem_action()));
@@ -167,103 +198,103 @@ void VisionGraph_::initTool_operation()
     m_lstToolBtn.append(sys_remove_item_button);
 
     //选中按钮---绘制规则形状的时候，绘制完成后默认选中，此时高亮，其他时间都是灰色
-    QAction* sys_selected_action = new QAction(QIcon(iconPath+"select.png"),QStringLiteral(""));
+    QAction* sys_selected_action = new QAction(QIcon(iconPath+"select.png"),QStringLiteral(""),this);
     sys_selected_action->setIconText(QStringLiteral("选择"));
     connect(sys_selected_action,SIGNAL(triggered(bool)),this,SLOT(slot_selected_action()));
     sys_selected_button = new QToolButton;
     sys_selected_button->setDefaultAction(sys_selected_action);
     //拖动按钮---拖动整个绘制的区域的位置
-    QAction* sys_drag_action = new QAction(QIcon(iconPath+"drag.png"),QStringLiteral("拖动当前视图"));
+    QAction* sys_drag_action = new QAction(QIcon(iconPath+"drag.png"),QStringLiteral("拖动当前视图"),this);
     sys_drag_action->setIconText(QStringLiteral("拖动"));
     connect(sys_drag_action,SIGNAL(triggered(bool)),this,SLOT(slot_drag_action()));
     sys_drag_button = new QToolButton;
     sys_drag_button->setDefaultAction(sys_drag_action);
     //放大镜功能  --->> 恢复到起始地点
-    QAction* sys_zoom_action = new QAction(QIcon(iconPath+"zoom.png"),QStringLiteral("居中"));
+    QAction* sys_zoom_action = new QAction(QIcon(iconPath+"zoom.png"),QStringLiteral("居中"),this);
     sys_zoom_action->setIconText(QStringLiteral("居中"));
     connect(sys_zoom_action,SIGNAL(triggered(bool)),this,SLOT(slot_zoom_action()));
     sys_zoom_button = new QToolButton;
     sys_zoom_button->setDefaultAction(sys_zoom_action);
 
     //图片自适应
-    QAction* sys_fit_action = new QAction(QIcon(iconPath+"zoomfit.png"),QStringLiteral("自适应"));
+    QAction* sys_fit_action = new QAction(QIcon(iconPath+"zoomfit.png"),QStringLiteral("自适应"),this);
     sys_fit_action->setIconText(QStringLiteral("自适应"));
     connect(sys_fit_action,SIGNAL(triggered(bool)),this,SLOT(slot_fit_action()));
     sys_fit_button = new QToolButton;
     sys_fit_button->setDefaultAction(sys_fit_action);
 
     //鼠标擦除
-    QAction* sys_mouseClear_action = new QAction(QIcon(iconPath+"clear.png"),QStringLiteral("擦除"));
+    QAction* sys_mouseClear_action = new QAction(QIcon(iconPath+"clear.png"),QStringLiteral("擦除"),this);
     sys_mouseClear_action->setIconText(QStringLiteral("擦除"));
     sys_mouseClear_action->setText("mouseClear");
     connect(sys_mouseClear_action,SIGNAL(triggered(bool)),this,SLOT(slot_mouseClear_action()));
     sys_mouseClear_button = new QToolButton;
     sys_mouseClear_button->setDefaultAction(sys_mouseClear_action);
     //鼠标绘制
-    QAction* sys_mousePainter_action = new QAction(QIcon(iconPath+"painter.png"),QStringLiteral("绘制"));
+    QAction* sys_mousePainter_action = new QAction(QIcon(iconPath+"painter.png"),QStringLiteral("绘制"),this);
     sys_mousePainter_action->setIconText(QStringLiteral("绘制"));
     sys_mousePainter_action->setText("mousePainter");
     connect(sys_mousePainter_action,SIGNAL(triggered(bool)),this,SLOT(slot_mousePainter_action()));
     sys_mousePainter_button = new QToolButton;
     sys_mousePainter_button->setDefaultAction(sys_mousePainter_action);
     //矩形
-    QAction* sys_rect_action = new QAction(QIcon(iconPath+"rect.png"),QStringLiteral("新建一个矩形区域"));
+    QAction* sys_rect_action = new QAction(QIcon(iconPath+"rect.png"),QStringLiteral("新建一个矩形区域"),this);
     sys_rect_action->setIconText(QStringLiteral("矩形"));
     sys_rect_action->setText("rectangle");
     connect(sys_rect_action,SIGNAL(triggered(bool)),this,SLOT(slot_rect_action()));
     sys_rect_button = new QToolButton;
     sys_rect_button->setDefaultAction(sys_rect_action);
     //椭圆
-    QAction* sys_ellipse_action = new QAction(QIcon(iconPath+"ellipse.png"),QStringLiteral("新建一个椭圆区域"));
+    QAction* sys_ellipse_action = new QAction(QIcon(iconPath+"ellipse.png"),QStringLiteral("新建一个椭圆区域"),this);
     sys_ellipse_action->setIconText(QStringLiteral("椭圆或者圆"));
     sys_ellipse_action->setText("ellipse");
     connect(sys_ellipse_action,SIGNAL(triggered(bool)),this,SLOT(slot_ellipse_action()));
     sys_ellipse_button = new QToolButton;
     sys_ellipse_button->setDefaultAction(sys_ellipse_action);
     //圆
-    QAction* sys_circle_action = new QAction(QIcon(iconPath+"circle.png"),QStringLiteral("新建一个圆区域"));
+    QAction* sys_circle_action = new QAction(QIcon(iconPath+"circle.png"),QStringLiteral("新建一个圆区域"),this);
     sys_circle_action->setIconText(QStringLiteral("圆"));
     sys_circle_action->setText("circle");
     connect(sys_circle_action,SIGNAL(triggered(bool)),this,SLOT(slot_circle_action()));
     sys_circle_button = new QToolButton;
     sys_circle_button->setDefaultAction(sys_circle_action);
     //圆弧
-    QAction* sys_arc_action = new QAction(QIcon(iconPath+"arc.png"),QStringLiteral("新建一个圆弧"));
+    QAction* sys_arc_action = new QAction(QIcon(iconPath+"arc.png"),QStringLiteral("新建一个圆弧"),this);
     sys_arc_action->setIconText(QStringLiteral("圆弧"));
     sys_arc_action->setText("Arc");
     connect(sys_arc_action,SIGNAL(triggered(bool)),this,SLOT(slot_arc_action()));
     sys_arc_button = new QToolButton;
     sys_arc_button->setDefaultAction(sys_arc_action);
     //不规则多边形---直线连接各点
-    QAction* sys_poly_action = new QAction(QIcon(iconPath+"poly.png"),QStringLiteral("新建一个不规则多边形区域"));
+    QAction* sys_poly_action = new QAction(QIcon(iconPath+"poly.png"),QStringLiteral("新建一个不规则多边形区域"),this);
     sys_poly_action->setIconText(QStringLiteral("多边形"));
     sys_poly_action->setText("poly");
     connect(sys_poly_action,SIGNAL(triggered(bool)),this,SLOT(slot_poly_action()));
     sys_poly_button = new QToolButton;
     sys_poly_button->setDefaultAction(sys_poly_action);
     //不规则圆形---曲线连接各点
-    QAction* sys_poly_elli_action = new QAction(QIcon(iconPath+"poly_elli.png"),QStringLiteral("任意区域：绘制不规则区域"));
+    QAction* sys_poly_elli_action = new QAction(QIcon(iconPath+"poly_elli.png"),QStringLiteral("任意区域：绘制不规则区域"),this);
     sys_poly_elli_action->setIconText(QStringLiteral("任意区域"));
     sys_poly_elli_action->setText("region");
     connect(sys_poly_elli_action,SIGNAL(triggered(bool)),this,SLOT(slot_poly_elli_action()));
     sys_poly_elli_button = new QToolButton;
     sys_poly_elli_button->setDefaultAction(sys_poly_elli_action);
 
-    QAction* sys_point_action = new QAction(QIcon(iconPath+"point.png"),QStringLiteral("绘制点"));
+    QAction* sys_point_action = new QAction(QIcon(iconPath+"point.png"),QStringLiteral("绘制点"),this);
     sys_point_action->setIconText(QStringLiteral("点"));
     sys_point_action->setText("point");
     connect(sys_point_action,SIGNAL(triggered(bool)),this,SLOT(slot_point_action()));
     sys_point_button = new QToolButton;
     sys_point_button->setDefaultAction(sys_point_action);
 
-    QAction* sys_line_action = new QAction(QIcon(iconPath+"line.png"),QStringLiteral("绘制直线"));
+    QAction* sys_line_action = new QAction(QIcon(iconPath+"line.png"),QStringLiteral("绘制直线"),this);
     sys_line_action->setIconText(QStringLiteral("直线"));
     sys_line_action->setText("line");
     connect(sys_line_action,SIGNAL(triggered(bool)),this,SLOT(slot_line_action()));
     sys_line_button = new QToolButton;
     sys_line_button->setDefaultAction(sys_line_action);
 
-    QAction* sys_polyLine_action = new QAction(QIcon(iconPath+"polyline.png"),QStringLiteral("绘制折线"));
+    QAction* sys_polyLine_action = new QAction(QIcon(iconPath+"polyline.png"),QStringLiteral("绘制折线"),this);
     sys_polyLine_action->setIconText(QStringLiteral("折线"));
     sys_polyLine_action->setText("polyLine");
     connect(sys_polyLine_action,SIGNAL(triggered(bool)),this,SLOT(slot_polyLine_action()));
@@ -1248,6 +1279,22 @@ VisionTextItem *VisionGraph_::addText(VGRegion region, QString name)
 {
     VisionTextItem* item = new VisionTextItem();
     item->setData(region,name);
+    scene->addItem(item);
+    return item;
+}
+
+VisionRegion *VisionGraph_::addRegion(VGRegion region, QColor color)
+{
+    VisionRegion *item  = new VisionRegion();
+    item->setRegionData(region,color);
+    scene->addItem(item);
+    return item;
+}
+
+VisionRegion *VisionGraph_::addRegion(vector<VGRegionPair> vec_regionPair)
+{
+    VisionRegion *item  = new VisionRegion();
+    item->setRegionData(vec_regionPair);
     scene->addItem(item);
     return item;
 }

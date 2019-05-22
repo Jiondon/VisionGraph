@@ -28,6 +28,11 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     this->setLayout(mainLayout);
 }
 
+VisionGraph::~VisionGraph()
+{
+    m_graphWidget->deleteLater();
+}
+
 void VisionGraph::setSceneWidgetSize(QSize size)
 {
     m_graphWidget->setSceneWidgetSize(size);
@@ -169,6 +174,16 @@ VisionCoordinateItem *VisionGraph::addCoordinate(QPointF p, qreal angle, qreal l
 VisionTextItem *VisionGraph::addText(VGRegion region, QString name)
 {
     return m_graphWidget->addText(region,name);
+}
+
+VisionRegion *VisionGraph::addRegion(VGRegion region, QColor color)
+{
+    return m_graphWidget->addRegion(region,color);
+}
+
+VisionRegion *VisionGraph::addRegion(vector<VGRegionPair> vec_regionPair)
+{
+    return m_graphWidget->addRegion(vec_regionPair);
 }
 
 void VisionGraph::setBkImg(QImage image)

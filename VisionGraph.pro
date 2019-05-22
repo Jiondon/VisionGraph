@@ -121,5 +121,4 @@ unix {
     INSTALLS += target
 }
 
-RESOURCES += \
-    image.qrc
+RESOURCES +=
