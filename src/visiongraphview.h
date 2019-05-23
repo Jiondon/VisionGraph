@@ -280,6 +280,8 @@ signals:
     void signal_Item_point(QPointF pointF);
     void signal_Item_Line(QLine line);
 
+    void signal_RegionItem();   //通知外部，区域发生变化，进行处理
+
 private:
 
     GraphType m_graphType = GraphType::graphItem_unSelf;
