@@ -47,6 +47,7 @@ void VisionRegion::addRegionData(VGRegion *region, QColor color)
     pair.region = region;
     pair.value = m_vecRegionPair.size();
     m_vecRegionPair.push_back(pair);
+
     this->update();
 }
 
@@ -61,11 +62,10 @@ void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
-    painter->setPen(QPen(m_regionColor,0));  //区域采用填充的颜色，原因自己想
+    painter->setPen(QPen(m_regionColor,0));
     QVector<QLineF> vecLines;
     if(m_vecLines.size() > 0){
         for(int i=0;i<m_vecLines.size();i++){
-    //        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
             QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
             vecLines.append(lineF);
             painter->drawLine(lineF);
@@ -94,7 +94,5 @@ QRectF VisionRegion::boundingRect() const
 {
     QRectF rf = QRectF(0,0,m_w,m_h);
     return rf;
-    qDebug()<<this->mapFromScene(rf).boundingRect();
-    return this->mapFromScene(rf).boundingRect();
 }
 

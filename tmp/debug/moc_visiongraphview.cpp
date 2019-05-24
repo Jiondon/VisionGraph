@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionGraphView_t {
-    QByteArrayData data[38];
-    char stringdata0[441];
+    QByteArrayData data[39];
+    char stringdata0[459];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,25 +51,26 @@ QT_MOC_LITERAL(15, 156, 8), // "vecPoint"
 QT_MOC_LITERAL(16, 165, 17), // "signal_Item_point"
 QT_MOC_LITERAL(17, 183, 16), // "signal_Item_Line"
 QT_MOC_LITERAL(18, 200, 4), // "line"
-QT_MOC_LITERAL(19, 205, 15), // "slot_updateItem"
-QT_MOC_LITERAL(20, 221, 12), // "QPainterPath"
-QT_MOC_LITERAL(21, 234, 4), // "path"
-QT_MOC_LITERAL(22, 239, 15), // "slot_updatePath"
-QT_MOC_LITERAL(23, 255, 8), // "XVRegion"
-QT_MOC_LITERAL(24, 264, 8), // "selected"
-QT_MOC_LITERAL(25, 273, 11), // "VisionItem*"
-QT_MOC_LITERAL(26, 285, 4), // "item"
-QT_MOC_LITERAL(27, 290, 7), // "leftTop"
-QT_MOC_LITERAL(28, 298, 5), // "angle"
-QT_MOC_LITERAL(29, 304, 19), // "slot_CreatePolygonF"
-QT_MOC_LITERAL(30, 324, 9), // "vecPointF"
-QT_MOC_LITERAL(31, 334, 18), // "slot_CombineRegion"
-QT_MOC_LITERAL(32, 353, 7), // "region1"
-QT_MOC_LITERAL(33, 361, 7), // "region2"
-QT_MOC_LITERAL(34, 369, 20), // "XVCombineRegionsType"
-QT_MOC_LITERAL(35, 390, 11), // "combineType"
-QT_MOC_LITERAL(36, 402, 22), // "slotUpdateViewInfo_Pos"
-QT_MOC_LITERAL(37, 425, 15) // "slot_wheelEvent"
+QT_MOC_LITERAL(19, 205, 17), // "signal_RegionItem"
+QT_MOC_LITERAL(20, 223, 15), // "slot_updateItem"
+QT_MOC_LITERAL(21, 239, 12), // "QPainterPath"
+QT_MOC_LITERAL(22, 252, 4), // "path"
+QT_MOC_LITERAL(23, 257, 15), // "slot_updatePath"
+QT_MOC_LITERAL(24, 273, 8), // "XVRegion"
+QT_MOC_LITERAL(25, 282, 8), // "selected"
+QT_MOC_LITERAL(26, 291, 11), // "VisionItem*"
+QT_MOC_LITERAL(27, 303, 4), // "item"
+QT_MOC_LITERAL(28, 308, 7), // "leftTop"
+QT_MOC_LITERAL(29, 316, 5), // "angle"
+QT_MOC_LITERAL(30, 322, 19), // "slot_CreatePolygonF"
+QT_MOC_LITERAL(31, 342, 9), // "vecPointF"
+QT_MOC_LITERAL(32, 352, 18), // "slot_CombineRegion"
+QT_MOC_LITERAL(33, 371, 7), // "region1"
+QT_MOC_LITERAL(34, 379, 7), // "region2"
+QT_MOC_LITERAL(35, 387, 20), // "XVCombineRegionsType"
+QT_MOC_LITERAL(36, 408, 11), // "combineType"
+QT_MOC_LITERAL(37, 420, 22), // "slotUpdateViewInfo_Pos"
+QT_MOC_LITERAL(38, 443, 15) // "slot_wheelEvent"
 
     },
     "VisionGraphView\0signal_Move\0\0pointF\0"
@@ -77,12 +78,12 @@ QT_MOC_LITERAL(37, 425, 15) // "slot_wheelEvent"
     "QWheelEvent*\0event\0signal_Item\0ItemType\0"
     "type\0rf\0signal_Item_poly\0QVector<QPointF>\0"
     "vecPoint\0signal_Item_point\0signal_Item_Line\0"
-    "line\0slot_updateItem\0QPainterPath\0"
-    "path\0slot_updatePath\0XVRegion\0selected\0"
-    "VisionItem*\0item\0leftTop\0angle\0"
-    "slot_CreatePolygonF\0vecPointF\0"
-    "slot_CombineRegion\0region1\0region2\0"
-    "XVCombineRegionsType\0combineType\0"
+    "line\0signal_RegionItem\0slot_updateItem\0"
+    "QPainterPath\0path\0slot_updatePath\0"
+    "XVRegion\0selected\0VisionItem*\0item\0"
+    "leftTop\0angle\0slot_CreatePolygonF\0"
+    "vecPointF\0slot_CombineRegion\0region1\0"
+    "region2\0XVCombineRegionsType\0combineType\0"
     "slotUpdateViewInfo_Pos\0slot_wheelEvent"
 };
 #undef QT_MOC_LITERAL
@@ -93,30 +94,31 @@ static const uint qt_meta_data_VisionGraphView[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       8,       // signalCount
+       9,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   84,    2, 0x06 /* Public */,
-       4,    1,   87,    2, 0x06 /* Public */,
-       6,    1,   90,    2, 0x06 /* Public */,
-       9,    2,   93,    2, 0x06 /* Public */,
-      13,    2,   98,    2, 0x06 /* Public */,
-      13,    1,  103,    2, 0x26 /* Public | MethodCloned */,
-      16,    1,  106,    2, 0x06 /* Public */,
-      17,    1,  109,    2, 0x06 /* Public */,
+       1,    1,   89,    2, 0x06 /* Public */,
+       4,    1,   92,    2, 0x06 /* Public */,
+       6,    1,   95,    2, 0x06 /* Public */,
+       9,    2,   98,    2, 0x06 /* Public */,
+      13,    2,  103,    2, 0x06 /* Public */,
+      13,    1,  108,    2, 0x26 /* Public | MethodCloned */,
+      16,    1,  111,    2, 0x06 /* Public */,
+      17,    1,  114,    2, 0x06 /* Public */,
+      19,    0,  117,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      19,    2,  112,    2, 0x0a /* Public */,
-      22,    6,  117,    2, 0x0a /* Public */,
-      29,    4,  130,    2, 0x0a /* Public */,
-      31,    3,  139,    2, 0x0a /* Public */,
-      36,    0,  146,    2, 0x0a /* Public */,
-      37,    1,  147,    2, 0x08 /* Private */,
+      20,    2,  118,    2, 0x0a /* Public */,
+      23,    6,  123,    2, 0x0a /* Public */,
+      30,    4,  136,    2, 0x0a /* Public */,
+      32,    3,  145,    2, 0x0a /* Public */,
+      37,    0,  152,    2, 0x0a /* Public */,
+      38,    1,  153,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QPointF,    3,
@@ -127,12 +129,13 @@ static const uint qt_meta_data_VisionGraphView[] = {
     QMetaType::Void, 0x80000000 | 14,   15,
     QMetaType::Void, QMetaType::QPointF,    3,
     QMetaType::Void, QMetaType::QLine,   18,
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 10, 0x80000000 | 20,   11,   21,
-    0x80000000 | 23, QMetaType::Bool, 0x80000000 | 25, 0x80000000 | 10, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,   24,   26,   11,   12,   27,   28,
-    0x80000000 | 23, QMetaType::Bool, 0x80000000 | 25, 0x80000000 | 10, 0x80000000 | 14,   24,   26,   11,   30,
-    0x80000000 | 23, 0x80000000 | 23, 0x80000000 | 23, 0x80000000 | 34,   32,   33,   35,
+    QMetaType::Void, 0x80000000 | 10, 0x80000000 | 21,   11,   22,
+    0x80000000 | 24, QMetaType::Bool, 0x80000000 | 26, 0x80000000 | 10, QMetaType::QRectF, QMetaType::QPointF, QMetaType::QReal,   25,   27,   11,   12,   28,   29,
+    0x80000000 | 24, QMetaType::Bool, 0x80000000 | 26, 0x80000000 | 10, 0x80000000 | 14,   25,   27,   11,   31,
+    0x80000000 | 24, 0x80000000 | 24, 0x80000000 | 24, 0x80000000 | 35,   33,   34,   36,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 7,    8,
 
@@ -153,15 +156,16 @@ void VisionGraphView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 5: _t->signal_Item_poly((*reinterpret_cast< QVector<QPointF>(*)>(_a[1]))); break;
         case 6: _t->signal_Item_point((*reinterpret_cast< QPointF(*)>(_a[1]))); break;
         case 7: _t->signal_Item_Line((*reinterpret_cast< QLine(*)>(_a[1]))); break;
-        case 8: _t->slot_updateItem((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QPainterPath(*)>(_a[2]))); break;
-        case 9: { XVRegion _r = _t->slot_updatePath((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6])));
+        case 8: _t->signal_RegionItem(); break;
+        case 9: _t->slot_updateItem((*reinterpret_cast< ItemType(*)>(_a[1])),(*reinterpret_cast< QPainterPath(*)>(_a[2]))); break;
+        case 10: { XVRegion _r = _t->slot_updatePath((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QRectF(*)>(_a[4])),(*reinterpret_cast< QPointF(*)>(_a[5])),(*reinterpret_cast< qreal(*)>(_a[6])));
             if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
-        case 10: { XVRegion _r = _t->slot_CreatePolygonF((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4])));
+        case 11: { XVRegion _r = _t->slot_CreatePolygonF((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< VisionItem*(*)>(_a[2])),(*reinterpret_cast< ItemType(*)>(_a[3])),(*reinterpret_cast< QVector<QPointF>(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
-        case 11: { XVRegion _r = _t->slot_CombineRegion((*reinterpret_cast< XVRegion(*)>(_a[1])),(*reinterpret_cast< XVRegion(*)>(_a[2])),(*reinterpret_cast< XVCombineRegionsType(*)>(_a[3])));
+        case 12: { XVRegion _r = _t->slot_CombineRegion((*reinterpret_cast< XVRegion(*)>(_a[1])),(*reinterpret_cast< XVRegion(*)>(_a[2])),(*reinterpret_cast< XVCombineRegionsType(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< XVRegion*>(_a[0]) = _r; }  break;
-        case 12: _t->slotUpdateViewInfo_Pos(); break;
-        case 13: _t->slot_wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
+        case 13: _t->slotUpdateViewInfo_Pos(); break;
+        case 14: _t->slot_wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -181,14 +185,14 @@ void VisionGraphView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<QPointF> >(); break;
             }
             break;
-        case 9:
+        case 10:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 1:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
             }
             break;
-        case 10:
+        case 11:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 3:
@@ -250,6 +254,13 @@ void VisionGraphView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
                 return;
             }
         }
+        {
+            typedef void (VisionGraphView::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&VisionGraphView::signal_RegionItem)) {
+                *result = 8;
+                return;
+            }
+        }
     }
 }
 
@@ -278,13 +289,13 @@ int VisionGraphView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }
@@ -336,6 +347,12 @@ void VisionGraphView::signal_Item_Line(QLine _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 7, _a);
+}
+
+// SIGNAL 8
+void VisionGraphView::signal_RegionItem()
+{
+    QMetaObject::activate(this, &staticMetaObject, 8, Q_NULLPTR);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

@@ -602,6 +602,8 @@ private slots:
     //接收view传过来的MouseMoveEvent事件
     void slot_mouseMove(QPointF pointF);
 
+    void slot_addRegion();
+
 private slots:
     void slot_Press(VisionItem *item, bool bSelected, bool bIn, qreal x, qreal y);
 

@@ -123,6 +123,8 @@ void VisionGraph_::initScene()
     QObject::connect(view,SIGNAL(signal_Move(QPointF)),this,SLOT(slot_mouseMove(QPointF)));
     QObject::connect(view,SIGNAL(signal_wheel(qreal)),this,SLOT(slot_wheel(qreal)));
 
+    QObject::connect(view,SIGNAL(signal_RegionItem()),this,SLOT(slot_addRegion()));
+
     scene = new VisionGraphScene(sceneWidget);
     connect(scene,SIGNAL(signal_MouseMove(qreal,qreal)),this,SLOT(slot_SceneMouseMove(qreal,qreal)));
     scene->setSceneRect(0,0,800,600);
@@ -1743,6 +1745,7 @@ void VisionGraph_::slot_fit_action()
         this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     }else{
         qDebug()<<"m_bkPixmapItem is NULL";
+        this->adjustSize(sceneWidget->width(),sceneWidget->height());
     }
 //    qDebug()<<"222222222222"<<m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height();
 }
@@ -2006,6 +2009,30 @@ void VisionGraph_::slot_mouseMove(QPointF pointF)
     m_mousePixmap->hide();
 }
 
+void VisionGraph_::slot_addRegion()
+{
+//    this->clearPainter();
+//    XVRegion *xvRegion/* = view->getRegion()*/;
+//    if(xvRegion->arrayPointRun.size() <= 0){
+//        return;
+//    }
+//    VGRegion *vgRegion;
+
+//    vgRegion->frameHeight = xvRegion->frameHeight;
+//    vgRegion->frameWidth = xvRegion->frameWidth;
+//    vgRegion->optional = (VGOptionalType)(int)xvRegion->optional;
+//    for(int i=0;i<xvRegion->arrayPointRun.size();i++){
+//        VGPointRun pointRun;
+//        pointRun.length = xvRegion->arrayPointRun.at(i).length;
+//        pointRun.x = xvRegion->arrayPointRun.at(i).x;
+//        pointRun.y = xvRegion->arrayPointRun.at(i).y;
+//        vgRegion->arrayPointRun.push_back(pointRun);
+//    }
+//    this->addRegion(vgRegion);
+//    delete vgRegion;
+//    delete xvRegion;
+}
+
 void VisionGraph_::slot_Press(VisionItem *item, bool bSelected,bool bIn,qreal x,qreal y)
 {
 
@@ -2091,7 +2118,7 @@ void VisionGraph_::slot_SizeChanged(QString currentSize)
 
 void VisionGraph_::slot_SizeChanged(qreal w, qreal h)
 {
-//    qDebug()<<"sceneWidget size is changed"<<w<<h;
+    qDebug()<<"sceneWidget size is changed"<<w<<h;
     view->resize(sceneWidget->width(),sceneWidget->height());
     view->slotUpdateViewInfo_Pos();
     slot_fit_action();

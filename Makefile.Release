@@ -8421,7 +8421,8 @@ tmp\release\visionregion.obj: src\item\visionregion.cpp src/item/visionregion.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qbrush.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
 
 tmp\release\moc_visiongraph.obj: tmp\release\moc_visiongraph.cpp 
 

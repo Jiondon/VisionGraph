@@ -105,6 +105,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+//    void mouseMoveEvent(QGraphicsSceneHoverEvent *event);
 
     QRectF boundingRect() const;
 
@@ -135,5 +136,7 @@ private:
 
 public slots:
 };
+
+
 
 #endif // VISIONTEXTITEM_H

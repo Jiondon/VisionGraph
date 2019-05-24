@@ -15,7 +15,7 @@ VisionTextItem::VisionTextItem(VisionItem *parent) : VisionItem(parent)
 //    penWidth = 1;
 //    m_bRotation = rotation;
     setAcceptHoverEvents(true);
-    setFlag(QGraphicsItem::ItemIsMovable,true);
+    setFlag(QGraphicsItem::ItemIsMovable,false);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
     setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren,true);
     setFlag(QGraphicsItem::ItemClipsChildrenToShape);
@@ -140,3 +140,8 @@ QRectF VisionTextItem::boundingRect() const
 {
     return QRectF(m_regionRf.x(),m_regionRf.y()-m_textHeight,m_regionRf.width(),m_regionRf.height()+m_textHeight);
 }
+
+//void VisionTextItem::mouseMoveEvent(QGraphicsSceneHoverEvent *event)
+//{
+//    return;
+//}

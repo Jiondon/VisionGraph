@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisionGraph__t {
-    QByteArrayData data[60];
-    char stringdata0[821];
+    QByteArrayData data[61];
+    char stringdata0[836];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -71,27 +71,28 @@ QT_MOC_LITERAL(35, 547, 6), // "pointF"
 QT_MOC_LITERAL(36, 554, 12), // "slot_addLine"
 QT_MOC_LITERAL(37, 567, 4), // "line"
 QT_MOC_LITERAL(38, 572, 14), // "slot_mouseMove"
-QT_MOC_LITERAL(39, 587, 10), // "slot_Press"
-QT_MOC_LITERAL(40, 598, 9), // "bSelected"
-QT_MOC_LITERAL(41, 608, 3), // "bIn"
-QT_MOC_LITERAL(42, 612, 1), // "x"
-QT_MOC_LITERAL(43, 614, 1), // "y"
-QT_MOC_LITERAL(44, 616, 10), // "slot_wheel"
-QT_MOC_LITERAL(45, 627, 5), // "delta"
-QT_MOC_LITERAL(46, 633, 16), // "slot_SizeChanged"
-QT_MOC_LITERAL(47, 650, 11), // "currentSize"
-QT_MOC_LITERAL(48, 662, 1), // "w"
-QT_MOC_LITERAL(49, 664, 1), // "h"
-QT_MOC_LITERAL(50, 666, 17), // "slot_valueChanged"
-QT_MOC_LITERAL(51, 684, 2), // "qR"
-QT_MOC_LITERAL(52, 687, 19), // "slot_SceneMouseMove"
-QT_MOC_LITERAL(53, 707, 20), // "slot_actionTriggered"
-QT_MOC_LITERAL(54, 728, 8), // "QAction*"
-QT_MOC_LITERAL(55, 737, 6), // "action"
-QT_MOC_LITERAL(56, 744, 27), // "slot_SpinBox_ViewRegionSize"
-QT_MOC_LITERAL(57, 772, 21), // "slot_GraphTypeChanged"
-QT_MOC_LITERAL(58, 794, 9), // "GraphType"
-QT_MOC_LITERAL(59, 804, 16) // "slotItemFinished"
+QT_MOC_LITERAL(39, 587, 14), // "slot_addRegion"
+QT_MOC_LITERAL(40, 602, 10), // "slot_Press"
+QT_MOC_LITERAL(41, 613, 9), // "bSelected"
+QT_MOC_LITERAL(42, 623, 3), // "bIn"
+QT_MOC_LITERAL(43, 627, 1), // "x"
+QT_MOC_LITERAL(44, 629, 1), // "y"
+QT_MOC_LITERAL(45, 631, 10), // "slot_wheel"
+QT_MOC_LITERAL(46, 642, 5), // "delta"
+QT_MOC_LITERAL(47, 648, 16), // "slot_SizeChanged"
+QT_MOC_LITERAL(48, 665, 11), // "currentSize"
+QT_MOC_LITERAL(49, 677, 1), // "w"
+QT_MOC_LITERAL(50, 679, 1), // "h"
+QT_MOC_LITERAL(51, 681, 17), // "slot_valueChanged"
+QT_MOC_LITERAL(52, 699, 2), // "qR"
+QT_MOC_LITERAL(53, 702, 19), // "slot_SceneMouseMove"
+QT_MOC_LITERAL(54, 722, 20), // "slot_actionTriggered"
+QT_MOC_LITERAL(55, 743, 8), // "QAction*"
+QT_MOC_LITERAL(56, 752, 6), // "action"
+QT_MOC_LITERAL(57, 759, 27), // "slot_SpinBox_ViewRegionSize"
+QT_MOC_LITERAL(58, 787, 21), // "slot_GraphTypeChanged"
+QT_MOC_LITERAL(59, 809, 9), // "GraphType"
+QT_MOC_LITERAL(60, 819, 16) // "slotItemFinished"
 
     },
     "VisionGraph_\0signal_itemFinished\0\0"
@@ -110,11 +111,12 @@ QT_MOC_LITERAL(59, 804, 16) // "slotItemFinished"
     "slot_addItem\0ItemType\0type\0rf\0"
     "slot_addPoly\0QVector<QPointF>\0vecPointF\0"
     "slot_addPoint\0pointF\0slot_addLine\0"
-    "line\0slot_mouseMove\0slot_Press\0bSelected\0"
-    "bIn\0x\0y\0slot_wheel\0delta\0slot_SizeChanged\0"
-    "currentSize\0w\0h\0slot_valueChanged\0qR\0"
-    "slot_SceneMouseMove\0slot_actionTriggered\0"
-    "QAction*\0action\0slot_SpinBox_ViewRegionSize\0"
+    "line\0slot_mouseMove\0slot_addRegion\0"
+    "slot_Press\0bSelected\0bIn\0x\0y\0slot_wheel\0"
+    "delta\0slot_SizeChanged\0currentSize\0w\0"
+    "h\0slot_valueChanged\0qR\0slot_SceneMouseMove\0"
+    "slot_actionTriggered\0QAction*\0action\0"
+    "slot_SpinBox_ViewRegionSize\0"
     "slot_GraphTypeChanged\0GraphType\0"
     "slotItemFinished"
 };
@@ -126,7 +128,7 @@ static const uint qt_meta_data_VisionGraph_[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      38,   14, // methods
+      39,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -134,46 +136,47 @@ static const uint qt_meta_data_VisionGraph_[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  204,    2, 0x06 /* Public */,
-       5,    1,  207,    2, 0x06 /* Public */,
+       1,    1,  209,    2, 0x06 /* Public */,
+       5,    1,  212,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,  210,    2, 0x08 /* Private */,
-       7,    0,  211,    2, 0x08 /* Private */,
-       8,    0,  212,    2, 0x08 /* Private */,
-       9,    0,  213,    2, 0x08 /* Private */,
-      10,    0,  214,    2, 0x08 /* Private */,
-      11,    0,  215,    2, 0x08 /* Private */,
-      12,    0,  216,    2, 0x08 /* Private */,
-      13,    0,  217,    2, 0x08 /* Private */,
-      14,    0,  218,    2, 0x08 /* Private */,
-      15,    0,  219,    2, 0x08 /* Private */,
-      16,    0,  220,    2, 0x08 /* Private */,
-      17,    0,  221,    2, 0x08 /* Private */,
-      18,    0,  222,    2, 0x08 /* Private */,
-      19,    0,  223,    2, 0x08 /* Private */,
-      20,    0,  224,    2, 0x08 /* Private */,
-      21,    0,  225,    2, 0x08 /* Private */,
-      22,    0,  226,    2, 0x08 /* Private */,
-      23,    0,  227,    2, 0x08 /* Private */,
-      24,    0,  228,    2, 0x08 /* Private */,
-      25,    0,  229,    2, 0x08 /* Private */,
-      26,    0,  230,    2, 0x08 /* Private */,
-      27,    2,  231,    2, 0x08 /* Private */,
-      31,    2,  236,    2, 0x08 /* Private */,
-      34,    1,  241,    2, 0x08 /* Private */,
-      36,    1,  244,    2, 0x08 /* Private */,
-      38,    1,  247,    2, 0x08 /* Private */,
-      39,    5,  250,    2, 0x08 /* Private */,
-      44,    1,  261,    2, 0x08 /* Private */,
-      46,    1,  264,    2, 0x08 /* Private */,
-      46,    2,  267,    2, 0x08 /* Private */,
-      50,    1,  272,    2, 0x08 /* Private */,
-      52,    2,  275,    2, 0x08 /* Private */,
-      53,    1,  280,    2, 0x08 /* Private */,
-      56,    1,  283,    2, 0x08 /* Private */,
-      57,    1,  286,    2, 0x08 /* Private */,
-      59,    1,  289,    2, 0x08 /* Private */,
+       6,    0,  215,    2, 0x08 /* Private */,
+       7,    0,  216,    2, 0x08 /* Private */,
+       8,    0,  217,    2, 0x08 /* Private */,
+       9,    0,  218,    2, 0x08 /* Private */,
+      10,    0,  219,    2, 0x08 /* Private */,
+      11,    0,  220,    2, 0x08 /* Private */,
+      12,    0,  221,    2, 0x08 /* Private */,
+      13,    0,  222,    2, 0x08 /* Private */,
+      14,    0,  223,    2, 0x08 /* Private */,
+      15,    0,  224,    2, 0x08 /* Private */,
+      16,    0,  225,    2, 0x08 /* Private */,
+      17,    0,  226,    2, 0x08 /* Private */,
+      18,    0,  227,    2, 0x08 /* Private */,
+      19,    0,  228,    2, 0x08 /* Private */,
+      20,    0,  229,    2, 0x08 /* Private */,
+      21,    0,  230,    2, 0x08 /* Private */,
+      22,    0,  231,    2, 0x08 /* Private */,
+      23,    0,  232,    2, 0x08 /* Private */,
+      24,    0,  233,    2, 0x08 /* Private */,
+      25,    0,  234,    2, 0x08 /* Private */,
+      26,    0,  235,    2, 0x08 /* Private */,
+      27,    2,  236,    2, 0x08 /* Private */,
+      31,    2,  241,    2, 0x08 /* Private */,
+      34,    1,  246,    2, 0x08 /* Private */,
+      36,    1,  249,    2, 0x08 /* Private */,
+      38,    1,  252,    2, 0x08 /* Private */,
+      39,    0,  255,    2, 0x08 /* Private */,
+      40,    5,  256,    2, 0x08 /* Private */,
+      45,    1,  267,    2, 0x08 /* Private */,
+      47,    1,  270,    2, 0x08 /* Private */,
+      47,    2,  273,    2, 0x08 /* Private */,
+      51,    1,  278,    2, 0x08 /* Private */,
+      53,    2,  281,    2, 0x08 /* Private */,
+      54,    1,  286,    2, 0x08 /* Private */,
+      57,    1,  289,    2, 0x08 /* Private */,
+      58,    1,  292,    2, 0x08 /* Private */,
+      60,    1,  295,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -206,15 +209,16 @@ static const uint qt_meta_data_VisionGraph_[] = {
     QMetaType::Void, QMetaType::QPointF,   35,
     QMetaType::Void, QMetaType::QLine,   37,
     QMetaType::Void, QMetaType::QPointF,   35,
-    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool, QMetaType::Bool, QMetaType::QReal, QMetaType::QReal,    4,   40,   41,   42,   43,
-    QMetaType::Void, QMetaType::QReal,   45,
-    QMetaType::Void, QMetaType::QString,   47,
-    QMetaType::Void, QMetaType::QReal, QMetaType::QReal,   48,   49,
-    QMetaType::Void, QMetaType::Int,   51,
-    QMetaType::Void, QMetaType::QReal, QMetaType::QReal,   42,   43,
-    QMetaType::Void, 0x80000000 | 54,   55,
-    QMetaType::Void, QMetaType::Int,   48,
-    QMetaType::Void, 0x80000000 | 58,   29,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool, QMetaType::Bool, QMetaType::QReal, QMetaType::QReal,    4,   41,   42,   43,   44,
+    QMetaType::Void, QMetaType::QReal,   46,
+    QMetaType::Void, QMetaType::QString,   48,
+    QMetaType::Void, QMetaType::QReal, QMetaType::QReal,   49,   50,
+    QMetaType::Void, QMetaType::Int,   52,
+    QMetaType::Void, QMetaType::QReal, QMetaType::QReal,   43,   44,
+    QMetaType::Void, 0x80000000 | 55,   56,
+    QMetaType::Void, QMetaType::Int,   49,
+    QMetaType::Void, 0x80000000 | 59,   29,
     QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
@@ -254,16 +258,17 @@ void VisionGraph_::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 25: _t->slot_addPoint((*reinterpret_cast< QPointF(*)>(_a[1]))); break;
         case 26: _t->slot_addLine((*reinterpret_cast< QLine(*)>(_a[1]))); break;
         case 27: _t->slot_mouseMove((*reinterpret_cast< QPointF(*)>(_a[1]))); break;
-        case 28: _t->slot_Press((*reinterpret_cast< VisionItem*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4])),(*reinterpret_cast< qreal(*)>(_a[5]))); break;
-        case 29: _t->slot_wheel((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 30: _t->slot_SizeChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 31: _t->slot_SizeChanged((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 32: _t->slot_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 33: _t->slot_SceneMouseMove((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
-        case 34: _t->slot_actionTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
-        case 35: _t->slot_SpinBox_ViewRegionSize((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 36: _t->slot_GraphTypeChanged((*reinterpret_cast< GraphType(*)>(_a[1]))); break;
-        case 37: _t->slotItemFinished((*reinterpret_cast< VisionItem*(*)>(_a[1]))); break;
+        case 28: _t->slot_addRegion(); break;
+        case 29: _t->slot_Press((*reinterpret_cast< VisionItem*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< qreal(*)>(_a[4])),(*reinterpret_cast< qreal(*)>(_a[5]))); break;
+        case 30: _t->slot_wheel((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 31: _t->slot_SizeChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 32: _t->slot_SizeChanged((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 33: _t->slot_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: _t->slot_SceneMouseMove((*reinterpret_cast< qreal(*)>(_a[1])),(*reinterpret_cast< qreal(*)>(_a[2]))); break;
+        case 35: _t->slot_actionTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
+        case 36: _t->slot_SpinBox_ViewRegionSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: _t->slot_GraphTypeChanged((*reinterpret_cast< GraphType(*)>(_a[1]))); break;
+        case 38: _t->slotItemFinished((*reinterpret_cast< VisionItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -290,21 +295,21 @@ void VisionGraph_::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<QPointF> >(); break;
             }
             break;
-        case 28:
+        case 29:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< VisionItem* >(); break;
             }
             break;
-        case 34:
+        case 35:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAction* >(); break;
             }
             break;
-        case 37:
+        case 38:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -357,13 +362,13 @@ int VisionGraph_::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 38)
+        if (_id < 39)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 38;
+        _id -= 39;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 38)
+        if (_id < 39)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 38;
+        _id -= 39;
     }
     return _id;
 }
