@@ -73,7 +73,7 @@ QVector<QPointF> VisionCrossPointItem::getPoints()
 
 QRectF VisionCrossPointItem::boundingRect() const
 {
-    QRectF rf = QRectF(m_pointF.x()-m_length*(1/g_scale),m_pointF.y()-m_length*(1/g_scale),2*m_length*(1/g_scale),2*m_length*(1/g_scale));
+    QRectF rf = QRectF(m_pointF.x()-m_length*(1/this->scene()->views().at(0)->matrix().m22()),m_pointF.y()-m_length*(1/this->scene()->views().at(0)->matrix().m22()),2*m_length*(1/this->scene()->views().at(0)->matrix().m22()),2*m_length*(1/this->scene()->views().at(0)->matrix().m22()));
     return rf;
 }
 
@@ -85,16 +85,16 @@ void VisionCrossPointItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
         setSelectedStatus(true);
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
         setSelectedStatus(false);
     }
 
 //    painter->setPen(QPen(QBrush(QColor(255,0,0)),0));
-    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()-m_length*(1/g_scale)),QPointF(m_pointF.x(),m_pointF.y()+m_length*(1/g_scale)));
-    painter->drawLine(QPointF(m_pointF.x()-m_length*(1/g_scale),m_pointF.y()),QPointF(m_pointF.x()+m_length*(1/g_scale),m_pointF.y()));
+    painter->drawLine(QPointF(m_pointF.x(),m_pointF.y()-m_length*(1/this->scene()->views().at(0)->matrix().m22())),QPointF(m_pointF.x(),m_pointF.y()+m_length*(1/this->scene()->views().at(0)->matrix().m22())));
+    painter->drawLine(QPointF(m_pointF.x()-m_length*(1/this->scene()->views().at(0)->matrix().m22()),m_pointF.y()),QPointF(m_pointF.x()+m_length*(1/this->scene()->views().at(0)->matrix().m22()),m_pointF.y()));
 
 }
 

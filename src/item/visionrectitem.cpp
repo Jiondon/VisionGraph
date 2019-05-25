@@ -164,12 +164,11 @@ void VisionRectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }
 
-//    qDebug()<<"00000000000000000000000 ; ;"<<QString::number(*g_scale);
     painter->setBrush(m_brushColor);
 
     QPointF originPointF = QPointF(m_x,m_y);

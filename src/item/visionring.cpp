@@ -92,7 +92,7 @@ void VisionRing::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->setRenderHint(QPainter::Antialiasing, true);
 
 //    qDebug()<<m_width<<m_height<<m_r1<<m_r2;
-    painter->setPen(QPen(m_borderColor,g_penWidth*(1/g_scale)));
+    painter->setPen(QPen(m_borderColor,g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r1,m_r1);
     painter->drawEllipse(QPointF(m_width/2,m_height/2),m_r2,m_r2);
     painter->drawRect(0,0,m_width,m_height);

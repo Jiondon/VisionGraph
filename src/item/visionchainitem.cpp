@@ -41,7 +41,7 @@ void VisionChainItem::setChainPos(QList<qreal> lst_x, QList<qreal> lst_y)
     for(int i=0;i<lst_x.count();i++){
         m_lstChainPoint.append(QPointF(lst_x[i],lst_y[i]));
         MiniRect* rectItem = new MiniRect(lst_x[i]-2.5,lst_y[i]-2.5,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        rectItem->setGlobleData(g_scale,g_penWidth);
+        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         rectItem->setIndex(i);
         QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         rectItem->hide();
@@ -75,7 +75,7 @@ void VisionChainItem::setChainPos(QList<QPointF> lst_p)
         m_lst_x.append(lst_p[i].x());
         m_lst_y.append(lst_p[i].y());
         MiniRect* rectItem = new MiniRect(lst_p[i].x()-2.5,lst_p[i].y()-2.5,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        rectItem->setGlobleData(g_scale,g_penWidth);
+        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         rectItem->setIndex(i);
 //        rectItem->setBrushEnable(false);
         QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
@@ -167,16 +167,16 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     painter->setRenderHint(QPainter::Antialiasing, true);
     // 设置画笔颜色
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
         painter->setBrush(m_selectedColor);
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
         painter->setBrush(m_borderColor);
     }
 
     // 绘制直线
     QPointF p1,p2;
-    qreal d = 2*(1/g_scale); //箭头方向的大小基数
+    qreal d = 2*(1/this->scene()->views().at(0)->matrix().m22()); //箭头方向的大小基数
     if(m_bClosed){
         //是封闭图形
         for(int i =0;i<m_lstChainPoint.count();i++){
@@ -227,8 +227,8 @@ void VisionChainItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     //绘制添加的点
     painter->setPen(QPen(QBrush(m_pointFColor),0));
     for(int j=0;j<m_lstPointF.count();j++){
-        painter->drawLine(QPointF(m_lstPointF[j].x(),m_lstPointF[j].y()-(1/g_scale)),QPointF(m_lstPointF[j].x(),m_lstPointF[j].y()+(1/g_scale)));
-        painter->drawLine(QPointF(m_lstPointF[j].x()-(1/g_scale),m_lstPointF[j].y()),QPointF(m_lstPointF[j].x()+(1/g_scale),m_lstPointF[j].y()));
+        painter->drawLine(QPointF(m_lstPointF[j].x(),m_lstPointF[j].y()-(1/this->scene()->views().at(0)->matrix().m22())),QPointF(m_lstPointF[j].x(),m_lstPointF[j].y()+(1/this->scene()->views().at(0)->matrix().m22())));
+        painter->drawLine(QPointF(m_lstPointF[j].x()-(1/this->scene()->views().at(0)->matrix().m22()),m_lstPointF[j].y()),QPointF(m_lstPointF[j].x()+(1/this->scene()->views().at(0)->matrix().m22()),m_lstPointF[j].y()));
     }
 
 

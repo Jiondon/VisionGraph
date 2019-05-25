@@ -27,12 +27,12 @@ VisionLineItem::VisionLineItem(bool bEdit, QPointF p1, QPointF p2, qreal penWidt
     }
 
     m_miniRect1 = new MiniRect(m_pointF1.x()-5,m_pointF1.y()-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
-    m_miniRect1->setGlobleData(g_scale,g_penWidth);
+    m_miniRect1->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
     m_miniRect1->setIndex(1);
     connect(m_miniRect1,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
     m_miniRect1->hide();
     m_miniRect2 = new MiniRect(m_pointF2.x()-5,m_pointF2.y()-5,10,10,m_borderColor,m_selectedColor,m_brushColor,this);
-    m_miniRect2->setGlobleData(g_scale,g_penWidth);
+    m_miniRect2->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
     m_miniRect2->setIndex(2);
     connect(m_miniRect2,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
     m_miniRect2->hide();
@@ -83,10 +83,10 @@ QVector<QPointF> VisionLineItem::getPoints(){
 
 QRectF VisionLineItem::boundingRect() const
 {
-    if(g_scale > 1){
-        return QRectF(m_x-5*(1/g_scale),m_y-5*(1/g_scale),m_width+10*(1/g_scale),m_height+10*(1/g_scale));
+    if(this->scene()->views().at(0)->matrix().m22() > 1){
+        return QRectF(m_x-5*(1/this->scene()->views().at(0)->matrix().m22()),m_y-5*(1/this->scene()->views().at(0)->matrix().m22()),m_width+10*(1/this->scene()->views().at(0)->matrix().m22()),m_height+10*(1/this->scene()->views().at(0)->matrix().m22()));
     }else{
-        return QRectF(m_x-5*(1/g_scale),m_y-5*(1/g_scale),m_width+10*(1/g_scale),m_height+10*(1/g_scale));
+        return QRectF(m_x-5*(1/this->scene()->views().at(0)->matrix().m22()),m_y-5*(1/this->scene()->views().at(0)->matrix().m22()),m_width+10*(1/this->scene()->views().at(0)->matrix().m22()),m_height+10*(1/this->scene()->views().at(0)->matrix().m22()));
     }
 }
 
@@ -98,10 +98,10 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setRenderHint(QPainter::Antialiasing, true);
 
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
 
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
 
     }
 
@@ -113,7 +113,7 @@ void VisionLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->translate(m_pointF2);
 
     qreal angle = (alph*180)/3.14159;
-    qreal len = 5*(1/g_scale);
+    qreal len = 5*(1/this->scene()->views().at(0)->matrix().m22());
 //    qDebug()<<angle;
     painter->rotate(angle);
     painter->drawLine(QPointF(-(2*len),-len),QPointF(0,0));

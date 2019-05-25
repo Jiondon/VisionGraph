@@ -109,9 +109,9 @@ void VisionArcItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->setRenderHint(QPainter::Antialiasing, true);
     if(option->state & QStyle::State_Selected){
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }
 
     painter->drawArc(QRectF(0,0,2*m_r,2*m_r),m_angle*16,m_spanAngle*16);
@@ -255,7 +255,7 @@ void VisionArcItem::initMiniRect()
 {
     if(m_sMiniRect == NULL){
         m_sMiniRect = new MiniRect(m_p1.x()-2.5-m_x,m_p1.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        m_sMiniRect->setGlobleData(g_scale,g_penWidth);
+        m_sMiniRect->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         m_sMiniRect->setIndex(1);
         QObject::connect(m_sMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_sMiniRect->hide();
@@ -265,7 +265,7 @@ void VisionArcItem::initMiniRect()
 
     if(m_mMiniRect == NULL){
         m_mMiniRect = new MiniRect(m_p2.x()-2.5-m_x,m_p2.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        m_mMiniRect->setGlobleData(g_scale,g_penWidth);
+        m_mMiniRect->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         m_mMiniRect->setIndex(2);
         QObject::connect(m_mMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_mMiniRect->hide();
@@ -275,7 +275,7 @@ void VisionArcItem::initMiniRect()
 
     if(m_fMiniRect == NULL){
         m_fMiniRect = new MiniRect(m_p3.x()-2.5-m_x,m_p3.y()-2.5-m_y,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        m_fMiniRect->setGlobleData(g_scale,g_penWidth);
+        m_fMiniRect->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         m_fMiniRect->setIndex(3);
         QObject::connect(m_fMiniRect,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         m_fMiniRect->hide();

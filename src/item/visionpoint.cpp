@@ -1,6 +1,9 @@
 ﻿#include "visionpoint.h"
 #include "../control/color.h"
 
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
 VisionPoint::VisionPoint(bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     m_type = ItemType::Paint_Point;
@@ -61,7 +64,7 @@ void VisionPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-    QPen pen = QPen(m_borderColor,g_penWidth*(1/g_scale));
+    QPen pen = QPen(m_borderColor,g_penWidth*(1/this->scene()->views().at(0)->matrix().m22()));
     painter->setPen(pen);
 //    painter->setBrush(Qt::red);
 //    painter->drawEllipse(m_pointF,1,1);

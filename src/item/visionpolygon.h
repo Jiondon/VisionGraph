@@ -16,7 +16,7 @@
 
 #include "../control/minirect.h"
 
-
+///  后期优化采用模板进行设置数据参数
 class VISIONGRAPHSHARED_EXPORT VisionPolygon : public VisionItem
 {
     Q_OBJECT

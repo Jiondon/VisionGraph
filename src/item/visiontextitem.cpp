@@ -1,6 +1,10 @@
 ﻿#include "visiontextitem.h"
 #include <QDebug>
 
+
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
 VisionTextItem::VisionTextItem(VisionItem *parent) : VisionItem(parent)
 {
 //    if(color_enable){
@@ -76,7 +80,7 @@ void VisionTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-    QPen pen = QPen(QColor(255,0,0),g_penWidth*(1/g_scale));
+    QPen pen = QPen(QColor(255,0,0),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22()));
     painter->setPen(pen);
 
 
@@ -94,9 +98,9 @@ void VisionTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawText(QPointF(m_regionRf.x(),m_regionRf.y()),m_strText);
 
     if(m_bEnter){
-        painter->setPen(QPen(QColor(0,0,0),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QColor(0,0,0),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }else{
-        painter->setPen(QPen(QColor(255,0,0),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QColor(255,0,0),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
     }
     painter->drawRect(m_regionRf);
 

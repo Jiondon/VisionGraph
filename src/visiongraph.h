@@ -473,7 +473,7 @@ private:
 
     QString iconPath = "./ico/graph/";
 
-    QCursor viewCursor;
+//    QCursor viewCursor;
 };
 
 #endif // VISIONGRAPH_H

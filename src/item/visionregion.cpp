@@ -1,5 +1,6 @@
 ﻿#include "visionregion.h"
 #include <QDebug>
+#include <QTime>
 
 VisionRegion::VisionRegion(VisionItem *parent) : VisionItem(parent)
 {
@@ -62,6 +63,8 @@ void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     Q_UNUSED(widget)
     Q_UNUSED(option)
 
+    QTime time;
+    time.start();
     painter->setPen(QPen(m_regionColor,0));
     QVector<QLineF> vecLines;
     if(m_vecLines.size() > 0){
@@ -88,6 +91,7 @@ void VisionRegion::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
             }
         }
     }
+    qDebug()<<"111111111111:"<<time.elapsed();
 }
 
 QRectF VisionRegion::boundingRect() const

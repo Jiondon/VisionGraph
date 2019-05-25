@@ -1,6 +1,11 @@
 ﻿#include "visionline.h"
 #include "../control/color.h"
 
+
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
+
 VisionLine::VisionLine(bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor, VisionItem *parent) : VisionItem(parent)
 {
     if(color_enable){
@@ -58,7 +63,7 @@ void VisionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     painter->setRenderHint(QPainter::Antialiasing, true);
 
-    QPen pen = QPen(m_borderColor,g_penWidth*(1/g_scale));
+    QPen pen = QPen(m_borderColor,g_penWidth*(1/this->scene()->views().at(0)->matrix().m22()));
     painter->setPen(pen);
 //    painter->setBrush(Qt::red);
     if(m_style == SINGLE){

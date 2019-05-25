@@ -74,7 +74,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     if(option->state & QStyle::State_Selected){
 
-        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_selectedColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
 
         if(m_bEdit){
             for(int i=0;i<m_lstRect.count();i++){
@@ -88,7 +88,7 @@ void VisionPolygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         setSelectedStatus(m_bSelected);
 
     }else{
-        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/g_scale)));
+        painter->setPen(QPen(QBrush(m_borderColor),g_penWidth*(1/this->scene()->views().at(0)->matrix().m22())));
 
         for(int i=0;i<m_lstRect.count();i++){
             m_lstRect[i]->hide();

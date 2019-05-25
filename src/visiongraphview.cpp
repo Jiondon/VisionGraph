@@ -212,14 +212,18 @@ void VisionGraphView::leaveEvent(QEvent *event)
 }
 
 #include <QTime>
+#include <QPaintEvent>
 void VisionGraphView::paintEvent(QPaintEvent *event)
 {
-    QTime time;
+//    QTime time;
 //    time.start();
 
     QGraphicsView::paintEvent(event);
 
-    QPainter painter(this->viewport());
+    QWidget *widget = this->viewport();
+    if(widget == NULL)
+        return;
+    QPainter painter(widget);
     painter.setRenderHint(QPainter::Antialiasing,true);
     if(m_bFrameVisible){
         painter.setPen(QPen(m_FrameColor,0));
@@ -261,42 +265,42 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     painter.drawPath(m_path);
 
 
-//    painter.setPen(QPen(m_brushColor,0));  //区域采用填充的颜色，原因自己想
-//    QVector<QLineF> vecLines;
-//    for(int i=0;i<m_vecLines.size();i++){
-////        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
-//        QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
-//        vecLines.append(lineF);
-//        painter.drawLine(lineF);
-//    }
-//    painter.drawLines(vecLines);
+//    time.start();
+    painter.setPen(QPen(m_brushColor,0));  //区域采用填充的颜色，原因自己想
+    QVector<QLineF> vecLines;
+    for(int i=0;i<m_vecLines.size();i++){
+//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
+        QLineF lineF = QLineF(this->mapFromScene(m_vecLines.at(i).p1()),this->mapFromScene(m_vecLines.at(i).p2()));
+        vecLines.append(lineF);
+        painter.drawLine(lineF);
+    }
+    painter.drawLines(vecLines);
+//    qDebug()<<"1111111111111: "<<time.elapsed()<<"  size: "<<m_vecLines.count();
 
     //绘制list region
-//    vector<XVPointRun> vec_point;
-//    for(int i=0;i<m_lstRegion.count();i++){
-//        vec_point.clear();
-//        vec_point = m_lstRegion[i].region.arrayPointRun;
-//        painter.setPen(QPen(m_lstRegion[i].color,0));
-//        XVPointRun pointRun;
-//        for(int i=0;i<vec_point.size();i++){
-//            pointRun = vec_point.at(i);
-//            painter.drawLine(this->mapFromScene(QPointF(pointRun.x,pointRun.y).toPoint()),
-//                             this->mapFromScene(QPointF(pointRun.x+pointRun.length,pointRun.y).toPoint()));
-//        }
-//    }
+    vector<XVPointRun> vec_point;
+    for(int i=0;i<m_lstRegion.count();i++){
+        vec_point.clear();
+        vec_point = m_lstRegion[i].region.arrayPointRun;
+        painter.setPen(QPen(m_lstRegion[i].color,0));
+        XVPointRun pointRun;
+        for(int i=0;i<vec_point.size();i++){
+            pointRun = vec_point.at(i);
+            painter.drawLine(this->mapFromScene(QPointF(pointRun.x,pointRun.y).toPoint()),
+                             this->mapFromScene(QPointF(pointRun.x+pointRun.length,pointRun.y).toPoint()));
+        }
+    }
 
 
     //绘制不可编辑的region
-//    painter.setPen(QPen(m_brushColor_unEdit,0));  //非编辑区域有自己的颜色
-//    QVector<QLineF> vecLines_unEdit;
-//    for(int i=0;i<m_vecLines_unEdit.size();i++){
-////        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
-//        QLineF lineF = QLineF(this->mapFromScene(m_vecLines_unEdit.at(i).p1()),this->mapFromScene(m_vecLines_unEdit.at(i).p2()));
-//        vecLines_unEdit.append(lineF);
-//    }
-//    painter.drawLines(vecLines_unEdit);
-
-//    qDebug()<<"111111111111111: "<<time.elapsed();
+    painter.setPen(QPen(m_brushColor_unEdit,0));  //非编辑区域有自己的颜色
+    QVector<QLineF> vecLines_unEdit;
+    for(int i=0;i<m_vecLines_unEdit.size();i++){
+//        qDebug()<<this->mapFromScene(m_vecLines.at(i).p1());
+        QLineF lineF = QLineF(this->mapFromScene(m_vecLines_unEdit.at(i).p1()),this->mapFromScene(m_vecLines_unEdit.at(i).p2()));
+        vecLines_unEdit.append(lineF);
+    }
+    painter.drawLines(vecLines_unEdit);
 
 }
 
@@ -748,7 +752,10 @@ XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2,
 
 QVector<QLineF> VisionGraphView::analysis_region(XVRegion region)
 {
-//    emit signal_RegionItem();
+//    if(m_region == region)
+//        return;
+
+    emit signal_RegionItem();
     //XVPointRun  起始点坐标和线的长度
     vector<XVPointRun> vec_point;
     vec_point = region.arrayPointRun;
@@ -1419,7 +1426,7 @@ void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
     // 获取当前鼠标相对于scene的位置;
      QPointF prev_scenePos = this->mapToScene(prev_viewPos.toPoint());
 
-     qDebug()<<prev_viewPos;
+//     qDebug()<<prev_viewPos;
      qreal zoom = m_scale;
      if(event->delta() > 0){
          //放大
@@ -1436,7 +1443,9 @@ void VisionGraphView::slot_wheelEvent(QWheelEvent *event)
 
      qreal scaleTemp = zoom/m_scale;  //获取本次缩放相对于上次缩放的比例
      m_scale = zoom;
+
     scale(scaleTemp, scaleTemp);
+
 
     this->scene()->setSceneRect(this->mapToScene(this->rect()).boundingRect());
 

@@ -1314,15 +1314,21 @@ int VisionGraph_::setBkImg(QImage image)
         scene->addItem(m_bkPixmapItem);
     }
     m_bkPixmapItem->setPixmap(QPixmap::fromImage(image));
-    scene->addItem(m_bkPixmapItem);
+//    scene->addItem(m_bkPixmapItem);
 //    this->adjustSize(m_bkPixmapItem->boundingRect().width(),m_bkPixmapItem->boundingRect().height());
     return 0;
 }
 
+
 void VisionGraph_::removeBkImg()
 {
-    if(m_bkPixmapItem != NULL)
-        scene->removeItem(m_bkPixmapItem);
+    if(m_bkPixmapItem == NULL){
+//        m_bkPixmapItem = new QGraphicsPixmapItem();
+//        scene->addItem(m_bkPixmapItem);
+        return;
+    }
+    QPixmap pixmap;
+    m_bkPixmapItem->setPixmap(pixmap);
 }
 
 void VisionGraph_::setToolButton_Direction(ToolButtonDirection direct){
@@ -2009,27 +2015,37 @@ void VisionGraph_::slot_mouseMove(QPointF pointF)
     m_mousePixmap->hide();
 }
 
+VisionRegion *itemRegion = NULL;
 void VisionGraph_::slot_addRegion()
 {
-//    this->clearPainter();
-//    XVRegion *xvRegion/* = view->getRegion()*/;
-//    if(xvRegion->arrayPointRun.size() <= 0){
-//        return;
-//    }
-//    VGRegion *vgRegion;
+    this->clearPainter();
+    XVRegion *xvRegion = view->getRegion();
+    if(xvRegion->arrayPointRun.size() <= 0){
+        return;
+    }
+    VGRegion *vgRegion = new VGRegion;
 
-//    vgRegion->frameHeight = xvRegion->frameHeight;
-//    vgRegion->frameWidth = xvRegion->frameWidth;
-//    vgRegion->optional = (VGOptionalType)(int)xvRegion->optional;
-//    for(int i=0;i<xvRegion->arrayPointRun.size();i++){
-//        VGPointRun pointRun;
-//        pointRun.length = xvRegion->arrayPointRun.at(i).length;
-//        pointRun.x = xvRegion->arrayPointRun.at(i).x;
-//        pointRun.y = xvRegion->arrayPointRun.at(i).y;
-//        vgRegion->arrayPointRun.push_back(pointRun);
-//    }
-//    this->addRegion(vgRegion);
-//    delete vgRegion;
+    vgRegion->frameHeight = xvRegion->frameHeight;
+    vgRegion->frameWidth = xvRegion->frameWidth;
+    vgRegion->optional = (VGOptionalType)(int)xvRegion->optional;
+
+
+    for(int i=0;i<xvRegion->arrayPointRun.size();i++){
+        VGPointRun pointRun;
+        pointRun.length = xvRegion->arrayPointRun.at(i).length;
+        pointRun.x = xvRegion->arrayPointRun.at(i).x;
+        pointRun.y = xvRegion->arrayPointRun.at(i).y;
+        vgRegion->arrayPointRun.push_back(pointRun);
+    }
+    if(itemRegion != NULL){
+        delete itemRegion;
+        itemRegion = NULL;
+    }
+    itemRegion  = new VisionRegion();
+    itemRegion->setRegionData(vgRegion);
+    scene->addItem(itemRegion);
+//    m_lstItem.push_back(itemRegion);
+    delete vgRegion;
 //    delete xvRegion;
 }
 
@@ -2096,7 +2112,7 @@ void VisionGraph_::slot_wheel(qreal delta)
     m_bWheel = true;
     m_zoom = delta;
     comboBox->setCurrentText(QString::number((float)((int)(m_zoom*100))/100));
-    g_scale = m_zoom;
+//    g_scale = m_zoom;
 }
 
 void VisionGraph_::slot_SizeChanged(QString currentSize)
@@ -2112,7 +2128,7 @@ void VisionGraph_::slot_SizeChanged(QString currentSize)
         m_zoom = scale;
         view->zoom(scale);
     }
-    g_scale = m_zoom;
+//    g_scale = m_zoom;
 //    qDebug()<<"textchange1111"<<g_scale;
 }
 
@@ -2410,6 +2426,6 @@ void VisionGraph_::init_graph_Item(GraphType type)
 void VisionGraph_::paintEvent(QPaintEvent *event)
 {
 //    qDebug()<<view->matrix().m22()<<g_scale;
-    g_scale = view->matrix().m22();
+//    g_scale = view->matrix().m22();
     QWidget::paintEvent(event);
 }

@@ -5362,7 +5362,8 @@ tmp\release\visiongraphview.obj: src\visiongraphview.cpp src/visiongraphview.h \
 		src/visiongraphscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QTime \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatetime.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatetime.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPaintEvent
 
 tmp\release\visionlineitem.obj: src\item\visionlineitem.cpp src/item/visionlineitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -5667,7 +5668,25 @@ tmp\release\visionpoint.obj: src\item\visionpoint.cpp src/item/visionpoint.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h
 
 tmp\release\visionpolygon.obj: src\item\visionpolygon.cpp src/item/visionpolygon.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -7813,7 +7832,25 @@ tmp\release\visionline.obj: src\item\visionline.cpp src/item/visionline.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qcursor.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h
 
 tmp\release\visioncoordinateitem.obj: src\item\visioncoordinateitem.cpp src/item/visioncoordinateitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -8314,7 +8351,25 @@ tmp\release\visiontextitem.obj: src\item\visiontextitem.cpp src/item/visiontexti
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsScene \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsscene.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QGraphicsView \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qgraphicsview.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractscrollarea.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qframe.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qwidget.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qpalette.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qkeysequence.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qevent.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurl.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qurlquery.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfile.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qfiledevice.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qvector2d.h \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qtouchdevice.h
 
 tmp\release\visionregion.obj: src\item\visionregion.cpp src/item/visionregion.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QObject \
@@ -8422,7 +8477,9 @@ tmp\release\visionregion.obj: src\item\visionregion.cpp src/item/visionregion.h 
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontinfo.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfont.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\qfontmetrics.h \
-		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QTime \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatetime.h
 
 tmp\release\moc_visiongraph.obj: tmp\release\moc_visiongraph.cpp 
 
