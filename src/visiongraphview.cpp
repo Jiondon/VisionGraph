@@ -755,7 +755,7 @@ QVector<QLineF> VisionGraphView::analysis_region(XVRegion region)
 //    if(m_region == region)
 //        return;
 
-    emit signal_RegionItem();
+//    emit signal_RegionItem();
     //XVPointRun  起始点坐标和线的长度
     vector<XVPointRun> vec_point;
     vec_point = region.arrayPointRun;
