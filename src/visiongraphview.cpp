@@ -76,7 +76,7 @@ void VisionGraphView::mouseMoveEvent(QMouseEvent *event)
 //        qDebug()<<disPointF;
         this->scene()->setSceneRect(this->scene()->sceneRect().x()-disPointF.x(),this->scene()->sceneRect().y()-disPointF.y(),
                                     this->scene()->sceneRect().width(),this->scene()->sceneRect().height());
-        qDebug()<<this->scene()->sceneRect();
+//        qDebug()<<this->scene()->sceneRect();
 //        this->scene()->update();
         return;
     }
@@ -261,7 +261,9 @@ void VisionGraphView::paintEvent(QPaintEvent *event)
     }
 
     painter.setPen(QPen(m_borderColor,0));  //区域采用填充的颜色，原因自己想
-    painter.setBrush(m_brushColor);
+    if(m_graphType == GraphType::graphRegion){
+        painter.setBrush(m_brushColor);
+    }
     painter.drawPath(m_path);
 
 

@@ -206,6 +206,14 @@ public:
     VisionRegion *addRegion(vector<VGRegionPair> vec_regionPair);
 
     /**
+     * @brief       添加大数量path
+     * @param       默认是不可编辑.当前不支持编辑（拖动，旋转等操作）
+     */
+    VisionPathItem *addPaths(QVector<QVector<QPointF>> vec_vec_p,
+                             bool color_enable = false, QColor borderColor = QColor(255,0,0),
+                             QColor selectedColor = QColor(255,0,0),QColor brushColor = QColor(255,0,0,160));
+
+    /**
      * @brief       设置VisionGraph的背景，区分版本
      */
     void setBkImg(QImage image);

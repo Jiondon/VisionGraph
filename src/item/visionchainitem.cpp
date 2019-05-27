@@ -41,7 +41,7 @@ void VisionChainItem::setChainPos(QList<qreal> lst_x, QList<qreal> lst_y)
     for(int i=0;i<lst_x.count();i++){
         m_lstChainPoint.append(QPointF(lst_x[i],lst_y[i]));
         MiniRect* rectItem = new MiniRect(lst_x[i]-2.5,lst_y[i]-2.5,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
+//        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         rectItem->setIndex(i);
         QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));
         rectItem->hide();
@@ -75,7 +75,7 @@ void VisionChainItem::setChainPos(QList<QPointF> lst_p)
         m_lst_x.append(lst_p[i].x());
         m_lst_y.append(lst_p[i].y());
         MiniRect* rectItem = new MiniRect(lst_p[i].x()-2.5,lst_p[i].y()-2.5,5,5,m_borderColor,m_selectedColor,m_brushColor,this);
-        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
+//        rectItem->setGlobleData(this->scene()->views().at(0)->matrix().m22(),g_penWidth);
         rectItem->setIndex(i);
 //        rectItem->setBrushEnable(false);
         QObject::connect(rectItem,SIGNAL(signalIndex(int)),this,SLOT(slotMiniRectIndex(int)));

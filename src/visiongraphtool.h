@@ -37,6 +37,7 @@
 #include "./item/visioncoordinateitem.h"
 #include "./item/visiontextitem.h"
 #include "./item/visionregion.h"
+#include "./item/visionpathitem.h"
 
 #include "./control/color.h"
 

@@ -186,6 +186,11 @@ VisionRegion *VisionGraph::addRegion(vector<VGRegionPair> vec_regionPair)
     return m_graphWidget->addRegion(vec_regionPair);
 }
 
+VisionPathItem *VisionGraph::addPaths(QVector<QVector<QPointF> > vec_vec_p, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
+{
+    return m_graphWidget->addPaths(vec_vec_p,color_enable,borderColor,selectedColor,brushColor);
+}
+
 void VisionGraph::setBkImg(QImage image)
 {
     m_graphWidget->setBkImg(image);

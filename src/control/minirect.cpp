@@ -16,6 +16,7 @@ MiniRect::MiniRect(qreal x, qreal y, qreal w, qreal h, QColor borderColor, QColo
     this->setPos(x,y);
     setAcceptHoverEvents(true);
 //    setTransformOriginPoint((m_width/2)*(1/this->scene()->views().at(0)->matrix().m22()),(m_height/2)*(1/this->scene()->views().at(0)->matrix().m22()));  //设置旋转的原点为中心点
+    setTransformOriginPoint((m_width/2),(m_height/2));  //设置旋转的原点为中心点
 }
 
 void MiniRect::setBrushEnable(bool brushEnable)

@@ -1303,6 +1303,15 @@ VisionRegion *VisionGraph_::addRegion(vector<VGRegionPair> vec_regionPair)
     return item;
 }
 
+VisionPathItem *VisionGraph_::addPaths(QVector<QVector<QPointF> > vec_vec_p, bool color_enable, QColor borderColor, QColor selectedColor, QColor brushColor)
+{
+    VisionPathItem *item  = new VisionPathItem(color_enable,borderColor,selectedColor,brushColor);
+    item->setPointFs(vec_vec_p);
+    scene->addItem(item);
+    m_lstItem.push_back(item);
+    return item;
+}
+
 
 int VisionGraph_::setBkImg(QImage image)
 {
