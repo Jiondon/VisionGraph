@@ -41,14 +41,6 @@ Debug:DESTDIR= ../bin/debug
 ##Debug:DESTDIR = C:\Users\Administrator\Desktop\debug121212\debug
 Release:DESTDIR = ../bin/release
 
-#Debug:DESTDIR=G:\vision\bin\debug
-#Release:DESTDIR=G:\vision\bin\release
-
-Debug:LIBS += ./lib/debug/XVRegionAnalysis.lib
-
-Release:LIBS += ./lib/release/XVRegionAnalysis.lib
-
-
 
 INCLUDEPATH += ./include/
 INCLUDEPATH += ./include/tools

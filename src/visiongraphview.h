@@ -16,13 +16,14 @@
 #include "./control/visionitem.h"
 
 #include "XVBase.h"
-#include "XVCreateRegion.h"
-#include "XVCombineRegions.h"
+
 #include <QDebug>
 #include <QLabel>
 
 #include "visiongraph_global.h"
 #include "./control/color.h"
+
+#include <QLibrary>
 
 //using namespace XVCreateR;
 enum Corner{
@@ -319,20 +320,20 @@ private:
 
 
 //    XVCreateRegionIn regionIn;
-    XVCreateRegionOfInterestRegionIn  createRegionOfInterestRegionIn;
-    XVCreateBoxRegionIn               createBoxRegionIn             ;
-    XVCreateBoxBorderRegionIn         createBoxBorderRegionIn       ;
-    XVCreateEllipseRegionIn           createEllipseRegionIn         ;
-    XVCreateRingRegionIn              createRingRegionIn            ;
-    XVCreateCrossRegionIn             createCrossRegionIn           ;
-    XVCreateGridRegionIn              createGridRegionIn            ;
-    XVCreateCircleRegionIn            createCircleRegionIn          ;
-    XVCreatePolygonRegionIn           createPolygonRegionIn         ;
-    XVCreatePathBorderRegionIn        createPathBorderRegionIn      ;
-    XVCreateRectangleRegionIn         createRectangleRegionIn       ;
-    XVCreateRectangleBorderRegionIn   createRectangleBorderRegionIn ;
-    XVCreateSegmentRegionIn           createSegmentRegionIn         ;
-    XVCreateLineRegionIn              createLineRegionIn            ;
+//    XVCreateRegionOfInterestRegionIn  createRegionOfInterestRegionIn;
+//    XVCreateBoxRegionIn               createBoxRegionIn             ;
+//    XVCreateBoxBorderRegionIn         createBoxBorderRegionIn       ;
+//    XVCreateEllipseRegionIn           createEllipseRegionIn         ;
+//    XVCreateRingRegionIn              createRingRegionIn            ;
+//    XVCreateCrossRegionIn             createCrossRegionIn           ;
+//    XVCreateGridRegionIn              createGridRegionIn            ;
+//    XVCreateCircleRegionIn            createCircleRegionIn          ;
+//    XVCreatePolygonRegionIn           createPolygonRegionIn         ;
+//    XVCreatePathBorderRegionIn        createPathBorderRegionIn      ;
+//    XVCreateRectangleRegionIn         createRectangleRegionIn       ;
+//    XVCreateRectangleBorderRegionIn   createRectangleBorderRegionIn ;
+//    XVCreateSegmentRegionIn           createSegmentRegionIn         ;
+//    XVCreateLineRegionIn              createLineRegionIn            ;
 
 
     QVector<QLineF> m_vecLines;
@@ -370,6 +371,7 @@ private:
     QColor m_selectedColor;
     QColor m_brushColor_unEdit;
 
+    QLibrary m_lib_XVRegionAnalysis;
 protected:
 
 public slots:

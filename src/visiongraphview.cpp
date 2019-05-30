@@ -4,6 +4,9 @@
 #include "visiongraphscene.h"
 #include "./control/color.h"
 
+#include "XVCreateRegion.h"
+#include "XVCombineRegions.h"
+
 #define Pi 3.1415926
 
 VisionGraphView::VisionGraphView(QWidget *parent):
@@ -28,6 +31,13 @@ VisionGraphView::VisionGraphView(QWidget *parent):
     setItemType(ItemType::No);
 
     connect(this,SIGNAL(signal_wheelEevent(QWheelEvent*)),this,SLOT(slot_wheelEvent(QWheelEvent*)));
+
+    m_lib_XVRegionAnalysis.setFileName("XVRegionAnalysis");
+    if(!m_lib_XVRegionAnalysis.load())
+    {
+        qDebug() << "load library failed";
+        qDebug() << m_lib_XVRegionAnalysis.errorString();
+    }
 
 }
 
@@ -744,12 +754,25 @@ XVRegion VisionGraphView::slot_CombineRegion(XVRegion region1, XVRegion region2,
 
     RegionOut unionOut;
     if(combineType == XVCombineRegionsType::Union){
-        XVRegionUnion(unionIn,unionOut);
+
+        typedef void (*RegionUnion)(TwoRegionIn &,RegionOut &);
+         RegionUnion XVRegionUnion =
+                 (RegionUnion) m_lib_XVRegionAnalysis.resolve("XVRegionUnion");
+         if (XVRegionUnion)
+             XVRegionUnion(unionIn,unionOut);
+
+//        XVRegionUnion(unionIn,unionOut);
     }else if(combineType == XVCombineRegionsType::Difference){
-        XVRegionDifference(unionIn,unionOut);
+
+        typedef void (*RegionDiff)(TwoRegionIn &,RegionOut &);
+         RegionDiff XVRegionDifference =
+                 (RegionDiff) m_lib_XVRegionAnalysis.resolve("XVRegionDifference");
+         if (XVRegionDifference)
+             XVRegionDifference(unionIn,unionOut);
+
+//        XVRegionDifference(unionIn,unionOut);
     }
     return unionOut.outRegion;
-
 }
 
 QVector<QLineF> VisionGraphView::analysis_region(XVRegion region)
@@ -772,6 +795,7 @@ QVector<QLineF> VisionGraphView::analysis_region(XVRegion region)
         m_vecLines.append(lineF);
     }
 
+    emit signal_RegionItem();
     return m_vecLines;
 }
 
@@ -798,7 +822,15 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     regionIn.inPolygon = xvPath;
     regionIn.inPolygon.optional = ENABLE;
 
-    XVCreatePolygonRegion(regionIn,regionOut);
+
+    typedef void (*PolygonRegion)(XVCreatePolygonRegionIn &,XVCreatePolygonRegionOut &);
+     PolygonRegion XVCreatePolygonRegion =
+             (PolygonRegion) m_lib_XVRegionAnalysis.resolve("XVCreatePolygonRegion");
+     if (XVCreatePolygonRegion)
+         XVCreatePolygonRegion(regionIn,regionOut);
+
+
+//    XVCreatePolygonRegion(regionIn,regionOut);
 
     XVRegion region;
 
@@ -834,7 +866,16 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         regionIn.inCircle = xvCircle;
         regionIn.inCircle.optional = ENABLE;
         regionIn.inCircle.center.optional = ENABLE;
-        XVCreateCircleRegion(regionIn,regionOut);
+
+
+        typedef void (*CircleRegion)(XVCreateCircleRegionIn &,XVCreateCircleRegionOut &);
+         CircleRegion XVCreateCircleRegion =
+                 (CircleRegion) m_lib_XVRegionAnalysis.resolve("XVCreateCircleRegion");
+         if (XVCreateCircleRegion)
+             XVCreateCircleRegion(regionIn,regionOut);
+
+//        XVCreateCircleRegion(regionIn,regionOut);
+
         region = regionOut.outRegion;
 
     }else{
@@ -856,7 +897,15 @@ XVRegion VisionGraphView::createEllipse(QRectF rf,QPointF leftTop, qreal angle)
         regionIn.inFrameHeight = m_frameRect.height();
         regionIn.inEllipse =xvRect;
         regionIn.inEllipse.optional = ENABLE;
-        XVCreateEllipseRegion(regionIn,regionOut);
+
+        typedef void (*EllipseRegion)(XVCreateEllipseRegionIn &,XVCreateEllipseRegionOut &);
+         EllipseRegion XVCreateEllipseRegion =
+                 (EllipseRegion) m_lib_XVRegionAnalysis.resolve("XVCreateEllipseRegion");
+         if (XVCreateEllipseRegion)
+             XVCreateEllipseRegion(regionIn,regionOut);
+
+//        XVCreateEllipseRegion(regionIn,regionOut);
+
         region = regionOut.outRegion;
 
     }
@@ -882,8 +931,23 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
     regionIn.inFrameHeight = m_frameRect.height();
     regionIn.inRectangle =xvRect;
     regionIn.inRectangle.optional = ENABLE;
-    XVCreateRectangleRegion(regionIn,regionOut);
+    regionIn.inRectangle.origin.optional = ENABLE;
 
+
+    typedef void (*RectangleRegion_1)(XVCreateRectangleRegionIn &,XVCreateRectangleRegionOut &);
+     RectangleRegion_1 XVCreateRectangleRegion_1 =
+             (RectangleRegion_1) m_lib_XVRegionAnalysis.resolve("XVCreateRectangleRegion");
+     if (XVCreateRectangleRegion_1){
+         XVCreateRectangleRegion_1(regionIn,regionOut);
+//         XVCreateRectangleRegion(regionIn,regionOut);
+     }else{
+
+     }
+
+//    XVCreateRectangleRegion(regionIn,regionOut);
+
+     //昨日进度：
+     //1.解决VisionGraph商库的问题
 
     XVRegion region = regionOut.outRegion;
 

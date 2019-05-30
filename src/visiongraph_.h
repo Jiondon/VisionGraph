@@ -468,6 +468,8 @@ signals:
     void signal_itemFinished(VisionItem* item);
     void signal_Changed(VisionItem* item);
 
+    void signal_RegionChanged();
+
 private:
     void initScene();
     void initTool_operation();  //水平的工具栏

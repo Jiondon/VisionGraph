@@ -461,6 +461,7 @@ signals:
     void signal_PaintFinishedChanged(VisionItem*);
     void signal_Changed(VisionItem* item);
 
+    void signal_RegionChanged();
 protected:
     void wheelEvent(QWheelEvent *event);
 

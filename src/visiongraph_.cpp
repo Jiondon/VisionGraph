@@ -2027,6 +2027,9 @@ void VisionGraph_::slot_mouseMove(QPointF pointF)
 VisionRegion *itemRegion = NULL;
 void VisionGraph_::slot_addRegion()
 {
+    emit signal_RegionChanged();
+    return;
+
     this->clearPainter();
     XVRegion *xvRegion = view->getRegion();
     if(xvRegion->arrayPointRun.size() <= 0){

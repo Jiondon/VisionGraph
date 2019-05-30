@@ -17,7 +17,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zi -MDd -GR -W3 -w34100 -w34189 -w44996
 INCPATH       = -I. -Iinclude -Iinclude\tools -Iinclude\tools\XVBase -Iinclude\tools\XVRegionAnalysis -ID:\Qt\Qt5.8.0\5.8\msvc2013\include -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtANGLE -ID:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore -Itmp\debug -ID:\Qt\Qt5.8.0\5.8\msvc2013\mkspecs\win32-msvc2013 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /DLL /SUBSYSTEM:WINDOWS
-LIBS          = lib\debug\XVRegionAnalysis.lib /LIBPATH:D:\Qt\Qt5.8.0\5.8\msvc2013\lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgetsd.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Guid.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Cored.lib 
+LIBS          = /LIBPATH:D:\Qt\Qt5.8.0\5.8\msvc2013\lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Widgetsd.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Guid.lib D:\Qt\Qt5.8.0\5.8\msvc2013\lib\Qt5Cored.lib 
 QMAKE         = D:\Qt\Qt5.8.0\5.8\msvc2013\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -581,15 +581,14 @@ tmp\debug\moc_visiongraph.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWid
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src\visiongraphwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
 		src\item\visionrectitem.h \
@@ -1233,15 +1232,14 @@ tmp\debug\moc_visiongraphview.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src\visiongraphview.h \
 		tmp\debug\moc_predefs.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\bin\moc.exe
@@ -3005,13 +3003,12 @@ tmp\debug\moc_visiongraph_.cpp: D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QFr
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src\control\color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src\item\visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \
@@ -4533,15 +4530,14 @@ tmp\debug\visiongraph.obj: src\visiongraph.cpp src/visiongraph.h \
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src/visiongraphwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
 		src/item/visionrectitem.h \
@@ -4795,15 +4791,14 @@ tmp\debug\visiongraphtool.obj: src\visiongraphtool.cpp src/visiongraphtool.h \
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src/visiongraphwidget.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QResizeEvent \
@@ -5432,20 +5427,22 @@ tmp\debug\visiongraphview.obj: src\visiongraphview.cpp src/visiongraphview.h \
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QLabel \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qlabel.h \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QScrollBar \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qscrollbar.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\qabstractslider.h \
 		src/visiongraphscene.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QWheelEvent \
+		include\tools\XVRegionAnalysis\XVCreateRegion.h \
+		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
+		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QTime \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qdatetime.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QPaintEvent
@@ -7286,13 +7283,12 @@ tmp\debug\visiongraph_.obj: src\visiongraph_.cpp src/visiongraph_.h \
 		include\tools\XVBase\XVScanMap.h \
 		include\tools\XVBase\XVSpatialMap.h \
 		include\tools\XVBase\XVTemplate2D.h \
-		include\tools\XVRegionAnalysis\XVCreateRegion.h \
-		include\tools\XVRegionAnalysis\xvregionanalysis_global.h \
-		include\tools\XVRegionAnalysis\XVCombineRegions.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QDebug \
 		src/control/color.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QColor \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QCursor \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\QLibrary \
+		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtCore\qlibrary.h \
 		src/item/visionrectitem.h \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtWidgets\QStyleOptionGraphicsItem \
 		D:\Qt\Qt5.8.0\5.8\msvc2013\include\QtGui\QTransform \

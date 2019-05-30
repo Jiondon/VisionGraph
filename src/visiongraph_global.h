@@ -1,4 +1,4 @@
-#ifndef VISIONGRAPH_GLOBAL_H
+﻿#ifndef VISIONGRAPH_GLOBAL_H
 #define VISIONGRAPH_GLOBAL_H
 
 #include <QtCore/qglobal.h>

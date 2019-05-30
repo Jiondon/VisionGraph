@@ -14,6 +14,7 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
 
     m_graphWidget = new VisionGraph_(m_graphType,toolButtonDirect);
     QObject::connect(m_graphWidget,SIGNAL(signal_Changed(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
+    QObject::connect(m_graphWidget,SIGNAL(signal_RegionChanged()),this,SIGNAL(signal_RegionChanged()));
 
     if(type == GraphType::graphRegion){
 //        m_graphWidget = new VisionGraph_Region(toolButtonDirect);
