@@ -27,9 +27,6 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     connect(m_graphWidget,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
 
     this->setLayout(mainLayout);
-
-    this->setGraphStyleSheet(QString::fromUtf8("QWidget{border:1px solid red;}"));
-
 }
 
 void VisionGraph::setBorderValue(int left,int top,int right,int bottom)
