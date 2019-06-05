@@ -37,6 +37,8 @@ public:
             ,QWidget *parent = 0);
     ~VisionGraph_();
 public:
+    //测试用，接口不开放
+    void setBorderValue(int i = 0);
     /**
      * @brief       设置GraphType
      * @param       //此接口作废---使用此接口和设置工具栏Direction，会导致工具栏出问题（内部调用）

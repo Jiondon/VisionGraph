@@ -22,7 +22,7 @@ VisionGraph_::VisionGraph_(GraphType type, ToolButtonDirection toolButtonDirect,
     setGraphType(type);
 
     connect(this,SIGNAL(signal_itemFinished(VisionItem*)),this,SLOT(slotItemFinished(VisionItem*)));
-
+    mainLayout->setMargin(0);
 }
 
 VisionGraph_::~VisionGraph_()
@@ -52,7 +52,12 @@ VisionGraph_::~VisionGraph_()
     delete sys_remove_item_button;  //删除当前选中的item
 
     delete tool_infoWidget;
-//    delete infoWidget;
+    //    delete infoWidget;
+}
+
+void VisionGraph_::setBorderValue(int i)
+{
+    mainLayout->setMargin(i);
 }
 
 

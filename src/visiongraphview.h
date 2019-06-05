@@ -372,6 +372,8 @@ private:
     QColor m_brushColor_unEdit;
 
     QLibrary m_lib_XVRegionAnalysis;
+
+
 protected:
 
 public slots:
@@ -437,6 +439,12 @@ private:
      * @brief       算法绘制矩形
      */
     XVRegion createRectangle(QRectF rf,QPointF leftTop,qreal angle);
+
+    /**
+     * @brief       算法绘制直线
+     */
+    XVRegion createLine(QLine line);
+
 
     /**
      * @brief       将生成的区域记录到vector中

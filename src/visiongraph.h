@@ -22,6 +22,7 @@ class VISIONGRAPHSHARED_EXPORT VisionGraph : public QWidget
 public:
     VisionGraph(GraphType type = GraphType::graph_Info, ToolButtonDirection toolButtonDirect = ToolButtonDirection::topDirection, QWidget *parent = 0);
 
+    void setBorderValue(int left=0, int top=0, int right=0, int bottom=0);
     ~VisionGraph();
     /**
      * @brief       添加rectangle  可旋转的矩形
@@ -468,7 +469,7 @@ protected:
 private:
     VisionGraph_ *m_graphWidget = nullptr;
     GraphType m_graphType = GraphType::graphItem_unSelf;
-
+    QVBoxLayout *mainLayout = NULL;
 
     QColor selectedColor = QColor(255,0,0);
     QColor borderColor = QColor(0,0,0);

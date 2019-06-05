@@ -10,7 +10,8 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }
     m_graphType = type;
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout = new QVBoxLayout(this);
+    mainLayout->setMargin(0);
 
     m_graphWidget = new VisionGraph_(m_graphType,toolButtonDirect);
     QObject::connect(m_graphWidget,SIGNAL(signal_Changed(VisionItem*)),this,SIGNAL(signal_Changed(VisionItem*)));
@@ -23,10 +24,17 @@ VisionGraph::VisionGraph(GraphType type, ToolButtonDirection toolButtonDirect, Q
     }
 //    qDebug()<<"brush color : "<<brushColor;
     mainLayout->addWidget(m_graphWidget);
-    m_graphWidget->layout()->setMargin(0);
     connect(m_graphWidget,SIGNAL(signal_itemFinished(VisionItem*)),this,SIGNAL(signal_PaintFinishedChanged(VisionItem*)));
 
     this->setLayout(mainLayout);
+
+    this->setGraphStyleSheet(QString::fromUtf8("QWidget{border:1px solid red;}"));
+
+}
+
+void VisionGraph::setBorderValue(int left,int top,int right,int bottom)
+{
+    mainLayout->setContentsMargins(left,top,right,bottom);
 }
 
 VisionGraph::~VisionGraph()

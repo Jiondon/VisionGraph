@@ -822,6 +822,8 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
     regionIn.inPolygon = xvPath;
     regionIn.inPolygon.optional = ENABLE;
 
+    XVRegion region;
+
 
     typedef void (*PolygonRegion)(XVCreatePolygonRegionIn &,XVCreatePolygonRegionOut &);
      PolygonRegion XVCreatePolygonRegion =
@@ -829,12 +831,9 @@ XVRegion VisionGraphView::createPolygon(QPolygonF polygonF)
      if (XVCreatePolygonRegion)
          XVCreatePolygonRegion(regionIn,regionOut);
 
+     //    XVCreatePolygonRegion(regionIn,regionOut);
+     region = regionOut.outRegion;
 
-//    XVCreatePolygonRegion(regionIn,regionOut);
-
-    XVRegion region;
-
-    region = regionOut.outRegion;
 
     return region;
 }
@@ -953,6 +952,36 @@ XVRegion VisionGraphView::createRectangle(QRectF rf,QPointF leftTop, qreal angle
 
     return region;
 
+}
+
+XVRegion VisionGraphView::createLine(QLine line)
+{
+    XVCreateLineRegionIn regionIn1;
+    XVCreateLineRegionOut regionOut1;
+
+    qreal a1 = line.p1().y() - line.p2().y();
+    qreal b1 = line.p2().x() - line.p1().x();
+    //ax+by+c=0; 直线和圆相切得到四个点    圆心到线的距离等于半径
+    qreal c1 =  - (a1*line.p1().x()+b1*line.p1().y());
+
+    XVLine2D line2D;
+    line2D.optional = ENABLE;
+    line2D.a = a1;
+    line2D.b = b1;
+    line2D.c = c1;
+    regionIn1.inLine = line2D;
+    regionIn1.inFrameWidth = m_frameRect.width();
+    regionIn1.inFrameHeight = m_frameRect.height();
+
+    typedef void (*LineRegion)(XVCreateLineRegionIn &,XVCreateLineRegionOut &);
+     LineRegion XVCreateLineRegion =
+             (LineRegion) m_lib_XVRegionAnalysis.resolve("XVCreateLineRegion");
+     if (XVCreateLineRegion)
+         XVCreateLineRegion(regionIn1,regionOut1);
+
+     XVRegion region = regionOut1.outRegion;
+
+     return region;
 }
 
 void VisionGraphView::push_region(XVRegion region, int index)
@@ -1104,32 +1133,39 @@ void VisionGraphView::detailMoveEvent(QMouseEvent *event)
 
         QPolygonF polygonF(vec);
 
+//        qDebug()<<c1<<c2<<"12121212121212"<<m_qCircleR;
+//        if(m_qCircleR == 1){
 
-        //合并区域
-        QPainterPath path;
-        path.addPolygon(polygonF);
+//        }else{
 
-        XVRegion region = createPolygon(polygonF);
+            //合并区域
+            QPainterPath path;
+            path.addPolygon(polygonF);
 
-        if(m_itemType == ItemType::Paint_Point){
-            m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
-        }else{
-            m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
-        }
-        //对两个path通过算法转换成region
+            XVRegion region = createPolygon(polygonF);
 
-        QPainterPath path1;
-        path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
+            if(m_itemType == ItemType::Paint_Point){
+                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Union);
+            }else{
+                m_region = slot_CombineRegion(m_region,region,XVCombineRegionsType::Difference);
+            }
+            //对两个path通过算法转换成region
 
-        QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
-                                              this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
-        XVRegion region1 = createEllipse(rf11,rf11.topLeft(),0);
+            QPainterPath path1;
+            path1.addEllipse(viewPos,m_qCircleR*m_scale,m_qCircleR*m_scale);
 
-        if(m_itemType == ItemType::Paint_Point){
-            m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Union);
-        }else{
-            m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Difference);
-        }
+            QRectF rf11 = QRectF(this->mapToScene(QPoint(viewPos.x()-m_qCircleR*m_scale,viewPos.y()-m_qCircleR*m_scale)),
+                                                  this->mapToScene(QPoint(viewPos.x()+m_qCircleR*m_scale,viewPos.y()+m_qCircleR*m_scale)));
+            XVRegion region1 = createEllipse(rf11,rf11.topLeft(),0);
+
+            if(m_itemType == ItemType::Paint_Point){
+                m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Union);
+            }else{
+                m_region = slot_CombineRegion(m_region,region1,XVCombineRegionsType::Difference);
+            }
+//        }
+
+
         analysis_region(m_region);
     }
     this->scene()->update();
